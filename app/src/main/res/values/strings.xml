@@ -1,22 +1,22 @@
 <resources>
+    //INICIAR SESION
     <string name="app_name">geolam</string>
     <string name="email_usuario">Email</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
-    <string name="title_activity_menu">menu</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Mishell Yerovi</string>
-    <string name="nav_header_subtitle">mishell.yerovi@espoch.edu.ec</string>
-    <string name="nav_header_desc">Navigation header</string>
+    //REGISTRO
     <string name="email">email</string>
     <string name="nombre_usuario">Nombre de Usuario</string>
     <string name="apellido_usuario">Apellido de Usuario</string>
     <string name="edad">Edad</string>
     <string name="sexo">Sexo</string>
     <string name="action_settings">Settings</string>
+    //INFORMACION DEL LUGAR
+    <string name="rec_nombre_del_lugar">Nombre del lugar</string>
+    <string name="rec_descripcion_lugar">Descripción del lugar</string>
+    <string name="rec_direccion_lugar">Dirección del lugar</string>
+    <string name="rec_telefono_lugar">Teléfono del lugar</string>
+    <string name="rec_especialidades_lugar">Especialidades del lugar</string>
+    <string name="rec_medicos_lugar">Médicos del lugar</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
 </resources>

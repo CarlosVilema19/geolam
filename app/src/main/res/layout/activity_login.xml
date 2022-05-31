@@ -90,21 +90,11 @@
                 android:hint="@string/contrasenia"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
+
                 tools:ignore="TextContrastCheck" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btniniciosesion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txcontrasenia"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center_horizontal"
-            android:text="Entrar" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnolvidarcontraseña"
@@ -118,6 +108,17 @@
             android:text="¿Has olvidado la contraseña?"
             android:textColor="@color/black"
             android:textSize="10sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btniniciosesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txcontrasenia"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:gravity="center_horizontal"
+            android:text="Entrar" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btncrearcuenta"
