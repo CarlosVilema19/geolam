@@ -16,7 +16,7 @@
     <string name="rec_descripcion_lugar">Descripción del lugar</string>
     <string name="rec_direccion_lugar">Dirección del lugar</string>
     <string name="rec_telefono_lugar">Teléfono del lugar</string>
-    <string name="rec_especialidades_lugar">Espe </string>
+    <string name="rec_especialidades_lugar">Especialidades........ </string>
     <string name="rec_medicos_lugar">Médicos del lugar</string>
 
 </resources>
