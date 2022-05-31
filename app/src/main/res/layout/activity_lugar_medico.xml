@@ -19,7 +19,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
+
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagenlugar"
@@ -54,156 +56,224 @@
                     android:id="@+id/tvnombrelugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imagenlugar"
-
+                    android:layout_below="@id/txnombrelugar"
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
-                    android:text="Nombre del lugar" />
+                    android:text="@string/rec_nombre_del_lugar" />
 
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txdescripcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txnombrelugar"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Descripción"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvdescripcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvnombrelugar"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:text="Descripción" />
-
-            <TextView
-                android:id="@+id/txdireccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txdescripcion"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Dirección"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvdireccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvdescripcion"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-
-                android:text="Dirección" />
-
-            <TextView
-                android:id="@+id/txtelefono"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txdireccion"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Teléfono"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvtelefono"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvdireccion"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:text="Teléfono" />
-
-
-            <TextView
-                android:id="@+id/txespecialidades"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtelefono"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Especialidades"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvespecialidades"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvtelefono"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:text="Especialidades" />
-
-            <TextView
-                android:id="@+id/txmedicos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txespecialidades"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Médicos"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvmedicos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvespecialidades"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:text="Médicos" />
-
-            <TextView
-                android:id="@+id/txcalificacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txmedicos"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Calificación"
-                android:textStyle="bold" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txcalificacion"
-                android:layout_marginLeft="25dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
-                android:numStars="5" />
+                android:layout_marginEnd="2dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txopinion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ratingBar"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:text="Opinión"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txdescripcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvnombrelugar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Descripción"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvopinion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txopinion"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="50dp"
-                android:text="Opinión General" />
+                <TextView
+                    android:id="@+id/tvdescripcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txdescripcion"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/rec_descripcion_lugar" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txdireccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvdescripcion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Dirección"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvdireccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txdireccion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/rec_direccion_lugar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvdireccion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Teléfono"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvtelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvdireccion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="50dp"
+                    android:text="@string/rec_telefono_lugar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txespecialidades"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvtelefono"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Especialidades"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvespecialidades"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txespecialidades"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="50dp"
+                    android:text="@string/rec_especialidades_lugar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutfin"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txmedicos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvespecialidades"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Médicos"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvmedicos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txmedicos"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="50dp"
+                    android:text="@string/rec_medicos_lugar" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txcalificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutfin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Calificación"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txcalificacion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:numStars="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txopinion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ratingBar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Opinión"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ingresaropinion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txopinion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="50dp"
+                    android:text="Opinión General">
+                </com.google.android.material.textfield.TextInputEditText>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnenviaropinion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvopinion"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="130dp"
+                    android:layout_marginEnd="130dp"
+                    android:text="Enviar" />
+            </LinearLayout>>
         </LinearLayout>
 
     </RelativeLayout>

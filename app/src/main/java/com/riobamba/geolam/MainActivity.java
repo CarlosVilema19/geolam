@@ -23,16 +23,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), Inicio.class));
         finish();
     }
-    public void moveToListarLugarMedico(View view) {
-        startActivity(new Intent(getApplicationContext(), ListarLugarMedico.class));
+
+
+    public void moveToLugarMedico(View view) {
+        startActivity(new Intent(getApplicationContext(), LugarMedico.class));
         finish();
     }
     public void moveToLogin(View view) {
         startActivity(new Intent(getApplicationContext(), SplashActivity.class));
         finish();
     }
-    public void moveToLugarMedico(View view) {
-        startActivity(new Intent(getApplicationContext(), LugarMedico.class));
+    public void moveToListarLugarMedico(View view) {
+        startActivity(new Intent(getApplicationContext(), ListarLugarMedico.class));
         finish();
     }
 }
