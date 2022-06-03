@@ -9,7 +9,8 @@
     <string name="nombre_usuario">Nombre de Usuario</string>
     <string name="apellido_usuario">Apellido de Usuario</string>
     <string name="edad">Edad</string>
-    <string name="sexo">Sexo</string>
+    //Items F y M
+    <string name="sexo_usuario">Sexo</string>
     <string name="action_settings">Settings</string>
     //INFORMACION DEL LUGAR
     <string name="rec_nombre_del_lugar">Nombre del lugar............</string>
@@ -18,8 +19,7 @@
     <string name="rec_telefono_lugar">Teléfono del lugar</string>
     <string name="rec_especialidades_lugar">Especialidades........ </string>
     <string name="rec_medicos_lugar">Médicos del lugar</string>
-    <string name="title_activity_conexion_mapa">ConexionMapa</string>
-    <string name="gestion_de_usuarios">Gestión de usuarios</string>
-    <string name="lugares_medicos">Gestión de Lugares de atención médica</string>
+    <string name="rec_confirme_la_contrasenia">Confirme la contraseña</string>
+
 
 </resources>
