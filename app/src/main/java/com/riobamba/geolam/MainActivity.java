@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.riobamba.geolam.modelo.ConexionMapa;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
