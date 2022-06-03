@@ -37,4 +37,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), ListarLugarMedico.class));
         finish();
     }
+    public void moveToMapa(View view) {
+        startActivity(new Intent(getApplicationContext(), ConexionMapa.class));
+        finish();
+    }
 }
