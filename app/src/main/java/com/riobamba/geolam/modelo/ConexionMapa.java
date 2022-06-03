@@ -1,4 +1,4 @@
-package com.riobamba.geolam;
+package com.riobamba.geolam.modelo;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -11,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
 
 public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {

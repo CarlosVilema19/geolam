@@ -30,7 +30,7 @@
             android:value="AIzaSyChinLYnjP6UnqE0cwxL2kkyg83iD5DwIk" />
 
         <activity
-            android:name=".ConexionMapa"
+            android:name=".modelo.ConexionMapa"
             android:exported="false"
             android:label="@string/title_activity_conexion_mapa" />
         <activity
