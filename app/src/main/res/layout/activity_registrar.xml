@@ -256,14 +256,6 @@
                     />
 
 
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:visibility="invisible"
-                    android:layout_height="30dp">
-
-                </Button>
-
             </LinearLayout>
         </ScrollView>
 
