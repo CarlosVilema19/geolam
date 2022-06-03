@@ -62,12 +62,14 @@
             android:onClick="moveToRegistrar"
             android:text="Registrar"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
-
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:id="@+id/btnMapa"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:onClick="moveToMapa"
+            android:text="Mapa"
+            tools:ignore="MissingConstraints,UsingOnClickInXml" />
+
 
 
     </LinearLayout>
