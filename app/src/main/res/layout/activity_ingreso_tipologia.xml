@@ -72,7 +72,7 @@
                             android:layout_below="@id/txTipologia"
                             android:layout_marginTop="15dp"
                             android:gravity="left"
-                            android:hint="@string/ingreso_topologia"
+                            android:hint="@string/ingreso_tipologia"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
