@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="35dp"
-                        android:text="Regístrate"
+                        android:text="@string/registrate"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -57,7 +57,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:onClick="login"
-                        android:text="Entrar"
+                        android:text="@string/entrar"
                         android:textColor="@android:color/holo_blue_dark"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -105,7 +105,7 @@
                         android:layout_marginRight="95dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
-                        app:iconTint="#FFFFFF"></com.google.android.material.button.MaterialButton>
+                        app:iconTint="#FFFFFF" />
 
                 </RelativeLayout>
 
@@ -128,7 +128,7 @@
                         android:layout_below="@id/txregistrate"
                         android:layout_marginTop="15dp"
                         android:gravity="left"
-                        android:hint="Email"
+                        android:hint="@string/email_registro"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +151,7 @@
                         android:layout_below="@id/etemail"
                         android:layout_marginTop="3dp"
                         android:gravity="left"
-                        android:hint="Nombre"
+                        android:hint="@string/nombre_regsitro"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -172,7 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ednombre"
-                        android:hint="Apellido"
+                        android:hint="@string/apellido_registro"
 
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -193,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/edapellido"
-                        android:hint="Edad"
+                        android:hint="@string/edad_regsitro"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -281,7 +281,7 @@
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="80dp"
-                    android:text="Regístrate"
+                    android:text="@string/ingreso_regsitro"
                     android:textColor="@android:color/white"
 
                     android:textSize="15dp" />
