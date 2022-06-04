@@ -154,7 +154,6 @@
                         android:hint="Nombre"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
