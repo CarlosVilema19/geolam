@@ -19,5 +19,7 @@
     <string name="rec_especialidades_lugar">Especialidades........ </string>
     <string name="rec_medicos_lugar">Médicos del lugar</string>
     <string name="title_activity_conexion_mapa">ConexionMapa</string>
+    <string name="gestion_de_usuarios">Gestión de usuarios</string>
+    <string name="lugares_medicos">Gestión de Lugares de atención médica</string>
 
 </resources>
