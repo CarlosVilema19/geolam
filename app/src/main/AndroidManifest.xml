@@ -27,7 +27,21 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyChinLYnjP6UnqE0cwxL2kkyg83iD5DwIk" />
-
+        <activity
+            android:name=".IngresoEspecialidad"
+            android:exported="false" />
+        <activity
+            android:name=".InicioAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".IngresoTipologia"
+            android:exported="false" />
+        <activity
+            android:name=".GestionUsuarios"
+            android:exported="false" />
+        <activity
+            android:name=".GestionLugares"
+            android:exported="false" />
         <activity
             android:name=".modelo.ConexionMapa"
             android:exported="false"
