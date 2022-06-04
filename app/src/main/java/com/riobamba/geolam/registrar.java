@@ -5,6 +5,9 @@ import static android.content.Intent.createChooser;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Base64;
 import android.app.ProgressDialog;
@@ -20,6 +23,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,6 +48,7 @@ public class registrar extends AppCompatActivity {
     private Button btnCargarImagen;
     private ImageView ivFoto;
     private Bitmap bitmap;
+    private Bitmap newbitMap;
     private String claveImagen = "foto";
     private String claveNombre = "nombre";
     private int PICK_IMAGE_REQUEST = 1;
@@ -63,6 +68,8 @@ public class registrar extends AppCompatActivity {
         btnInsert = findViewById(R.id.btn_register);
         ivFoto = findViewById(R.id.imageViewPerfil);
 
+
+
         btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +79,7 @@ public class registrar extends AppCompatActivity {
                 }
 
                 if (v == btnInsert) {
-                    showFileChooser();
+                    insertarUsusario();
 
                 }
 
@@ -129,7 +136,7 @@ public class registrar extends AppCompatActivity {
 
 
     private void insertarUsusario() {
-        final ProgressDialog loading = ProgressDialog.show(this, "Subiendo ...", "Espere por favor");
+        final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/insertar_.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -145,7 +152,7 @@ public class registrar extends AppCompatActivity {
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Complete todos los campos"+error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
@@ -181,8 +188,10 @@ public class registrar extends AppCompatActivity {
 
     public void showFileChooser() {
 
+
         Intent intent = new Intent();
         intent.setType("image/*");
+
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Selecciona la imagen"), PICK_IMAGE_REQUEST);
 
@@ -198,7 +207,16 @@ public class registrar extends AppCompatActivity {
                 //Cómo obtener el mapa de bits de la Galería
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 //Configuración del mapa de bits en ImageView
-                ivFoto.setImageBitmap(bitmap);
+                int bwidth=bitmap.getWidth();
+                int bheight=bitmap.getHeight();
+                int swidth=ivFoto.getWidth();
+                int sheight=ivFoto.getHeight();
+                int new_width = swidth;
+                int new_height = (int) Math.floor((double) bheight *( (double) new_width / (double) bwidth));
+                newbitMap = Bitmap.createScaledBitmap(bitmap,new_width,new_height, true);
+                ivFoto.setImageBitmap(newbitMap);
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

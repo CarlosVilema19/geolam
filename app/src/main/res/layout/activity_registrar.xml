@@ -78,7 +78,6 @@
                         android:id="@+id/imageViewPerfil"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
@@ -89,9 +88,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                        app:srcCompat="@mipmap/ic_launcher_foreground"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher_foreground"
                         app:strokeColor="@android:color/darker_gray"
-                        app:strokeWidth="8dp" />
+                        app:strokeWidth="8dp"
+
+                        />
 
 
                     <com.google.android.material.button.MaterialButton
