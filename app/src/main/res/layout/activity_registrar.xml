@@ -17,19 +17,22 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="25dp"
         app:cardUseCompatPadding="true"
         android:elevation="10dp"
         >
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_margin="15dp"
-                >
+                android:paddingBottom="25dp"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,54 +68,92 @@
                         />
                 </RelativeLayout>
 
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
-
-                   >
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                   android:id="@+id/etemail"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="left"
-                    android:layout_below="@id/txregistrate"
-                    android:hint="Email"
-                    tools:ignore="TextContrastCheck,TextContrastCheck"
-                     />
-                </com.google.android.material.textfield.TextInputLayout>
+
+                    >
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imageViewPerfil"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:padding="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                        app:srcCompat="@mipmap/ic_launcher_foreground"
+                        app:strokeColor="@android:color/darker_gray"
+                        app:strokeWidth="8dp" />
+
+
+                    <com.google.android.material.button.MaterialButton
+
+                        android:id="@+id/btn_cargarfoto"
+                        style="@style/Widget.Material3.Button.TextButton.Icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="180dp"
+                        android:layout_marginTop="105dp"
+
+                        android:layout_marginRight="95dp"
+                        android:backgroundTint="@android:color/holo_green_light"
+                        app:icon="@drawable/ic_baseline_photo_camera_24"
+                        app:iconTint="#FFFFFF"></com.google.android.material.button.MaterialButton>
+
+                </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
-                    android:layout_below="@id/etemail"
+
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ednombre"
-                        android:layout_below="@id/etemail"
+                        android:id="@+id/etemail"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/txregistrate"
+                        android:layout_marginTop="15dp"
+                        android:gravity="left"
+                        android:hint="Email"
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_below="@id/etemail"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ednombre"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etemail"
                         android:layout_marginTop="3dp"
                         android:gravity="left"
                         android:hint="Nombre"
-                        tools:ignore="TextContrastCheck,TextContrastCheck"
-                         />
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -124,19 +165,18 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/etemail"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    >
+                    android:layout_marginRight="10dp">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:id="@+id/edapellido"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ednombre"
                         android:hint="Apellido"
 
-                        tools:ignore="TextContrastCheck,TextContrastCheck"
-                        />
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,18 +186,17 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/etemail"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    >
+                    android:layout_marginRight="10dp">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:id="@+id/ededad"
-                        android:layout_below="@id/edapellido"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/edapellido"
                         android:hint="Edad"
-                        tools:ignore="TextContrastCheck,TextContrastCheck"
-                        />
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -169,23 +208,20 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/etemail"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:hint="@string/sexo_usuario"
 
 
                     >
+
                     <AutoCompleteTextView
                         android:id="@+id/edsexo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        />
+                        android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -213,7 +249,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -239,27 +274,23 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/etcontrasenia"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="25dp"
-                    android:layout_gravity="center"
-                    android:layout_below="@id/etcontrasenia"
                     android:layout_marginRight="80dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="15dp"
-
                     android:text="Regístrate"
-                    />
+                    android:textColor="@android:color/white"
+
+                    android:textSize="15dp" />
 
 
             </LinearLayout>
         </ScrollView>
-
-
 
 
     </androidx.cardview.widget.CardView>
