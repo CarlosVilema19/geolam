@@ -6,10 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-
-
     tools:context=".registrar">
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -156,7 +153,6 @@
                         android:gravity="left"
                         android:hint="Nombre"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
-
 
                 </com.google.android.material.textfield.TextInputLayout>
 
