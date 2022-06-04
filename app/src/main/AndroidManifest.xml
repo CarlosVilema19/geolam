@@ -32,7 +32,7 @@
         <activity
             android:name=".modelo.ConexionMapa"
             android:exported="false"
-            android:label="@string/ConexionMapa" />
+            android:label="@string/Conexion_Mapa" />
         <activity
             android:name=".ListarLugarMedico"
             android:exported="false" />
