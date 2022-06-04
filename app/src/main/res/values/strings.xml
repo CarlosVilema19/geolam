@@ -45,6 +45,8 @@
     <string name="ingrese_especilidad">Ingrese la especilidad</string>
     <string name="agregar_especialidad">agregar</string>
     <string name="especialidades_agregadas">Especialidades agregadas</string>
+    //MAPA
+    <string name="ConexionMapa">Conexión Mapa</string>
 
 
 </resources>
