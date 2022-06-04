@@ -10,7 +10,8 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.ConexionMapa;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnInicio, btnListarLugar, btnLog, btnRegistrar, btnLugarMedico, btnMapa;
+    Button btnInicio, btnListarLugar, btnLog, btnRegistrar, btnLugarMedico, btnMapa,
+            btnGestionLugar, btnGestionUsuario, btnInicioAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.buttonRegistrar);
         btnLugarMedico = findViewById(R.id.buttonLugarMedico);
         btnMapa= findViewById(R.id.btnMapa);
+        btnGestionLugar= findViewById(R.id.btnGestionLugar);
+        btnGestionUsuario= findViewById(R.id.btnGestionUsuario);
+        btnInicioAdmin= findViewById(R.id.btnInicioAdmin);
+
 
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +67,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ConexionMapa.class);
+                startActivity(intent);
+            }
+        });
+        btnGestionLugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GestionLugares.class);
+                startActivity(intent);
+            }
+        });
+        btnGestionUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GestionUsuarios.class);
+                startActivity(intent);
+            }
+        });
+        btnInicioAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InicioAdmin.class);
                 startActivity(intent);
             }
         });

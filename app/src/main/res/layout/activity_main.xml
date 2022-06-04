@@ -62,6 +62,24 @@
             android:layout_height="wrap_content"
             android:text="Mapa"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
+        <Button
+            android:id="@+id/btnGestionLugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestion Lugar"
+            tools:ignore="MissingConstraints,UsingOnClickInXml" />
+        <Button
+            android:id="@+id/btnGestionUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestion Usuario"
+            tools:ignore="MissingConstraints,UsingOnClickInXml" />
+        <Button
+            android:id="@+id/btnInicioAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio Admin"
+            tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
 
 
