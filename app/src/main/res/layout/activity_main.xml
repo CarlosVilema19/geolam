@@ -9,7 +9,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,7 +26,6 @@
             android:id="@+id/buttonInicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToInicio"
             android:text="Inicio"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
@@ -35,7 +33,6 @@
             android:id="@+id/buttonListarLugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToListarLugarMedico"
             android:text="Listar Lugar Medico"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
@@ -43,7 +40,6 @@
             android:id="@+id/buttonLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToLogin"
             android:text="Login"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
@@ -51,7 +47,6 @@
             android:id="@+id/buttonLugarMedico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToLugarMedico"
             android:text="Lugar Medico"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
@@ -59,14 +54,12 @@
             android:id="@+id/buttonRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToRegistrar"
             android:text="Registrar"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
         <Button
             android:id="@+id/btnMapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="moveToMapa"
             android:text="Mapa"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
