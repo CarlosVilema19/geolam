@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".GestionLugares">
+
+
+    <LinearLayout
+        android:id="@+id/menuLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTipologia"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:insetTop="0dp"
+            android:insetBottom="3dp"
+            android:text="@string/tipologia" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLugares"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:insetTop="0dp"
+            android:insetBottom="3dp"
+            android:text="@string/lugares_de_atencion_medica" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEspecialidad"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:insetTop="0dp"
+            android:insetBottom="3dp"
+            android:text="@string/especialidades" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMedico"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:insetTop="0dp"
+            android:insetBottom="3dp"
+            android:text="@string/medicos" />
+
+    </LinearLayout>
+</RelativeLayout>
