@@ -20,6 +20,8 @@
     <string name="rec_especialidades_lugar">Especialidades........ </string>
     <string name="rec_medicos_lugar">Médicos del lugar</string>
     <string name="rec_confirme_la_contrasenia">Confirme la contraseña</string>
+    <string name="gestion_de_usuarios">Gestion Usuarios</string>
+    <string name="lugares_medicos">Lugares Medicos</string>
 
 
 </resources>

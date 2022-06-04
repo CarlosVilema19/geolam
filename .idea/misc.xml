@@ -3,10 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_lugar_medico.xml" value="0.13541666666666666" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_registrar.xml" value="0.25" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/lista_items.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_registrar.xml" value="0.22" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/GEOLAM-RIOBAMBA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/GEOLAM-RIOBAMBA/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/GEOLAM-RIOBAMBA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -23,9 +20,11 @@
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam-GITHUB/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_gestion_informacion_lugares.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_admin.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_admin.xml" value="0.1" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_lugar_medico.xml" value="0.1" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_mapa.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/lista_items.xml" value="0.1" />
       </map>
     </option>
   </component>
