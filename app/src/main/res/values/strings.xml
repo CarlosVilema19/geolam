@@ -47,6 +47,11 @@
     <string name="especialidades_agregadas">Especialidades agregadas</string>
     //MAPA
     <string name="ConexionMapa">Conexión Mapa</string>
+    <string name="rec_whatsapp">WhatsApp</string>
+    <string name="rec_pagina_web">Página Web</string>
+    <string name="rec_latitud_lugar">Latitud</string>
+    <string name="rec_longitud_lugar">Longitud</string>
+    <string name="rec_guardar_informacion">Guardar</string>
 
 
 </resources>

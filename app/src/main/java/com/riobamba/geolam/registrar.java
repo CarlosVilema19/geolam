@@ -144,7 +144,8 @@ public class registrar extends AppCompatActivity {
                 loading.dismiss();
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
