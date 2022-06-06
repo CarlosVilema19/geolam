@@ -13,6 +13,18 @@
         android:layout_height="wrap_content"
         tools:context=".LugarMedico">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="25dp"
+            app:cardUseCompatPadding="true"
+            android:elevation="10dp"
+            >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,8 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/imagenlugar"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="150dp"
                     android:text="Nombre"
@@ -57,8 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txnombrelugar"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
                     android:text="@string/rec_nombre_del_lugar" />
@@ -79,7 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvnombrelugar"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="8dp"
                     android:text="Descripción"
                     android:textStyle="bold" />
@@ -89,8 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txdescripcion"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
                     android:text="@string/rec_descripcion_lugar" />
@@ -109,7 +122,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvdescripcion"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="8dp"
                     android:text="Dirección"
                     android:textStyle="bold" />
@@ -119,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txdireccion"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="20dp"
                     android:text="@string/rec_direccion_lugar" />
@@ -137,7 +151,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvdireccion"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="8dp"
                     android:text="Teléfono"
                     android:textStyle="bold" />
@@ -147,9 +162,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvdireccion"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/rec_telefono_lugar" />
             </LinearLayout>
 
@@ -166,7 +181,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvtelefono"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="8dp"
                     android:text="Especialidades"
                     android:textStyle="bold" />
@@ -176,9 +192,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txespecialidades"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/rec_especialidades_lugar" />
             </LinearLayout>
 
@@ -195,7 +211,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvespecialidades"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="8dp"
                     android:text="Médicos"
                     android:textStyle="bold" />
@@ -205,9 +222,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txmedicos"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/rec_medicos_lugar" />
             </LinearLayout>
             <LinearLayout
@@ -222,8 +239,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layoutfin"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
                     android:text="Calificación"
                     android:textStyle="bold" />
 
@@ -232,7 +250,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txcalificacion"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp"
                     android:numStars="5" />
             </LinearLayout>
@@ -249,7 +268,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ratingBar"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp"
                     android:text="Opinión"
                     android:textStyle="bold" />
@@ -259,9 +279,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txopinion"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="50dp"
-                    android:text="Opinión General">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:hint="Opinión General"
+                   >
                 </com.google.android.material.textfield.TextInputEditText>
 
                 <com.google.android.material.button.MaterialButton
@@ -270,11 +291,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvopinion"
                     android:layout_gravity="center"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginEnd="130dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
                     android:text="Enviar" />
             </LinearLayout>>
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </ScrollView>
