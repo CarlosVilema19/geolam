@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.riobamba.geolam.modelo.ConexionMapa;
+
 public class Inicio extends AppCompatActivity {
     Button btnlugarmedico;
 
@@ -18,7 +20,7 @@ public class Inicio extends AppCompatActivity {
         btnlugarmedico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inicio.this, LugarMedico.class);
+                Intent intent = new Intent(Inicio.this, ConexionMapa.class);
                 startActivity(intent);
             }
         }
