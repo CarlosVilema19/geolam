@@ -61,4 +61,8 @@
     <string name="rec_latitud_lugar">Latitud</string>
     <string name="rec_longitud_lugar">Longitud</string>
     <string name="rec_guardar_informacion">Guardar</string>
+    <string name="restabecer">Restabecer</string>
+    <string name="correo_electronico_restablecer">Correo electrónico</string>
+    <string name="mensaje_restablecer">Enviaremos una nueva contraseña a tu correo</string>
+    <string name="restablecer_contrasenia">Restablecer contraseña</string>
 </resources>
