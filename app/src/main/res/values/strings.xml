@@ -19,7 +19,6 @@
     <string name="apellido_registro">Apellido</string>
     <string name="edad_regsitro">Edad</string>
     <string name="ingreso_regsitro">Regístrate</string>
-
     //INFORMACION DEL LUGAR
     <string name="rec_nombre_del_lugar">Nombre del lugar............</string>
     <string name="rec_descripcion_lugar">Descripción del lugar</string>
@@ -47,7 +46,19 @@
     <string name="especialidades_agregadas">Especialidades agregadas</string>
     //MAPA
     <string name="ConexionMapa">Conexión Mapa</string>
-
-
-
+    //MEDICO
+    <string name="medico">Médico</string>
+    <string name="nombre_medico">Nombre</string>
+    <string name="apellido_medico">Apellido</string>
+    <string name="lugar_de_trabajo">Lugar de trabajo</string>
+    <string name="especialidad_medico">Especialidad</string>
+    <string name="descripcion_medico">Descripción</string>
+    <string name="agregar_medico">Agregar</string>
+    <string name="ver_agregados">Ver Agregados</string>
+    //LUGARES
+    <string name="rec_whatsapp">WhatsApp</string>
+    <string name="rec_pagina_web">Página Web</string>
+    <string name="rec_latitud_lugar">Latitud</string>
+    <string name="rec_longitud_lugar">Longitud</string>
+    <string name="rec_guardar_informacion">Guardar</string>
 </resources>
