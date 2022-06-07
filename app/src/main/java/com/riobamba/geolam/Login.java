@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
-    Button btnLogin;
+    Button btnLogin, btnRecuperar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,16 @@ public class Login extends AppCompatActivity {
         //String URL = "https://qcqjfcit.lucusvirtual.es/validar_usuario.php";
         //ConectarLogin oConectarLogin = new ConectarLogin(edtUsuario,edtPassword, URL);
        // btnLogin.setOnClickListener(view -> oConectarLogin.validarUsuario());
+        btnRecuperar = findViewById(R.id.btnolvidarcontraseña);
+
+        btnRecuperar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, RecuperacionContrasenia.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
