@@ -47,6 +47,14 @@
     <string name="especialidades_agregadas">Especialidades agregadas</string>
     //MAPA
     <string name="ConexionMapa">Conexión Mapa</string>
+    <string name="medico">Médico</string>
+    <string name="nombre_medico">Nombre</string>
+    <string name="apellido_medico">Apellido</string>
+    <string name="lugar_de_trabajo">Lugar de trabajo</string>
+    <string name="especialidad_medico">Especialidad</string>
+    <string name="descripcion_medico">Descripción</string>
+    <string name="agregar_medico">Agregar</string>
+    <string name="ver_agregados">Ver Agregados</string>
 
 
 </resources>
