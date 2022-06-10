@@ -28,7 +28,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
     }
 
@@ -46,8 +46,12 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng riobamba = new LatLng(-1.6627, -78.66126);
-        mMap.addMarker(new MarkerOptions().position(riobamba).title("Riobamba").snippet("Lugares de atención médica de Riobamba").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        LatLng riobamba = new LatLng(-1.66246, -78.65975);
+        mMap.addMarker(new MarkerOptions().position(riobamba).title("Hospital San Juan").snippet("Av. José Veloz y Atuachi").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        LatLng metropolitana = new LatLng(-1.66872,  -78.6488);
+        mMap.addMarker(new MarkerOptions().position(metropolitana).title("Hospital General Clinica Metroplitana").snippet("Junín entre España & García Moreno").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(riobamba,14));
     }
