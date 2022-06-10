@@ -149,14 +149,7 @@
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-                <Spinner
-                    android:id="@+id/spinnerCategoria"
-                    android:layout_width="match_parent"
 
-                    android:layout_marginTop="10dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    />
 
 
                 <com.google.android.material.textfield.TextInputLayout
