@@ -54,15 +54,15 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
     private int PICK_IMAGE_REQUEST = 1;
 
     //Items Tipología
-    String[] itemsTip = {"1", "2", "3", "4", "5", "6"};
+    String[] itemsTip = {"Hospital General", "Hospital Básico", "Hospital del Día"};
     ArrayList<String> tipologia = new ArrayList<>();
     AutoCompleteTextView autoCompleteOpcionesTipologia;
     ArrayAdapter<String> adapterItemsTip;
 
     //Items Categoría
-   // String[] itemsCat = {"1", "2"};
+    String[] itemsCat = {"Privado", "Público"};
     ArrayList<String> categoriaList = new ArrayList<>();
-    //AutoCompleteTextView autoCompleteOpcionesCategoría;
+    AutoCompleteTextView autoCompleteOpcionesCategoría;
     ArrayAdapter<String> adapterItemsCat;
 
     //consulta
@@ -100,10 +100,10 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         });
         //Base de datos consulta
         requestQueue = Volley.newRequestQueue(this);
-       // autoCompleteOpcionesCategoría = (AutoCompleteTextView)  findViewById(R.id.opcionesCategoria);
-spinnerCategoria=findViewById(R.id.spinnerCategoria);
+        autoCompleteOpcionesCategoría = (AutoCompleteTextView)  findViewById(R.id.opcionesCategoria);
+//spinnerCategoria=findViewById(R.id.spinnerCategoria);
 
-        JSONObject jsonObject = null;
+     /*   JSONObject jsonObject = null;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", jsonObject, new Response.Listener<JSONObject>()
         { @Override public void onResponse(JSONObject response) {
 
@@ -121,11 +121,11 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
-        }, new Response.ErrorListener() {
+       /* }, new Response.ErrorListener() {
             @Override public void onErrorResponse(VolleyError error) { }
-        });
+        });*/
         //requestQueue.add(jsonObjectRequest);
         //spinnerCategoria.setOnItemSelectedListener(this);
 
@@ -169,11 +169,11 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
             }
         });*/
 
-
+/*
         requestQueue.add(jsonObjectRequest);
         spinnerCategoria.setOnItemSelectedListener(this);
         //autoCompleteOpcionesCategoría.setOnItemSelectedListener();
-
+*/
 
 
 
@@ -194,7 +194,6 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
         });
 
         //Items Categoría Autocomplete
-        /*
         autoCompleteOpcionesCategoría = (AutoCompleteTextView) findViewById(R.id.opcionesCategoria);
         adapterItemsCat = new ArrayAdapter<String>(this, R.layout.lista_items, itemsCat);
         autoCompleteOpcionesCategoría.setAdapter(adapterItemsCat);
@@ -207,7 +206,7 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
 
             }
 
-        });*/
+        });
 
         //otros campos
         txtTipología = findViewById(R.id.opcionesTipologia);
@@ -287,7 +286,7 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
                 parametros.put("longitud", txtLongitud.getText().toString());
                 parametros.put("descripcion_lugar", txtDescripcion.getText().toString());
 
-            //Imagen
+                //Imagen
                 parametros.put(claveImagen, imagen_lugar);
                 parametros.put(claveNombre, nombreImagen);
 
@@ -300,16 +299,16 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
         //Agregar solicitud a la cola
         requestQueue.add(stringRequest);
     }
-        public void showFileChooser() {
+    public void showFileChooser() {
 
 
-            Intent intent = new Intent();
-            intent.setType("image/*");
+        Intent intent = new Intent();
+        intent.setType("image/*");
 
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Selecciona la imagen"), PICK_IMAGE_REQUEST);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Selecciona la imagen"), PICK_IMAGE_REQUEST);
 
-        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -338,11 +337,11 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
     }
 
 
-        @Override
-        public void onBackPressed() {
-            super.onBackPressed();
-            finish();
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -353,4 +352,4 @@ spinnerCategoria=findViewById(R.id.spinnerCategoria);
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-    }
+}
