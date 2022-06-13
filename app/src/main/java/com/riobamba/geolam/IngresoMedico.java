@@ -85,7 +85,7 @@ public class IngresoMedico extends AppCompatActivity {
     }
 
     private void insertarUsusario() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/agregar_medico.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/agregar_medico.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();

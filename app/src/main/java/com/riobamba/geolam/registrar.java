@@ -137,7 +137,7 @@ public class registrar extends AppCompatActivity {
 
     private void insertarUsusario() {
         final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/insertar_.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/insertar_.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Descartar el diálogo de progreso

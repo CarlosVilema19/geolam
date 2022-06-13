@@ -247,7 +247,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
     private void insertarLugar() {
         final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/insertar_lugar.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/insertar_lugar.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Descartar el diálogo de progreso
