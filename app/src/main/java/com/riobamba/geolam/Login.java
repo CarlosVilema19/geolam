@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void validarUsuario(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/validar_usuario.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/validar_usuario.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 /*if (!response.isEmpty()){
