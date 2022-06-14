@@ -16,14 +16,8 @@ import java.util.List;
 
 public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdaptador.ViewHolder> {
 
-    //private String[] localDataSet;
-    private Context mCtx;
-    private List<ListadoLugar> lugarList;
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
-
+    private final Context mCtx;
+    private final List<ListadoLugar> lugarList;
 
     public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList){
         this.mCtx = mCtx;
@@ -32,8 +26,10 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView nombreLugar, direccionLugar, telefonoLugar;
-        private ImageView imagenLugar;
+        private final TextView nombreLugar;
+        private final TextView direccionLugar;
+        private final TextView telefonoLugar;
+        //private final ImageView imagenLugar;
 
 
 
@@ -45,7 +41,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
             direccionLugar = view.findViewById(R.id.tvDireccionLista);
             telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
-            imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
+            //imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
         }
 
         /*public TextView getTextView() {
@@ -53,22 +49,12 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         }*/
     }
 
-   /* /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
-   /* public CustomAdapter(String[] dataSet) {
-        localDataSet = dataSet;
-    }*/
-
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.activity_listado, viewGroup, false);
+        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        View view = inflater.inflate(R.layout.activity_listado, null);
 
         return new ViewHolder(view);
     }
@@ -78,9 +64,9 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         ListadoLugar listadoLugar = lugarList.get(position);
         //Cargar Imagen
-        Glide.with(mCtx)
+        /*Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
-                        .into(viewHolder.imagenLugar);
+                        .into(viewHolder.imagenLugar);*/
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
