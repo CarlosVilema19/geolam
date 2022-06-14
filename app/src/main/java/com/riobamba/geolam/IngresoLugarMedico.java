@@ -99,12 +99,13 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             }
         });
         //Base de datos consulta
-        requestQueue = Volley.newRequestQueue(this);
-        autoCompleteOpcionesCategoría = (AutoCompleteTextView)  findViewById(R.id.opcionesCategoria);
-//spinnerCategoria=findViewById(R.id.spinnerCategoria);
+      requestQueue = Volley.newRequestQueue(this);
+        //autoCompleteOpcionesCategoría = (AutoCompleteTextView)  findViewById(R.id.opcionesCategoria);
 
-     /*   JSONObject jsonObject = null;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", jsonObject, new Response.Listener<JSONObject>()
+        spinnerCategoria=findViewById(R.id.spinnerCategoria);
+
+       JSONObject jsonObject = null;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", jsonObject, new Response.Listener<JSONObject>()
         { @Override public void onResponse(JSONObject response) {
 
             try {
@@ -112,6 +113,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String descripcion_categoria = jsonObject.optString("descripcion_categoria");
+
 
                     categoriaList.add(descripcion_categoria);
                     adapterItemsCat = new ArrayAdapter<>(IngresoLugarMedico.this,android.R.layout.simple_spinner_item, categoriaList);
@@ -121,16 +123,19 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 
-       /* }, new Response.ErrorListener() {
+       }, new Response.ErrorListener() {
             @Override public void onErrorResponse(VolleyError error) { }
-        });*/
-        //requestQueue.add(jsonObjectRequest);
-        //spinnerCategoria.setOnItemSelectedListener(this);
+        });
+
+
+        requestQueue.add(jsonObjectRequest);
+        spinnerCategoria.setOnItemSelectedListener(this);
 
 /*
-            // JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", (String)null, new Response.Listener<JSONObject>() {
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", (String)null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -146,7 +151,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
                         /////
 
-                      /* autoCompleteOpcionesCategoría.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                      autoCompleteOpcionesCategoría.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -155,8 +160,8 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
                             }
 
-                        });*/
-/*
+                        });
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -167,19 +172,20 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Complete todos los campos" + error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
-/*
+
         requestQueue.add(jsonObjectRequest);
         spinnerCategoria.setOnItemSelectedListener(this);
         //autoCompleteOpcionesCategoría.setOnItemSelectedListener();
+
 */
 
 
-
 ///////////////////////////////////
+        /*
         //Items Tipología Autocomplete
-        autoCompleteOpcionesTipologia = (AutoCompleteTextView) findViewById(R.id.opcionesTipologia);
+        //autoCompleteOpcionesTipologia = (AutoCompleteTextView) findViewById(R.id.opcionesTipologia);
         adapterItemsTip = new ArrayAdapter<String>(this, R.layout.lista_items_tipologia, itemsTip);
         autoCompleteOpcionesTipologia.setAdapter(adapterItemsTip);
         autoCompleteOpcionesTipologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -193,7 +199,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
         });
 
-        //Items Categoría Autocomplete
+        Items Categoría Autocomplete
         autoCompleteOpcionesCategoría = (AutoCompleteTextView) findViewById(R.id.opcionesCategoria);
         adapterItemsCat = new ArrayAdapter<String>(this, R.layout.lista_items, itemsCat);
         autoCompleteOpcionesCategoría.setAdapter(adapterItemsCat);
@@ -207,10 +213,10 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             }
 
         });
-
+*/
         //otros campos
-        txtTipología = findViewById(R.id.opcionesTipologia);
-        txtCategoria= findViewById(R.id.opcionesCategoria);
+        //txtTipología = findViewById(R.id.opcionesTipologia);
+        //txtCategoria= findViewById(R.id.opcionesCategoria);
         txtNombreLugar = findViewById(R.id.ingresoNombreLugar);
         txtDireccion = findViewById(R.id.ingresoDireccion);
         txtTelefono = findViewById(R.id.ingresoTelefono);
@@ -275,8 +281,8 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
                 Map<String, String> parametros = new HashMap<String, String>();
 
-                parametros.put("id_tipologia_lugar", txtTipología.getText().toString());
-                parametros.put("id_categoria", txtCategoria.getText().toString());
+               // parametros.put("id_tipologia_lugar", txtTipología.getText().toString());
+                //parametros.put("id_categoria", txtCategoria.getText().toString());
                 parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
                 parametros.put("direccion", txtDireccion.getText().toString());
                 parametros.put("telefono", txtTelefono.getText().toString());
