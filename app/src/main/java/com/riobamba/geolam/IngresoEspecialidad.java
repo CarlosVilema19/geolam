@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,13 +34,14 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ConexionTipologia conexionTipologia = new ConexionTipologia();
-                insertarUsusario();
+                insertarEspecialidad();
             }
         });
     }
 
-    private void insertarUsusario() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/agregar_especialidad.php", new Response.Listener<String>() {
+    private void insertarEspecialidad() {
+        String url = WebService.urlRaiz + WebService.servicioAgregarEspecialidad;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();

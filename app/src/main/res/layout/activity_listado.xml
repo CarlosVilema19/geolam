@@ -62,6 +62,7 @@
 >
 
                     <ImageView
+                        android:id="@+id/ivImagenLugarLista"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -75,17 +76,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvNombreLugarLista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nombre del lugar"
                         android:textSize="25sp" />
 
                     <TextView
+                        android:id="@+id/tvDireccionLista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Dirección"
                         android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/tvTelefonoLista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Telefono"
