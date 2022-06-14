@@ -109,48 +109,15 @@
                         app:iconTint="#FFFFFF" />
 
                 </RelativeLayout>
-                <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <Spinner
+                    android:id="@+id/spinnerCategoria"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etemail"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="Tipo"
-                    >
-
-                    <AutoCompleteTextView
-                        android:id="@+id/opcionesTipologia"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/opcionesTipologia"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="Categoría"
-                    >
-
-                    <AutoCompleteTextView
-                        android:id="@+id/opcionesCategoria"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -168,7 +135,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/opcionesCategoria"
+
                         android:gravity="left"
                         android:hint="@string/rec_nombre_del_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
