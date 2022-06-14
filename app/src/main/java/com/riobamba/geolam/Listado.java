@@ -40,7 +40,7 @@ public class Listado extends AppCompatActivity {
 
         lugarList = new ArrayList<>();
 
-       // MostarResultado();
+        MostrarResultado();
 
     }
 
@@ -49,29 +49,30 @@ public class Listado extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = WebService.urlRaiz + WebService.servicioListarLugares;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray array = new JSONArray(response);
 
                     for (int i = 0; i < array.length(); i++) {
-                        JSONObject obj = (JSONObject) array.get(i);
+                        JSONObject obj = array.getJSONObject(i);
                         lugarList.add(new ListadoLugar(
                                 obj.getString("nombre_lugar"),
                                 obj.getString("direccion"),
-                                obj.getString("telefono"),
-                                obj.getString("imagen_lugar")));
+                                obj.getString("telefono")
+                                //obj.getString("imagen_lugar")
+                        ));
 
                     }
 
-                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(getApplicationContext(), lugarList);
+                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList);
                     recyclerView.setAdapter(myadapter);
 
 
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-
+                    e.printStackTrace();
 
                 }
 
@@ -79,7 +80,7 @@ public class Listado extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
