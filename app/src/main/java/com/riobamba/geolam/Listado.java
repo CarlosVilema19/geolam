@@ -61,8 +61,8 @@ public class Listado extends AppCompatActivity {
                         lugarList.add(new ListadoLugar(
                                 obj.getString("nombre_lugar"),
                                 obj.getString("direccion"),
-                                obj.getString("telefono")
-                                //obj.getString("imagen_lugar")
+                                obj.getString("telefono"),
+                                obj.getString("imagen_lugar")
                         ));
 
                     }
