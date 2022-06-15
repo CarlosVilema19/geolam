@@ -29,7 +29,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         private final TextView nombreLugar;
         private final TextView direccionLugar;
         private final TextView telefonoLugar;
-        //private final ImageView imagenLugar;
+        private final ImageView imagenLugar;
 
 
 
@@ -41,7 +41,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
             direccionLugar = view.findViewById(R.id.tvDireccionLista);
             telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
-            //imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
+            imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
         }
 
         /*public TextView getTextView() {
@@ -64,9 +64,9 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         ListadoLugar listadoLugar = lugarList.get(position);
         //Cargar Imagen
-        /*Glide.with(mCtx)
+        Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
-                        .into(viewHolder.imagenLugar);*/
+                        .into(viewHolder.imagenLugar);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
