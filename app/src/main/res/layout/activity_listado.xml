@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".Listado"
-    android:background="#F2F2F2"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
         android:orientation="vertical">
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:contentPadding="5dp">
+            android:layout_gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,12 +31,16 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="50dp"
-                    android:layout_height="50dp">
+                    android:layout_gravity="center"
+                    android:layout_height="50dp"
+                    >
 
                     <ImageView
                         android:id="@+id/ivImagenLugarLista"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
@@ -48,7 +53,7 @@
 
                     <TextView
                         android:id="@+id/tvNombreLugarLista"
-                        android:layout_width="325dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nombre del lugar"
                         android:textSize="20dp" />
