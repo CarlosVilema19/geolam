@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/encabezado"
-        android:title="Encabezado">
+        android:title="@string/lugares_menu">
         <menu>
             <item
                 android:id="@+id/inicio"
-                android:title="Inicio" />
+                android:title="@string/inicio_menu" />
             <item
                 android:id="@+id/misDatos"
-                android:title="Mis Datos" />
+                android:title="@string/mis_datos_menu" />
             <item
                 android:id="@+id/acercaApp"
-                android:title="Acerca de la app" />
+                android:title="@string/acerca_menu" />
             <item
                 android:id="@+id/cerrarSesion"
-                android:title="Cerrar sesión" />
+                android:title="@string/cerrar_menu" />
             <item
                 android:id="@+id/salir"
-                android:title="Salir" />
+                android:title="@string/salir_menu" />
 
         </menu>
 

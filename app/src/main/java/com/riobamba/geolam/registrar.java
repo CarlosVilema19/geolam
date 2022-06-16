@@ -33,6 +33,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.WebService;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Hashtable;
@@ -136,8 +138,9 @@ public class registrar extends AppCompatActivity {
 
 
     private void insertarUsusario() {
+        String url = WebService.urlRaiz+WebService.servicioInsertar;
         final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/insertar_.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Descartar el diálogo de progreso

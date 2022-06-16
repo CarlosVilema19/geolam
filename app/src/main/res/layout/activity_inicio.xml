@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".Inicio">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/viewlogo2"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:foregroundTint="#00FFFFFF"
-        android:src="@mipmap/ic_launcher_foreground" />
-
-    <LinearLayout
-        android:id="@+id/menuLinearLayout"
-        android:layout_below="@+id/viewlogo2"
-        android:layout_width="fill_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="3">
+        >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnlugarescercanos"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/viewlogo2"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="Lugares más cercanos" />
+            android:layout_height="300dp"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:foregroundTint="#00FFFFFF"
+            android:src="@mipmap/ic_launcher_foreground" />
+    </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnespecialidades"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="Especialidades" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnlugaresmedicos"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="Lugares médicos" />
-    </LinearLayout>>
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnlugarescercanos"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cornerRadius="10dp"
+                android:text="@string/lugares_cercanos_inicio" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnespecialidades"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cornerRadius="10dp"
+                android:text="@string/especialidades_inicio" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnlugaresmedicos"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
+                app:cornerRadius="10dp"
+                android:text="@string/lugares_medicos_inicio" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
