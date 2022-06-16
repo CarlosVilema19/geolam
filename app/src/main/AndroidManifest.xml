@@ -68,6 +68,9 @@
             android:name=".ListarLugarMedico"
             android:exported="false" />
         <activity
+            android:name=".ListadoCrud"
+            android:exported="false" />
+        <activity
             android:name=".LugarMedico"
             android:exported="false" />
         <activity

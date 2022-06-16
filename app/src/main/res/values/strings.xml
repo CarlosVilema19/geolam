@@ -1,6 +1,6 @@
 <resources>
     //INICIAR SESION
-    <string name="app_name">geolam</string>
+    <string name="app_name">Geolam</string>
     <string name="email_usuario">Email</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Iniciar sesión</string>

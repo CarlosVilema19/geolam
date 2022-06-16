@@ -4,7 +4,9 @@ import android.media.Image;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListadoLugar {
+import java.io.Serializable;
+
+public class ListadoLugar implements Serializable {
 
     String nombreLugar, direccionLugar, telefonoLugar;
     String imagenLugar;

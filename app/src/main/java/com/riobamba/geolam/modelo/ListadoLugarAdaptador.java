@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
 import java.util.List;
@@ -18,10 +19,16 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
 
     private final Context mCtx;
     private final List<ListadoLugar> lugarList;
+    final ListadoLugarAdaptador.OnItemClickListener listener;
 
-    public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList){
+    public interface OnItemClickListener{
+        void onItemClick(ListadoLugar item);
+    }
+
+    public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList, ListadoLugarAdaptador.OnItemClickListener listener){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
+        this.listener = listener;
     }
 
 
@@ -72,6 +79,12 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(listadoLugar);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

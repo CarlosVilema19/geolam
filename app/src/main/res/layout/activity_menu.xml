@@ -9,24 +9,23 @@
     android:id="@+id/menu">
 
     <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/activity_menu_toolbar">
-    </include>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        layout="@layout/activity_menu_toolbar"/>
+
+
     <include
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/activity_menu_contenedor">
-    </include>
+        layout="@layout/activity_inicio"/>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:menu="@menu/menu"
         app:headerLayout="@layout/activity_menu_encabezado"
         android:layout_gravity="start"
         android:fitsSystemWindows="true" />
-
-
 </androidx.drawerlayout.widget.DrawerLayout>
