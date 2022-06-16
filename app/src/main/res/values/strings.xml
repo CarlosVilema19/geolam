@@ -65,4 +65,6 @@
     <string name="correo_electronico_restablecer">Correo electrónico</string>
     <string name="mensaje_restablecer">Enviaremos una nueva contraseña a tu correo</string>
     <string name="restablecer_contrasenia">Restablecer contraseña</string>
+    <string name="open" />
+    <string name="close" />
 </resources>
