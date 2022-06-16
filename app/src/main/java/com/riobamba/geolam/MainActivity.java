@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Button btnInicio, btnListarLugar, btnLog, btnRegistrar, btnLugarMedico, btnMapa,
-            btnGestionLugar, btnGestionUsuario, btnInicioAdmin;
+            btnGestionLugar, btnGestionUsuario, btnInicioAdmin, btnMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         btnGestionLugar= findViewById(R.id.btnGestionLugar);
         btnGestionUsuario= findViewById(R.id.btnGestionUsuario);
         btnInicioAdmin= findViewById(R.id.btnInicioAdmin);
-
+        btnMenu= findViewById(R.id.btnMenu);
 
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Menu.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
