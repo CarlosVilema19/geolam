@@ -9,7 +9,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/viewlogo2"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
@@ -28,16 +28,14 @@
             android:id="@+id/btnGestionLugar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
+            app:cornerRadius="10dp"
             android:text="@string/gestion_de_lugares" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGestionUsuario"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
+            app:cornerRadius="10dp"
             android:text="@string/gestion_de_usuarios" />
 
     </LinearLayout>

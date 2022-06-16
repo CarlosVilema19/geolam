@@ -33,8 +33,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
                 app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
 
 
@@ -58,14 +58,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="Nombre del lugar"
+                    android:text="@string/nombre_lugar_listado"
                     android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/tvDireccionLista"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dirección"
+                    android:text="@string/direccion_listado"
                     android:textSize="12sp" />
 
                 <TextView

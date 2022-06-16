@@ -67,4 +67,19 @@
     <string name="restablecer_contrasenia">Restablecer contraseña</string>
     <string name="open" />
     <string name="close" />
+    <string name="lugares_menu">Lugares de atención médica</string>
+    <string name="inicio_menu">Inicio</string>
+    <string name="mis_datos_menu">Mis Datos</string>
+    <string name="acerca_menu">Acerca de la app</string>
+    <string name="cerrar_menu">Cerrar sesión</string>
+    <string name="salir_menu">Salir</string>
+    <string name="geolam_menu_enc">GEOLAM</string>
+    <string name="olvidaste_contr_login">¿Has olvidado la contraseña?</string>
+    <string name="entrar_log">Entrar</string>
+    <string name="registro_log">¿No tienes una cuenta? Regístrate</string>
+    <string name="nombre_lugar_listado">Nombre del lugar</string>
+    <string name="direccion_listado">Dirección</string>
+    <string name="lugares_cercanos_inicio">Lugares más cercanos</string>
+    <string name="especialidades_inicio">Especialidades</string>
+    <string name="lugares_medicos_inicio">Lugares médicos</string>
 </resources>
