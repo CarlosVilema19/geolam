@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -67,7 +68,12 @@ public class Listado extends AppCompatActivity {
 
                     }
 
-                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList);
+                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, new ListadoLugarAdaptador.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ListadoLugar item) {
+                            moveToDescription(item);
+                        }
+                    });
                     recyclerView.setAdapter(myadapter);
 
 
@@ -87,6 +93,13 @@ public class Listado extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
+    public void moveToDescription(ListadoLugar item)
+    {
+        Intent intent = new Intent(this,LugarMedico.class);
+        intent.putExtra("LisadoLugar",item);
+        startActivity(intent);
+    }
+
 
 }
 

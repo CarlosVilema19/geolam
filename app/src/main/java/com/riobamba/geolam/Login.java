@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,6 +88,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void moveToRegistro(View view) {
+        startActivity(new Intent(getApplicationContext(), registrar.class));
+        finish();
+    }
+
+    public void moveToRegistro1(MenuItem item) {
         startActivity(new Intent(getApplicationContext(), registrar.class));
         finish();
     }
