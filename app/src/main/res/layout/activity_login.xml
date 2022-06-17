@@ -105,7 +105,7 @@
             android:layout_marginRight="25dp"
             android:background="@android:color/transparent"
             android:gravity="left"
-            android:text="¿Has olvidado la contraseña?"
+            android:text="@string/olvidaste_contr_login"
             android:textColor="@color/black"
             android:textSize="10sp" />
 
@@ -118,7 +118,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="25dp"
             android:gravity="center_horizontal"
-            android:text="Entrar" />
+            android:text="@string/entrar_log" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btncrearcuenta"
@@ -131,7 +131,7 @@
             android:background="@android:color/transparent"
             android:gravity="center_horizontal"
             android:onClick="moveToRegistro"
-            android:text="¿No tienes una cuenta? Regístrate"
+            android:text="@string/registro_log"
             android:textColor="@color/black"
             android:textSize="10sp" />
 

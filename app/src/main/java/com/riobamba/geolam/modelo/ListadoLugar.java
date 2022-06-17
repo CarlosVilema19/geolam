@@ -1,11 +1,15 @@
 package com.riobamba.geolam.modelo;
 
+import android.media.Image;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListadoLugar {
+import java.io.Serializable;
 
-    String nombreLugar, direccionLugar, telefonoLugar,imagenLugar;
+public class ListadoLugar implements Serializable {
+
+    String nombreLugar, direccionLugar, telefonoLugar;
+    String imagenLugar;
 
     public ListadoLugar(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar) {
         this.nombreLugar = nombreLugar;

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class Listado extends AppCompatActivity {
 
         lugarList = new ArrayList<>();
 
-       // MostarResultado();
+        MostrarResultado();
 
     }
 
@@ -49,29 +50,35 @@ public class Listado extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = WebService.urlRaiz + WebService.servicioListarLugares;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray array = new JSONArray(response);
 
                     for (int i = 0; i < array.length(); i++) {
-                        JSONObject obj = (JSONObject) array.get(i);
+                        JSONObject obj = array.getJSONObject(i);
                         lugarList.add(new ListadoLugar(
                                 obj.getString("nombre_lugar"),
                                 obj.getString("direccion"),
                                 obj.getString("telefono"),
-                                obj.getString("imagen_lugar")));
+                                obj.getString("imagen_lugar")
+                        ));
 
                     }
 
-                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(getApplicationContext(), lugarList);
+                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, new ListadoLugarAdaptador.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ListadoLugar item) {
+                            moveToDescription(item);
+                        }
+                    });
                     recyclerView.setAdapter(myadapter);
 
 
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-
+                    e.printStackTrace();
 
                 }
 
@@ -79,13 +86,20 @@ public class Listado extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
+    public void moveToDescription(ListadoLugar item)
+    {
+        Intent intent = new Intent(this,LugarMedico.class);
+        intent.putExtra("LisadoLugar",item);
+        startActivity(intent);
+    }
+
 
 }
 

@@ -3,6 +3,7 @@ package com.riobamba.geolam;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,18 +24,26 @@ import java.util.Map;
 
 public class IngresoEspecialidad extends AppCompatActivity {
     EditText txtEspecialidad;
-    Button btnAgregar;
+    Button btnAgregar, btnVerAgregados;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_especialidad);
         txtEspecialidad = findViewById(R.id.etEspecialidad);
         btnAgregar = findViewById(R.id.btnAgregarEspecialidad);
+        btnVerAgregados = findViewById(R.id.btnEspecialidadAgregada);
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ConexionTipologia conexionTipologia = new ConexionTipologia();
                 insertarEspecialidad();
+            }
+        });
+        btnVerAgregados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IngresoEspecialidad.this, ListadoCrud.class);
+                startActivity(intent);
             }
         });
     }

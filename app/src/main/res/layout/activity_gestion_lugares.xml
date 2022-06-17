@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".GestionLugares">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/viewlogo2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:foregroundTint="#00FFFFFF"
+            android:src="@mipmap/ic_launcher_foreground" />
+    </androidx.cardview.widget.CardView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTipologia"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@string/tipologia"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLugares"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@string/lugares_de_atencion_medica"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEspecialidad"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@string/especialidades"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMedico"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@string/medicos"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/menuLinearLayout"
@@ -15,35 +69,5 @@
         android:orientation="vertical"
         android:weightSum="3">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnTipologia"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="@string/tipologia" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLugares"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="@string/lugares_de_atencion_medica" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEspecialidad"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="@string/especialidades" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMedico"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:insetTop="0dp"
-            android:insetBottom="3dp"
-            android:text="@string/medicos" />
-
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

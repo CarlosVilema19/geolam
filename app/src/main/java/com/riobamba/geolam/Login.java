@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ConectarLogin;
+import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +50,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void validarUsuario(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/validar_usuario.php", new Response.Listener<String>() {
+        String url = WebService.urlRaiz+WebService.servicioValidarUsuario;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 /*if (!response.isEmpty()){
@@ -85,6 +88,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void moveToRegistro(View view) {
+        startActivity(new Intent(getApplicationContext(), registrar.class));
+        finish();
+    }
+
+    public void moveToRegistro1(MenuItem item) {
         startActivity(new Intent(getApplicationContext(), registrar.class));
         finish();
     }

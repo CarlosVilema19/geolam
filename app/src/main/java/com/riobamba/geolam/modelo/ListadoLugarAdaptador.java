@@ -10,30 +10,33 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
 import java.util.List;
 
 public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdaptador.ViewHolder> {
 
-    //private String[] localDataSet;
-    private Context mCtx;
-    private List<ListadoLugar> lugarList;
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
+    private final Context mCtx;
+    private final List<ListadoLugar> lugarList;
+    final ListadoLugarAdaptador.OnItemClickListener listener;
 
+    public interface OnItemClickListener{
+        void onItemClick(ListadoLugar item);
+    }
 
-    public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList){
+    public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList, ListadoLugarAdaptador.OnItemClickListener listener){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
+        this.listener = listener;
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView nombreLugar, direccionLugar, telefonoLugar;
-        private ImageView imagenLugar;
+        private final TextView nombreLugar;
+        private final TextView direccionLugar;
+        private final TextView telefonoLugar;
+        private final ImageView imagenLugar;
 
 
 
@@ -53,22 +56,12 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         }*/
     }
 
-   /* /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
-   /* public CustomAdapter(String[] dataSet) {
-        localDataSet = dataSet;
-    }*/
-
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.activity_listado, viewGroup, false);
+        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        View view = inflater.inflate(R.layout.activity_listado, null);
 
         return new ViewHolder(view);
     }
@@ -86,6 +79,12 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(listadoLugar);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

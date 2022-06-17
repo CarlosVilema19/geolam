@@ -81,6 +81,12 @@
             android:text="Inicio Admin"
             tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
+        <Button
+            android:id="@+id/btnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            tools:ignore="MissingConstraints,UsingOnClickInXml" />
 
 
     </LinearLayout>

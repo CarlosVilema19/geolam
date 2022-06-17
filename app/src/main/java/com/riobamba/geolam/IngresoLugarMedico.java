@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -276,9 +277,9 @@ public int validarCampos(){
 }
 
     private void insertarLugar() {
-
+        String url = WebService.urlRaiz +WebService.servicioInsertarLugar;
         final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://tvcpdudx.lucusvirtual.es/insertar_lugar.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
