@@ -33,6 +33,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     >
 
                     <TextView
@@ -40,29 +41,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="35dp"
-                        android:text="@string/registrate"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Ingresar datos"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
 
 
                         />
 
-                    <TextView
-                        android:id="@+id/txsignup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:onClick="login"
-                        android:text="@string/entrar"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-
-                        />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -84,6 +73,7 @@
                         android:padding="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_image_24"
+                        android:tag="bg1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -100,10 +90,10 @@
                         style="@style/Widget.Material3.Button.TextButton.Icon"
                         android:layout_width="50dp"
                         android:layout_height="55dp"
-                        android:layout_marginLeft="230dp"
+                        android:layout_marginLeft="244dp"
                         android:layout_marginTop="145dp"
 
-                        android:layout_marginRight="18dp"
+                        android:layout_marginRight="2dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
                         app:iconTint="#FFFFFF" />
@@ -278,7 +268,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_guardarLugar"
                     android:layout_width="match_parent"
@@ -288,6 +277,7 @@
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="80dp"
+
                     android:text="@string/rec_guardar_informacion"
                     android:textColor="@android:color/white"
                     android:textSize="15dp" />

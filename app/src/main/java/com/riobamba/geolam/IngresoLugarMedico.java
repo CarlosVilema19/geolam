@@ -44,6 +44,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 
     EditText txtTipología, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
     Button btnGuardarInfo;
+    String imagen_lugar;
     Spinner spinnerCategoria;
     //Imagen
     private Button btnCargarImagen;
@@ -53,6 +54,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
     private String claveImagen = "foto";
     private String claveNombre = "nombre";
     private int PICK_IMAGE_REQUEST = 1;
+
 
     //Items Tipología
     String[] itemsTip = {"Hospital General", "Hospital Básico", "Hospital del Día"};
@@ -88,14 +90,14 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
 
-                if (v == btnCargarImagen) {
+                if (v.equals(btnCargarImagen) ) {
                     showFileChooser();
                 }
 
-                if (v == btnGuardarInfo) {
-                    insertarLugar();
+                //if (v == btnGuardarInfo) {
+                  //  insertarLugar();
 
-                }
+                //}
 
             }
         });
@@ -106,17 +108,16 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         spinnerCategoria=findViewById(R.id.spinnerCategoria);
 
        JSONObject jsonObject = null;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", jsonObject, new Response.Listener<JSONObject>()
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, "https://tvcpdudx.lucusvirtual.es/consultaCat.php", jsonObject, new Response.Listener<JSONObject>()
         { @Override public void onResponse(JSONObject response) {
 
             try {
                 JSONArray jsonArray = response.getJSONArray("categoria_medica");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String descripcion_categoria = jsonObject.optString("descripcion_categoria");
-
-
+                    String descripcion_categoria =jsonArray.getString(i);//jsonObject.optString("descripcion_categoria"); //jsonArray.getString();
                     categoriaList.add(descripcion_categoria);
+                    //categoriaList.add(jsonArray.getJSONObject(i).getString("descripcion_categoria"));
                     adapterItemsCat = new ArrayAdapter<>(IngresoLugarMedico.this,android.R.layout.simple_spinner_item, categoriaList);
                     adapterItemsCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCategoria.setAdapter(adapterItemsCat);
@@ -231,10 +232,11 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         btnGuardarInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //General
-                insertarLugar();
-
+              if(validarCampos()==1)
+              {
+                  insertarLugar();
+              }
             }
         });
     }
@@ -250,7 +252,29 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
+public int validarCampos(){
+    int respuesta =0;
+        String nameImage= String.valueOf(ivFotoL.getTag());
+        if(nameImage.equals("bg1")){
+            Toast.makeText(IngresoLugarMedico.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();
+        }
+       else{
+            if(txtNombreLugar.getText().toString().equals("")
+        && txtDireccion.getText().toString().equals("") && txtTelefono.getText().toString().equals("") && txtLatitud.getText().toString().equals("")
+        && txtLongitud.getText().toString().equals("") && txtDescripcion.getText().toString().equals("")){
+            Toast.makeText(IngresoLugarMedico.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();}
+        else{ if(txtNombreLugar.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();}
+        else {if(txtDireccion.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la dirección", Toast.LENGTH_SHORT).show();}
+        else {if(txtTelefono.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show();}
+        else {if(txtLatitud.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la Latitud", Toast.LENGTH_SHORT).show();}
+        else {if (txtLongitud.getText().toString().equals("")) { Toast.makeText(IngresoLugarMedico.this, "Ingrese la Longitud", Toast.LENGTH_SHORT).show();}
+        else {if (txtDescripcion.getText().toString().equals("")) {Toast.makeText(IngresoLugarMedico.this, "Ingrese la descripción", Toast.LENGTH_SHORT).show();}
+            else{respuesta=1;}
+        }}}}}}
+    }
 
+        return respuesta;
+}
 
     private void insertarLugar() {
         String url = WebService.urlRaiz +WebService.servicioInsertarLugar;
@@ -258,8 +282,10 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 //Descartar el diálogo de progreso
                 loading.dismiss();
+
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
 
@@ -270,16 +296,18 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), "Complete todos los campos" + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Convertir bits a cadena
-                String imagen_lugar = getStringImagen(bitmap); //Imagen
+                imagen_lugar = getStringImagen(bitmap); //Imagen
+
                 //Obtener el nombre de la imagen
                 String nombreImagen = txtNombreLugar.getText().toString().trim();
+
 
                 Map<String, String> parametros = new HashMap<String, String>();
 
@@ -327,6 +355,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             try {
                 //Cómo obtener el mapa de bits de la Galería
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                ivFotoL.setTag("bg2");
                 //Configuración del mapa de bits en ImageView
                 int bwidth = bitmap.getWidth();
                 int bheight = bitmap.getHeight();
@@ -348,7 +377,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        //finish();
     }
 
     @Override
