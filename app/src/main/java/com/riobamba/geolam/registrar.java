@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class registrar extends AppCompatActivity {
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
@@ -171,16 +172,16 @@ public class registrar extends AppCompatActivity {
 
         if(respuesta==2)
         {
-            if(validarEdad()==1&&validarContraseña()==1&&validarEmail()==1)
+            if(validarEmail()==1&&validarNombre()==1&&validarApellido()==1&&validarEdad()==1&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
             {
-                Toast.makeText(registrar.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(registrar.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
                 respuesta=1;
             }
 
         }
         else{
 
-            Toast.makeText(registrar.this, "No coninside alguna función", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(registrar.this, "No coinside alguna función", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -207,14 +208,42 @@ public class registrar extends AppCompatActivity {
 
         return datCorrecto;
     }
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[@#$%^&+=*])"+     // al menos un caracter especial
+                    "(?=\\S+$)" +            // sin espacios en blanco
+                    ".{10,16}" +                // al menos 10 caracteres
+                    "$");
 
-    private int validarContraseña(){
+    private int validarCaracteresContrasenia(){
+        int datCorrecto=0;
+        String passwordInput = pass.getText().toString().trim();
+        if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            Toast.makeText(registrar.this, "La contraseña es demasiado débil o fuera de rango", Toast.LENGTH_SHORT).show();
+            pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)");
+            pass.requestFocus();
+        }
+        else{
+            //pass.setError("Contraseña válida");
+            datCorrecto = 1;
+        }
+        return datCorrecto;
+    }
+    //private int Longitud(){
+
+
+
+    private int validarContrasenia(){
         int datCorrecto=0;
         String contrasenia = pass.getText().toString();
         String confirmContrasenia = confirmPass.getText().toString();
+        // longitud de la contraseña
+
+
+
         // Comparar si son iguales
         if (contrasenia.equals(confirmContrasenia)) {
-            Toast.makeText(registrar.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(registrar.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
@@ -230,15 +259,50 @@ public class registrar extends AppCompatActivity {
     public int validarEmail() {
         int emailCorrecto=0;
         String emailToText = txtEmail.getText().toString();
-        if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
-            Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
-            emailCorrecto=1;
-        } else {
-            txtEmail.setError("Ingrese un correo válido");
+        if(emailToText.length()<41) {
+            if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+                //Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
+                emailCorrecto = 1;
+            } else {
+                txtEmail.setError("Ingrese un correo válido");
+                txtEmail.requestFocus();
+                //Toast.makeText(this, "Ingrese un correo válido", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "¡Error! Correo electrónico", Toast.LENGTH_SHORT).show();
+            txtEmail.setError("Correo demasiado largo. (Mínimo 40 caracteres)");
             txtEmail.requestFocus();
-            //Toast.makeText(this, "Ingrese un correo válido", Toast.LENGTH_SHORT).show();
+
         }
         return emailCorrecto;
+    }
+
+    private int validarApellido(){
+        int datCorrecto=0;
+        if(txtApe.getText().toString().length()<81){
+            datCorrecto=1;
+        }
+        else {
+            Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
+            txtApe.setError("Apellido demasiado largo. (Mínimo 80 caracteres)");
+            txtApe.requestFocus();
+        }
+        return datCorrecto;
+    }
+    private int validarNombre(){
+
+        int datCorrecto=0;
+        if(txtName.getText().toString().length()<81){
+            datCorrecto=1;
+        }
+        else{
+            Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
+            txtName.setError("Nombre demasiado largo. (Mínimo 80 caracteres)");
+            txtName.requestFocus();
+        }
+        return datCorrecto;
     }
     private void insertarUsusario() {
 
@@ -250,9 +314,9 @@ public class registrar extends AppCompatActivity {
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
-               // startActivity(new Intent(getApplicationContext(), Login.class));
-                //finish();
+                Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
