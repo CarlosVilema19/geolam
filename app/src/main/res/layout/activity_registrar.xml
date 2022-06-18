@@ -125,6 +125,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etemail"
+                        android:maxLines="1"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,6 +156,7 @@
                         android:layout_marginTop="3dp"
                         android:gravity="left"
                         android:hint="@string/nombre_regsitro"
+                        android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -176,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ednombre"
                         android:hint="@string/apellido_registro"
-
+                        android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
