@@ -5,6 +5,7 @@ import static android.content.Intent.createChooser;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -46,6 +47,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -190,6 +192,8 @@ public class registrar extends AppCompatActivity {
         return respuesta;
     }
 
+
+
     private int validarEdad(){
         int datCorrecto=0;
         String Edad = txtEdad.getText().toString();
@@ -259,7 +263,7 @@ public class registrar extends AppCompatActivity {
     public int validarEmail() {
         int emailCorrecto=0;
         String emailToText = txtEmail.getText().toString();
-        if(emailToText.length()<41) {
+        if(emailToText.length()<40) {
             if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
                 //Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
                 emailCorrecto = 1;
@@ -281,8 +285,18 @@ public class registrar extends AppCompatActivity {
 
     private int validarApellido(){
         int datCorrecto=0;
-        if(txtApe.getText().toString().length()<81){
-            datCorrecto=1;
+        if(txtApe.getText().toString().length()<80){
+
+            if(txtApe.getText().toString().length()<3)
+            {
+                Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
+                txtApe.setError("Apellido demasiado corto. (Mínimo 3 caracteres)");
+                txtApe.requestFocus();
+            }
+            else {
+                datCorrecto=1;
+            }
+
         }
         else {
             Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
@@ -294,8 +308,18 @@ public class registrar extends AppCompatActivity {
     private int validarNombre(){
 
         int datCorrecto=0;
-        if(txtName.getText().toString().length()<81){
-            datCorrecto=1;
+        if(txtName.getText().toString().length()<80){
+            if(txtName.getText().toString().length()<3)
+            {
+                Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
+                txtName.setError("Nombre demasiado corto. (Mínimo 3 caracteres)");
+                txtName.requestFocus();
+            }
+            else {
+                datCorrecto=1;
+            }
+
+
         }
         else{
             Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();

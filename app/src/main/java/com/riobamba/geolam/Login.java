@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
         //String URL = "https://qcqjfcit.lucusvirtual.es/validar_usuario.php";
         //ConectarLogin oConectarLogin = new ConectarLogin(edtUsuario,edtPassword, URL);
        // btnLogin.setOnClickListener(view -> oConectarLogin.validarUsuario());
-        btnRecuperar = findViewById(R.id.btnolvidarcontraseña);
+        btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
 
         btnRecuperar.setOnClickListener(new View.OnClickListener(){
             @Override
