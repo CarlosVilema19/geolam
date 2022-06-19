@@ -289,6 +289,18 @@
                     android:text="@string/rec_guardar_informacion"
                     android:textColor="@android:color/white"
                     android:textSize="15dp" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAgregados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"
+                    android:text="Agregados"
+                    android:textColor="@android:color/white"
+                    android:textSize="15dp" />
             </LinearLayout>
         </ScrollView>
 

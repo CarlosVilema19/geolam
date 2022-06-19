@@ -6,18 +6,16 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class ListadoLugar implements Serializable {
+public class ListadoLugarUsuario implements Serializable {
 
     String nombreLugar, direccionLugar, telefonoLugar;
     String imagenLugar;
-    Integer id;
 
-    public ListadoLugar(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, int id_lugar) {
+    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
         this.imagenLugar = imagenLugar;
-        this.id = id_lugar;
     }
 
     public String getNombreLugar() {
@@ -34,9 +32,5 @@ public class ListadoLugar implements Serializable {
 
     public String getImagenLugar() {
         return imagenLugar;
-    }
-
-    public Integer getId() {
-        return id;
     }
 }

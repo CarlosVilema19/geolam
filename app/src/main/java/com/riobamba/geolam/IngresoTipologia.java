@@ -3,12 +3,8 @@ package com.riobamba.geolam;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.ConexionTipologia;
 import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
@@ -40,7 +35,8 @@ public class IngresoTipologia extends AppCompatActivity {
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //ConexionTipologia conexionTipologia = new ConexionTipologia();
+                /*ConexionTipologia conexionTipologia = new ConexionTipologia();
+                conexionTipologia.insertarUsusario(txtTipologia);*/
                 insertarTipologia();
             }
         });

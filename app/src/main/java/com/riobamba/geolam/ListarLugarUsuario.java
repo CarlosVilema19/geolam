@@ -16,6 +16,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
+import com.riobamba.geolam.modelo.ListadoLugarUsuario;
+import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -26,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarException;
 
-public class Listado extends AppCompatActivity {
+public class ListarLugarUsuario extends AppCompatActivity {
 
-    List<ListadoLugar> lugarList;
+    List<ListadoLugarUsuario> lugarList;
     RecyclerView recyclerView;
 
 
@@ -53,41 +55,41 @@ public class Listado extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = WebService.urlRaiz + WebService.servicioListarLugares;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray array = new JSONArray(response);
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
 
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject obj = array.getJSONObject(i);
-                        lugarList.add(new ListadoLugar(
-                                obj.getString("nombre_lugar"),
-                                obj.getString("direccion"),
-                                obj.getString("telefono"),
-                                obj.getString("imagen_lugar"),
-                                obj.getInt("id_lugar")
-                        ));
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject obj = array.getJSONObject(i);
+                                lugarList.add(new ListadoLugarUsuario(
+                                        obj.getString("nombre_lugar"),
+                                        obj.getString("direccion"),
+                                        obj.getString("telefono"),
+                                        obj.getString("imagen_lugar")
+                                ));
+
+                            }
+
+                            ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList, new ListadoLugarUsuarioAdaptador.OnItemClickListener() {
+
+                                @Override
+                                public void onItemClick(ListadoLugarUsuario item) {
+                                    moveToDescription(item);
+                                }
+                            });
+                            recyclerView.setAdapter(myadapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
 
                     }
-
-                    ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, new ListadoLugarAdaptador.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(ListadoLugar item) {
-                            moveToDescription(item);
-                        }
-                    });
-                    recyclerView.setAdapter(myadapter);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
@@ -97,7 +99,7 @@ public class Listado extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
-    public void moveToDescription(ListadoLugar item)
+    public void moveToDescription(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,LugarMedico.class);
         intent.putExtra("ListadoLugar",item);
@@ -106,14 +108,3 @@ public class Listado extends AppCompatActivity {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
