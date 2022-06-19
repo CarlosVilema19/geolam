@@ -15,21 +15,17 @@ import com.riobamba.geolam.R;
 
 import java.util.List;
 
-public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdaptador.ViewHolder> {
+public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLugarUsuarioAdaptador.ViewHolder> {
 
     private final Context mCtx;
-    private final List<ListadoLugar> lugarList;
-    final ListadoLugarAdaptador.OnItemClickListener listener;
+    private final List<ListadoLugarUsuario> lugarList;
+    final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
 
     public interface OnItemClickListener{
-        void onItemClick(ListadoLugar item);
+        void onItemClick(ListadoLugarUsuario item);
     }
 
-    public interface OnClickListener{
-        void onClick(ListadoLugar item);
-    }
-
-    public ListadoLugarAdaptador(Context mCtx, List<ListadoLugar> lugarList, ListadoLugarAdaptador.OnItemClickListener listener){
+    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
@@ -45,7 +41,6 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         private final TextView direccionLugar;
         private final TextView telefonoLugar;
         private final ImageView imagenLugar;
-        private final TextView idLugar;
 
 
 
@@ -54,11 +49,10 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             super(view);
             // Define click listener for the ViewHolder's View
 
-            nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
-            direccionLugar = view.findViewById(R.id.tvDireccionLista);
-            telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
-            imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
-            idLugar = view.findViewById(R.id.tvId);
+            nombreLugar = view.findViewById(R.id.tvnombrelugar);
+            direccionLugar = view.findViewById(R.id.tvdireccion);
+            telefonoLugar = view.findViewById(R.id.tvtelefono);
+            imagenLugar = view.findViewById(R.id.imagenlugar);
         }
 
         /*public TextView getTextView() {
@@ -78,17 +72,16 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        ListadoLugar listadoLugar = lugarList.get(position);
+        ListadoLugarUsuario listadoLugar = lugarList.get(position);
         //Cargar Imagen
         Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
-                        .into(viewHolder.imagenLugar);
+                .into(viewHolder.imagenLugar);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
-        viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +96,6 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         return lugarList.size();
     }
 }
-
-
-
-
-
-
-
 
 
 

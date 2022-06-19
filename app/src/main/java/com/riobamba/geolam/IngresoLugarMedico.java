@@ -43,7 +43,7 @@ import java.util.Map;
 public class IngresoLugarMedico extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText txtTipología, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
-    Button btnGuardarInfo;
+    Button btnGuardarInfo, btnAgregados;
     String imagen_lugar;
     Spinner spinnerCategoria;
     //Imagen
@@ -83,6 +83,8 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         //Imagen
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfotoL);
         btnGuardarInfo = findViewById(R.id.btn_guardarLugar);
+        btnAgregados = findViewById(R.id.btnAgregados);
+
         ivFotoL = findViewById(R.id.imageViewLugar);
 
 
@@ -239,6 +241,15 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
               }
             }
         });
+
+        btnAgregados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IngresoLugarMedico.this, ListadoCrud.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 //Bitmap
