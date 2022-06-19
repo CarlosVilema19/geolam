@@ -106,7 +106,7 @@ public class registrar extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -158,15 +158,44 @@ public class registrar extends AppCompatActivity {
 
             if(nameImage.equals("bg1") && txtEmail.getText().toString().equals("") && txtName.getText().toString().equals("") && txtApe.getText().toString().equals("") && txtEdad.getText().toString().equals("")
                 && txtSexo.getText().toString().equals("") && pass.getText().toString().equals("") && confirmPass.getText().toString().equals("")){
-                Toast.makeText(registrar.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();}
-        else{ if(nameImage.equals("bg1")){Toast.makeText(registrar.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
-            else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();}
-        else {if(txtName.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();}
-        else {if(txtApe.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese el apellido", Toast.LENGTH_SHORT).show();}
-        else {if(txtEdad.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese la edad", Toast.LENGTH_SHORT).show();}
-        else {if (txtSexo.getText().toString().equals("")) { Toast.makeText(registrar.this, "Seleccione el sexo", Toast.LENGTH_SHORT).show();}
-        else {if (pass.getText().toString().equals("")) {Toast.makeText(registrar.this, "Ingrese la contraseña", Toast.LENGTH_SHORT).show();}
-            else {if(confirmPass.getText().toString().equals("")){Toast.makeText(registrar.this, "Confirme la contraseña", Toast.LENGTH_SHORT).show();}
+                Toast.makeText(registrar.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
+                txtEmail.setError("Ingrese el correo eletrónico");
+                txtEmail.requestFocus();
+                txtName.setError("Ingrese el nombre");
+                txtApe.setError("Ingrese el apellido");
+                txtEdad.setError("Ingrese la edad");
+                //txtSexo.setError("Seleccione el sexo");
+                pass.setError("Ingrese la contraseña");
+                confirmPass.setError("Ingrese nuevamente la contraseña");
+            }
+            else{ if(nameImage.equals("bg1")){Toast.makeText(registrar.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
+            else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
+                txtEmail.setError("Ingrese el correo eletrónico");
+                txtEmail.requestFocus();
+            }
+            else {if(txtName.getText().toString().equals("")){
+                txtName.setError("Ingrese el nombre");
+                txtName.requestFocus();
+            }
+            else {if(txtApe.getText().toString().equals("")){
+                txtApe.setError("Ingrese el apellido");
+                txtApe.requestFocus();
+            }
+            else {if(txtEdad.getText().toString().equals("")){
+
+            }
+            else {if (txtSexo.getText().toString().equals("")) {
+                Toast.makeText(this, "Por favor seleccione el sexo", Toast.LENGTH_SHORT).show();
+            }
+            else {if (pass.getText().toString().equals("")) {
+                pass.setError("Ingrese la contraseña");
+                pass.requestFocus();
+            }
+            else {if(confirmPass.getText().toString().equals("")){
+                confirmPass.setError("Confirme la contraseña");
+                confirmPass.requestFocus();
+
+            }
                 respuesta=2;
                 }
 
@@ -193,15 +222,35 @@ public class registrar extends AppCompatActivity {
     }
 
 
+/*private int validarSexo(){
+
+   int datCorrecto=0;
+    String item;
+    item=autoCompleteTxtEdSexo.getOnItemSelectedListener().toString();
+    if(item.length()>0){
+      datCorrecto=1;
+      autoCompleteTxtEdSexo.setError("");
+        autoCompleteTxtEdSexo.setError(null);
+        txtSexo.setError(null);
+   }
+   else{
+        autoCompleteTxtEdSexo.setError("hola2");
+    }
+
+    return datCorrecto;
+}*/
 
     private int validarEdad(){
         int datCorrecto=0;
         String Edad = txtEdad.getText().toString();
-        int numero = Integer.parseInt(Edad);
+
         // Comparar si está en el rango
+
+            int numero = Integer.parseInt(Edad);
         if (numero >= 15 && numero <= 100) {
             // La validación termina y hacemos lo que vayamos a hacer
             //Toast.makeText(registrar.this, "Edad correcta", Toast.LENGTH_SHORT).show();
+
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
@@ -209,6 +258,8 @@ public class registrar extends AppCompatActivity {
             txtEdad.requestFocus();
             datCorrecto=0;
         }
+
+
 
         return datCorrecto;
     }
@@ -251,7 +302,7 @@ public class registrar extends AppCompatActivity {
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
-            confirmPass.setError("Las contraseñas no coinciden");
+            confirmPass.setError("Las contraseñas no coinciden, ingrese nuevamente");
             confirmPass.requestFocus();
 
             datCorrecto=0;

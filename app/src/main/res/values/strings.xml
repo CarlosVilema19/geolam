@@ -23,7 +23,7 @@
     <string name="rec_nombre_del_lugar">Nombre del lugar</string>
     <string name="rec_descripcion_lugar">Descripción del lugar</string>
     <string name="rec_direccion_lugar">Dirección del lugar</string>
-    <string name="rec_telefono_lugar">Teléfono del lugar</string>
+    <string name="rec_telefono_lugar">Teléfono del lugar (opcional)</string>
     <string name="rec_especialidades_lugar">Especialidades </string>
     <string name="rec_medicos_lugar">Médicos del lugar</string>
     //GESTION DE LUGARES
@@ -56,8 +56,8 @@
     <string name="agregar_medico">Agregar</string>
     <string name="ver_agregados">Ver Agregados</string>
     //LUGARES
-    <string name="rec_whatsapp">WhatsApp</string>
-    <string name="rec_pagina_web">Página Web</string>
+    <string name="rec_whatsapp">WhatsApp (opcional)</string>
+    <string name="rec_pagina_web">Página Web (opcional)</string>
     <string name="rec_latitud_lugar">Latitud</string>
     <string name="rec_longitud_lugar">Longitud</string>
     <string name="rec_guardar_informacion">Guardar</string>

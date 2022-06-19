@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ednombre"
                         android:hint="@string/apellido_registro"
-                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:digits="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
