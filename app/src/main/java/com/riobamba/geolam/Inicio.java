@@ -8,16 +8,18 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.riobamba.geolam.modelo.ConexionMapa;
+import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 
 public class Inicio extends AppCompatActivity {
-    Button btnlugarmedico, btnListadoLugar;
-
+    Button btnlugarmedico, btnListadoLugar, btnEspecialidades;
+    public static final Integer btnListadoMapa = R.layout.activity_listado_card;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         btnlugarmedico = findViewById(R.id.btnlugarescercanos);
         btnListadoLugar = findViewById(R.id.btnlugaresmedicos);
+        btnEspecialidades = findViewById(R.id.btnespecialidades);
 
         btnlugarmedico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +35,12 @@ public class Inicio extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Inicio.this, Listado.class);
                 startActivity(intent);
+            }
+        }
+        );
+        btnEspecialidades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         }
         );
