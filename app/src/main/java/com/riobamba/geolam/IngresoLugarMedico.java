@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Patterns;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -36,9 +38,17 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class IngresoLugarMedico extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -233,7 +243,7 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 //General
-              if(validarCampos()==1)
+              if(validarCampos()==4)
               {
                   insertarLugar();
               }
@@ -255,27 +265,320 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
 public int validarCampos(){
     int respuesta =0;
         String nameImage= String.valueOf(ivFotoL.getTag());
-        if(nameImage.equals("bg1")){
-            Toast.makeText(IngresoLugarMedico.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();
-        }
-       else{
-            if(txtNombreLugar.getText().toString().equals("")
-        && txtDireccion.getText().toString().equals("") && txtTelefono.getText().toString().equals("") && txtLatitud.getText().toString().equals("")
-        && txtLongitud.getText().toString().equals("") && txtDescripcion.getText().toString().equals("")){
-            Toast.makeText(IngresoLugarMedico.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();}
-        else{ if(txtNombreLugar.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();}
-        else {if(txtDireccion.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la dirección", Toast.LENGTH_SHORT).show();}
-        else {if(txtTelefono.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show();}
-        else {if(txtLatitud.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la Latitud", Toast.LENGTH_SHORT).show();}
-        else {if (txtLongitud.getText().toString().equals("")) { Toast.makeText(IngresoLugarMedico.this, "Ingrese la Longitud", Toast.LENGTH_SHORT).show();}
-        else {if (txtDescripcion.getText().toString().equals("")) {Toast.makeText(IngresoLugarMedico.this, "Ingrese la descripción", Toast.LENGTH_SHORT).show();}
-            else{respuesta=1;}
-        }}}}}}
-    }
 
+            if(nameImage.equals("bg1")&&txtNombreLugar.getText().toString().equals("")
+                    && txtDireccion.getText().toString().equals("") &&
+                    /*txtTelefono.getText().toString().equals("") && */
+
+    txtLatitud.getText().toString().equals("")
+                    && txtLongitud.getText().toString().equals("") && txtDescripcion.getText().toString().equals("")){
+            Toast.makeText(IngresoLugarMedico.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
+                txtNombreLugar.setError("Ingrese el nombre del lugar");
+                txtNombreLugar.requestFocus();
+                txtDireccion.setError("Ingrese la dirección");
+                //txtTelefono.setError("Ingrese el teléfono");
+                txtLatitud.setError("Ingrese la latitud");
+                txtLongitud.setError("Ingrese la longitud");
+                txtDescripcion.setError("Ingrese la descripción");
+            }
+            else {if(nameImage.equals("bg1")){Toast.makeText(IngresoLugarMedico.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
+            else{ if(txtNombreLugar.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();
+            txtNombreLugar.setError("Ingrese el nombre");
+            txtNombreLugar.requestFocus();}
+            else {if(txtDireccion.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la dirección", Toast.LENGTH_SHORT).show();
+                txtDireccion.setError("Ingrese la dirección");
+                txtDireccion.requestFocus();
+            }
+           /* else {if(txtTelefono.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show();
+                txtTelefono.setError("Ingrese el teléfono");
+                txtTelefono.requestFocus();
+            }*/
+            else {if(txtLatitud.getText().toString().equals("")){Toast.makeText(IngresoLugarMedico.this, "Ingrese la Latitud", Toast.LENGTH_SHORT).show();
+                txtLatitud.setError("Ingrese la latitud");
+                txtLatitud.requestFocus();
+            }
+            else {if (txtLongitud.getText().toString().equals("")) { Toast.makeText(IngresoLugarMedico.this, "Ingrese la Longitud", Toast.LENGTH_SHORT).show();
+                txtLongitud.setError("Ingrese la longitud");
+                txtLongitud.requestFocus();
+            }
+            else {if (txtDescripcion.getText().toString().equals("")) {Toast.makeText(IngresoLugarMedico.this, "Ingrese la descripción", Toast.LENGTH_SHORT).show();
+                txtDescripcion.setError("Ingrese una descripción");
+                txtDescripcion.requestFocus();
+            }
+            else{respuesta=2;}
+        }}}}}
+            //}
+    }
+int opcionales=0;
+    if(respuesta==2) {
+        if (validarNombre() == 1 && validarDireccion() == 1 &&  txtTelefono.getText().toString().equals("")
+                && txtWhatsApp.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")
+        ) {
+            respuesta = 3;
+        } else {
+            if (validarNombre() == 1 && validarDireccion() == 1 && !txtTelefono.getText().toString().equals("") && !txtWhatsApp.getText().toString().equals("") && !txtPaginaWeb.getText().toString().equals("")) {
+
+                if (validarTelefono() == 1 && validarWhatsapp() == 1 && validarUrl() == 1) {
+                    opcionales = 2;
+
+                }
+            } else {
+                if (validarNombre() == 1 && validarDireccion() == 1 && !txtTelefono.getText().toString().equals("")&& txtWhatsApp.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")) {
+
+                    if (validarTelefono() == 1) {
+                        opcionales = 3;
+                    }
+
+                } else {if (validarNombre() == 1 && validarDireccion() == 1 && !txtWhatsApp.getText().toString().equals("") && txtTelefono.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")) {
+                    if (validarWhatsapp() == 1) {
+                        opcionales = 4;
+                    }
+
+                } else {
+                    if (validarNombre() == 1 && validarDireccion() == 1  && !txtPaginaWeb.getText().toString().equals("") && txtTelefono.getText().toString().equals("")&& txtWhatsApp.getText().toString().equals("")) {
+                        if (validarUrl() == 1) {
+                            opcionales = 5;
+                        }
+                    }
+                    else {
+                        if (validarNombre() == 1 && validarDireccion() == 1 && !txtTelefono.getText().toString().equals("") && !txtWhatsApp.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")) {
+                            if (validarTelefono() == 1 && validarWhatsapp() == 1) {
+                                opcionales = 6;
+                            }
+
+                        } else {
+                            if (validarNombre() == 1 && validarDireccion() == 1 && txtTelefono.getText().toString().equals("") && !txtWhatsApp.getText().toString().equals("") && !txtPaginaWeb.getText().toString().equals("")) {
+                                if (validarWhatsapp() == 1 && validarUrl() == 1) {
+                                    opcionales = 7;
+                                }
+                            } else {
+                                if (validarNombre() == 1 && validarDireccion() == 1 && !txtTelefono.getText().toString().equals("") && txtWhatsApp.getText().toString().equals("") && !txtPaginaWeb.getText().toString().equals("")) {
+
+                                    if (validarTelefono() == 1 && validarUrl() == 1) {
+                                        opcionales = 8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+
+                    }
+                }
+
+
+
+            }
+
+        }
+        if (respuesta == 3 || opcionales ==2 || opcionales == 3 || opcionales == 4 || opcionales == 5 || opcionales == 6|| opcionales == 7 || opcionales == 8) {
+            respuesta = 4;
+        }
+
+    }
         return respuesta;
 }
 
+private int validarNombre(){
+     int datCorrecto=0;
+     if(txtNombreLugar.getText().toString().length()<80){
+         if(txtNombreLugar.getText().toString().length()<10)
+         {
+             Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
+             txtNombreLugar.setError("Nombre demasiado corto. (Mínimo 10 caracteres)");
+             txtNombreLugar.requestFocus();
+         }
+         else {
+             datCorrecto=1;
+         }
+     }
+     else
+     {
+         Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
+         txtNombreLugar.setError("Nombre demasiado largo. (Mínimo 40 caracteres)");
+         txtNombreLugar.requestFocus();
+     }
+
+     return datCorrecto;
+}
+
+public boolean urlValida(String url) {
+
+/*
+    try {
+        new URL(url).toURI();
+
+        return true;
+    }
+    catch (URISyntaxException exception) {
+        return false;
+    }
+    catch (MalformedURLException exception) {
+        return false;
+
+
+ */
+
+    try {
+        new URL(url).toURI();
+        //URL urlV = new URL(url);
+        return URLUtil.isValidUrl(url) && Patterns.WEB_URL.matcher(url).matches(); }
+    catch (MalformedURLException e) {
+        Toast.makeText(this, "¡Error! URL" + e.toString(), Toast.LENGTH_SHORT).show();
+        txtPaginaWeb.setError("URL mal formada");
+        txtPaginaWeb.requestFocus();
+    }
+    catch (URISyntaxException exception) {
+        Toast.makeText(this, "¡Error! URL" + exception.toString(), Toast.LENGTH_SHORT).show();
+        txtPaginaWeb.setError("Error de sintaxis");
+        txtPaginaWeb.requestFocus();
+        return false;
+    }
+    return false;
+
+
+
+
+}
+private int validarUrl() {
+    int datCorrecto = 0;
+    String url = txtPaginaWeb.getText().toString().trim();
+
+  /*  if (url == null || "".equals(url) )
+    {
+        return 0;
+    }
+       final Pattern p = Patterns.WEB_URL;
+       final Matcher m = p.matcher(url);
+        if(m.matches() )
+        //if(Patterns.WEB_URL.matcher(url).matches())
+        {
+            datCorrecto=1;
+
+        }
+        else{
+            Toast.makeText(this, "¡Error! Página Web", Toast.LENGTH_SHORT).show();
+            txtPaginaWeb.setError("Dirección inválida");
+            txtPaginaWeb.requestFocus();
+
+        }*/
+    /*if(urlValida(url))
+    {
+        datCorrecto=1;
+    }
+    else
+    {
+        txtPaginaWeb.setError("error url");
+    }
+
+*/
+    if(url.length()<100) {
+        if (urlValida(url)) {
+            datCorrecto = 1;
+        }
+    }
+    else
+    {
+        Toast.makeText(this, "¡Error! Página web", Toast.LENGTH_SHORT).show();
+        txtPaginaWeb.setError("Página web demasiada larga. (Mínimo 100 caracteres)");
+        txtPaginaWeb.requestFocus();
+    }
+    /*
+    if (urlValida(uriUrl.toString()))
+    {
+        datCorrecto=1;
+    }
+    else{txtPaginaWeb.setError("error pagina");}
+       // System.out.print("La url dada " + url + " no es válida");
+
+
+    return datCorrecto;
+    }
+*/
+    return datCorrecto;
+}
+
+private int validarDescripcion(){
+        int datCorrecto=0;
+        if(txtDescripcion.getText().toString().length()<80) {
+
+            datCorrecto=1;
+        }
+        return datCorrecto;
+}
+private int validarDireccion(){
+
+    int datCorrecto=0;
+    if(txtDireccion.getText().toString().length()<80){
+        if(txtDireccion.getText().toString().length()<10)
+        {
+            Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
+            txtDireccion.setError("Dirección demasiada corta. (Mínimo 10 caracteres)");
+            txtDireccion.requestFocus();
+        }
+        else {
+            datCorrecto=1;
+        }
+    }
+    else
+    {
+        Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
+        txtDireccion.setError("Dirección demasiada larga. (Mínimo 40 caracteres)");
+        txtDireccion.requestFocus();
+    }
+
+    return datCorrecto;
+}
+
+private int validarTelefono(){
+    int datCorrecto=0;
+    if(txtTelefono.getText().toString().length()<11){
+        if(txtTelefono.getText().toString().length()==7 )
+        {
+            datCorrecto=1;
+        }
+        else {
+
+            Toast.makeText(this, "¡Error! Teléfono del lugar", Toast.LENGTH_SHORT).show();
+            txtTelefono.setError("Teléfono inválido (Ingrese únicamente 7 dígitos)");
+            txtTelefono.requestFocus();
+        }
+    }
+    else
+    {
+        Toast.makeText(this, "¡Error! Número de Contacto del lugar", Toast.LENGTH_SHORT).show();
+        txtTelefono.setError("Teléfono demasiado largo");
+        txtTelefono.requestFocus();
+    }
+
+    return datCorrecto;
+
+}
+private int validarWhatsapp(){
+    int datCorrecto=0;
+    if(txtWhatsApp.getText().toString().length()<11){
+        if( txtWhatsApp.getText().toString().length()==10)
+        {
+            datCorrecto=1;
+        }
+        else {
+
+            Toast.makeText(this, "¡Error! WhatsApp del lugar", Toast.LENGTH_SHORT).show();
+            txtWhatsApp.setError("Número de WhatsApp es inválido (Ingrese 10 dígitos)");
+            txtWhatsApp.requestFocus();
+        }
+    }
+    else
+    {
+        Toast.makeText(this, "¡Error! WhatsApp del lugar", Toast.LENGTH_SHORT).show();
+        txtTelefono.setError("El número de WhatsApp es demasiado largo");
+        txtTelefono.requestFocus();
+    }
+
+    return datCorrecto;
+
+}
     private void insertarLugar() {
         String url = WebService.urlRaiz +WebService.servicioInsertarLugar;
         final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
@@ -287,7 +590,7 @@ public int validarCampos(){
                 loading.dismiss();
 
                 //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {

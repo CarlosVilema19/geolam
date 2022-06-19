@@ -125,7 +125,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°.-_"
                         android:gravity="left"
                         android:hint="@string/rec_nombre_del_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
@@ -149,6 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ingresoNombreLugar"
                         android:gravity="left"
+                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°.-_"
                         android:hint="@string/rec_direccion_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -170,6 +171,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_telefono_lugar"
+                        android:maxLines="1"
+                        android:inputType="number"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -189,6 +192,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_whatsapp"
+                        android:inputType="number"
+                        android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -226,6 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_latitud_lugar"
+                        android:inputType="number|numberDecimal|numberSigned"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -245,6 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_longitud_lugar"
+                        android:inputType="number|numberDecimal|numberSigned"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -263,6 +270,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_descripcion_lugar"
+                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°'.-_,:;"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
