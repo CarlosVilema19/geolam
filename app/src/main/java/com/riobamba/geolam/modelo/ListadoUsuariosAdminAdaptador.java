@@ -5,34 +5,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 
 import java.util.List;
 
-public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLugarAdminAdaptador.ViewHolder> {
+public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoUsuariosAdminAdaptador.ViewHolder> {
 
     private final Context mCtx;
-    private final List<ListadoLugarAdmin> lugarList;
-    final ListadoLugarAdminAdaptador.OnItemClickListener listener;
-    final ListadoLugarAdminAdaptador.OnClickListener listener2;
+    private final List<ListadoUsuariosAdmin> usuariosList;
+    final ListadoUsuariosAdminAdaptador.OnItemClickListener listener;
+    final ListadoUsuariosAdminAdaptador.OnClickListener listener2;
 
 
 
     public interface OnItemClickListener{
-        void onItemClick(ListadoLugarAdmin item);
+        void onItemClick(ListadoUsuariosAdmin item);
     }
 
     public interface OnClickListener{
-        void onClick(ListadoLugarAdmin button);
+        void onClick(ListadoUsuariosAdmin button);
     }
 
-    public ListadoLugarAdminAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, OnItemClickListener listener, OnClickListener listener2){
+
+
+
+
+    public ListadoUsuariosAdminAdaptador(Context mCtx, List<ListadoUsuariosAdmin> usuariosList, OnItemClickListener listener, OnClickListener listener2){
         this.mCtx = mCtx;
-        this.lugarList = lugarList;
+        this.usuariosList = usuariosList;
         this.listener = listener;
         this.listener2 = listener2;
     }
@@ -43,17 +49,26 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView nombreLugar;
-        private final TextView idLugar;
+        private final TextView nombreUsuarios;
+        private final TextView emailUsuarios;
+        private final TextView idTipoUsuarios;
         private final ImageButton btnBorrar;
+        private final ImageView imagenUsuarios;
+
+
+
+
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
-            idLugar = view.findViewById(R.id.tvId);
+            nombreUsuarios = view.findViewById(R.id.tvNombreUsuariosLista);
+            emailUsuarios = view.findViewById(R.id.tvEmail);
             btnBorrar = view.findViewById(R.id.ibBorrarLista);
+            idTipoUsuarios = view.findViewById(R.id.tvIdTipo);
+            imagenUsuarios = view.findViewById(R.id.ivImagenUsuariosLista);
+
         }
 
         /*public TextView getTextView() {
@@ -66,29 +81,36 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.activity_listado_lugar_crud, null);
+        View view = inflater.inflate(R.layout.activity_listado_usuarios_admin, null);
         return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        ListadoLugarAdmin listadoLugar = lugarList.get(position);
+        ListadoUsuariosAdmin listadousuarios = usuariosList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
-        viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
+
+        Glide.with(mCtx)
+                .load(listadousuarios.getImagenUsuarios())
+                .into(viewHolder.imagenUsuarios);
+
+        viewHolder.nombreUsuarios.setText(listadousuarios.getNombreUsuarios());
+        viewHolder.emailUsuarios.setText(listadousuarios.getEmailUsuarios());
+        viewHolder.idTipoUsuarios.setText(String.valueOf(listadousuarios.getIdTipoUsuarios()));
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(listadoLugar);
+                listener.onItemClick(listadousuarios);
             }
         });
 
         viewHolder.btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener2.onClick(listadoLugar);
+                listener2.onClick(listadousuarios);
             }
         });
     }
@@ -96,9 +118,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return lugarList.size();
+        return usuariosList.size();
     }
 }
-
-
 

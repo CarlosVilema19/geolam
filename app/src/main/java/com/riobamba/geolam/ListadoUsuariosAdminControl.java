@@ -20,8 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
-import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdmin;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdminAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -33,11 +33,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoCrud extends AppCompatActivity {
-//Declarar la lista y el recycler view
-    List<ListadoLugarAdmin> lugarList;
+public class ListadoUsuariosAdminControl extends AppCompatActivity {
+    //Declarar la lista y el recycler view
+    List<ListadoUsuariosAdmin> usuariosList;
     RecyclerView recyclerView;
-    ListadoLugarAdminAdaptador adaptador;
+    ListadoUsuariosAdminAdaptador adaptador;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,15 +47,15 @@ public class ListadoCrud extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        lugarList = new ArrayList<>();
-    //llamar al mostrar resultado
+        usuariosList = new ArrayList<>();
+        //llamar al mostrar resultado
         MostrarResultado();
     }
 
     public void MostrarResultado()
     {
         //URL del web service
-        String url = WebService.urlRaiz + WebService.servicioListarLugaresAdmin;
+        String url = WebService.urlRaiz + WebService.servicioListarUsuariosAdmin;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -65,19 +65,21 @@ public class ListadoCrud extends AppCompatActivity {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
-                                lugarList.add(new ListadoLugarAdmin(
-                                        obj.getString("nombre_lugar"),
-                                        obj.getInt("id_lugar")
-                                ));
+                                usuariosList.add(new ListadoUsuariosAdmin(
+                                        obj.getString("nombre_usuario"),
+                                        obj.getString("email"),
+                                        obj.getString("imagen"),
+                                        obj.getInt("id_tipo_usuario")
+                                        ));
                             }
-                            ListadoLugarAdminAdaptador myadapter = new ListadoLugarAdminAdaptador(ListadoCrud.this, lugarList,
-                                    new ListadoLugarAdminAdaptador.OnItemClickListener() {
-                                @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
-                                public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
-                            }, new ListadoLugarAdminAdaptador.OnClickListener() {
+                            ListadoUsuariosAdminAdaptador myadapter = new ListadoUsuariosAdminAdaptador(ListadoUsuariosAdminControl.this, usuariosList,
+                                    new ListadoUsuariosAdminAdaptador.OnItemClickListener() {
+                                        @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
+                                        public void onItemClick(ListadoUsuariosAdmin item) {moveToDescription(item);}
+                                    }, new ListadoUsuariosAdminAdaptador.OnClickListener() {
 
                                 @Override//llamada al método para borrar presionando sobre el botón
-                                public void onClick(ListadoLugarAdmin item) {
+                                public void onClick(ListadoUsuariosAdmin item) {
                                     mensajeConfirmacion(item);
                                 }
                             });
@@ -99,18 +101,18 @@ public class ListadoCrud extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
-    public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
+    public void moveToDescription(ListadoUsuariosAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
         Intent intent = new Intent(this,LugarMedico.class);
         intent.putExtra("ListadoLugarAdmin",item);
         startActivity(intent);
     }
-    public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
+    public void moveToEliminar(ListadoUsuariosAdmin button) //Método para eliminar presionando sobre un botón
     {
-        String idLugar = button.getId().toString();
-        String url2 = WebService.urlRaiz+WebService.servicioEliminarLugar; //URL del web service
+        String emailUsuarios = button.getEmailUsuarios().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioEliminarUsuarios; //URL del web service
 
-        final ProgressDialog loading = ProgressDialog.show(ListadoCrud.this, "Eliminando...", "Espere por favor");
+        final ProgressDialog loading = ProgressDialog.show(ListadoUsuariosAdminControl.this, "Eliminando...", "Espere por favor");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
             @Override
@@ -118,7 +120,7 @@ public class ListadoCrud extends AppCompatActivity {
                 //Oculta el progress dialog de confirmacion
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), ListadoCrud.class));
+                startActivity(new Intent(getApplicationContext(), ListadoUsuariosAdminControl.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -130,7 +132,7 @@ public class ListadoCrud extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar", idLugar);
+                parametros.put("email", emailUsuarios);
                 loading.dismiss();
                 return parametros;
             }
@@ -140,8 +142,8 @@ public class ListadoCrud extends AppCompatActivity {
 
     }
 
-    public void mensajeConfirmacion(ListadoLugarAdmin item) { //Método para confirmar la eliminación
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListadoCrud.this);
+    public void mensajeConfirmacion(ListadoUsuariosAdmin item) { //Método para confirmar la eliminación
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListadoUsuariosAdminControl.this);
         dialogo1.setTitle("Importante");
         dialogo1.setMessage("¿Desea Eliminar el item?");
         dialogo1.setCancelable(false);

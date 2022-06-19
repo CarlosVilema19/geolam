@@ -87,6 +87,9 @@
             android:name=".SplashActivity"
             android:exported="true" />
         <activity
+            android:name=".ListadoUsuariosAdminControl"
+            android:exported="true" />
+        <activity
             android:name=".registrar"
             android:exported="true" />
         <activity
