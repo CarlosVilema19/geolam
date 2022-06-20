@@ -602,7 +602,8 @@ private int validarWhatsapp(){
 
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-
+                //startActivity(new Intent(getApplicationContext(), Login.class));
+                //finish();
             }
         }, new Response.ErrorListener() {
             @Override
