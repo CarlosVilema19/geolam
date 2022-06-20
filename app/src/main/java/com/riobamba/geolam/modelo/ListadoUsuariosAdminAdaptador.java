@@ -22,8 +22,6 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
     final ListadoUsuariosAdminAdaptador.OnItemClickListener listener;
     final ListadoUsuariosAdminAdaptador.OnClickListener listener2;
 
-
-
     public interface OnItemClickListener{
         void onItemClick(ListadoUsuariosAdmin item);
     }
@@ -31,10 +29,6 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
     public interface OnClickListener{
         void onClick(ListadoUsuariosAdmin button);
     }
-
-
-
-
 
     public ListadoUsuariosAdminAdaptador(Context mCtx, List<ListadoUsuariosAdmin> usuariosList, OnItemClickListener listener, OnClickListener listener2){
         this.mCtx = mCtx;
@@ -52,6 +46,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         private final TextView nombreUsuarios;
         private final TextView emailUsuarios;
         private final TextView idTipoUsuarios;
+        private final TextView descripcionTipo;
         private final ImageButton btnBorrar;
         private final ImageView imagenUsuarios;
 
@@ -67,6 +62,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
             emailUsuarios = view.findViewById(R.id.tvEmail);
             btnBorrar = view.findViewById(R.id.ibBorrarLista);
             idTipoUsuarios = view.findViewById(R.id.tvIdTipo);
+            descripcionTipo = view.findViewById(R.id.tvDescripcionTipo);
             imagenUsuarios = view.findViewById(R.id.ivImagenUsuariosLista);
 
         }
@@ -98,6 +94,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
 
         viewHolder.nombreUsuarios.setText(listadousuarios.getNombreUsuarios());
         viewHolder.emailUsuarios.setText(listadousuarios.getEmailUsuarios());
+        viewHolder.descripcionTipo.setText(listadousuarios.getDescripcionTipo());
         viewHolder.idTipoUsuarios.setText(String.valueOf(listadousuarios.getIdTipoUsuarios()));
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

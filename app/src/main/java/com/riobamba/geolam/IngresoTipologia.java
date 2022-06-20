@@ -3,6 +3,7 @@ package com.riobamba.geolam;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ public class IngresoTipologia extends AppCompatActivity {
 
         txtTipologia = findViewById(R.id.etTipologia);
         btnAgregar = findViewById(R.id.btnAgregarTipologia);
+        btnTipologiaAgregada = findViewById(R.id.btnTipologiaAgregada);
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -40,6 +42,17 @@ public class IngresoTipologia extends AppCompatActivity {
                 insertarTipologia();
             }
         });
+
+        btnTipologiaAgregada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IngresoTipologia.this, ListadoTipologia.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     private void insertarTipologia() {
