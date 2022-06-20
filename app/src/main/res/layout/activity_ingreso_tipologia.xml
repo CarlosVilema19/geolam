@@ -102,7 +102,7 @@
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="80dp"
-                        android:text="@string/agregar_tipologia"
+                        android:text="Guardar"
                         android:textColor="@android:color/white"
 
                         android:textSize="15sp" />
@@ -115,7 +115,7 @@
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="80dp"
-                        android:text="@string/tipologia_agregada"
+                        android:text="Agregadas"
                         android:textColor="@android:color/white"
 
                         android:textSize="15sp" />

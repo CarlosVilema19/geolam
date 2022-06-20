@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class ListadoUsuariosAdmin implements Serializable {
 
-    String nombreUsuarios, emailUsuarios, imagenUsuarios;
+    String nombreUsuarios, emailUsuarios, imagenUsuarios, descripcionTipo;
     Integer  idTipoUsuarios;
 
-    public ListadoUsuariosAdmin(String nombreUsuarios, String emailUsuarios, String imagenUsuarios, Integer idTipoUsuarios) {
+    public ListadoUsuariosAdmin(String nombreUsuarios, String emailUsuarios, String imagenUsuarios, String descripcionTipo, Integer idTipoUsuarios) {
         this.nombreUsuarios = nombreUsuarios;
         this.emailUsuarios = emailUsuarios;
         this.imagenUsuarios = imagenUsuarios;
+        this.descripcionTipo = descripcionTipo;
         this.idTipoUsuarios = idTipoUsuarios;
     }
 
@@ -24,6 +25,10 @@ public class ListadoUsuariosAdmin implements Serializable {
 
     public String getImagenUsuarios() {
         return imagenUsuarios;
+    }
+
+    public String getDescripcionTipo() {
+        return descripcionTipo;
     }
 
     public Integer getIdTipoUsuarios() {
