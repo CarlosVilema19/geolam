@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -54,6 +55,7 @@ import java.util.regex.Pattern;
 public class registrar extends AppCompatActivity {
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
     Button btnInsert;
+    TextView login;
     String[] items = {"Hombre", "Mujer"};
 
     //Imagen
@@ -74,6 +76,16 @@ public class registrar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
+
+        login=findViewById(R.id.txsignup);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
+            }
+        });
+
 
         //Imagen
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfoto);
