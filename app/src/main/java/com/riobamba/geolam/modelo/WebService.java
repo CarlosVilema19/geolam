@@ -15,6 +15,8 @@ public class WebService {
     public static final  String servicioEliminarUsuarios = "eliminar_usuarios.php";
     public static final  String servicioListarTipologiaAdmin = "listar_tipologia_admin.php";
     public static final  String servicioEliminarTipologia = "eliminar_tipologia.php";
+    public static final  String servicioListarLugaresMapa = "listar_lugares_mapa.php";
+
 
 
 
