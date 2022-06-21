@@ -1,7 +1,9 @@
 package com.riobamba.geolam.modelo;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
@@ -21,12 +23,28 @@ import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
 
-public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
+import java.util.List;
 
+public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
+    Double latitud, longitud;
+    String nombreLugar, direccionLugar;
+    //private final List<ListadoMapa> mapaList;
+    //private final Context mCtx;
+
+
+    /*public ConexionMapa(Context mCtx,List<ListadoMapa> mapaList) {
+
+        this.mapaList = mapaList;
+        this.mCtx = mCtx;
+
+    }*/
+
     public static final Integer btnListadoMapa = R.layout.activity_listado_card;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +81,16 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng riobamba = new LatLng(-1.66246, -78.65975);
-        mMap.addMarker(new MarkerOptions().position(riobamba).title("Hospital San Juan").snippet("Av. José Veloz y Atuachi").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        //ListadoMapa listadoMapa = mapaList.get(0);
 
+        // Add a marker in Sydney and move the camera
+        /*LatLng riobamba = new LatLng(listadoMapa.getLatitud(), listadoMapa.getLongitud());
+        mMap.addMarker(new MarkerOptions().position(riobamba).title(listadoMapa.getNombreLugar()).snippet(listadoMapa.getDireccionLugar()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+*/
         LatLng metropolitana = new LatLng(-1.66872,  -78.6488);
         mMap.addMarker(new MarkerOptions().position(metropolitana).title("Hospital General Clinica Metroplitana").snippet("Junín entre España & García Moreno").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(riobamba,14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(metropolitana,14));
     }
 }

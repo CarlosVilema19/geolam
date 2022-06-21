@@ -7,8 +7,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.riobamba.geolam.modelo.ConexionMapa;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoMapa;
 
 public class Inicio extends AppCompatActivity {
     Button btnlugarmedico, btnListadoLugar, btnEspecialidades;
@@ -26,6 +28,7 @@ public class Inicio extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Inicio.this, ConexionMapa.class);
                 startActivity(intent);
+
             }
         }
         );
