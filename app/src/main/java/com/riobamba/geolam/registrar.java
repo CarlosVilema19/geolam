@@ -110,7 +110,7 @@ public class registrar extends AppCompatActivity {
 
 
         //Items Sexo F y M Autocomplete
-        autoCompleteTxtEdSexo = (AutoCompleteTextView) findViewById(R.id.edsexo);
+        autoCompleteTxtEdSexo = findViewById(R.id.edsexo);
         adapterItems = new ArrayAdapter<String>(this, R.layout.lista_items, items);
         autoCompleteTxtEdSexo.setAdapter(adapterItems);
         autoCompleteTxtEdSexo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -339,7 +339,7 @@ public class registrar extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "¡Error! Correo electrónico", Toast.LENGTH_SHORT).show();
-            txtEmail.setError("Correo demasiado largo. (Mínimo 40 caracteres)");
+            txtEmail.setError("Correo demasiado largo. (Máximo 40 caracteres)");
             txtEmail.requestFocus();
 
         }
