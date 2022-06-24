@@ -44,9 +44,9 @@ public class ListarLugarUsuario extends AppCompatActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_items);
+        setContentView(R.layout.activity_items);
 
-        recyclerView = findViewById(R.id.rvListado);
+        recyclerView = findViewById(R.id.rvUsuario);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
