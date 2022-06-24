@@ -9,13 +9,16 @@ import java.io.Serializable;
 public class ListadoLugarUsuario implements Serializable {
 
     String nombreLugar, direccionLugar, telefonoLugar;
-    String imagenLugar;
+    String imagenLugar, informacionLugar, categoriaLugar, tipologiaLugar;
 
-    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar) {
+    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, String informacionLugar, String categoriaLugar, String tipologiaLugar) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
         this.imagenLugar = imagenLugar;
+        this.informacionLugar = informacionLugar;
+        this.categoriaLugar = categoriaLugar;
+        this.tipologiaLugar = tipologiaLugar;
     }
 
     public String getNombreLugar() {
@@ -32,5 +35,17 @@ public class ListadoLugarUsuario implements Serializable {
 
     public String getImagenLugar() {
         return imagenLugar;
+    }
+
+    public String getInformacionLugar() {
+        return informacionLugar;
+    }
+
+    public String getCategoriaLugar() {
+        return categoriaLugar;
+    }
+
+    public String getTipologiaLugar() {
+        return tipologiaLugar;
     }
 }

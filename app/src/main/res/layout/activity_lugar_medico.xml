@@ -15,285 +15,330 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="25dp"
-            app:cardUseCompatPadding="true"
+            android:layout_margin="2dp"
             android:elevation="10dp"
-            >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
-
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagenlugar"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:foregroundTint="#00FFFFFF"
-                android:src="@mipmap/ic_launcher_foreground" />
-            //Foto del lugar
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="2dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txnombrelugar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/imagenlugar"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="150dp"
-                    android:text="Nombre"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvnombrelugar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txnombrelugar"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/rec_nombre_del_lugar" />
-
-
-            </LinearLayout>
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="2dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txdescripcion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvnombrelugar"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Descripción"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvdescripcion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txdescripcion"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/rec_descripcion_lugar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txdireccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvdescripcion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Dirección"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvdireccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txdireccion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="20dp"
-                    android:text="@string/rec_direccion_lugar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtelefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvdireccion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Teléfono"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvtelefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvdireccion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/rec_telefono_lugar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txespecialidades"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvtelefono"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Especialidades"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvespecialidades"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txespecialidades"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/rec_especialidades_lugar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutfin"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txmedicos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvespecialidades"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Médicos"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvmedicos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txmedicos"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/rec_medicos_lugar" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/layout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txcalificacion"
+
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layoutfin"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:text="Calificación"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="10dp">
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txcalificacion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="5dp"
-                    android:numStars="5" />
-            </LinearLayout>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imagenlugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundTint="#00FFFFFF"
+                        android:src="@mipmap/ic_launcher_foreground" />
+                </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/layout3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txopinion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ratingBar"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="15dp"
-                    android:text="Opinión"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ingresaropinion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txopinion"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:hint="Opinión General"
-                   >
-                </com.google.android.material.textfield.TextInputEditText>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnenviaropinion"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvopinion"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    android:text="Enviar" />
-            </LinearLayout>>
-        </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="50dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_baseline_person_add_alt_1_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:text="Médicos">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_baseline_medical_services_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:text="Especialidades">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNombreLugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="Nombre"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTipologia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Tipologia" />
+
+                    <TextView
+                        android:id="@+id/tvCategoria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Categoria" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txdireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Dirección"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txdireccion"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/rec_direccion_lugar" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtelefono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Teléfono"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/rec_telefono_lugar" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txdescripcion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvNombreLugar"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Información extra"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvInformacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txdescripcion"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/rec_descripcion_lugar" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txcalificacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Calificación"
+                        android:textStyle="bold" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txcalificacion"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:numStars="5" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txopinion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ratingBar"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Opinión"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ingresaropinion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txopinion"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:hint="Opinión General"
+                        android:minHeight="48dp"
+                        android:textSize="15dp">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnenviaropinion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:text="Enviar" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvComentario"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>

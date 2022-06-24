@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,13 +26,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.jar.JarException;
 
-public class ListarLugarUsuario extends AppCompatActivity {
+public class ListarLugarUsuario extends AppCompatActivity
+{
 
     List<ListadoLugarUsuario> lugarList;
     RecyclerView recyclerView;
+    Integer item;
+
 
 
 
@@ -45,66 +51,68 @@ public class ListarLugarUsuario extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         lugarList = new ArrayList<>();
+        ListadoLugar listadoLugar = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
+        MostrarResultado(listadoLugar);
 
-        MostrarResultado();
 
     }
 
-    public void MostrarResultado()
+
+    public void MostrarResultado(ListadoLugar listadoLugar)
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = WebService.urlRaiz + WebService.servicioListarLugares;
+        String idLugar = listadoLugar.getId().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioListarLugaresUsuario; //URL del web service
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray array = new JSONArray(response);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
 
-                            for (int i = 0; i < array.length(); i++) {
-                                JSONObject obj = array.getJSONObject(i);
-                                lugarList.add(new ListadoLugarUsuario(
-                                        obj.getString("nombre_lugar"),
-                                        obj.getString("direccion"),
-                                        obj.getString("telefono"),
-                                        obj.getString("imagen_lugar")
-                                ));
-
-                            }
-
-                            ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList, new ListadoLugarUsuarioAdaptador.OnItemClickListener() {
-
-                                @Override
-                                public void onItemClick(ListadoLugarUsuario item) {
-                                    moveToDescription(item);
-                                }
-                            });
-                            recyclerView.setAdapter(myadapter);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                        }
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        lugarList.add(new ListadoLugarUsuario(
+                                obj.getString("nombre_lugar"),
+                                obj.getString("direccion"),
+                                obj.getString("telefono"),
+                                obj.getString("imagen_lugar"),
+                                obj.getString("informacion"),
+                                obj.getString("categoria"),
+                                obj.getString("tipologia")
+                        ));
 
                     }
-                }, new Response.ErrorListener() {
+
+                    ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList);
+                    recyclerView.setAdapter(myadapter);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
-
-        Volley.newRequestQueue(this).add(stringRequest);
-
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", idLugar/*item.toString()*/);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
     public void moveToDescription(ListadoLugarUsuario item)
     {
-        Intent intent = new Intent(this,LugarMedico.class);
+        Intent intent = new Intent(this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
-        startActivity(intent);
-    }
-
+        startActivity(intent);}
 
 }

@@ -57,9 +57,9 @@
             <ImageButton
                 android:id="@+id/ibBorrarLista"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="28dp"
                 android:layout_margin="5dp"
-                android:backgroundTint="#00FFFFFF"
+                android:backgroundTint="#75FFFFFF"
                 app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 
         </LinearLayout>

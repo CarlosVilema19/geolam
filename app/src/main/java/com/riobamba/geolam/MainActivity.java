@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Menu.class);
+                Intent intent = new Intent(MainActivity.this, LugarMedico.class);
                 startActivity(intent);
             }
         });
