@@ -82,4 +82,5 @@
     <string name="lugares_cercanos_inicio">Lugares más cercanos</string>
     <string name="especialidades_inicio">Especialidades</string>
     <string name="lugares_medicos_inicio">Lugares médicos</string>
+    <string name="Categoria">categoria</string>
 </resources>

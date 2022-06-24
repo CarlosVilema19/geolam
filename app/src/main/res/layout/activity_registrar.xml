@@ -27,13 +27,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
-                android:paddingBottom="50dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/txregistrate"
@@ -83,13 +82,13 @@
                         android:padding="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_account_circle_24"
+                        android:tag="bg1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:strokeColor="@android:color/darker_gray"
                         app:strokeWidth="8dp"
-                        android:tag="bg1"
 
                         />
 
@@ -125,7 +124,6 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etemail"
-                        android:maxLines="1"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,6 +131,7 @@
                         android:layout_marginTop="15dp"
                         android:gravity="left"
                         android:hint="@string/email_registro"
+                        android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,9 +153,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/etemail"
                         android:layout_marginTop="3dp"
+                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:gravity="left"
                         android:hint="@string/nombre_regsitro"
-                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                         android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -178,8 +177,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ednombre"
-                        android:hint="@string/apellido_registro"
                         android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                        android:hint="@string/apellido_registro"
                         android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -201,8 +200,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/edapellido"
                         android:hint="@string/edad_regsitro"
-                        android:numeric="integer"
                         android:inputType="number"
+                        android:numeric="integer"
 
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -252,8 +251,7 @@
                         android:gravity="left"
                         android:hint="@string/contrasenia"
                         android:inputType="textPassword"
-                        android:textColor="@color/black"
-                        />
+                        android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -277,8 +275,7 @@
                         android:gravity="left"
                         android:hint="@string/rec_confirme_la_contrasenia"
                         android:inputType="textPassword"
-                        android:textColor="@color/black"
-                        />
+                        android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 

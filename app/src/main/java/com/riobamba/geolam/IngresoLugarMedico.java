@@ -11,15 +11,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,67 +28,240 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.ListadoCategoria;
+import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
+import com.riobamba.geolam.modelo.ListadoTipologia;
+import com.riobamba.geolam.modelo.ListadoTipologiaAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class IngresoLugarMedico extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class IngresoLugarMedico extends AppCompatActivity {
 
-    EditText txtTipología, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
+    EditText txtTipologia, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
+    TextView txId ;
+
+
+    String pTip;
     Button btnGuardarInfo, btnAgregados;
     String imagen_lugar;
-    Spinner spinnerCategoria;
+    String idCategoria;
+    String idTipologia;
+    String pcat;
+   Spinner spinnerCategoria;
     //Imagen
     private Button btnCargarImagen;
     private ImageView ivFotoL;
     private Bitmap bitmap;
+
     private Bitmap newbitMap;
     private String claveImagen = "foto";
     private String claveNombre = "nombre";
     private int PICK_IMAGE_REQUEST = 1;
 
+ArrayList<String> opciones = new ArrayList<>();
 
-    //Items Tipología
-    String[] itemsTip = {"Hospital General", "Hospital Básico", "Hospital del Día"};
-    ArrayList<String> tipologia = new ArrayList<>();
-    AutoCompleteTextView autoCompleteOpcionesTipologia;
-    ArrayAdapter<String> adapterItemsTip;
-
-    //Items Categoría
-    String[] itemsCat = {"Privado", "Público"};
-    ArrayList<String> categoriaList = new ArrayList<>();
-    AutoCompleteTextView autoCompleteOpcionesCategoría;
-    ArrayAdapter<String> adapterItemsCat;
-
-    //consulta
-    RequestQueue requestQueue;
-
+    //autocomplete
+    private ListadoCategoriaAdaptador adaptadorCategoria;
+    private ListadoTipologiaAdaptador adaptadorTipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_lugar_medico);
 
-        //
+        //AutoCompleteTextView
+
+        adaptadorCategoria = new ListadoCategoriaAdaptador(this);
+        AutoCompleteTextView autoCompleteOpcionesCategoria=findViewById(R.id.autoCat);
+
+        adaptadorTipo= new ListadoTipologiaAdaptador(this);
+        AutoCompleteTextView autoCompleteOpcionesTipologia=findViewById(R.id.autoTipologia);
+
+        //Adaptador
+        autoCompleteOpcionesCategoria.setAdapter(adaptadorCategoria);
+
+        autoCompleteOpcionesTipologia.setAdapter(adaptadorTipo);
+
+
+        //Conexión al Servidor- Consulta AutoComplete Tipología
+        RequestQueue queue= Volley.newRequestQueue(this);
+        String url=WebService.urlRaiz+WebService.servicioListarTipologia;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try{
+
+
+                        JSONArray array= new JSONArray(response);
+                        for(int i=0;i<array.length();i++){
+
+                            JSONObject object = array.getJSONObject(i);
+                            JSONObject object2 = array.getJSONObject(i);
+                            ListadoTipologia tipo=new ListadoTipologia(object);
+                            //Carga de datos
+                            adaptadorTipo.add(tipo);
+                            pcat= ( object2.getString("ID_TIPOLOGIA_LUGAR"));
+                            opciones.add(pcat);
+                           // String descripcionTipo=object.getString("DESCRIPCION_TIPO_LUGAR"); //jsonArray.getString();
+                           // String IDTipo=object.getString("DESCRIPCION_TIPO_LUGAR");
+                            //adaptadorTipo.add(descripcionTipo);
+
+
+
+
+                        }
+
+                        autoCompleteOpcionesTipologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String itemTipo = parent.getItemAtPosition(position).toString();
+                                String a= "";
+                                a=itemTipo;
+                               // idTipologia =RetornaID2(a);
+
+                                String p= String.valueOf(position).trim();
+                                //for(int k=0;k<opciones.size();k++)
+                                //{
+                                    String c=opciones.get(position);
+
+                                    //Toast.makeText(getApplicationContext(), "Item: " +c, Toast.LENGTH_SHORT).show();
+                                  // if(p.equals(c))
+                                    //{
+                                        //Toast.makeText(getApplicationContext(), "Hola " +opciones.get(k) , Toast.LENGTH_SHORT).show();
+                                        pTip=c;
+                                        //pTip=opciones.get();
+                                        retorna(pTip);
+                                    //}
+
+
+                              //  }
+
+
+                               // Toast.makeText(getApplicationContext(), "Item23: " +pTip, Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        });
+
+
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest.setTag("REQUEST");
+        queue.add(stringRequest);
+
+        //Conexión al Servidor- Consulta AutoComplete Categoría
+
+        RequestQueue queue2= Volley.newRequestQueue(this);
+        String url2=WebService.urlRaiz+WebService.servicioListarCategoria;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest2= new StringRequest(Request.Method.GET,url2,
+                response ->
+                {
+                    try{
+
+
+                        JSONArray array= new JSONArray(response);
+                        for(int i=0;i<array.length();i++){
+
+                            JSONObject object = array.getJSONObject(i);
+                            ListadoCategoria cat=new ListadoCategoria(object);
+                            adaptadorCategoria.add(cat);
+
+
+
+
+
+
+                        }
+
+                        autoCompleteOpcionesCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String itemCat = parent.getItemAtPosition(position).toString();
+                                String a=itemCat;
+                                idCategoria =RetornaID(a);
+                                Toast.makeText(getApplicationContext(), "Item: " + idCategoria, Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        });
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest2.setTag("REQUEST");
+        queue2.add(stringRequest2);
+
+
+
+        //Oyente
+        /*
+        autoCompleteOpcionesCategoria.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Petición al servidor
+                makeRequest(( s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        */
+
+/*
+        autoCompleteOpcionesTipologia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                makeRequestT(( s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+*/
+
 
 
         //Imagen
@@ -114,26 +288,28 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
             }
         });
         //Base de datos consulta
+        /*
       requestQueue = Volley.newRequestQueue(this);
         //autoCompleteOpcionesCategoría = (AutoCompleteTextView)  findViewById(R.id.opcionesCategoria);
 
         spinnerCategoria=findViewById(R.id.spinnerCategoria);
 
-       JSONObject jsonObject = null;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, "https://tvcpdudx.lucusvirtual.es/consultaCat.php", jsonObject, new Response.Listener<JSONObject>()
-        { @Override public void onResponse(JSONObject response) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://tvcpdudx.lucusvirtual.es/consultaCategoria.php", new Response.Listener<String>()
+        { @Override public void onResponse(String response) {
 
             try {
-                JSONArray jsonArray = response.getJSONArray("categoria_medica");
+                JSONArray jsonArray = new JSONArray(response);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String descripcion_categoria =jsonArray.getString(i);//jsonObject.optString("descripcion_categoria"); //jsonArray.getString();
+                    String descripcion_categoria =jsonObject.getString("descripcion_categoria"); //jsonArray.getString();
                     categoriaList.add(descripcion_categoria);
                     //categoriaList.add(jsonArray.getJSONObject(i).getString("descripcion_categoria"));
                     adapterItemsCat = new ArrayAdapter<>(IngresoLugarMedico.this,android.R.layout.simple_spinner_item, categoriaList);
                     adapterItemsCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCategoria.setAdapter(adapterItemsCat);
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -144,9 +320,9 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         });
 
 
-        requestQueue.add(jsonObjectRequest);
-        spinnerCategoria.setOnItemSelectedListener(this);
-
+        requestQueue.add(stringRequest);
+       // spinnerCategoria.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+*/
 /*
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "https://qcqjfcit.lucusvirtual.es/consultaCategoria.php", (String)null, new Response.Listener<JSONObject>() {
@@ -229,8 +405,8 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         });
 */
         //otros campos
-        //txtTipología = findViewById(R.id.opcionesTipologia);
-        //txtCategoria= findViewById(R.id.opcionesCategoria);
+        txtTipologia = findViewById(R.id.autoTipologia);
+        txtCategoria= findViewById(R.id.autoCat);
         txtNombreLugar = findViewById(R.id.ingresoNombreLugar);
         txtDireccion = findViewById(R.id.ingresoDireccion);
         txtTelefono = findViewById(R.id.ingresoTelefono);
@@ -239,7 +415,9 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         txtLatitud = findViewById(R.id.ingresoLatitud);
         txtLongitud = findViewById(R.id.ingresoLongitud);
         txtDescripcion = findViewById(R.id.ingresoDescripcionLugar);
+        txId = (TextView) findViewById(R.id.TextViewID);
         btnGuardarInfo= findViewById(R.id.btn_guardarLugar);
+
 
         btnGuardarInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,6 +439,129 @@ public class IngresoLugarMedico extends AppCompatActivity implements AdapterView
         });
 
     }
+
+    private void retorna(String pTip) {
+
+
+
+        CharSequence p=pTip;
+        String p2=p.toString();
+        txId.setText(p2);
+        //Carga de datos
+
+    }
+
+    private String RetornaID(String item) {
+        //String id=itemCat;
+         /*int idC=0;
+
+        for(int i=0;i<itemCat.length();i++){
+            char idCat=id.charAt(i);
+            idC= ((int) idCat);
+        }
+        */
+
+        String data = item;
+        String[] split = data.split("-");
+        String id=null;
+        for (int i=0; i<split.length; i++) {
+            //System.out.println(split[i]);
+            id= split[0];
+            //Toast.makeText(getApplicationContext(), "Item: " + split[i], Toast.LENGTH_SHORT).show();
+        }
+       return id;
+    }
+//retorna solo el id de la cadena
+/*
+    private String RetornaID2(String item) {
+
+
+        String data = item;
+        String[] split = data.split("-");
+        String id=null;
+        for (int i=0; i<split.length; i++) {
+            //System.out.println(split[i]);
+            id= split[0].trim();
+            //Toast.makeText(getApplicationContext(), "Item: " + split[i], Toast.LENGTH_SHORT).show();
+        }
+
+       // txId.append(p);
+        return id;
+    }
+
+ */
+/*
+    private void makeRequestT(String text) {
+
+        //Conexión al Servidor
+        RequestQueue queue= Volley.newRequestQueue(this);
+        String url="https://tvcpdudx.lucusvirtual.es/consultaTipologia.php?text="+text;
+        adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try{
+
+
+                        JSONArray array= new JSONArray(response);
+                        for(int i=0;i<array.length();i++){
+
+                            JSONObject object = array.getJSONObject(i);
+                            ListadoTipologia tipo=new ListadoTipologia(object);
+                            //Carga de datos
+                            adaptadorTipo.add(tipo);
+
+
+                        }
+
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest.setTag("REQUEST");
+        queue.add(stringRequest);
+
+
+
+    }
+*/
+    /*
+    private void makeRequest(String text) {
+        //Conexión al Servidor
+        RequestQueue queue= Volley.newRequestQueue(this);
+        String url="https://tvcpdudx.lucusvirtual.es/consultaCategoria.php?text="+text;
+        adaptadorCategoria.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try{
+                        JSONArray array= new JSONArray(response);
+                        for(int i=0;i<array.length();i++){
+
+                            JSONObject object = array.getJSONObject(i);
+                            ListadoCategoria cat=new ListadoCategoria(object);
+                            //Carga de datos
+                            adaptadorCategoria.add(cat);
+
+
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+                stringRequest.setTag("REQUEST");
+                queue.add(stringRequest);
+
+
+    }
+    */
 
 //Bitmap
 
@@ -625,10 +926,9 @@ private int validarWhatsapp(){
 
 
                 Map<String, String> parametros = new HashMap<String, String>();
-
-               // parametros.put("id_tipologia_lugar", txtTipología.getText().toString());
-                //parametros.put("id_categoria", txtCategoria.getText().toString());
-                parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
+               parametros.put("id_tipologia_lugar", txId.getText().toString());
+               parametros.put("id_categoria", idCategoria);
+               parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
                 parametros.put("direccion", txtDireccion.getText().toString());
                 parametros.put("telefono", txtTelefono.getText().toString());
                 parametros.put("whatsapp", txtWhatsApp.getText().toString());
@@ -695,7 +995,8 @@ private int validarWhatsapp(){
         //finish();
     }
 
-    @Override
+
+    /*@Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
     }
@@ -704,4 +1005,6 @@ private int validarWhatsapp(){
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+    */
+
 }
