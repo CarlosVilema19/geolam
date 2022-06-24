@@ -19,6 +19,7 @@
         android:elevation="10dp"
         >
 
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
-                android:paddingBottom="50dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -40,14 +41,14 @@
                         android:id="@+id/txregistrate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
                         android:text="Ingresar datos"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="10dp"
 
 
                         />
@@ -96,18 +97,13 @@
                         android:layout_marginRight="2dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
-                        app:iconTint="#FFFFFF" />
+                        app:iconTint="#FFFFFF"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinnerCategoria"
-                    android:layout_width="match_parent"
 
-                    android:layout_marginTop="10dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    />
+
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -131,6 +127,73 @@
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etemail"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Tipología"
+
+
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoTipologia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/TextViewID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="1sp"
+                    android:hint="item"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="1sp"
+                    android:textStyle="bold"
+
+
+                    android:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/autoTipologia"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Categoria"
+
+
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:maxLines="1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -148,8 +211,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ingresoNombreLugar"
-                        android:gravity="left"
                         android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°.-_"
+                        android:gravity="left"
                         android:hint="@string/rec_direccion_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -171,8 +234,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/rec_telefono_lugar"
-                        android:maxLines="1"
                         android:inputType="number"
+                        android:maxLines="1"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -197,6 +260,7 @@
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -255,6 +319,7 @@
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -269,8 +334,8 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/rec_descripcion_lugar"
                         android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°'.-_,:;"
+                        android:hint="@string/rec_descripcion_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
