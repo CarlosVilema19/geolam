@@ -4,32 +4,32 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLugarUsuarioAdaptador.ViewHolder> {
+public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.ViewHolder> {
 
     private final Context mCtx;
-    private final List<ListadoLugarUsuario> lugarList;
-    final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
+    private final List<ListadoLugar> lugarList;
+    final LugarMapaAdaptador.OnItemClickListener listener;
 
     public interface OnItemClickListener{
-        void onItemClick(ListadoLugarUsuario item);
+        void onItemClick(ListadoLugar item);
     }
 
-    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener){
+    public interface OnClickListener{
+        void onClick(ListadoLugar item);
+    }
+
+    public LugarMapaAdaptador(Context mCtx, List<ListadoLugar> lugarList, LugarMapaAdaptador.OnItemClickListener listener){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
@@ -45,11 +45,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final TextView direccionLugar;
         private final TextView telefonoLugar;
         private final ImageView imagenLugar;
-        private final TextView informacionLugar;
-        private final TextView categoriaLugar;
-        private final TextView tipologiaLugar;
-        private final CardView btnMedicoUsuario;
-
+        private final TextView idLugar;
 
 
 
@@ -58,16 +54,11 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             super(view);
             // Define click listener for the ViewHolder's View
 
-            nombreLugar = view.findViewById(R.id.tvNombreLugar);
-            direccionLugar = view.findViewById(R.id.tvDireccion);
-            telefonoLugar = view.findViewById(R.id.tvTelefono);
-            imagenLugar = view.findViewById(R.id.imagenlugar);
-            informacionLugar = view.findViewById(R.id.tvInformacion);
-            categoriaLugar = view.findViewById(R.id.tvCategoria);
-            tipologiaLugar = view.findViewById(R.id.tvTipologia);
-            btnMedicoUsuario = view.findViewById(R.id.btnMedicoUsuario);
-
-
+            nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
+            direccionLugar = view.findViewById(R.id.tvDireccionLista);
+            telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
+            imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
+            idLugar = view.findViewById(R.id.tvId);
         }
 
         /*public TextView getTextView() {
@@ -80,14 +71,14 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.activity_lugar_medico, null);
+        View view = inflater.inflate(R.layout.activity_listado, null);
         return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        ListadoLugarUsuario listadoLugar = lugarList.get(position);
+        ListadoLugar listadoLugar = lugarList.get(position);
         //Cargar Imagen
         Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
@@ -97,10 +88,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
-        viewHolder.informacionLugar.setText(listadoLugar.getInformacionLugar());
-        viewHolder.categoriaLugar.setText(listadoLugar.getCategoriaLugar());
-        viewHolder.tipologiaLugar.setText(listadoLugar.getTipologiaLugar());
-        viewHolder.btnMedicoUsuario.setOnClickListener(new View.OnClickListener() {
+        viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(listadoLugar);
@@ -114,6 +103,3 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         return lugarList.size();
     }
 }
-
-
-

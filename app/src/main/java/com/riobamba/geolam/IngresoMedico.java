@@ -43,8 +43,6 @@ public class IngresoMedico extends AppCompatActivity {
         txtNombreMedico = findViewById(R.id.ednombreMedico);
         txtApellidoMedico = findViewById(R.id.edapellidoMedico);
         txtDescripcionMedico = findViewById(R.id.eddescripcionMedico);
-        autoTxtEspecialidad = findViewById(R.id.edEspecialidad);
-        autoTxtLugar = findViewById(R.id.edLugarMedico);
 
         btnAgregarMedico = findViewById(R.id.btnAgregarMedico);
 

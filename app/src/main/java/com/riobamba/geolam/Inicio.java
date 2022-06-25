@@ -44,6 +44,8 @@ public class Inicio extends AppCompatActivity {
         btnEspecialidades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, ListadoEspecialidad.class);
+                startActivity(intent);
             }
         }
         );
@@ -51,3 +53,4 @@ public class Inicio extends AppCompatActivity {
 
 
 }
+
