@@ -19,6 +19,8 @@ import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdmin;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdminAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -83,7 +85,12 @@ public class ListarLugarUsuario extends AppCompatActivity
 
                     }
 
-                    ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList);
+                    ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList, new ListadoLugarUsuarioAdaptador.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ListadoLugarUsuario item) {
+                            moveToMedico(item);
+                        }
+                    });
                     recyclerView.setAdapter(myadapter);
 
 
@@ -109,9 +116,9 @@ public class ListarLugarUsuario extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-    public void moveToDescription(ListadoLugarUsuario item)
+    public void moveToMedico(ListadoLugarUsuario item)
     {
-        Intent intent = new Intent(this,ListarLugarUsuario.class);
+        Intent intent = new Intent(this,MedicoListado.class);
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);}
 

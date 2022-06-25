@@ -100,44 +100,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="@string/lugar_de_trabajo"
-                    >
-
-                    <AutoCompleteTextView
-                        android:id="@+id/edLugarMedico"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="@string/especialidad_medico">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/edEspecialidad"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -165,7 +127,7 @@
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="80dp"
-                    android:text="@string/agregar_medico"
+                    android:text="Guardar"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />
                 <com.google.android.material.button.MaterialButton
@@ -176,7 +138,7 @@
                     android:layout_marginLeft="80dp"
 
                     android:layout_marginRight="80dp"
-                    android:text="@string/ver_agregados"
+                    android:text="Agregados"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />
 

@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.riobamba.geolam.GestionUsuarios;
 import com.riobamba.geolam.InicioAdmin;
 import com.riobamba.geolam.Listado;
+import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
 
@@ -61,7 +62,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConexionMapa.this, Listado.class);
+                Intent intent = new Intent(ConexionMapa.this, LugarMapa.class);
                 startActivity(intent);
             }
         });

@@ -100,6 +100,15 @@
             android:name=".registrar"
             android:exported="true" />
         <activity
+            android:name=".LugarMapa"
+            android:exported="true" />
+        <activity
+            android:name=".ListadoEspecialidad"
+            android:exported="true" />
+        <activity
+            android:name=".MedicoListado"
+            android:exported="true" />
+        <activity
             android:name=".Menu"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

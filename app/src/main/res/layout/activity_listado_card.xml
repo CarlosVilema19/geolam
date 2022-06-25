@@ -31,17 +31,24 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp">
 
-                    <ImageView
-                        android:id="@+id/ivImagenLugarLista"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/ivImagenLugarLista"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
+                    </androidx.cardview.widget.CardView>
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
