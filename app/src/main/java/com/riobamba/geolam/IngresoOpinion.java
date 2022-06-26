@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,50 +23,46 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.DatosOpinion;
 import com.riobamba.geolam.modelo.WebService;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IngresoMedico extends AppCompatActivity {
-    EditText txtNombreMedico,txtApellidoMedico,txtDescripcionMedico;
-    Button btnAgregarMedico,btnMostrarAgregado;
+public class IngresoOpinion extends AppCompatActivity {
+    EditText ingresarOpinion;
+    Button btnEnviarOpinion;
+    RatingBar calficacionLugar;
+    String email;
+    DatosOpinion datosOpinion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingreso_medico);
-        txtNombreMedico = findViewById(R.id.ednombreMedico);
-        txtApellidoMedico = findViewById(R.id.edapellidoMedico);
-        txtDescripcionMedico = findViewById(R.id.eddescripcionMedico);
+        setContentView(R.layout.activity_calificacion);
 
-        btnAgregarMedico = findViewById(R.id.btnAgregarMedico);
-        btnMostrarAgregado = findViewById(R.id.btnVerAgregados);
+        ingresarOpinion = findViewById(R.id.etIngresarOpinion);
+        btnEnviarOpinion = findViewById(R.id.btnEnviarOpinion);
+        calficacionLugar = findViewById(R.id.rbCalificacion);
 
-
-        btnAgregarMedico.setOnClickListener(new View.OnClickListener() {
+        btnEnviarOpinion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                insertarMedico();
+                insertarOpinion();
             }
         });
 
-        btnMostrarAgregado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IngresoMedico.this, MedicoListado.class);
-                startActivity(intent);}
-        });
 
     }
 
-    private void insertarMedico() {
-        String url = WebService.urlRaiz + WebService.servicioAgregarMedico;
+    private void insertarOpinion() {
+        String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Se ha enviado con éxito", Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
@@ -78,10 +75,10 @@ public class IngresoMedico extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("nombre_medico", txtNombreMedico.getText().toString());
-                parametros.put("apellido_medico", txtApellidoMedico.getText().toString());
-                parametros.put("descripcion_medico", txtDescripcionMedico.getText().toString());
-
+                parametros.put("id_lugar", "115");
+                parametros.put("email", "carlos.vilema21@gmail.com");
+                parametros.put("calificacion", "5");
+                parametros.put("comentario",ingresarOpinion.getText().toString());
                 return parametros;
             }
         };

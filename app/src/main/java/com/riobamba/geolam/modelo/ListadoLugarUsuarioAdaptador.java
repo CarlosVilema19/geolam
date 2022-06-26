@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -24,15 +26,21 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     private final Context mCtx;
     private final List<ListadoLugarUsuario> lugarList;
     final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
+    final ListadoLugarUsuarioAdaptador.OnClickListener listener2;
 
     public interface OnItemClickListener{
         void onItemClick(ListadoLugarUsuario item);
     }
 
-    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener){
+    public interface OnClickListener{
+        void onClick(ListadoLugarUsuario item);
+    }
+
+    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener,ListadoLugarUsuarioAdaptador.OnClickListener listener2){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
+        this.listener2 = listener2;
     }
     View view1;
     public void viewEjem (View v)
@@ -49,6 +57,11 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final TextView categoriaLugar;
         private final TextView tipologiaLugar;
         private final CardView btnMedicoUsuario;
+        private final RatingBar btnOpinion;
+        private final CardView btnEspecialidadUsuario;
+
+
+
 
 
 
@@ -66,6 +79,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             categoriaLugar = view.findViewById(R.id.tvCategoria);
             tipologiaLugar = view.findViewById(R.id.tvTipologia);
             btnMedicoUsuario = view.findViewById(R.id.btnMedicoUsuario);
+            btnOpinion = view.findViewById(R.id.rbCalificacion);
+            btnEspecialidadUsuario = view.findViewById(R.id. btnEspecialidadUsuario);
 
 
         }
@@ -104,6 +119,12 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             @Override
             public void onClick(View v) {
                 listener.onItemClick(listadoLugar);
+            }
+        });
+        viewHolder.btnEspecialidadUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener2.onClick(listadoLugar);
             }
         });
     }
