@@ -280,11 +280,11 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
-                        android:text="Calificación"
+                        android:text="Califique este lugar"
                         android:textStyle="bold" />
 
                     <RatingBar
-                        android:id="@+id/ratingBar"
+                        android:id="@+id/rbCalificacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txcalificacion"
@@ -295,51 +295,11 @@
                         android:numStars="5" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/layout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txopinion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/ratingBar"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:text="Opinión"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ingresaropinion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txopinion"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:hint="Opinión General"
-                        android:minHeight="48dp"
-                        android:textSize="15dp">
-
-                    </com.google.android.material.textfield.TextInputEditText>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnenviaropinion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-
-                        android:text="Enviar" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvComentario"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

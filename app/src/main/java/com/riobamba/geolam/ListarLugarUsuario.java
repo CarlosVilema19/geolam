@@ -90,6 +90,11 @@ public class ListarLugarUsuario extends AppCompatActivity
                         public void onItemClick(ListadoLugarUsuario item) {
                             moveToMedico(item);
                         }
+                    },new ListadoLugarUsuarioAdaptador.OnClickListener() {
+                        @Override
+                        public void onClick(ListadoLugarUsuario item) {
+                            moveToOpinion(item);
+                        }
                     });
                     recyclerView.setAdapter(myadapter);
 
@@ -119,6 +124,12 @@ public class ListarLugarUsuario extends AppCompatActivity
     public void moveToMedico(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,MedicoListado.class);
+        intent.putExtra("ListadoLugar",item);
+        startActivity(intent);}
+
+    public void moveToOpinion(ListadoLugarUsuario item)
+    {
+        Intent intent = new Intent(this,IngresoOpinion.class);
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);}
 
