@@ -59,6 +59,20 @@
                 android:layout_height="70dp"
                 android:text="@string/medicos"
                 app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAsignarMedico"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Asignar Médicos"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAsignarEspecialidad"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Asignar Especialidad"
+                app:cornerRadius="10dp" />
         </LinearLayout>
     </ScrollView>
 

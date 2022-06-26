@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class GestionLugares extends AppCompatActivity {
-    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico;
+    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico, btnAsignarMedico, btnAsignarEspecialidades;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,8 @@ public class GestionLugares extends AppCompatActivity {
         btnEspecialidad= findViewById(R.id.btnEspecialidad);
         btnMedico = findViewById(R.id.btnMedico);
         btnLugares=findViewById(R.id.btnLugares);
-
+        btnAsignarMedico=findViewById(R.id.btnAsignarMedico);
+        btnAsignarEspecialidades=findViewById(R.id.btnAsignarEspecialidad);
 
         btnTipologia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,21 @@ public class GestionLugares extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnAsignarMedico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GestionLugares.this, AsignarMedico.class);
+                startActivity(intent);
+            }
+        });
+        btnAsignarEspecialidades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GestionLugares.this, AsignarEspecialidad.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnEspecialidad.setOnClickListener(new View.OnClickListener() {
             @Override
