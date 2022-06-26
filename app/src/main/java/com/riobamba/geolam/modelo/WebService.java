@@ -22,9 +22,10 @@ public class WebService {
     public static final  String servicioListarLugaresUsuario= "listar_lugares_usuario.php";
     public static final  String servicioListarEspecialidad= "listar_especialidad.php";
     public static final  String servicioListarMedico= "listar_medico.php";
+    public static final  String servicioAsignarMedico=  "asignarMedico.php";
+    public static final  String servicioAsignarEspecialidad =  "asignarEspecialidad.php";
+    public static final  String servicioAsignarLugarMedico=  "asignarLugarMedico.php";
     public static final  String servicioInsertarOpinion = "insertar_opinion.php";
-
-
 
 
 

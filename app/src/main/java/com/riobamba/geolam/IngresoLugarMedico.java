@@ -61,7 +61,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
     String idTipologia;
     String listIDCat;
     String listIDTipo;
-   Spinner spinnerCategoria;
+
     //Imagen
     private Button btnCargarImagen;
     private ImageView ivFotoL;
