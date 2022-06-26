@@ -3,35 +3,7 @@ package com.riobamba.geolam.modelo;
 import org.json.JSONObject;
 
 public class ListadoCategoria {
-/*
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public ListadoCategoria(int id, String descripcion) {
-        this.id = id;
-        this.descripcion = descripcion;
-    }
-    public ListadoCategoria() {
-    }
-    @Override
-    public String toString(){
-        return descripcion;
-    }
-    */
 
     private String id;
     private String descripcion;

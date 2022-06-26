@@ -53,7 +53,7 @@
                 >
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoLugarMedico"
+                    android:id="@+id/autoLugarMedico2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
@@ -63,7 +63,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/TextViewIDLugarMedico"
+                android:id="@+id/TextViewIDLugarMedico2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -83,7 +83,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/autoLugarMedico"
+                android:layout_below="@id/autoLugarMedico2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
@@ -93,7 +93,7 @@
                 >
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoEspecialidad"
+                    android:id="@+id/autoEspecialidad2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"

@@ -149,6 +149,20 @@
 
             />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_guardarAsignarMedic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TextViewIDLugar"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="80dp"
+
+            android:text="@string/rec_guardar_informacion"
+            android:textColor="@android:color/white"
+            android:textSize="15dp" />
+
     </LinearLayout>
     </ScrollView>
 
