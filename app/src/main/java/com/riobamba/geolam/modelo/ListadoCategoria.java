@@ -39,7 +39,6 @@ public class ListadoCategoria {
     public String getId() {
         return id;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -61,7 +60,8 @@ public ListadoCategoria(JSONObject object)
 @Override
     public String toString(){
 
-        return id.toString()+"-"+descripcion;
+        return descripcion;
+    //id.toString()+"-"+descripcion;
     }
 
 

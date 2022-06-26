@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
@@ -51,15 +50,17 @@ import java.util.Map;
 public class IngresoLugarMedico extends AppCompatActivity {
 
     EditText txtTipologia, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
-    TextView txId ;
-
+    TextView tvIdTipo;
+    TextView tvIdCategoria ;
 
     String pTip;
+    String pCat;
     Button btnGuardarInfo, btnAgregados;
     String imagen_lugar;
     String idCategoria;
     String idTipologia;
-    String pcat;
+    String listIDCat;
+    String listIDTipo;
    Spinner spinnerCategoria;
     //Imagen
     private Button btnCargarImagen;
@@ -71,8 +72,8 @@ public class IngresoLugarMedico extends AppCompatActivity {
     private String claveNombre = "nombre";
     private int PICK_IMAGE_REQUEST = 1;
 
-ArrayList<String> opciones = new ArrayList<>();
-
+    ArrayList<String> opcionesTipologia = new ArrayList<>();
+    ArrayList<String> opcionesCategoria= new ArrayList<>();
     //autocomplete
     private ListadoCategoriaAdaptador adaptadorCategoria;
     private ListadoTipologiaAdaptador adaptadorTipo;
@@ -114,8 +115,8 @@ ArrayList<String> opciones = new ArrayList<>();
                             ListadoTipologia tipo=new ListadoTipologia(object);
                             //Carga de datos
                             adaptadorTipo.add(tipo);
-                            pcat= ( object2.getString("ID_TIPOLOGIA_LUGAR"));
-                            opciones.add(pcat);
+                            listIDCat = ( object2.getString("ID_TIPOLOGIA_LUGAR"));
+                            opcionesTipologia.add(listIDCat);
                            // String descripcionTipo=object.getString("DESCRIPCION_TIPO_LUGAR"); //jsonArray.getString();
                            // String IDTipo=object.getString("DESCRIPCION_TIPO_LUGAR");
                             //adaptadorTipo.add(descripcionTipo);
@@ -137,7 +138,7 @@ ArrayList<String> opciones = new ArrayList<>();
                                 String p= String.valueOf(position).trim();
                                 //for(int k=0;k<opciones.size();k++)
                                 //{
-                                    String c=opciones.get(position);
+                                    String c= opcionesTipologia.get(position);
 
                                     //Toast.makeText(getApplicationContext(), "Item: " +c, Toast.LENGTH_SHORT).show();
                                   // if(p.equals(c))
@@ -145,7 +146,7 @@ ArrayList<String> opciones = new ArrayList<>();
                                         //Toast.makeText(getApplicationContext(), "Hola " +opciones.get(k) , Toast.LENGTH_SHORT).show();
                                         pTip=c;
                                         //pTip=opciones.get();
-                                        retorna(pTip);
+                                        retornaIdTipologia(pTip);
                                     //}
 
 
@@ -186,9 +187,11 @@ ArrayList<String> opciones = new ArrayList<>();
                         for(int i=0;i<array.length();i++){
 
                             JSONObject object = array.getJSONObject(i);
+                            JSONObject object2 = array.getJSONObject(i);
                             ListadoCategoria cat=new ListadoCategoria(object);
                             adaptadorCategoria.add(cat);
-
+                            listIDCat = ( object2.getString("ID_CATEGORIA"));
+                            opcionesCategoria.add(listIDCat);
 
 
 
@@ -201,9 +204,14 @@ ArrayList<String> opciones = new ArrayList<>();
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemCat = parent.getItemAtPosition(position).toString();
-                                String a=itemCat;
-                                idCategoria =RetornaID(a);
-                                Toast.makeText(getApplicationContext(), "Item: " + idCategoria, Toast.LENGTH_SHORT).show();
+                                //String a=itemCat;
+                                //idCategoria =RetornaID(a);
+                                //Toast.makeText(getApplicationContext(), "Item: " + idCategoria, Toast.LENGTH_SHORT).show();
+
+                                String c= opcionesCategoria.get(position);
+                                pCat=c;
+                                retornaIdCategoria(pCat);
+                                //Toast.makeText(getApplicationContext(), "Item Categoria: " +pCat, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -415,7 +423,8 @@ ArrayList<String> opciones = new ArrayList<>();
         txtLatitud = findViewById(R.id.ingresoLatitud);
         txtLongitud = findViewById(R.id.ingresoLongitud);
         txtDescripcion = findViewById(R.id.ingresoDescripcionLugar);
-        txId = (TextView) findViewById(R.id.TextViewID);
+        tvIdTipo = (TextView) findViewById(R.id.TextViewIDTipologia);
+        tvIdCategoria = (TextView) findViewById(R.id.TextViewIDCategoria);
         btnGuardarInfo= findViewById(R.id.btn_guardarLugar);
 
 
@@ -440,13 +449,19 @@ ArrayList<String> opciones = new ArrayList<>();
 
     }
 
-    private void retorna(String pTip) {
-
-
+    private void retornaIdTipologia(String pTip) {
 
         CharSequence p=pTip;
         String p2=p.toString();
-        txId.setText(p2);
+        tvIdTipo.setText(p2);
+        //Carga de datos
+
+    }
+    private void retornaIdCategoria(String pCat) {
+
+        CharSequence p=pCat;
+        String p2=p.toString();
+        tvIdCategoria.setText(p2);
         //Carga de datos
 
     }
@@ -926,8 +941,8 @@ private int validarWhatsapp(){
 
 
                 Map<String, String> parametros = new HashMap<String, String>();
-               parametros.put("id_tipologia_lugar", txId.getText().toString());
-               parametros.put("id_categoria", idCategoria);
+               parametros.put("id_tipologia_lugar", tvIdTipo.getText().toString());
+               parametros.put("id_categoria", tvIdCategoria.getText().toString());
                parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
                 parametros.put("direccion", txtDireccion.getText().toString());
                 parametros.put("telefono", txtTelefono.getText().toString());

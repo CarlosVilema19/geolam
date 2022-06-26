@@ -78,8 +78,8 @@ public ListadoCategoriaAdaptador(@NonNull Context context){
 
             TextView item_text = view.findViewById(R.id.viewItem);
             ListadoCategoria listCate = getItem(position);
-            //item_text.setText(listCate.toString());
-            String data = listCate.toString();
+            item_text.setText(listCate.toString());
+           /* String data = listCate.toString();
             String[] split = data.split("-");
             String descrip=null;
             String descrip2=null;
@@ -90,7 +90,7 @@ public ListadoCategoriaAdaptador(@NonNull Context context){
                 //Toast.makeText(getApplicationContext(), "Item: " + split[i], Toast.LENGTH_SHORT).show();
             }
             item_text.setText(descrip);
-
+*/
         }
 
         return view;
