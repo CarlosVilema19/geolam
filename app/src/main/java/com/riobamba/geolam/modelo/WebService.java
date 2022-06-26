@@ -25,7 +25,7 @@ public class WebService {
     public static final  String servicioAsignarMedico=  "asignarMedico.php";
     public static final  String servicioAsignarEspecialidad =  "asignarEspecialidad.php";
     public static final  String servicioAsignarLugarMedico=  "asignarLugarMedico.php";
-
+    public static final  String servicioInsertarOpinion = "insertar_opinion.php";
 
 
 

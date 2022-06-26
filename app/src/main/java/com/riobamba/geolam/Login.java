@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.DatosOpinion;
 import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
@@ -24,6 +25,9 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin, btnRecuperar;
+    String email;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", edtUsuario.getText().toString());
                 parametros.put("contrasenia", edtPassword.getText().toString());
+                new DatosOpinion(edtUsuario.getText().toString());
                 return parametros;
             }
         };
@@ -95,5 +100,6 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), registrar.class));
         finish();
     }
+
 }
 
