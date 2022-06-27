@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -54,6 +55,9 @@ public class ListarLugarUsuario extends AppCompatActivity
 
         lugarList = new ArrayList<>();
         ListadoLugar listadoLugar = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
+        //Listado listado = (Listado) getIntent().getSerializableExtra("ListadoLugar2");
+
+
         MostrarResultado(listadoLugar);
 
 
@@ -80,7 +84,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getString("imagen_lugar"),
                                 obj.getString("informacion"),
                                 obj.getString("categoria"),
-                                obj.getString("tipologia")
+                                obj.getString("tipologia"),
+                                obj.getInt("id_lugar")
                         ));
 
                     }
@@ -89,6 +94,12 @@ public class ListarLugarUsuario extends AppCompatActivity
                         @Override
                         public void onItemClick(ListadoLugarUsuario item) {
                             moveToMedico(item);
+                        }
+                    },new ListadoLugarUsuarioAdaptador.OnClickEspeListener() {
+                        @Override
+                        public void onClick2(ListadoLugarUsuario item) {
+                            moveToEspecialidad(item);
+
                         }
                     },new ListadoLugarUsuarioAdaptador.OnClickListener() {
                         @Override
@@ -127,10 +138,17 @@ public class ListarLugarUsuario extends AppCompatActivity
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);}
 
+    public void moveToEspecialidad(ListadoLugarUsuario item)
+    {
+        Intent intent = new Intent(this,ListadoEspecialidad.class);
+        intent.putExtra("ListadoLugar",item);
+        //intent.putExtra("ListadoLugar2", (Parcelable) listado);
+        startActivity(intent);}
     public void moveToOpinion(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,IngresoOpinion.class);
         intent.putExtra("ListadoLugar",item);
+        //intent.putExtra("ListadoLugar2", (Parcelable) listado);
         startActivity(intent);}
 
 }

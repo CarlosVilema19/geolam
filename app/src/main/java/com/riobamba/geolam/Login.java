@@ -2,7 +2,7 @@ package com.riobamba.geolam;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,18 +14,28 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.DatosOpinion;
+import com.riobamba.geolam.modelo.ListadoLugar;
+import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
+import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin, btnRecuperar;
-    String email;
+
 
 
     @Override
@@ -35,10 +45,9 @@ public class Login extends AppCompatActivity {
         edtUsuario = findViewById(R.id.edusuario);
         edtPassword = findViewById(R.id.edcontrasenia);
         btnLogin = findViewById(R.id.btniniciosesion);
-        btnLogin.setOnClickListener(view -> validarUsuario());
-        //String URL = "https://qcqjfcit.lucusvirtual.es/validar_usuario.php";
-        //ConectarLogin oConectarLogin = new ConectarLogin(edtUsuario,edtPassword, URL);
-       // btnLogin.setOnClickListener(view -> oConectarLogin.validarUsuario());
+        btnLogin.setOnClickListener(view -> {
+            validarUsuario();
+        });
         btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
 
         btnRecuperar.setOnClickListener(new View.OnClickListener(){
@@ -57,12 +66,6 @@ public class Login extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                /*if (!response.isEmpty()){
-                    Intent intent = new Intent(getApplicationContext(), Inicio.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(Login.this, "Email or Password Invalid", Toast.LENGTH_LONG).show();
-                }*/
                 if(edtUsuario.getText().toString().equals("")){
                     Toast.makeText(Login.this, "Ingrese un email", Toast.LENGTH_SHORT).show();
                 }
@@ -70,8 +73,9 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
                 }
                 else{if (!response.isEmpty()){
-                    Intent intent = new Intent(getApplicationContext(), Inicio.class);
-                    startActivity(intent);
+
+                        Intent intent = new Intent(Login.this,Inicio.class);
+                        startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
                 }}
@@ -83,7 +87,6 @@ public class Login extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", edtUsuario.getText().toString());
                 parametros.put("contrasenia", edtPassword.getText().toString());
-                new DatosOpinion(edtUsuario.getText().toString());
                 return parametros;
             }
         };
@@ -96,10 +99,6 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    public void moveToRegistro1(MenuItem item) {
-        startActivity(new Intent(getApplicationContext(), registrar.class));
-        finish();
-    }
 
 }
 

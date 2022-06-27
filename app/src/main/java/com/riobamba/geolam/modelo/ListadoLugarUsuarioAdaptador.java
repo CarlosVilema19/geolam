@@ -26,21 +26,28 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     private final Context mCtx;
     private final List<ListadoLugarUsuario> lugarList;
     final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
-    final ListadoLugarUsuarioAdaptador.OnClickListener listener2;
+    final ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2;
+    final ListadoLugarUsuarioAdaptador.OnClickListener listener3;
+
 
     public interface OnItemClickListener{
         void onItemClick(ListadoLugarUsuario item);
+    }
+
+    public interface OnClickEspeListener{
+        void onClick2(ListadoLugarUsuario item);
     }
 
     public interface OnClickListener{
         void onClick(ListadoLugarUsuario item);
     }
 
-    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener,ListadoLugarUsuarioAdaptador.OnClickListener listener2){
+    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener,ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2,ListadoLugarUsuarioAdaptador.OnClickListener listener3){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
         this.listener2 = listener2;
+        this.listener3 = listener3;
     }
     View view1;
     public void viewEjem (View v)
@@ -56,9 +63,10 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final TextView informacionLugar;
         private final TextView categoriaLugar;
         private final TextView tipologiaLugar;
+        private final TextView idLugar;
         private final CardView btnMedicoUsuario;
-        private final RatingBar btnOpinion;
         private final CardView btnEspecialidadUsuario;
+        private final Button btnCalificar;
 
 
 
@@ -79,7 +87,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             categoriaLugar = view.findViewById(R.id.tvCategoria);
             tipologiaLugar = view.findViewById(R.id.tvTipologia);
             btnMedicoUsuario = view.findViewById(R.id.btnMedicoUsuario);
-            btnOpinion = view.findViewById(R.id.rbCalificacion);
+            btnCalificar = view.findViewById(R.id.btnCalificar);
+            idLugar = view.findViewById(R.id.tvIdLugar);
             btnEspecialidadUsuario = view.findViewById(R.id. btnEspecialidadUsuario);
 
 
@@ -115,6 +124,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.informacionLugar.setText(listadoLugar.getInformacionLugar());
         viewHolder.categoriaLugar.setText(listadoLugar.getCategoriaLugar());
         viewHolder.tipologiaLugar.setText(listadoLugar.getTipologiaLugar());
+        viewHolder.idLugar.setText(String.valueOf(listadoLugar.getIdLugar()));
         viewHolder.btnMedicoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +134,13 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.btnEspecialidadUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener2.onClick(listadoLugar);
+                listener2.onClick2(listadoLugar);
+            }
+        });
+        viewHolder.btnCalificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener3.onClick(listadoLugar);
             }
         });
     }

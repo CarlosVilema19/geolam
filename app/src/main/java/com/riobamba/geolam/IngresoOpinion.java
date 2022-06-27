@@ -24,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.DatosOpinion;
+import com.riobamba.geolam.modelo.ListadoLugar;
+import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.WebService;
 
 import java.util.Calendar;
@@ -36,6 +38,7 @@ public class IngresoOpinion extends AppCompatActivity {
     RatingBar calficacionLugar;
     String email;
     DatosOpinion datosOpinion;
+    Login log;
 
 
     @Override
@@ -46,17 +49,23 @@ public class IngresoOpinion extends AppCompatActivity {
         ingresarOpinion = findViewById(R.id.etIngresarOpinion);
         btnEnviarOpinion = findViewById(R.id.btnEnviarOpinion);
         calficacionLugar = findViewById(R.id.rbCalificacion);
+        ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
+        //DatosOpinion datosOpinion = (DatosOpinion) getIntent().getSerializableExtra("ListadoLugar");
+        //ListarLugarUsuario listarLugarUsuario = (ListarLugarUsuario) getIntent().getSerializableExtra("ListadoLugar2");
 
         btnEnviarOpinion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                insertarOpinion();
+                insertarOpinion(listadoLugarUsuario);
             }
         });
 
 
     }
 
-    private void insertarOpinion() {
+    private void insertarOpinion(ListadoLugarUsuario listadoLugarUsuario) {
+
+        String idLugar = listadoLugarUsuario.getIdLugar().toString();
+        String email = "carlos.vilema21@gmail.com";
         String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -75,10 +84,10 @@ public class IngresoOpinion extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar", "115");
-                parametros.put("email", "carlos.vilema21@gmail.com");
-                parametros.put("calificacion", "5");
-                parametros.put("comentario",ingresarOpinion.getText().toString());
+                parametros.put("id_lugar", idLugar);
+                parametros.put("email", email);
+                parametros.put("calificacion", String.valueOf(calficacionLugar.getRating()));
+                parametros.put("comentario", ingresarOpinion.getText().toString());
                 return parametros;
             }
         };
