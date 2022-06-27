@@ -10,8 +10,9 @@ public class ListadoLugarUsuario implements Serializable {
 
     String nombreLugar, direccionLugar, telefonoLugar;
     String imagenLugar, informacionLugar, categoriaLugar, tipologiaLugar;
+    Integer idLugar;
 
-    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, String informacionLugar, String categoriaLugar, String tipologiaLugar) {
+    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, String informacionLugar, String categoriaLugar, String tipologiaLugar, Integer idLugar) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
@@ -19,6 +20,8 @@ public class ListadoLugarUsuario implements Serializable {
         this.informacionLugar = informacionLugar;
         this.categoriaLugar = categoriaLugar;
         this.tipologiaLugar = tipologiaLugar;
+        this.idLugar = idLugar;
+
     }
 
     public String getNombreLugar() {
@@ -47,5 +50,9 @@ public class ListadoLugarUsuario implements Serializable {
 
     public String getTipologiaLugar() {
         return tipologiaLugar;
+    }
+
+    public Integer getIdLugar() {
+        return idLugar;
     }
 }

@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.riobamba.geolam.modelo.ConexionMapa;
+import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.ListadoMapa;
 
@@ -23,6 +25,9 @@ public class Inicio extends AppCompatActivity {
         btnListadoLugar = findViewById(R.id.btnlugaresmedicos);
         btnEspecialidades = findViewById(R.id.btnespecialidades);
 
+        //Login login = (Login) getIntent().getSerializableExtra("Login");
+
+
         btnlugarmedico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,8 +41,12 @@ public class Inicio extends AppCompatActivity {
         btnListadoLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inicio.this, Listado.class);
+
+                Intent intent = new Intent(Inicio.this,Listado.class);
+                //intent.putExtra("Inicio", (Parcelable) login);
                 startActivity(intent);
+
+
             }
         }
         );

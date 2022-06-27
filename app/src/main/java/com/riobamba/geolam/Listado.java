@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,6 +48,7 @@ public class Listado extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         lugarList = new ArrayList<>();
+        //Inicio inicio = (Inicio) getIntent().getSerializableExtra("Inicio");
 
         MostrarResultado();
     }
@@ -88,6 +90,7 @@ public class Listado extends AppCompatActivity {
     {
         Intent intent = new Intent(this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
+       // intent.putExtra("ListadoLugar2", (Parcelable) inicio);
         startActivity(intent);
     }
 }
