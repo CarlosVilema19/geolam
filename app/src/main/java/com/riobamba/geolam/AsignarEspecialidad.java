@@ -1,16 +1,22 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoAsignarEspecialidad;
@@ -23,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AsignarEspecialidad extends AppCompatActivity {
 
@@ -34,6 +42,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
 
     String listIDEspecialidad;
     String listIDLugarMedico;
+    Button btnGuardarAsig;
 
     //Especialidades - Lugares Medicos
     ArrayList<String> opcionesEspecialidad= new ArrayList<>();
@@ -49,6 +58,9 @@ public class AsignarEspecialidad extends AppCompatActivity {
         setContentView(R.layout.activity_asignar_especialidad);
         tvIdEspecialidad = findViewById(R.id.TextViewIDEspecialidad2);
         tvIdLugarMedico = findViewById(R.id.TextViewIDLugarMedico2);
+        btnGuardarAsig = findViewById(R.id.btn_guardarAsigEspecialidad);
+
+
 
         adaptadorEspecialidad = new ListadoAsignarEspecialidadAdaptador(this);
         AutoCompleteTextView autoCompleteOpcionesEspecialidad = findViewById(R.id.autoEspecialidad2);
@@ -57,6 +69,8 @@ public class AsignarEspecialidad extends AppCompatActivity {
         adaptadorLugarMedico = new ListadoAsignarLugarMedicoAdaptador(this);
         AutoCompleteTextView autoCompleteOpcionesLugarMedico = findViewById(R.id.autoLugarMedico2);
         autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
+
+
 
         //Conexión al Servidor- Consulta AutoComplete Especialidad
         RequestQueue queue2 = Volley.newRequestQueue(this);
@@ -168,6 +182,13 @@ public class AsignarEspecialidad extends AppCompatActivity {
         queue3.add(stringRequest3);
 
 
+        btnGuardarAsig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertarLugar();
+            }
+        });
+
     }
 
     private void retornaIdLugarMedico(String idLugarMedico) {
@@ -183,5 +204,50 @@ public class AsignarEspecialidad extends AppCompatActivity {
         tvIdEspecialidad.setText(p2);
         //Carga de datos
     }
+    private void insertarLugar() {
+        String url = WebService.urlRaiz +WebService.servicioIngresarEspecialidadLugar;
+        final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                //Descartar el diálogo de progreso
+                loading.dismiss();
+
+                //Mostrando el mensaje de la respuesta
+                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+                //startActivity(new Intent(getApplicationContext(), Login.class));
+                //finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Descartar el diálogo de progreso
+                loading.dismiss();
+                //Showing toast
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar",tvIdLugarMedico.getText().toString());
+                parametros.put("id_especialidad",tvIdEspecialidad.getText().toString());
+
+
+
+
+                return parametros;
+            }
+        };
+        //Creación de una cola de solicitudes
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        //Agregar solicitud a la cola
+        requestQueue.add(stringRequest);
+    }
+
 
 }
