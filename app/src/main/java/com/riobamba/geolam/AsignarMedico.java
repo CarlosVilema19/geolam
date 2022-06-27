@@ -1,7 +1,9 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,8 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoAsignarEspecialidad;
@@ -20,14 +25,14 @@ import com.riobamba.geolam.modelo.ListadoAsignarLugarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedicoAdaptador;
 import com.riobamba.geolam.modelo.ListadoAsignarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarMedicoAdaptador;
-import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
-import com.riobamba.geolam.modelo.ListadoTipologia;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AsignarMedico extends AppCompatActivity {
     TextView tvIdMedico;
@@ -79,7 +84,7 @@ public class AsignarMedico extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                insertarAsignacion();
             }
         });
 
@@ -259,7 +264,7 @@ public class AsignarMedico extends AppCompatActivity {
 
     private void retornaIdLugarMedico(String idLugarMedico) {
         CharSequence p=idLugarMedico;
-        String p2=p.toString();
+        String p2= p.toString();
         tvIdLugarMedico.setText(p2);
         //Carga de datos
     }
@@ -278,5 +283,44 @@ public class AsignarMedico extends AppCompatActivity {
         //Carga de datos
     }
 
+    private void insertarAsignacion() {
+        String url = WebService.urlRaiz +WebService.servicioIngresarMedicoTrabaja;
+        final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                //Descartar el diálogo de progreso
+                loading.dismiss();
+
+                //Mostrando el mensaje de la respuesta
+                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+                //startActivity(new Intent(getApplicationContext(), Login.class));
+                //finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Descartar el diálogo de progreso
+                loading.dismiss();
+                //Showing toast
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar",tvIdLugarMedico.getText().toString());
+                parametros.put("id_especialidad",tvIdEspecialidad.getText().toString());
+                parametros.put("id_medico",tvIdMedico.getText().toString());
+                return parametros;
+            }
+        };
+        //Creación de una cola de solicitudes
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        //Agregar solicitud a la cola
+        requestQueue.add(stringRequest);
+    }
 
 }
