@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicoListado extends AppCompatActivity {
+public class MedicoListado extends AppCompatActivity implements SearchView.OnQueryTextListener{
     //Declarar la lista y el recycler view
     List<ListadoMedico> lugarList;
     RecyclerView recyclerView;
-    ListadoMedicoAdaptador adaptador;
+    SearchView txtBuscar;
+    ListadoMedicoAdaptador myadapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,17 @@ public class MedicoListado extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
+
+        txtBuscar = findViewById(R.id.svBuscar);
+        myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
+
+
         //llamar al mostrar resultado
         MostrarResultado();
+
+        txtBuscar.setOnQueryTextListener(this);
+
+
     }
 
     public void MostrarResultado()
@@ -90,5 +102,18 @@ public class MedicoListado extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        myadapter.filtrado(newText);
+        recyclerView.setAdapter(myadapter);
+        return false;
     }
 }

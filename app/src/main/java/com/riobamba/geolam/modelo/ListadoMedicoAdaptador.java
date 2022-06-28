@@ -12,17 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAdaptador.ViewHolder> {
 
     private final Context mCtx;
     private final List<ListadoMedico> lugarList;
+    private final List<ListadoMedico> medicListOriginal;
 
 
     public ListadoMedicoAdaptador(Context mCtx, List<ListadoMedico> lugarList){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
+        medicListOriginal = new ArrayList<>();
+        medicListOriginal.addAll(lugarList);
     }
     View view1;
     public void viewEjem (View v)
@@ -46,9 +52,33 @@ public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAd
             idLugar = view.findViewById(R.id.tvIdMedicoLista);
         }
 
-        /*public TextView getTextView() {
-            return textView;
-        }*/
+    }
+
+    public void filtrado(final String txtBuscar)
+    {
+        if(txtBuscar.length() == 0)
+        {
+            lugarList.clear();
+            lugarList.addAll(medicListOriginal);
+        }else{
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                List<ListadoMedico> collection = lugarList.stream()
+                        .filter(i -> i.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                lugarList.clear();
+                lugarList.addAll(collection);
+            }else{
+                lugarList.clear();
+                for (ListadoMedico l:medicListOriginal) {
+                    if(l.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase()))
+                    {
+                        lugarList.add(l);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)

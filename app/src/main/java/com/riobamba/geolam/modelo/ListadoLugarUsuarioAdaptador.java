@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -125,6 +126,10 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.categoriaLugar.setText(listadoLugar.getCategoriaLugar());
         viewHolder.tipologiaLugar.setText(listadoLugar.getTipologiaLugar());
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getIdLugar()));
+
+       // viewHolder.btnEspecialidadUsuario.setCardBackgroundColor(ContextCompat.getColor(this.mCtx, R.color.teal_700));
+
+
         viewHolder.btnMedicoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
