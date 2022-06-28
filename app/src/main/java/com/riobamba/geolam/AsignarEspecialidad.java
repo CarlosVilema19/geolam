@@ -109,7 +109,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
                                 retornaIdEspecialidad(idEspecialidad);
 
 
-                                Toast.makeText(getApplicationContext(), "Item23: " + idEspecialidad, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Item23: " + idEspecialidad, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -164,7 +164,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
                                 retornaIdLugarMedico(idLugarMedico);
 
 
-                                Toast.makeText(getApplicationContext(), "Item23: " + idLugarMedico, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Item23: " + idLugarMedico, Toast.LENGTH_SHORT).show();
 
                             }
 
