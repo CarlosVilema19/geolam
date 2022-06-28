@@ -42,7 +42,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnVerAgregados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoEspecialidad.this, ListadoCrud.class);
+                Intent intent = new Intent(IngresoEspecialidad.this, ListadoEspecialidad.class);
                 startActivity(intent);
             }
         });
