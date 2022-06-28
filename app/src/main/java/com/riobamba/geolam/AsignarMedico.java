@@ -124,7 +124,7 @@ public class AsignarMedico extends AppCompatActivity {
                                 retornaIdMedico(idMedico);
 
 
-                                Toast.makeText(getApplicationContext(), "Item23: " +idMedico, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(), "Item23: " +idMedico, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -182,7 +182,7 @@ public class AsignarMedico extends AppCompatActivity {
                                 retornaIdEspecialidad(idEspecialidad);
 
 
-                                Toast.makeText(getApplicationContext(), "Item23: " +idEspecialidad, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(), "Item23: " +idEspecialidad, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -241,7 +241,7 @@ public class AsignarMedico extends AppCompatActivity {
 
 
 
-                                Toast.makeText(getApplicationContext(), "Item23: " +idLugarMedico, Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(getApplicationContext(), "Item23: " +idLugarMedico, Toast.LENGTH_SHORT).show();
 
                             }
 
