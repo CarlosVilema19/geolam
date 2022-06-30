@@ -5,19 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Menu"
     android:id="@+id/menu">
 
     <include
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         layout="@layout/activity_menu_toolbar"/>
-
-
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        layout="@layout/activity_inicio"/>
 
 
     <com.google.android.material.navigation.NavigationView
