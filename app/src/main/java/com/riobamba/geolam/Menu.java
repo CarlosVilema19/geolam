@@ -1,6 +1,7 @@
 package com.riobamba.geolam;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +37,8 @@ public class Menu extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
-        
+        navigationView.setItemIconTintList(null);
+
         //itemInicioMenu = findViewById(R.id.btnInicioMenu);
 
         /*@Override
