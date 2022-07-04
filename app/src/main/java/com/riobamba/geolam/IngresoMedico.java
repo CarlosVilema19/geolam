@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,7 +23,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.ListadoTipologia;
 import com.riobamba.geolam.modelo.WebService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -31,6 +36,7 @@ import java.util.Map;
 public class IngresoMedico extends AppCompatActivity {
     EditText txtNombreMedico,txtApellidoMedico,txtDescripcionMedico;
     Button btnAgregarMedico,btnMostrarAgregado;
+    TextView tvIdMedico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class IngresoMedico extends AppCompatActivity {
 
         btnAgregarMedico = findViewById(R.id.btnAgregarMedico);
         btnMostrarAgregado = findViewById(R.id.btnVerAgregados);
-
+        tvIdMedico = (TextView) findViewById(R.id.TextViewIDMedico_);
 
         btnAgregarMedico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -56,6 +62,46 @@ public class IngresoMedico extends AppCompatActivity {
                 Intent intent = new Intent(IngresoMedico.this, MedicoListado.class);
                 startActivity(intent);}
         });
+
+
+        //Conexión al Servidor- Consulta Id Médico
+        RequestQueue queue= Volley.newRequestQueue(this);
+        String url=WebService.urlRaiz+WebService.servicioIDMedico;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try{
+
+
+                        JSONArray array= new JSONArray(response);
+                        for(int i=0;i<array.length();i++){
+
+                            JSONObject object = array.getJSONObject(i);
+
+                            //Carga de datos
+                            CharSequence p= object.getString("AUTO_INCREMENT");
+                            String p2=p.toString();
+                            tvIdMedico.setText(p2);
+
+                            // String descripcionTipo=object.getString("DESCRIPCION_TIPO_LUGAR"); //jsonArray.getString();
+                            // String IDTipo=object.getString("DESCRIPCION_TIPO_LUGAR");
+                            //adaptadorTipo.add(descripcionTipo);
+
+
+
+
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest.setTag("REQUEST");
+        queue.add(stringRequest);
+
 
     }
 
