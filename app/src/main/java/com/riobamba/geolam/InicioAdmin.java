@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.riobamba.geolam.modelo.Toolbar;
+
 public class InicioAdmin extends AppCompatActivity {
     Button btnGestionLugar, btnGestionUsuario;
     @Override
@@ -16,6 +18,12 @@ public class InicioAdmin extends AppCompatActivity {
 
         btnGestionLugar= findViewById(R.id.btnGestionLugar);
         btnGestionUsuario= findViewById(R.id.btnGestionUsuario);
+
+
+        Toolbar toolbar = new Toolbar();
+        toolbar.show(this, "Geolam", true);
+
+
         btnGestionLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

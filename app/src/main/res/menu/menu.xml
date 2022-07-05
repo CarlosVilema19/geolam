@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/encabezado"
         android:title="@string/lugares_menu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        app:showAsAction="always"
         >
         <menu>
             <item
-                android:id="@+id/btnInicioMenu"
+                android:id="@+id/iInicioMenu"
                 android:icon="@drawable/ic_baseline_home_24"
                 android:title="@string/inicio_menu" />
             <item
-                android:id="@+id/btnMisDatos"
+                android:id="@+id/iMisDatos"
                 android:icon="@drawable/ic_baseline_account_circle_24"
                 android:title="@string/mis_datos_menu" />
             <item
-                android:id="@+id/btnAcercaApp"
+                android:id="@+id/iAcercaApp"
                 android:icon="@drawable/ic_baseline_info_24"
                 android:title="@string/acerca_menu" />
             <item
-                android:id="@+id/btnCerrarSesion"
+                android:id="@+id/iCerrarSesion"
                 android:icon="@drawable/ic_baseline_power_settings_new_24"
                 android:title="@string/cerrar_menu" />
             <item
-                android:id="@+id/btnSalir"
+                android:id="@+id/iSalir"
                 android:icon="@drawable/ic_baseline_logout_24"
                 android:title="@string/salir_menu" />
 
         </menu>
 
     </item>
+
 </menu>

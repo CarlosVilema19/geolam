@@ -9,6 +9,9 @@
     android:orientation="vertical"
     app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
     app:cardUseCompatPadding="true">
 
 
@@ -142,6 +145,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
                     android:backgroundTint="#00FFFFFF"
                     app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 

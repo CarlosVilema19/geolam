@@ -7,6 +7,9 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     tools:context=".AsignarMedico">
+    <include
+        layout="@layout/activity_menu_toolbar"
+        />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

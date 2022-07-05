@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D0D5D8"
     android:orientation="vertical"
-    tools:context=".Listado">
+    tools:context=".Inicio">
 
+    <include layout="@layout/activity_menu_toolbar" />
+    <include layout="@layout/activity_toolbar_infe" />
 
     <LinearLayout
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_above="@+id/iMenuInfe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,4 +56,6 @@
             android:layout_margin="10dp" />
     </LinearLayout>
 
-</LinearLayout>
+
+
+</RelativeLayout>

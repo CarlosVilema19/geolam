@@ -4,8 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".InicioAdmin">
+    <include
+        layout="@layout/activity_menu_toolbar"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/viewlogo2"
@@ -39,4 +46,5 @@
             android:text="@string/gestion_de_usuarios" />
 
     </LinearLayout>
+</RelativeLayout>
 </RelativeLayout>

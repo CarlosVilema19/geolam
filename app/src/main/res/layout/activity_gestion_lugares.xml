@@ -4,9 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:orientation="vertical"
     tools:context=".GestionLugares">
+    <include
+        layout="@layout/activity_menu_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,7 +26,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/viewlogo2"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="230dp"
             android:layout_margin="10dp"
             android:layout_centerHorizontal="true"
             android:foregroundTint="#00FFFFFF"
@@ -76,12 +86,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/menuLinearLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="3">
-
     </LinearLayout>
+
 </LinearLayout>

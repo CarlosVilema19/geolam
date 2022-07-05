@@ -9,6 +9,9 @@
     android:orientation="vertical"
     app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
     app:cardUseCompatPadding="true">
 
 
