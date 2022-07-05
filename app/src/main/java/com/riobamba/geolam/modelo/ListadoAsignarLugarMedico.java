@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 public class ListadoAsignarLugarMedico {
 
+
     String id;
     String nombreLugarMedico;
 
@@ -15,7 +16,7 @@ public class ListadoAsignarLugarMedico {
         return nombreLugarMedico;
     }
 
-    public ListadoAsignarLugarMedico(JSONObject object)
+    public  ListadoAsignarLugarMedico(JSONObject object)
     {
         try{
             id= (object.getString("ID_LUGAR"));
@@ -35,5 +36,6 @@ public class ListadoAsignarLugarMedico {
         return nombreLugarMedico;
 
     }
+
 
 }
