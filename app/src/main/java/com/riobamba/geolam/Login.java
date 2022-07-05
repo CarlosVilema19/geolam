@@ -1,8 +1,9 @@
 package com.riobamba.geolam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,27 +15,16 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.DatosOpinion;
-import com.riobamba.geolam.modelo.ListadoLugar;
-import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
-import com.riobamba.geolam.modelo.ListadoLugarAdmin;
-import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
-    Button btnLogin, btnRecuperar;
+    Button btnLogin, btnRecuperar, btnRegistro, btnAdmin;
 
 
 
@@ -42,22 +32,32 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         edtUsuario = findViewById(R.id.edusuario);
         edtPassword = findViewById(R.id.edcontrasenia);
         btnLogin = findViewById(R.id.btniniciosesion);
+        btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
+        btnRegistro = findViewById(R.id.btnRegistroUsu);
+        btnAdmin = findViewById(R.id.btnAdmin);
+
         btnLogin.setOnClickListener(view -> {
             validarUsuario();
         });
-        btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
 
-        btnRecuperar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, RecuperacionContrasenia.class);
-                startActivity(intent);
-            }
+        btnRecuperar.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, RecuperacionContrasenia.class);
+            startActivity(intent);
         });
 
+        btnRegistro.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, registrar.class);
+            startActivity(intent);
+        });
+
+        btnAdmin.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, InicioAdmin.class);
+            startActivity(intent);
+        });
 
     }
 
@@ -73,8 +73,9 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
                 }
                 else{if (!response.isEmpty()){
-
-                        Intent intent = new Intent(Login.this,Inicio.class);
+                    guardarEstadoButton();
+                    guardarEmail(edtUsuario.getText().toString());
+                    Intent intent = new Intent(Login.this,Inicio.class);
                         startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
@@ -87,6 +88,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", edtUsuario.getText().toString());
                 parametros.put("contrasenia", edtPassword.getText().toString());
+
                 return parametros;
             }
         };
@@ -94,10 +96,26 @@ public class Login extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void moveToRegistro(View view) {
-        startActivity(new Intent(getApplicationContext(), registrar.class));
-        finish();
+    public void guardarEstadoButton()
+    {
+        SharedPreferences preferences = getSharedPreferences("omitir_log",Context.MODE_PRIVATE);
+        boolean estado = true;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("estado_inicio",estado);
+        editor.commit();
+
     }
+
+    public void guardarEmail(String email)
+    {
+        //SharedPreferences = getSharedPreferences("email", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("correo_email",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("estado_correo", email);
+        editor.commit();
+
+    }
+
 
 
 }

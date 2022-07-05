@@ -21,6 +21,7 @@ import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -48,7 +49,9 @@ public class Listado extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         lugarList = new ArrayList<>();
-        //Inicio inicio = (Inicio) getIntent().getSerializableExtra("Inicio");
+
+        Toolbar toolbar = new Toolbar();
+        toolbar.show(this, "Geolam", true);
 
         MostrarResultado();
     }
@@ -90,7 +93,6 @@ public class Listado extends AppCompatActivity {
     {
         Intent intent = new Intent(this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
-       // intent.putExtra("ListadoLugar2", (Parcelable) inicio);
         startActivity(intent);
     }
 }

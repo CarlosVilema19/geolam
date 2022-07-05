@@ -11,6 +11,9 @@
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
     tools:context=".ListadoCrud">
 
 
@@ -51,6 +54,9 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:focusable="true"
                 android:backgroundTint="#00FFFFFF"
                 app:srcCompat="@drawable/ic_baseline_system_update_alt_24" />
 
@@ -59,6 +65,9 @@
                 android:layout_width="30dp"
                 android:layout_height="28dp"
                 android:layout_margin="5dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:focusable="true"
                 android:backgroundTint="#75FFFFFF"
                 app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 

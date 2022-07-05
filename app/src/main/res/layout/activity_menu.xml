@@ -1,24 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Menu"
     android:id="@+id/menu">
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        layout="@layout/activity_menu_toolbar"/>
+    <include layout="@layout/activity_menu_toolbar" />
+    <include layout="@layout/activity_toolbar_infe" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/iMenuInfe"
+        android:layout_below="@+id/iMenuSupe"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_start_color"
+            android:orientation="horizontal">
 
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationViewer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:menu="@menu/menu"
-        app:headerLayout="@layout/activity_menu_encabezado"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true" />
-</androidx.drawerlayout.widget.DrawerLayout>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:foregroundTint="#00FFFFFF"
+                android:src="@mipmap/ic_launcher_foreground" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="GEOLAM"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RIOBAMBA" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Lugares de atención médica"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInicioMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_home_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Inicio"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMisDatosMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_account_circle_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Mis datos"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAcercaAppMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_info_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Acerca de la app"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCerrarSesionMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_power_settings_new_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Cerrar sesión"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSalirMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Salir"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -3,15 +3,13 @@ package com.riobamba.geolam;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -23,12 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.DatosOpinion;
-import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.WebService;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +32,6 @@ public class IngresoOpinion extends AppCompatActivity {
     Button btnEnviarOpinion;
     RatingBar calficacionLugar;
     String email;
-    DatosOpinion datosOpinion;
     Login log;
 
 
@@ -64,8 +58,11 @@ public class IngresoOpinion extends AppCompatActivity {
 
     private void insertarOpinion(ListadoLugarUsuario listadoLugarUsuario) {
 
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
         String idLugar = listadoLugarUsuario.getIdLugar().toString();
-        String email = "carlos.vilema21@gmail.com";
+
         String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:orientation="vertical"
     tools:context=".Inicio">
 
+    <include layout="@layout/activity_menu_toolbar" />
+    <include layout="@layout/activity_toolbar_infe" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/iMenuSupe"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -24,8 +28,11 @@
     </androidx.cardview.widget.CardView>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/cardView"
+        android:layout_above="@+id/iMenuInfe"
         >
 
         <LinearLayout
@@ -37,29 +44,34 @@
                 android:id="@+id/btnlugarescercanos"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                app:cornerRadius="10dp"
-                android:text="@string/lugares_cercanos_inicio" />
+                android:text="@string/lugares_cercanos_inicio"
+                app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnespecialidades"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                app:cornerRadius="10dp"
-                android:text="@string/especialidades_inicio" />
+                android:text="@string/especialidades_inicio"
+                app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnlugaresmedicos"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="2dp"
-                app:cornerRadius="10dp"
-                android:text="@string/lugares_medicos_inicio" />
+                android:text="@string/lugares_medicos_inicio"
+                app:cornerRadius="10dp" />
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
+                android:text="Cerrar Sesion"
+                app:cornerRadius="10dp" />
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+
+</RelativeLayout>
