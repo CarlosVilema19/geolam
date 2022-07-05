@@ -47,6 +47,15 @@
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnActualizarLugar"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:text="Actualizar Lugar de atención médica"
+                app:cornerRadius="10dp"
+                android:visibility="invisible"
+                />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEspecialidad"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"

@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class GestionLugares extends AppCompatActivity {
-    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico, btnAsignarMedico, btnAsignarEspecialidades;
+    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico, btnAsignarMedico, btnAsignarEspecialidades,
+            btnActualizarLugarMedico;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class GestionLugares extends AppCompatActivity {
         btnLugares=findViewById(R.id.btnLugares);
         btnAsignarMedico=findViewById(R.id.btnAsignarMedico);
         btnAsignarEspecialidades=findViewById(R.id.btnAsignarEspecialidad);
-
+        btnActualizarLugarMedico=findViewById(R.id.btnActualizarLugar);
         btnTipologia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +30,15 @@ public class GestionLugares extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnActualizarLugarMedico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GestionLugares.this, actualizar_lugar_medico.class);
+                startActivity(intent);
+            }
+        });
+
         btnAsignarMedico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

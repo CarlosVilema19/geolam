@@ -93,6 +93,21 @@
                         app:iconTint="#FFFFFF"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/TextViewIDLugar_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="2sp"
+                    android:hint="ID"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+
+                    />
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
