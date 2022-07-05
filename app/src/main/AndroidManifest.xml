@@ -74,9 +74,6 @@
             android:name=".IngresoTipologia"
             android:exported="false" />
         <activity
-            android:name=".GestionUsuarios"
-            android:exported="false" />
-        <activity
             android:name=".GestionLugares"
             android:exported="false" />
         <activity

@@ -29,7 +29,8 @@ public class Bienvenida extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent inicio = new Intent(getApplicationContext(),Inicio.class);
+              //  Intent inicio = new Intent(getApplicationContext(),Inicio.class);
+                Intent inicio = new Intent(getApplicationContext(),Listado.class);
                 startActivity(inicio);
                 finish();
             }

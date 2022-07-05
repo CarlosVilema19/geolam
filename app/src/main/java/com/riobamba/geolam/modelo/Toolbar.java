@@ -6,16 +6,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.riobamba.geolam.Inicio;
+import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.ListadoEspecialidad;
 import com.riobamba.geolam.R;
 
 import java.util.Objects;
 
 public class Toolbar extends AppCompatActivity{
+
+    public Class<Listado> inicioClass = Listado.class;
+    public Class<ConexionMapa> conexionMapaClass = ConexionMapa.class;
+    public Class<ListadoEspecialidad> listadoEspecialidadClass = ListadoEspecialidad.class;
+    public Context ctx;
+
+    public void getContexto(Context ctx)
+    {
+        this.ctx = ctx;
+    }
 
     public void show(AppCompatActivity activities,String titulo , Boolean flechaRegreso )
     {
@@ -31,5 +41,11 @@ public class Toolbar extends AppCompatActivity{
             Toast.makeText(ctx, "Inicio", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    public Intent retornarInicio() {return new Intent(ctx, inicioClass);}
+    public Intent retornarMapa() {return new Intent(ctx, conexionMapaClass);}
+    public Intent retornarEspecialidad() {return new Intent(ctx, listadoEspecialidadClass);}
+
 
 }
