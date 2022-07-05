@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.ListadoOpinion;
 import com.riobamba.geolam.modelo.ListadoOpinionAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -39,7 +41,6 @@ public class OpinionListado extends AppCompatActivity {
     //Declarar la lista y el recycler view
     List<ListadoOpinion> opinionList;
     RecyclerView recyclerView;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

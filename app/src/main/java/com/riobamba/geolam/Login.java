@@ -75,8 +75,10 @@ public class Login extends AppCompatActivity {
                 else{if (!response.isEmpty()){
                     guardarEstadoButton();
                     guardarEmail(edtUsuario.getText().toString());
-                    Intent intent = new Intent(Login.this,Inicio.class);
-                        startActivity(intent);
+                   // Intent intent = new Intent(Login.this,Inicio.class);
+                    Intent intent = new Intent(Login.this,Listado.class);
+
+                    startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
                 }}

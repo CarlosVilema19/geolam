@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +22,7 @@ import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
 import com.riobamba.geolam.modelo.LugarMapaAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -37,6 +39,8 @@ public class LugarMapa extends AppCompatActivity {
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class LugarMapa extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         lugarList = new ArrayList<>();
+
+        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         MostrarResultado();
     }
@@ -90,6 +96,23 @@ public class LugarMapa extends AppCompatActivity {
         Intent intent = new Intent(this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);
+    }
+
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 }
 

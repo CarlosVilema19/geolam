@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class IngresoOpinion extends AppCompatActivity {
     RatingBar calficacionLugar;
     String email;
     Login log;
-
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class IngresoOpinion extends AppCompatActivity {
         ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
         //DatosOpinion datosOpinion = (DatosOpinion) getIntent().getSerializableExtra("ListadoLugar");
         //ListarLugarUsuario listarLugarUsuario = (ListarLugarUsuario) getIntent().getSerializableExtra("ListadoLugar2");
+
+        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnEnviarOpinion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,6 +93,23 @@ public class IngresoOpinion extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 
     @Override

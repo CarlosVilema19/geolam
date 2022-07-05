@@ -20,14 +20,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.navigation.NavigationView;
 import com.riobamba.geolam.modelo.ConexionMapa;
-import com.riobamba.geolam.modelo.ListadoLugar;
-import com.riobamba.geolam.modelo.ListadoLugarAdmin;
-import com.riobamba.geolam.modelo.ListadoMapa;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class Inicio extends AppCompatActivity {
     Button btnlugarmedico, btnListadoLugar, btnEspecialidades, btnCerrar;
-
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     public static final Integer btnListadoMapa = R.layout.activity_listado_card;
     @Override
@@ -39,10 +36,7 @@ public class Inicio extends AppCompatActivity {
         btnEspecialidades = findViewById(R.id.btnespecialidades);
         btnCerrar = findViewById(R.id.btnCerrarSesion);
 
-        //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-        Toolbar toolbar = new Toolbar();
-        toolbar.show(this, "Geolam", false);
-
+        toolbar.show(this, "Geolam", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnlugarmedico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +82,13 @@ public class Inicio extends AppCompatActivity {
     //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toolbar toolbar = new Toolbar();
         toolbar.ejecutarItemSelected(this,item);
+        if(item.getItemId()==R.id.iCerrarSesion)
+        {
+            guardarEstadoButton();
+            Intent intent = new Intent(Inicio.this, Login.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -104,31 +103,21 @@ public class Inicio extends AppCompatActivity {
         editor.commit();
 
     }
-
-    public void moverInicio(View view)
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
     {
-        Intent intent = new Intent(this,Inicio.class);
-        startActivity(intent);
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
     }
-    public void moverMapa(View view)
+    public void moverMapa(View view)    //dirige al mapa
     {
-        Intent intent = new Intent(this,ConexionMapa.class);
-        startActivity(intent);
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
     }
-    public void moverEspe(View view)
+    public void moverEspe(View view)    //dirige a la especialidad
     {
-        Intent intent = new Intent(this,ListadoEspecialidad.class);
-        startActivity(intent);
-    }
-    public void moverMenu(View view)
-    {
-        Intent intent = new Intent(this,Menu.class);
-        startActivity(intent);
-    }
-    public void moverRegreso(View view)
-    {
-        Intent intent = new Intent(this,InicioAdmin.class);
-        startActivity(intent);
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 
 

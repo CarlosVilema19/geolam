@@ -32,4 +32,5 @@ public class WebService {
     public static final  String servicioListarOpinion = "listar_opinion.php";
     public static final  String servicioEliminarOpinion = "eliminar_opinion.php";
     public static final  String servicioIDMedico = "id_medico.php";
+    public static final  String servicioListarMedicoUsu = "listar_medico_usu.php";
 }
