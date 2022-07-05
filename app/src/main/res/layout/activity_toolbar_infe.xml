@@ -69,6 +69,8 @@
                 android:onClick="moverEspe"
                 android:text="Especialidades"
                 android:textAllCaps="false"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
 

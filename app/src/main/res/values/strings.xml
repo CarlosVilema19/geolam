@@ -48,8 +48,8 @@
     <string name="ConexionMapa">Conexión Mapa</string>
     //MEDICO
     <string name="medico">Médico</string>
-    <string name="nombre_medico">Nombre</string>
-    <string name="apellido_medico">Apellido</string>
+    <string name="nombre_medico">Nombres</string>
+    <string name="apellido_medico">Apellidos</string>
     <string name="lugar_de_trabajo">Lugar de trabajo</string>
     <string name="especialidad_medico">Especialidad</string>
     <string name="descripcion_medico">Descripción</string>
