@@ -55,11 +55,10 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
         txtBuscar = findViewById(R.id.svBuscar);
         myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
 
-
+        txtBuscar.setOnQueryTextListener(this);
         //llamar al mostrar resultado
         MostrarResultado();
 
-        txtBuscar.setOnQueryTextListener(this);
 
 
     }
@@ -68,8 +67,10 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
     {
         //URL del web service
         String url = WebService.urlRaiz + WebService.servicioListarMedico;
+     //lugarList.clear();
+
         //Metodo String Request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -84,7 +85,7 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
                                         obj.getInt("id_medico")
                                 ));
                             }
-                            ListadoMedicoAdaptador myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
+                            myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -106,6 +107,7 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
         return false;
     }
 
@@ -113,7 +115,7 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
     public boolean onQueryTextChange(String newText) {
 
         myadapter.filtrado(newText);
-        recyclerView.setAdapter(myadapter);
+      // recyclerView.setAdapter(myadapter);
         return false;
     }
 }

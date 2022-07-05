@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
         <activity
+            android:name=".actualizar_lugar_medico"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
