@@ -9,6 +9,9 @@
     android:orientation="vertical"
     app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
     app:cardUseCompatPadding="true">
 
 
@@ -69,6 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:paddingRight="2dp"
                         android:text="@string/nombre_lugar_listado"
                         android:textSize="18sp" />
@@ -82,6 +87,8 @@
                             android:id="@+id/tvDireccionLista"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="@string/direccion_listado"
                             android:textSize="12sp" />
                     </LinearLayout>

@@ -3,15 +3,13 @@ package com.riobamba.geolam;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -23,12 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.DatosOpinion;
-import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +33,8 @@ public class IngresoOpinion extends AppCompatActivity {
     Button btnEnviarOpinion;
     RatingBar calficacionLugar;
     String email;
-    DatosOpinion datosOpinion;
     Login log;
-
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,8 @@ public class IngresoOpinion extends AppCompatActivity {
         //DatosOpinion datosOpinion = (DatosOpinion) getIntent().getSerializableExtra("ListadoLugar");
         //ListarLugarUsuario listarLugarUsuario = (ListarLugarUsuario) getIntent().getSerializableExtra("ListadoLugar2");
 
+        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
         btnEnviarOpinion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 insertarOpinion(listadoLugarUsuario);
@@ -64,8 +61,11 @@ public class IngresoOpinion extends AppCompatActivity {
 
     private void insertarOpinion(ListadoLugarUsuario listadoLugarUsuario) {
 
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
         String idLugar = listadoLugarUsuario.getIdLugar().toString();
-        String email = "carlos.vilema21@gmail.com";
+
         String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -93,6 +93,23 @@ public class IngresoOpinion extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 
     @Override

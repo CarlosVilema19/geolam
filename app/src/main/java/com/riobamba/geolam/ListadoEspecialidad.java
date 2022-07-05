@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -38,6 +42,8 @@ public class ListadoEspecialidad extends AppCompatActivity {
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
     ListadoEspecialidadAdaptador adaptador;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,9 @@ public class ListadoEspecialidad extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
         //llamar al mostrar resultado
+        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
+
         MostrarResultado();
     }
 
@@ -56,6 +65,11 @@ public class ListadoEspecialidad extends AppCompatActivity {
     {
         //URL del web service
         String url = WebService.urlRaiz + WebService.servicioListarEspecialidad;
+
+        //asignar el id_lugar guardado
+        SharedPreferences preferences = getSharedPreferences("id_lugar_med", Context.MODE_PRIVATE);
+        String id_lugar = preferences.getString("estado_id","");
+
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -88,9 +102,17 @@ public class ListadoEspecialidad extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", id_lugar);
+                return parametros;
+            }
+        };
 
-        Volley.newRequestQueue(this).add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
     }
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
@@ -98,5 +120,22 @@ public class ListadoEspecialidad extends AppCompatActivity {
         Intent intent = new Intent(this,LugarMapa.class);
         intent.putExtra("ListadoLugarAdmin",item);
         startActivity(intent);
+    }
+
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 }

@@ -1,12 +1,9 @@
 package com.riobamba.geolam.modelo;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,33 +14,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.riobamba.geolam.GestionUsuarios;
-import com.riobamba.geolam.InicioAdmin;
-import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
-
-import java.util.List;
 
 public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
-    Double latitud, longitud;
-    String nombreLugar, direccionLugar;
-    //private final List<ListadoMapa> mapaList;
-    //private final Context mCtx;
-
-
-    /*public ConexionMapa(Context mCtx,List<ListadoMapa> mapaList) {
-
-        this.mapaList = mapaList;
-        this.mCtx = mCtx;
-
-    }*/
-
-    public static final Integer btnListadoMapa = R.layout.activity_listado_card;
 
 
     @Override
@@ -57,6 +35,8 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
+
+
 
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {

@@ -9,7 +9,10 @@
     android:orientation="vertical"
     app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
-    app:cardUseCompatPadding="true">
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,6 +71,8 @@
                         android:layout_gravity="center"
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="@string/nombre_lugar_listado"
                         android:textAlignment="center"
                         android:textSize="18sp" />
@@ -81,13 +86,14 @@
                             android:id="@+id/imageView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_baseline_add_location_24"
-                             />
+                            app:srcCompat="@drawable/ic_baseline_add_location_24" />
 
                         <TextView
                             android:id="@+id/tvDireccionLista"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_gravity="center"
                             android:layout_marginStart="2dp"
                             android:text="@string/direccion_listado"
@@ -104,15 +110,14 @@
                             android:id="@+id/imageView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_baseline_phone_24"
-                            />
+                            app:srcCompat="@drawable/ic_baseline_phone_24" />
 
                         <TextView
                             android:id="@+id/tvTelefonoLista"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="2dp"
                             android:layout_gravity="center"
+                            android:layout_marginStart="2dp"
                             android:text="Telefono"
                             android:textSize="12sp" />
 
