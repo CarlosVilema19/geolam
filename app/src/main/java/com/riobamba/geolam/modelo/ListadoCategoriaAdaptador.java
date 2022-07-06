@@ -76,21 +76,11 @@ public ListadoCategoriaAdaptador(@NonNull Context context){
         if(view==null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_view, parent, false);
 
-            TextView item_text = view.findViewById(R.id.viewItem);
+            TextView tvCat = view.findViewById(R.id.viewItem);
             ListadoCategoria listCate = getItem(position);
-            item_text.setText(listCate.toString());
-           /* String data = listCate.toString();
-            String[] split = data.split("-");
-            String descrip=null;
-            String descrip2=null;
-            for (int i=0; i<split.length; i++) {
-                //System.out.println(split[i]);
-                descrip2= split[0];
-                descrip= split[1];
-                //Toast.makeText(getApplicationContext(), "Item: " + split[i], Toast.LENGTH_SHORT).show();
-            }
-            item_text.setText(descrip);
-*/
+            tvCat.setText(listCate.toString());
+
+
         }
 
         return view;
