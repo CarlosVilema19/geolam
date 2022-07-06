@@ -20,7 +20,7 @@ public ListadoCategoria(JSONObject object)
 {
     try{
         id= (object.getString("ID_CATEGORIA"));
-        descripcion= (object.getString("DESCRIPCION_CATEGORIA"));
+        descripcion= (object.getString("DESCRIPCION_CATEGORIA").toUpperCase());
     }catch(Exception e){
 
         e.printStackTrace();

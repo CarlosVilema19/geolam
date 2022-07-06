@@ -148,7 +148,7 @@
                     >
 
                     <AutoCompleteTextView
-                        android:id="@+id/autoTipologia"
+                        android:id="@+id/autoTipologia2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
@@ -158,7 +158,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/TextViewIDTipologia"
+                    android:id="@+id/TextViewIDTipologia2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -167,11 +167,11 @@
                     android:layout_marginBottom="1sp"
                     android:hint="item"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="1sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
 
 
-                    android:visibility="invisible" />
+                     />
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -188,7 +188,7 @@
                     >
 
                     <AutoCompleteTextView
-                        android:id="@+id/autoCat"
+                        android:id="@+id/autoCat2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
@@ -196,7 +196,7 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:id="@+id/TextViewIDCategoria"
+                    android:id="@+id/TextViewIDCategoria2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -205,9 +205,9 @@
                     android:layout_marginBottom="1sp"
                     android:hint="item"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="1sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
-                    android:visibility="invisible"
+
 
                     />
 

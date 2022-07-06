@@ -115,8 +115,8 @@ public class IngresoLugarMedico extends AppCompatActivity {
                             ListadoTipologia tipo=new ListadoTipologia(object);
                             //Carga de datos
                             adaptadorTipo.add(tipo);
-                            listIDCat = ( object2.getString("ID_TIPOLOGIA_LUGAR"));
-                            opcionesTipologia.add(listIDCat);
+                            listIDTipo = ( object2.getString("ID_TIPOLOGIA_LUGAR"));
+                            opcionesTipologia.add(listIDTipo);
                            // String descripcionTipo=object.getString("DESCRIPCION_TIPO_LUGAR"); //jsonArray.getString();
                            // String IDTipo=object.getString("DESCRIPCION_TIPO_LUGAR");
                             //adaptadorTipo.add(descripcionTipo);
