@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.riobamba.geolam.EspecialidadListadoUsuario;
 import com.riobamba.geolam.Inicio;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.ListadoEspecialidad;
@@ -19,7 +20,7 @@ public class Toolbar extends AppCompatActivity{
 
     public Class<Listado> inicioClass = Listado.class;
     public Class<ConexionMapa> conexionMapaClass = ConexionMapa.class;
-    public Class<ListadoEspecialidad> listadoEspecialidadClass = ListadoEspecialidad.class;
+    public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
     public Context ctx;
 
     public void getContexto(Context ctx)

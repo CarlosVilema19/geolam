@@ -42,7 +42,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnVerAgregados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoEspecialidad.this, ListadoEspecialidad.class);
+                Intent intent = new Intent(IngresoEspecialidad.this, EspecialidadListadoAdmin.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
 
     private void insertarEspecialidad() {
         String url = WebService.urlRaiz + WebService.servicioAgregarEspecialidad;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
