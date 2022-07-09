@@ -35,4 +35,6 @@ public class WebService {
     public static final  String servicioObtenerDatosLugarMedico= "obtener_lugar_medico.php";
     public static final  String servicioListarMedicoUsu = "listar_medico_usu.php";
     public static final  String servicioActualizarLugar = "actualizar_lugar.php";
+    public static final  String servicioOlvideLaContrasenia ="olvide_la_contrasenia.php";
+
 }
