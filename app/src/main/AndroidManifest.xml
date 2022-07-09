@@ -121,6 +121,12 @@
             android:name=".Menu"
             android:exported="true" />
         <activity
+            android:name=".EspecialidadListadoUsuario"
+            android:exported="true" />
+        <activity
+            android:name=".EspecialidadListadoAdmin"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
