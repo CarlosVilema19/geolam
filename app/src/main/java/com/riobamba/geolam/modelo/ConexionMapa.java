@@ -1,12 +1,21 @@
 package com.riobamba.geolam.modelo;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,28 +24,36 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.riobamba.geolam.LugarMapa;
+import com.riobamba.geolam.OpinionListado;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
-
+    List<ListadoMapa> mapaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //llamada a la funcion para obtener las coordenadas
+        mapaList = new ArrayList<>();
+        obtenerCoordenadas();
 
         binding = ActivityMapaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
-
-
 
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
@@ -61,17 +78,55 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        //ListadoMapa listadoMapa = mapaList.get(0);
-
-        // Add a marker in Sydney and move the camera
-        /*LatLng riobamba = new LatLng(listadoMapa.getLatitud(), listadoMapa.getLongitud());
-        mMap.addMarker(new MarkerOptions().position(riobamba).title(listadoMapa.getNombreLugar()).snippet(listadoMapa.getDireccionLugar()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-*/
-        LatLng metropolitana = new LatLng(-1.66872,  -78.6488);
-        mMap.addMarker(new MarkerOptions().position(metropolitana).title("Hospital General Clinica Metroplitana").snippet("Junín entre España & García Moreno").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        Integer i = 0;
+        Float latitud, longitud;
+        String nombreLugar, direccionLugar;
+        LatLng riobamba = new LatLng( -1.67435, -78.6483);
+        mMap.addMarker(new MarkerOptions().position(riobamba).title("Riobamba").snippet("Riobamba").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(metropolitana,14));
+        for (i = 0; i<5;i++)
+        {
+            latitud = mapaList.get(i).getLatitud();
+            longitud = mapaList.get(i).getLongitud();
+            nombreLugar = mapaList.get(i).getNombreLugar();
+            direccionLugar = mapaList.get(i).getDireccionLugar();
+
+            LatLng metropolitana = new LatLng(latitud, longitud);
+            mMap.addMarker(new MarkerOptions().position(metropolitana).title(nombreLugar).snippet(direccionLugar).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(riobamba, 14));
     }
+
+    public void obtenerCoordenadas()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                response -> {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject obj = array.getJSONObject(i);
+                            mapaList.add(new ListadoMapa(
+                                    (float) obj.getDouble("latitud"),
+                                    (float) obj.getDouble("longitud"),
+                                    obj.getString("nombre_lugar"),
+                                    obj.getString("direccion")
+                            ));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+
+                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+
 }

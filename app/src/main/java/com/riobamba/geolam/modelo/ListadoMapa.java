@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class ListadoMapa implements Serializable {
 
-    Double latitud, longitud;
+    Float latitud, longitud;
     String nombreLugar, direccionLugar;
 
-    public ListadoMapa(Double latitud, Double longitud, String nombreLugar, String direccionLugar) {
+    public ListadoMapa(Float latitud, Float longitud, String nombreLugar, String direccionLugar) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
     }
 
-    public Double getLatitud() {
+    public Float getLatitud() {
         return latitud;
     }
 
-    public Double getLongitud() {
+    public Float getLongitud() {
         return longitud;
     }
 

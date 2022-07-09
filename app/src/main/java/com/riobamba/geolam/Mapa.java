@@ -1,21 +1,13 @@
 package com.riobamba.geolam;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.PostProcessor;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -29,20 +21,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Mapa extends AppCompatActivity {
     //Declarar la lista y el recycler view
     List<ListadoMapa> mapaList;
     ConexionMapa adaptador;
+    RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
-
+        recyclerView = findViewById(R.id.rvListado);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mapaList = new ArrayList<>();
         //llamar al mostrar resultado
         MostrarResultado();
     }
@@ -63,8 +57,8 @@ public class Mapa extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 mapaList.add(new ListadoMapa(
-                                        obj.getDouble("latitud"),
-                                        obj.getDouble("longitud"),
+                                        (float)obj.getDouble("latitud"),
+                                        (float)obj.getDouble("longitud"),
                                         obj.getString("nombre_lugar"),
                                         obj.getString("direccion")
                                 ));
