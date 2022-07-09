@@ -73,7 +73,7 @@ public class OpinionListado extends AppCompatActivity {
                                         obj.getString("comentario"),
                                         obj.getString("imagen"),
                                         obj.getInt("id_opinion"),
-                                        (float) obj.getInt("calificacion")
+                                        (float) obj.getDouble("calificacion")
                                 ));
                             }
                             ListadoOpinionAdaptador myadapter = new ListadoOpinionAdaptador(OpinionListado.this, opinionList,
