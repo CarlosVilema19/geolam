@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     android:padding="10dp"
     tools:context=".Login">
 
@@ -21,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/iniciar_sesion"
             android:textColor="#616161"
             android:textSize="15sp"
@@ -60,6 +62,7 @@
                 android:layout_marginTop="15dp"
                 android:gravity="left"
                 android:hint="@string/email_usuario"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -76,7 +79,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="25dp"
             android:gravity="center_horizontal"
-            app:endIconMode="password_toggle"
+            app:passwordToggleEnabled="true"
 >
 
 
@@ -85,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-
+                android:singleLine="true"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
                 android:hint="@string/contrasenia"
                 android:inputType="textPassword"
@@ -156,4 +159,6 @@
         android:text="Iniciar como administrador"
         android:textColor="@color/black"
         android:textSize="10sp" />
+
+
 </RelativeLayout>
