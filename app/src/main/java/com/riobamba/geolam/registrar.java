@@ -32,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.common.hash.Hashing;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -472,7 +474,7 @@ public class registrar extends AppCompatActivity {
                 parametros.put("apellido_usuario", txtApe.getText().toString().trim());
                 parametros.put("edad", txtEdad.getText().toString().trim());
                 parametros.put("sexo", txtSexo.getText().toString());
-                parametros.put("contrasenia", pass.getText().toString().trim());
+                parametros.put("contrasenia", getSHA256(pass.getText().toString().trim()));
 
                 //Imagen
 
@@ -491,6 +493,9 @@ public class registrar extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    public String getSHA256(String data) {
+        return Hashing.sha256().hashString(data, StandardCharsets.UTF_8).toString();
+    }
     public void showFileChooser() {
 
 
