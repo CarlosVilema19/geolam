@@ -22,13 +22,19 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
 import com.riobamba.geolam.modelo.WebService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
-    TextInputLayout edPass;
+    TextInputLayout errorPass, errorEmail;
     Button btnLogin, btnRecuperar, btnRegistro, btnAdmin;
 
 
@@ -37,7 +43,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        edPass = findViewById(R.id.txcontrasenia);
+        errorPass = findViewById(R.id.txcontrasenia);
+        errorEmail=findViewById(R.id.txusuario);
         edtUsuario = findViewById(R.id.edusuario);
         edtPassword = findViewById(R.id.edcontrasenia);
         btnLogin = findViewById(R.id.btniniciosesion);
@@ -69,29 +76,59 @@ public class Login extends AppCompatActivity {
     private void validarUsuario(){
         if(validarCamposVacios()==1) {
             String url = WebService.urlRaiz + WebService.servicioValidarUsuario;
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    response ->
+                    {
+
+                        try {
+                            //JSONArray array = new JSONArray(response);
+                            //JSONObject object = array.toJSONObject(array);
+                            JSONObject object = new JSONObject( URLDecoder.decode( response, "UTF-8" ));
+                            String existencia = object.getString("valida");
+                            //Toast.makeText(getApplicationContext(), existencia, Toast.LENGTH_SHORT).show();
+                            if (existencia.equals("existe")) {
+
+                                Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
+                                guardarEstadoButton();
+                                guardarEmail(edtUsuario.getText().toString());
+                                // Intent intent = new Intent(Login.this,Inicio.class);
+                                Intent intent = new Intent(Login.this, Listado.class);
+                                startActivity(intent);
+                            } else {
+                                if (existencia.equals("administrador"))
+                                {
+                                    Toast.makeText(getApplicationContext(), "Inicie sesión como administrador", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    if(existencia.equals("error_contrasenia")){
+                                        //Toast.makeText(getApplicationContext(), "La contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                                        errorPass.setErrorIconDrawable(null);
+                                        errorPass.setError("La contraseña es incorrecta");
+                                        edtPassword.requestFocus();
+                                    }
+                                    else{
+                                        if(existencia.equals("no_hay_registro")){
+                                            Toast.makeText(getApplicationContext(), "Usuario no registrado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                            }
+                        } catch (JSONException | UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    },error ->{
 
 
-                    if (!response.isEmpty()) {
-                        guardarEstadoButton();
-                        guardarEmail(edtUsuario.getText().toString());
-                        // Intent intent = new Intent(Login.this,Inicio.class);
-                        Intent intent = new Intent(Login.this, Listado.class);
+                    })
 
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
-                    }
 
-                }
-            }, error -> Toast.makeText(Login.this, error.toString(), Toast.LENGTH_LONG).show()) {
+           {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("email", edtUsuario.getText().toString());
-                    parametros.put("contrasenia", getSHA256(edtPassword.getText().toString()));
+                    parametros.put("email",edtUsuario.getText().toString());
+                    parametros.put("contrasenia",getSHA256(edtPassword.getText().toString()));
 
                     return parametros;
                 }
@@ -99,29 +136,36 @@ public class Login extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         }
+
     }
 
     private int validarCamposVacios() {
+        errorEmail.setError(null);
+        errorPass.setError(null);
         int camposVacios=0;
         if (!edtUsuario.getText().toString().equals("") && !edtPassword.getText().toString().equals("")) {
             camposVacios=1;
         }
         else {
             if (edtUsuario.getText().toString().equals("") && edtPassword.getText().toString().equals("")) {
-                edtUsuario.setError("Ingrese un correo electrónico");
-                edtUsuario.requestFocus();
-                edPass.setError("Ingrese una contraseña9");
-                edtPassword.requestFocus();
+
+                //edtUsuario.setError("Ingrese un correo electrónico");
+                //edtUsuario.requestFocus();
+
+                errorEmail.setError("Ingrese un correo electrónico");
+                errorEmail.requestFocus();
+                errorPass.setErrorIconDrawable(null);
+                errorPass.setError("Ingrese una contraseña");
+                //errorPass.requestFocus();
             } else {
                 if (edtUsuario.getText().toString().equals("")) {
-
-                    edPass.setError("Ingrese un correo electrónico");
-                    edPass.requestFocus();
+                    errorEmail.setError("Ingrese un correo electrónico");
+                    errorEmail.requestFocus();
                 } else {
                     if (edtPassword.getText().toString().equals("")) {
-
-                        edtPassword.setError("Ingrese una contraseña");
-                        edtPassword.requestFocus();
+                        errorPass.setErrorIconDrawable(null);
+                        errorPass.setError("Ingrese una contraseña");
+                        errorPass.requestFocus();
                     }
                 }
             }
