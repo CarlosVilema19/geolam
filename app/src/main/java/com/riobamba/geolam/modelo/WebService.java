@@ -9,7 +9,8 @@ public class WebService {
     public static final  String servicioAgregarMedico = "agregar_medico.php";
     //public static final  String servicioInsertarLugar = "insertar_lugar.php";
     public static final  String servicioInsertarLugar = "insertar_lugar2.php";
-    public static final  String servicioValidarUsuario = "validar_usuario.php";
+    //public static final  String servicioValidarUsuario = "validar_usuario.php";
+    public static final  String servicioValidarUsuario = "validar_usuario2.php";
     public static final  String servicioInsertar = "insertar_.php";
     public static final  String servicioEliminarLugar = "eliminar_lugar.php";
     public static final  String servicioListarUsuariosAdmin = "listar_usuarios_admin.php";

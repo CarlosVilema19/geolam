@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.text.InputType;
+import android.text.Layout;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,13 +18,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.common.hash.Hashing;
 import com.riobamba.geolam.modelo.WebService;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
+    TextInputLayout edPass;
     Button btnLogin, btnRecuperar, btnRegistro, btnAdmin;
 
 
@@ -32,7 +37,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        edPass = findViewById(R.id.txcontrasenia);
         edtUsuario = findViewById(R.id.edusuario);
         edtPassword = findViewById(R.id.edcontrasenia);
         btnLogin = findViewById(R.id.btniniciosesion);
@@ -62,41 +67,68 @@ public class Login extends AppCompatActivity {
     }
 
     private void validarUsuario(){
-        String url = WebService.urlRaiz+WebService.servicioValidarUsuario;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(edtUsuario.getText().toString().equals("")){
-                    Toast.makeText(Login.this, "Ingrese un email", Toast.LENGTH_SHORT).show();
+        if(validarCamposVacios()==1) {
+            String url = WebService.urlRaiz + WebService.servicioValidarUsuario;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+
+                    if (!response.isEmpty()) {
+                        guardarEstadoButton();
+                        guardarEmail(edtUsuario.getText().toString());
+                        // Intent intent = new Intent(Login.this,Inicio.class);
+                        Intent intent = new Intent(Login.this, Listado.class);
+
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
+                    }
+
                 }
-                else if(edtPassword.getText().toString().equals("")){
-                    Toast.makeText(Login.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
+            }, error -> Toast.makeText(Login.this, error.toString(), Toast.LENGTH_LONG).show()) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("email", edtUsuario.getText().toString());
+                    parametros.put("contrasenia", getSHA256(edtPassword.getText().toString()));
+
+                    return parametros;
                 }
-                else{if (!response.isEmpty()){
-                    guardarEstadoButton();
-                    guardarEmail(edtUsuario.getText().toString());
-                   // Intent intent = new Intent(Login.this,Inicio.class);
-                    Intent intent = new Intent(Login.this,Listado.class);
-
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_LONG).show();
-                }}
-
-            }
-        }, error -> Toast.makeText(Login.this, error.toString(), Toast.LENGTH_LONG).show()){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("email", edtUsuario.getText().toString());
-                parametros.put("contrasenia", edtPassword.getText().toString());
-
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
     }
+
+    private int validarCamposVacios() {
+        int camposVacios=0;
+        if (!edtUsuario.getText().toString().equals("") && !edtPassword.getText().toString().equals("")) {
+            camposVacios=1;
+        }
+        else {
+            if (edtUsuario.getText().toString().equals("") && edtPassword.getText().toString().equals("")) {
+                edtUsuario.setError("Ingrese un correo electrónico");
+                edtUsuario.requestFocus();
+                edPass.setError("Ingrese una contraseña9");
+                edtPassword.requestFocus();
+            } else {
+                if (edtUsuario.getText().toString().equals("")) {
+
+                    edPass.setError("Ingrese un correo electrónico");
+                    edPass.requestFocus();
+                } else {
+                    if (edtPassword.getText().toString().equals("")) {
+
+                        edtPassword.setError("Ingrese una contraseña");
+                        edtPassword.requestFocus();
+                    }
+                }
+            }
+        }
+     return camposVacios;
+    }
+
 
     public void guardarEstadoButton()
     {
@@ -106,6 +138,10 @@ public class Login extends AppCompatActivity {
         editor.putBoolean("estado_inicio",estado);
         editor.commit();
 
+    }
+
+    public String getSHA256(String data) {
+        return Hashing.sha256().hashString(data, StandardCharsets.UTF_8).toString();
     }
 
     public void guardarEmail(String email)
