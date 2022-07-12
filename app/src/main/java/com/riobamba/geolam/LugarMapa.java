@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -59,6 +62,10 @@ public class LugarMapa extends AppCompatActivity {
     }
     public void MostrarResultado()
     {
+        /*SharedPreferences preferences = getSharedPreferences("distanciaMapa", Context.MODE_PRIVATE);
+        preferences.getString("distancia_mapa","50 Km" );*/
+
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = WebService.urlRaiz + WebService.servicioListarLugares;
 
@@ -74,7 +81,8 @@ public class LugarMapa extends AppCompatActivity {
                                     obj.getString("direccion"),
                                     obj.getString("telefono"),
                                     obj.getString("imagen_lugar"),
-                                    obj.getInt("id_lugar")
+                                    obj.getInt("id_lugar"),
+                                    "50 km"
                             ));
                         }
                         LugarMapaAdaptador myadapter = new LugarMapaAdaptador(LugarMapa.this, lugarList, item -> moveToDescription(item));

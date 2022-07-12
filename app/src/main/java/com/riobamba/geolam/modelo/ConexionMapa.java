@@ -6,8 +6,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -52,14 +54,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
    // private GoogleMap mMap;
     private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
     List<ListadoMapa> mapaList;
+
+
+
     Integer count;
 
     // Estado del Settings de verificación de permisos del GPS
@@ -212,35 +220,60 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor iconoPuntero = BitmapDescriptorFactory.fromResource(R.drawable.punterogeo);
         LatLng riobamba = new LatLng(-1.67435, -78.6483);
         LatLng coordenadas = new LatLng(lat, lng);//coordenadas de mi posicion
+        String distanciaString;
+        String[] distancias = new String[count];
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
-            if (marker != null) marker.remove();
-            marker = mMap.addMarker(new MarkerOptions()
+            //if (marker != null) marker.remove();
+            mMap.addMarker(new MarkerOptions()
                     .position(riobamba)
-                    .title("Riobamba")
-                    .icon(puntero));
+                    .title("Riobamba"));
 
             for (int i = 0; i < count; i++)
             {
+                Proceso proceso = new Proceso();
+
                 latitud = mapaList.get(i).getLatitud();
                 longitud = mapaList.get(i).getLongitud();
                 nombreLugar = mapaList.get(i).getNombreLugar();
                 direccionLugar = mapaList.get(i).getDireccionLugar();
 
+                DecimalFormat formato1 = new DecimalFormat("#.0");
+                String distancia = formato1.format(proceso.obtenerDistancia(lat, lng, latitud,longitud));
+
+                distanciaString = "Distancia: " + distancia + " " + "Km";
+
+
                 LatLng lugarMedico = new LatLng(latitud, longitud);
                 mMap.addMarker(new MarkerOptions()
                         .position(lugarMedico)
                         .title(nombreLugar)
-                        .snippet(direccionLugar)
+                        .snippet(distanciaString)
+                        .icon(puntero)
                         .icon(iconoPuntero));
+
+                //distancias[i] = Arrays.toString(new String[]{distanciaString});
             }
+            //guardarDistancia(distancias);//guardar las distancias de cada lugar
             CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
             mMap.animateCamera(miUbicacion);
         }
+    }
+
+    public void guardarDistancia(String[] distancia)
+    {
+        SharedPreferences preferences = getSharedPreferences("distanciaMapa", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        for(int i = 0; i <= count; i++)
+        {
+            editor.putString("distancia_mapa", distancia.toString());
+        }
+        editor.commit();
+
     }
 
     private void obtenerUltimaUbicacion() {

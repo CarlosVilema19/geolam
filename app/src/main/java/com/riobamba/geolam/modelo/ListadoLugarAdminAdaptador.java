@@ -19,6 +19,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     private final List<ListadoLugarAdmin> lugarList;
     final ListadoLugarAdminAdaptador.OnItemClickListener listener;
     final ListadoLugarAdminAdaptador.OnClickListener listener2;
+    final ListadoLugarAdminAdaptador.OnClickActListener listener3;
 
 
 
@@ -30,11 +31,16 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         void onClick(ListadoLugarAdmin button);
     }
 
-    public ListadoLugarAdminAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, OnItemClickListener listener, OnClickListener listener2){
+    public interface OnClickActListener{
+        void onClick(ListadoLugarAdmin button);
+    }
+
+    public ListadoLugarAdminAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, OnItemClickListener listener, OnClickListener listener2, OnClickActListener listener3){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
         this.listener2 = listener2;
+        this.listener3 = listener3;
     }
     View view1;
     public void viewEjem (View v)
@@ -46,6 +52,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         private final TextView nombreLugar;
         private final TextView idLugar;
         private final ImageButton btnBorrar;
+        private final ImageButton btnActualizar;
 
         public ViewHolder(View view) {
             super(view);
@@ -54,6 +61,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
             nombreLugar = view.findViewById(R.id.tvNombreLugarLista);
             idLugar = view.findViewById(R.id.tvId);
             btnBorrar = view.findViewById(R.id.ibBorrarLista);
+            btnActualizar = view.findViewById(R.id.ibActualizarLista);
         }
 
         /*public TextView getTextView() {
@@ -89,6 +97,13 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
             @Override
             public void onClick(View v) {
                 listener2.onClick(listadoLugar);
+            }
+        });
+
+        viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener3.onClick(listadoLugar);
             }
         });
     }

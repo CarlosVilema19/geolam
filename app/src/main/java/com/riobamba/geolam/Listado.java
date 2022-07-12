@@ -79,7 +79,8 @@ public class Listado extends AppCompatActivity {
                                     obj.getString("direccion"),
                                     obj.getString("telefono"),
                                     obj.getString("imagen_lugar"),
-                                    obj.getInt("id_lugar")
+                                    obj.getInt("id_lugar"),
+                                    ""
                             ));
                         }
                         ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, item -> moveToDescription(item));
