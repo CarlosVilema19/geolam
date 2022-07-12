@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.ListadoAsignarEspecialidad;
 import com.riobamba.geolam.modelo.ListadoAsignarEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedicoAdaptador;
@@ -40,17 +40,23 @@ public class AsignarEspecialidad extends AppCompatActivity {
     String idEspecialidad;
     String idLugarMedico;
 
-    String listIDEspecialidad;
-    String listIDLugarMedico;
+    String listIDEspecialidadID;
+    String listIDEspecialidadNombres;
+    String listIDLugarMedicoID;
+    String listIDLugarMedicoNombres;
     Button btnGuardarAsig;
 
     //Especialidades - Lugares Medicos
-    ArrayList<String> opcionesEspecialidad= new ArrayList<>();
-    ArrayList<String> opcionesLugaresMedicos= new ArrayList<>();
+    ArrayList<String> opcionesEspecialidadID = new ArrayList<>();
+    ArrayList<String> opcionesEspecialidadNombres = new ArrayList<>();
+    ArrayList<String> opcionesLugaresMedicosID = new ArrayList<>();
+    ArrayList<String> opcionesLugaresMedicosNombres = new ArrayList<>();
 
+    AutoCompleteTextView autoCompleteOpcionesEspecialidad;
+    AutoCompleteTextView autoCompleteOpcionesLugarMedico;
     //Autocomplete Especialidad, Lugar
-    private ListadoAsignarEspecialidadAdaptador adaptadorEspecialidad;
-    private ListadoAsignarLugarMedicoAdaptador adaptadorLugarMedico;
+   // private ListadoAsignarEspecialidadAdaptador adaptadorEspecialidad;
+   // private ListadoAsignarLugarMedicoAdaptador adaptadorLugarMedico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +68,18 @@ public class AsignarEspecialidad extends AppCompatActivity {
 
 
 
-        adaptadorEspecialidad = new ListadoAsignarEspecialidadAdaptador(this);
-        AutoCompleteTextView autoCompleteOpcionesEspecialidad = findViewById(R.id.autoEspecialidad2);
-        autoCompleteOpcionesEspecialidad.setAdapter(adaptadorEspecialidad);
+       // adaptadorEspecialidad = new ListadoAsignarEspecialidadAdaptador(this);
+        autoCompleteOpcionesEspecialidad = findViewById(R.id.autoEspecialidad2);
+        //autoCompleteOpcionesEspecialidad.setAdapter(adaptadorEspecialidad);
 
-        adaptadorLugarMedico = new ListadoAsignarLugarMedicoAdaptador(this);
-        AutoCompleteTextView autoCompleteOpcionesLugarMedico = findViewById(R.id.autoLugarMedico2);
-        autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
+        //adaptadorLugarMedico = new ListadoAsignarLugarMedicoAdaptador(this);
+        autoCompleteOpcionesLugarMedico = findViewById(R.id.autoLugarMedico2);
+        //autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
 
 
 
         //Conexión al Servidor- Consulta AutoComplete Especialidad
-        RequestQueue queue2 = Volley.newRequestQueue(this);
+
         String url2 = WebService.urlRaiz + WebService.servicioAsignarEspecialidad;
         StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url2,
 
@@ -87,11 +93,16 @@ public class AsignarEspecialidad extends AppCompatActivity {
 
                             JSONObject object = array.getJSONObject(i);
                             JSONObject object2 = array.getJSONObject(i);
-                            ListadoAsignarEspecialidad esp = new ListadoAsignarEspecialidad(object);
+                            //ListadoAsignarEspecialidad esp = new ListadoAsignarEspecialidad(object);
                             //Carga de datos
-                            adaptadorEspecialidad.add(esp);
-                            listIDEspecialidad = (object2.getString("ID_ESPECIALIDAD"));
-                            opcionesEspecialidad.add(listIDEspecialidad);
+                            //adaptadorEspecialidad.add(esp);
+                            listIDEspecialidadNombres = (object.getString("DESCRIPCION_ESPECIALIDAD"));
+                            opcionesEspecialidadNombres.add(listIDEspecialidadNombres);
+                            listIDEspecialidadID = (object2.getString("ID_ESPECIALIDAD"));
+                            opcionesEspecialidadID.add(listIDEspecialidadID);
+                            ArrayAdapter adapter;
+                            adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesEspecialidadNombres);
+                            autoCompleteOpcionesEspecialidad.setAdapter(adapter);
 
                         }
 
@@ -101,11 +112,8 @@ public class AsignarEspecialidad extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemTipo = parent.getItemAtPosition(position).toString();
 
-                                String c = opcionesEspecialidad.get(position);
-
+                                String c = opcionesEspecialidadID.get(position);
                                 idEspecialidad = c;
-
-
                                 retornaIdEspecialidad(idEspecialidad);
 
 
@@ -123,12 +131,13 @@ public class AsignarEspecialidad extends AppCompatActivity {
             Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
 
         });
+        RequestQueue queue2 = Volley.newRequestQueue(this);
         stringRequest2.setTag("REQUEST");
         queue2.add(stringRequest2);
 
 
         //Conexión al Servidor- Consulta AutoComplete Lugar Médico
-        RequestQueue queue3 = Volley.newRequestQueue(this);
+
         String url3 = WebService.urlRaiz + WebService.servicioAsignarLugarMedico;
         StringRequest stringRequest3 = new StringRequest(Request.Method.GET, url3,
 
@@ -140,13 +149,18 @@ public class AsignarEspecialidad extends AppCompatActivity {
                         JSONArray array = new JSONArray(response);
                         for (int i = 0; i < array.length(); i++) {
 
-                            JSONObject object = array.getJSONObject(i);
+                           // JSONObject object = array.getJSONObject(i);
                             JSONObject object2 = array.getJSONObject(i);
-                            ListadoAsignarLugarMedico lugarMedic = new ListadoAsignarLugarMedico(object);
+                            //ListadoAsignarLugarMedico lugarMedic = new ListadoAsignarLugarMedico(object);
                             //Carga de datos
-                            adaptadorLugarMedico.add(lugarMedic);
-                            listIDLugarMedico = (object2.getString("ID_LUGAR"));
-                            opcionesLugaresMedicos.add(listIDLugarMedico);
+                            //adaptadorLugarMedico.add(lugarMedic);
+                            listIDLugarMedicoID = (object2.getString("ID_LUGAR"));
+                            opcionesLugaresMedicosID.add(listIDLugarMedicoID);
+                            listIDLugarMedicoNombres = (object2.getString("NOMBRE_LUGAR"));
+                            opcionesLugaresMedicosNombres.add(listIDLugarMedicoNombres);
+                            ArrayAdapter adapter;
+                            adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesLugaresMedicosNombres);
+                            autoCompleteOpcionesLugarMedico.setAdapter(adapter);
 
                         }
 
@@ -156,7 +170,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemTipo = parent.getItemAtPosition(position).toString();
 
-                                String c = opcionesLugaresMedicos.get(position);
+                                String c = opcionesLugaresMedicosID.get(position);
 
                                 idLugarMedico = c;
 
@@ -178,6 +192,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
             Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
 
         });
+        RequestQueue queue3 = Volley.newRequestQueue(this);
         stringRequest3.setTag("REQUEST");
         queue3.add(stringRequest3);
 
@@ -195,6 +210,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
         CharSequence p=idLugarMedico;
         String p2=p.toString();
         tvIdLugarMedico.setText(p2);
+
         //Carga de datos
     }
 
@@ -205,6 +221,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
         //Carga de datos
     }
     private void insertarLugar() {
+
         String url = WebService.urlRaiz +WebService.servicioIngresarEspecialidadLugar;
         final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

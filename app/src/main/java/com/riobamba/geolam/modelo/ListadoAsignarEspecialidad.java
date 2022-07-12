@@ -7,10 +7,10 @@ public class ListadoAsignarEspecialidad {
         return id;
     }
 
-    public String getEspecialidad() {
+    /*public String getEspecialidad() {
         return especialidad;
     }
-
+*/
     String id;
     String especialidad;
 
@@ -18,7 +18,7 @@ public class ListadoAsignarEspecialidad {
     {
         try{
             id= (object.getString("ID_ESPECIALIDAD"));
-            especialidad= (object.getString("DESCRIPCION_ESPECIALIDAD").toUpperCase());
+            especialidad= (object.getString("DESCRIPCION_ESPECIALIDAD"));
 
         }catch(Exception e){
 
