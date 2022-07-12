@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,12 +13,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="2dp"
         app:cardUseCompatPadding="true"
         android:elevation="10dp"
         >
@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp"
             android:orientation="vertical"
-            android:paddingBottom="50dp">
+            android:paddingBottom="280dp">
 
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:text="Asignar Lugar | Especialidad"
                 android:layout_gravity="center_horizontal"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvAsignarLugarEspecialidad"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:hint="Lugar de atención médica"
 
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/autoLugarMedico2"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:hint="Especialidad"
 
@@ -107,10 +107,15 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/autoEspecialidad2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:inputType="none"
-                    android:maxLines="1"
+                    android:scrollbarDefaultDelayBeforeFade="50"
+                    android:scrollbarFadeDuration="50"
+
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
@@ -136,7 +141,7 @@
                 android:layout_below="@id/TextViewIDLugar"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="80dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="80dp"
                 android:layout_marginBottom="80dp"
                 android:text="@string/rec_guardar_informacion"
@@ -146,4 +151,4 @@
         </LinearLayout>
     </ScrollView>
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</RelativeLayout>

@@ -59,6 +59,7 @@ public class ListadoAsignarLugarMedicoAdaptador extends ArrayAdapter<ListadoAsig
         if(view==null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_view, parent, false);
 
+            //TextView item_text = view.findViewById(R.id.viewItem);
             TextView item_text = view.findViewById(R.id.viewItem);
             ListadoAsignarLugarMedico listAsigLugarMedico= getItem(position);
             item_text.setText(listAsigLugarMedico.toString());
