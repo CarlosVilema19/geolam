@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PostProcessor;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -80,6 +78,12 @@ public class ListadoCrud extends AppCompatActivity {
                                 public void onClick(ListadoLugarAdmin item) {
                                     mensajeConfirmacion(item);
                                 }
+                            }, new ListadoLugarAdminAdaptador.OnClickActListener() {
+
+                                @Override//llamada al método para borrar presionando sobre el botón
+                                public void onClick(ListadoLugarAdmin item) {
+                                    moveToActualizar(item);
+                                }
                             });
                             recyclerView.setAdapter(myadapter);
 
@@ -102,6 +106,13 @@ public class ListadoCrud extends AppCompatActivity {
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
         Intent intent = new Intent(this,LugarMedico.class);
+        intent.putExtra("ListadoLugarAdmin",item);
+        startActivity(intent);
+    }
+
+    public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
+    {
+        Intent intent = new Intent(this,actualizar_lugar_medico.class);
         intent.putExtra("ListadoLugarAdmin",item);
         startActivity(intent);
     }

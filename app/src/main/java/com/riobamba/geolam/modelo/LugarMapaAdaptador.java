@@ -46,6 +46,8 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
         private final TextView telefonoLugar;
         private final ImageView imagenLugar;
         private final TextView idLugar;
+        private final TextView distanciaLugar;
+
 
 
 
@@ -59,11 +61,8 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
             telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
             imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
             idLugar = view.findViewById(R.id.tvId);
+            distanciaLugar = view.findViewById(R.id.tvDistancia);
         }
-
-        /*public TextView getTextView() {
-            return textView;
-        }*/
     }
 
     // Create new views (invoked by the layout manager)
@@ -89,6 +88,8 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
+        viewHolder.distanciaLugar.setText(listadoLugar.getDistancia());
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
