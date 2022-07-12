@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:padding="10dp"
+    tools:context=".login_admin">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_above="@+id/btnAdmin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tviniciosesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/iniciar_sesion"
+                android:textColor="#616161"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/viewlogo1"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_below="@+id/tviniciosesion"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:foregroundTint="#00FFFFFF"
+                android:src="@mipmap/ic_launcher_foreground">
+
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txusuario"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewlogo1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center_horizontal"
+                app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edusuario"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="left"
+                    android:hint="@string/email_usuario"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txcontrasenia"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txusuario"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center_horizontal"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24">
+                >
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edcontrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    android:hint="@string/contrasenia"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:ignore="TextContrastCheck" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnolvidarcontrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txcontrasenia"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="25dp"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:text="@string/olvidaste_contr_login"
+                android:textColor="@color/black"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"            android:focusable="true"
+                android:textSize="10sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btniniciosesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txcontrasenia"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/entrar_log" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
