@@ -66,6 +66,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
     Button btnListarLugarCercano;
     List<ListadoMapa> mapaList;
 
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
     Integer count;
@@ -129,7 +130,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         // Hago uso de FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Método para obtener la última ubicación del usuario (Lo crearé más adelante)
+        // Método para obtener la última ubicación del usuario
         obtenerUltimaUbicacion();
 
         // Con LocationCallback enviamos notificaciones de la ubicación del usuario
@@ -231,6 +232,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
             //if (marker != null) marker.remove();
             mMap.addMarker(new MarkerOptions()
                     .position(riobamba)
+                    .icon(puntero)
                     .title("Riobamba"));
 
             for (int i = 0; i < count; i++)
@@ -399,6 +401,22 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
                 && ActivityCompat.checkSelfPermission(ConexionMapa.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ConexionMapa.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 123);
         }
+    }
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
     }
 
 }

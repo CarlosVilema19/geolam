@@ -366,10 +366,10 @@ public class actualizar_lugar_medico extends AppCompatActivity {
     }
 
     private void imagenReturn(String url) {
-        if(url.contains("tvcpdudx.lucusvirtual.es/")) {
+        if(url.contains(WebService.imagenRaiz)) {
             urlSinEspacios = url.replace(" ", "%20");
             String data = urlSinEspacios;
-            String[] split = data.split("tvcpdudx.lucusvirtual.es/");
+            String[] split = data.split(WebService.imagenRaiz);
              ruta = null;
             for (int i = 0; i < split.length; i++) {
                 ruta = split[1];

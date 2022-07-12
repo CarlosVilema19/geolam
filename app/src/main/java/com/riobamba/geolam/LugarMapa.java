@@ -82,7 +82,7 @@ public class LugarMapa extends AppCompatActivity {
                                     obj.getString("telefono"),
                                     obj.getString("imagen_lugar"),
                                     obj.getInt("id_lugar"),
-                                    "50 km"
+                                    "1 km"
                             ));
                         }
                         LugarMapaAdaptador myadapter = new LugarMapaAdaptador(LugarMapa.this, lugarList, item -> moveToDescription(item));

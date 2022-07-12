@@ -34,7 +34,7 @@ public class Bienvenida extends AppCompatActivity {
                 startActivity(inicio);
                 finish();
             }
-        },2500);
+        },100);
     }
 
 
