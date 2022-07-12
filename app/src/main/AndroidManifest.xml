@@ -22,6 +22,9 @@
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
         <activity
+            android:name=".login_admin"
+            android:exported="false" />
+        <activity
             android:name=".actualizar_lugar_medico"
             android:exported="false" />
         <activity
@@ -35,8 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".ListarLugarUsuario"
-            android:parentActivityName=".Listado"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Listado" />
         <activity
             android:name=".RecuperacionContrasenia"
             android:exported="false" />
@@ -71,8 +74,8 @@
             android:exported="false" />
         <activity
             android:name=".InicioAdmin"
-            android:parentActivityName=".Inicio"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Inicio" />
         <activity
             android:name=".IngresoTipologia"
             android:exported="false" />
@@ -98,7 +101,6 @@
         <activity
             android:name=".ListadoTipologia"
             android:exported="false" />
-
         <activity
             android:name=".ListadoUsuariosAdminControl"
             android:exported="true" />
@@ -110,26 +112,26 @@
             android:exported="true" />
         <activity
             android:name=".ListadoEspecialidad"
-            android:parentActivityName=".Listado"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Listado" />
         <activity
             android:name=".MedicoListado"
-            android:parentActivityName=".Listado"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Listado" />
         <activity
             android:name=".IngresoOpinion"
             android:exported="true" />
         <activity
             android:name=".OpinionListado"
-            android:parentActivityName=".Listado"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Listado" />
         <activity
             android:name=".Menu"
             android:exported="true" />
         <activity
             android:name=".EspecialidadListadoUsuario"
-            android:parentActivityName=".Listado"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Listado" />
         <activity
             android:name=".EspecialidadListadoAdmin"
             android:exported="true" />

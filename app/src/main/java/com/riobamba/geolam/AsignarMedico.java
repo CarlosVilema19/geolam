@@ -51,7 +51,7 @@ public class AsignarMedico extends AppCompatActivity {
     String listLugarMedicoNombres;
 
     Button btnGuardarAsignacion;
-
+String guardarValor;
     //Listado ID Médico - Especialidades - Lugares Medicos
     ArrayList<String> opcionesMedicoID= new ArrayList<>();
     ArrayList<String> opcionesEspecialidadID= new ArrayList<>();
@@ -62,7 +62,9 @@ public class AsignarMedico extends AppCompatActivity {
     ArrayList<String> opcionesMedicoNombres= new ArrayList<>();
     ArrayList<String> opcionesEspecialidadNombres= new ArrayList<>();
     ArrayList<String> opcionesLugaresMedicosNombres= new ArrayList<>();
-
+    AutoCompleteTextView autoCompleteOpcionesLugarMedico;
+    AutoCompleteTextView autoCompleteOpcionesEspecialidad;
+    AutoCompleteTextView autoCompleteOpcionesMedico;
 
     //Autocomplete Medico, Especialidad, Lugar
     /*private ListadoAsignarMedicoAdaptador adaptadorMedico;
@@ -81,15 +83,16 @@ public class AsignarMedico extends AppCompatActivity {
 
         //AutoComplete
         //adaptadorMedico=new ListadoAsignarMedicoAdaptador(this);
-        AutoCompleteTextView autoCompleteOpcionesMedico=findViewById(R.id.autoMedico);
+       autoCompleteOpcionesMedico=findViewById(R.id.autoMedico);
+
         //autoCompleteOpcionesMedico.setAdapter(adaptadorMedico);
 
        // adaptadorEspecialidad= new ListadoAsignarEspecialidadAdaptador(this);
-        AutoCompleteTextView autoCompleteOpcionesEspecialidad=findViewById(R.id.autoEspecialidad);
+       autoCompleteOpcionesEspecialidad=findViewById(R.id.autoEspecialidad);
         //autoCompleteOpcionesEspecialidad.setAdapter(adaptadorEspecialidad);
 
        // adaptadorLugarMedico= new ListadoAsignarLugarMedicoAdaptador(this);
-        AutoCompleteTextView autoCompleteOpcionesLugarMedico =findViewById(R.id.autoLugar);
+      autoCompleteOpcionesLugarMedico =findViewById(R.id.autoLugar);
        // autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
 
         btnGuardarAsignacion.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +100,7 @@ public class AsignarMedico extends AppCompatActivity {
             public void onClick(View v) {
 
                 insertarAsignacion();
+
             }
         });
 
@@ -125,8 +129,6 @@ public class AsignarMedico extends AppCompatActivity {
                             ArrayAdapter adapter;
                             adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesMedicoNombres);
                             autoCompleteOpcionesMedico.setAdapter(adapter);
-
-
                         }
 
                         autoCompleteOpcionesMedico.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,14 +136,9 @@ public class AsignarMedico extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemTipo = parent.getItemAtPosition(position).toString();
-
                                 String c= opcionesMedicoID.get(position);
-
                                 idMedico=c;
-
                                 retornaIdMedico(idMedico);
-
-
                                // Toast.makeText(getApplicationContext(), "Item23: " +idMedico, Toast.LENGTH_SHORT).show();
 
                             }
@@ -160,15 +157,13 @@ public class AsignarMedico extends AppCompatActivity {
 
 
         //Conexión al Servidor- Consulta AutoComplete Especialidad
-        RequestQueue queue2= Volley.newRequestQueue(this);
-        String url2= WebService.urlRaiz+WebService.servicioAsignarEspecialidad;
+
+        String url2= WebService.urlRaiz+WebService.servicioEspecialidadesDisponibles;
         StringRequest stringRequest2= new StringRequest(Request.Method.GET,url2,
 
                 response ->
                 {
                     try{
-
-
                         JSONArray array= new JSONArray(response);
                         for(int i=0;i<array.length();i++){
 
@@ -177,9 +172,9 @@ public class AsignarMedico extends AppCompatActivity {
                             //ListadoAsignarEspecialidad esp=new ListadoAsignarEspecialidad(object);
                             //Carga de datos
                             //adaptadorEspecialidad.add(esp);
-                            listEspecialidadNombres=(object.getString("DESCRIPCION_ESPECIALIDAD"));
+                            listEspecialidadNombres=(object.getString("descripcion_especialidad"));
                             opcionesEspecialidadNombres.add(listEspecialidadNombres);
-                            listIDEspecialidad = ( object2.getString("ID_ESPECIALIDAD"));
+                            listIDEspecialidad = ( object2.getString("id_especialidad"));
                             opcionesEspecialidadID.add(listIDEspecialidad);
                             ArrayAdapter adapter;
                             adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesEspecialidadNombres);
@@ -191,25 +186,17 @@ public class AsignarMedico extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemTipo = parent.getItemAtPosition(position).toString();
-
                                 String c= opcionesEspecialidadID.get(position);
-
                                 idEspecialidad=c;
-
-
                                 retornaIdEspecialidad(idEspecialidad);
-
-
+                                aparecerLugares(retornaIdEspecialidad(idEspecialidad));
+                                //guardarValor= retornaIdEspecialidad(idEspecialidad);
+                                //Toast.makeText(getApplicationContext(), "ID prueba " + retornaIdEspecialidad(idEspecialidad), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "ID prueba " +tvIdEspecialidad.getText().toString(), Toast.LENGTH_SHORT).show();
                                // Toast.makeText(getApplicationContext(), "Item23: " +idEspecialidad, Toast.LENGTH_SHORT).show();
 
                             }
-
                         });
-
-
-
-
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -217,14 +204,26 @@ public class AsignarMedico extends AppCompatActivity {
             Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
 
         });
+        RequestQueue queue2= Volley.newRequestQueue(this);
         stringRequest2.setTag("REQUEST");
         queue2.add(stringRequest2);
 
 
-        //Conexión al Servidor- Consulta AutoComplete Lugar Médico
+    }
 
-        String url3= WebService.urlRaiz+WebService.servicioAsignarLugarMedico;
-        StringRequest stringRequest3= new StringRequest(Request.Method.GET,url3,
+    private void aparecerLugares(String s) {
+
+        String valorID=s;
+        //Toast.makeText(this,"este es "+ s,Toast.LENGTH_SHORT).show();
+        //Conexión al Servidor- Consulta AutoComplete Lugar Médico
+        autoCompleteOpcionesLugarMedico.setAdapter(null);
+        opcionesLugaresMedicosID.clear();
+        listIDLugarMedico = ( null);
+        //opcionesLugaresMedicosID.add(null);
+        listLugarMedicoNombres = (null);
+        opcionesLugaresMedicosNombres.clear();
+        String url3= WebService.urlRaiz+WebService.servicioEspecialidadLugar;
+        StringRequest stringRequest3= new StringRequest(Request.Method.POST,url3,
 
                 response ->
                 {
@@ -239,9 +238,9 @@ public class AsignarMedico extends AppCompatActivity {
                             //ListadoAsignarLugarMedico lugarMedic=new ListadoAsignarLugarMedico(object);
                             //Carga de datos
                             //adaptadorLugarMedico.add(lugarMedic);
-                            listIDLugarMedico = ( object2.getString("ID_LUGAR"));
+                            listIDLugarMedico = ( object.getString("id_lugar"));
                             opcionesLugaresMedicosID.add(listIDLugarMedico);
-                            listLugarMedicoNombres = (object2.getString("NOMBRE_LUGAR"));
+                            listLugarMedicoNombres = (object2.getString("nombre_lugar"));
                             opcionesLugaresMedicosNombres.add(listLugarMedicoNombres);
                             ArrayAdapter adapter;
                             adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesLugaresMedicosNombres);
@@ -254,29 +253,34 @@ public class AsignarMedico extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String itemTipo = parent.getItemAtPosition(position).toString();
-
                                 String c= opcionesLugaresMedicosID.get(position);
-
                                 idLugarMedico=c;
-
-
                                 retornaIdLugarMedico(idLugarMedico);
-
-
-
-                              //  Toast.makeText(getApplicationContext(), "Item23: " +idLugarMedico, Toast.LENGTH_SHORT).show();
-
+                                //Toast.makeText(getApplicationContext(), "Item23: " +idLugarMedico, Toast.LENGTH_SHORT).show();
                             }
-
                         });
 
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                 },error -> {
-            Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
 
-        });
+            Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+        }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+
+                parametros.put("id_especialidad",valorID.toString());
+
+                return parametros;
+            }
+        };
+
+
+
         RequestQueue queue3= Volley.newRequestQueue(this);
         stringRequest3.setTag("REQUEST");
         queue3.add(stringRequest3);
@@ -289,10 +293,12 @@ public class AsignarMedico extends AppCompatActivity {
         //Carga de datos
     }
 
-    private void retornaIdEspecialidad(String idEspecialidad) {
+    private String retornaIdEspecialidad(String idEspecialidad) {
         CharSequence p=idEspecialidad;
         String p2=p.toString();
         tvIdEspecialidad.setText(p2);
+        String a=tvIdEspecialidad.getText().toString();
+        return a;
         //Carga de datos
     }
 
@@ -304,43 +310,112 @@ public class AsignarMedico extends AppCompatActivity {
     }
 
     private void insertarAsignacion() {
-        String url = WebService.urlRaiz +WebService.servicioIngresarMedicoTrabaja;
-        final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
+        if(!tvIdMedico.getText().toString().equals("")
+                &&!tvIdLugarMedico.getText().toString().equals("")
+                && !tvIdEspecialidad.getText().toString().equals(""))
+        {
+            String url = WebService.urlRaiz + WebService.servicioIngresarMedicoTrabaja;
+            final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
 
-                //Descartar el diálogo de progreso
-                loading.dismiss();
+                    //Descartar el diálogo de progreso
+                    loading.dismiss();
 
-                //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(getApplicationContext(), Login.class));
-                //finish();
+                    //Mostrando el mensaje de la respuesta
+                    Toast.makeText(getApplicationContext(), "Se ha asignado el médico correctamente", Toast.LENGTH_SHORT).show();
+                    tvIdEspecialidad.setText(null);
+                    tvIdMedico.setText(null);
+                    tvIdLugarMedico.setText(null);
+                    autoCompleteOpcionesMedico.clearListSelection();
+                    autoCompleteOpcionesEspecialidad.clearListSelection();
+                    autoCompleteOpcionesLugarMedico.clearListSelection();
+                    autoCompleteOpcionesLugarMedico.requestFocus();
+                    autoCompleteOpcionesEspecialidad.requestFocus();
+                    autoCompleteOpcionesMedico.requestFocus();
+
+                    //startActivity(new Intent(getApplicationContext(), Login.class));
+                    //finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Descartar el diálogo de progreso
+                    loading.dismiss();
+                    //Showing toast
+                    Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("id_lugar", tvIdLugarMedico.getText().toString());
+                    parametros.put("id_especialidad", tvIdEspecialidad.getText().toString());
+                    parametros.put("id_medico", tvIdMedico.getText().toString());
+                    return parametros;
+                }
+            };
+            //Creación de una cola de solicitudes
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            //Agregar solicitud a la cola
+            requestQueue.add(stringRequest);
+        }
+        else {
+
+            if (tvIdMedico.getText().toString().equals("")
+                    &&tvIdEspecialidad.getText().toString().equals("")
+                    &&tvIdLugarMedico.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Seleccione la información correspondiente", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    if (tvIdMedico.getText().toString().equals("")
+                            &&tvIdEspecialidad.getText().toString().equals("")) {
+                        Toast.makeText(getApplicationContext(), "Seleccione un médico y una Especialidad", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if (tvIdMedico.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Seleccione un Médico", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+
+                                if (tvIdEspecialidad.getText().toString().equals("")&&tvIdLugarMedico.getText().toString().equals("")) {
+                                    Toast.makeText(getApplicationContext(), "Seleccione una Especialidad & Lugar Médico", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                if (tvIdEspecialidad.getText().toString().equals("")) {
+                                    Toast.makeText(getApplicationContext(), "Seleccione una Especialidad", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    if(tvIdLugarMedico.getText().toString().equals("")){
+
+                                        Toast.makeText(getApplicationContext(), "Seleccione un Lugar Médico", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+                }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Descartar el diálogo de progreso
-                loading.dismiss();
-                //Showing toast
-                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar",tvIdLugarMedico.getText().toString());
-                parametros.put("id_especialidad",tvIdEspecialidad.getText().toString());
-                parametros.put("id_medico",tvIdMedico.getText().toString());
-                return parametros;
-            }
-        };
-        //Creación de una cola de solicitudes
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //Agregar solicitud a la cola
-        requestQueue.add(stringRequest);
+/*
+        autoCompleteOpcionesLugarMedico.setAdapter(null);
+        opcionesLugaresMedicosID.clear();
+        listIDLugarMedico = ( null);
+        //opcionesLugaresMedicosID.add(null);
+        listLugarMedicoNombres = (null);
+        opcionesLugaresMedicosNombres.clear();
+
+        autoCompleteOpcionesEspecialidad.setAdapter(null);
+        opcionesEspecialidadID.clear();
+        listIDEspecialidad=(null);
+        listEspecialidadNombres=(null);
+        opcionesEspecialidadNombres.clear();
+
+*/
+
+
+        }
     }
-
-}

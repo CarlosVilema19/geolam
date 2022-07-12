@@ -80,6 +80,7 @@
             android:layout_marginRight="25dp"
             android:gravity="center_horizontal"
             app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
 >
 
 
