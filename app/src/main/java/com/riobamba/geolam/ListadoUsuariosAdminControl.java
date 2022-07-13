@@ -104,9 +104,6 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity {
     }
     public void moveToDescription(ListadoUsuariosAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        Intent intent = new Intent(this,LugarMedico.class);
-        intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);
     }
     public void moveToEliminar(ListadoUsuariosAdmin button) //Método para eliminar presionando sobre un botón
     {

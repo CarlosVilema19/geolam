@@ -106,9 +106,7 @@ public class EspecialidadListadoAdmin extends AppCompatActivity {
     }
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        Intent intent = new Intent(this,LugarMapa.class);
-        intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);
+
     }
 
     //Metodos para la barra inferior
