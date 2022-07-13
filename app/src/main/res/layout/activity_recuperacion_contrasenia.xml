@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center_horizontal"
+
 
 
     tools:context=".RecuperacionContrasenia">
@@ -55,7 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Ingresa tu correo para reestablecer la contraseña"
+                        android:text="Restablecer la contraseña"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         />
@@ -63,6 +62,8 @@
                     <com.google.android.material.textfield.TextInputLayout
 
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                        android:id="@+id/txrecuperar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -76,11 +77,11 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/txTipologia"
+
                             android:layout_marginTop="15dp"
-                            android:gravity="left"
+
                             android:hint="@string/correo_electronico_restablecer"
-                            tools:ignore="TextContrastCheck,TextContrastCheck" />
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -100,4 +101,4 @@
             </ScrollView>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

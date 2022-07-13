@@ -16,18 +16,18 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_above="@+id/btnAdmin"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tviniciosesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="35dp"
                 android:text="@string/iniciar_sesion"
                 android:textColor="#616161"
-                android:textSize="15sp"
+                android:textSize="20sp"
+
+                android:layout_gravity="center_horizontal"
                 android:textStyle="bold" />
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -44,7 +44,7 @@
             </com.google.android.material.imageview.ShapeableImageView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txusuario"
+                android:id="@+id/txusuarioAdmin"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edusuario"
+                    android:id="@+id/edusuarioAdmin"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,11 +71,11 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txcontrasenia"
+                android:id="@+id/txcontraseniaAdmin"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txusuario"
+                android:layout_below="@id/txusuarioAdmin"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="25dp"
@@ -86,7 +86,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edcontrasenia"
+                    android:id="@+id/edcontraseniaAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -103,10 +103,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnolvidarcontrasenia"
+                android:id="@+id/btnolvidarcontraseniaAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txcontrasenia"
+                android:layout_below="@+id/txcontraseniaAdmin"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="25dp"
                 android:background="@android:color/transparent"
@@ -118,10 +118,10 @@
                 android:textSize="10sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btniniciosesion"
+                android:id="@+id/btniniciosesionAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txcontrasenia"
+                android:layout_below="@+id/txcontraseniaAdmin"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="25dp"
