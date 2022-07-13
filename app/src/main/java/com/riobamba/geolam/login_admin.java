@@ -161,11 +161,18 @@ public class login_admin extends AppCompatActivity {
 
     public void guardarEstadoButton()
     {
-        SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
-        boolean estado = true;
+        SharedPreferences preferences1 = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
+        boolean estado1 = true;
+        SharedPreferences.Editor editor1 = preferences1.edit();
+        editor1.putBoolean("estado_inicio_admin",estado1);
+        editor1.commit();
+
+        SharedPreferences preferences = getSharedPreferences("omitir_log",Context.MODE_PRIVATE);
+        boolean estado = false;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("estado_inicio",estado);
         editor.commit();
+
 
     }
 

@@ -15,27 +15,40 @@ public class Bienvenida extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
-    if(!preferences.getBoolean("estado_inicio", false))
+        SharedPreferences preferencesAdmin = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
+
+        if(preferences.getBoolean("estado_inicio", true))
     {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent login = new Intent(getApplicationContext(),Login.class);
-                startActivity(login);
-                finish();
-            }
-        },2500);
-    }else{
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-              //  Intent inicio = new Intent(getApplicationContext(),Inicio.class);
+                //  Intent inicio = new Intent(getApplicationContext(),Inicio.class);
                 Intent inicio = new Intent(getApplicationContext(),Listado.class);
                 startActivity(inicio);
                 finish();
             }
         },100);
-    }
+    }else if(preferencesAdmin.getBoolean("estado_inicio_admin", true)){
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent inicioAdmin = new Intent(getApplicationContext(),InicioAdmin.class);
+                startActivity(inicioAdmin);
+                finish();
+            }
+        },100);
+
+    }else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent login = new Intent(getApplicationContext(),Login.class);
+                    startActivity(login);
+                    finish();
+                }
+            },2000);
+        }
 
 
 
