@@ -69,10 +69,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:text="@string/nombre_lugar_listado"
                         android:textAlignment="center"
                         android:textSize="18sp" />

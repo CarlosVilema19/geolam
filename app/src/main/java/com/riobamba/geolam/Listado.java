@@ -154,6 +154,12 @@ public class Listado extends AppCompatActivity {
         editor.putBoolean("estado_inicio",estado);
         editor.commit();
 
+        SharedPreferences preferences1 = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
+        boolean estado1 = false;
+        SharedPreferences.Editor editor1 = preferences1.edit();
+        editor1.putBoolean("estado_inicio_admin",estado1);
+        editor1.commit();
+
     }
 
 
