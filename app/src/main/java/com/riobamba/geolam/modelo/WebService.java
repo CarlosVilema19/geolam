@@ -12,6 +12,7 @@ public class WebService {
     public static final  String servicioInsertarLugar = "insertar_lugar2.php";
     //public static final  String servicioValidarUsuario = "validar_usuario.php";
     public static final  String servicioValidarUsuario = "validar_usuario2.php";
+    public static final  String servicioValidarAdministrador = "validar_admin.php";
     public static final  String servicioInsertar = "insertar_.php";
     public static final  String servicioEliminarLugar = "eliminar_lugar.php";
     public static final  String servicioListarUsuariosAdmin = "listar_usuarios_admin.php";
@@ -31,6 +32,8 @@ public class WebService {
     public static final  String servicioIngresarMedicoTrabaja= "ingreso_medico_trabaja2.php";
     public  static final  String servicioIngresarEspecialidadLugar= "ingreso_especialidadLugar.php";
     public  static final  String servicioExistenciaCorreo="existencia_correo.php";
+    public  static final  String servicioExistenciaCorreoRC="existencia_correo_RC.php";
+    public  static final  String servicioExistenciaCorreoRCUsuario="existencia_correo_RC_Usuario.php";
     public static final  String servicioListarOpinion = "listar_opinion.php";
     public static final  String servicioEliminarOpinion = "eliminar_opinion.php";
     public static final  String servicioIDMedico = "id_medico.php";
@@ -38,6 +41,7 @@ public class WebService {
     public static final  String servicioListarMedicoUsu = "listar_medico_usu.php";
     public static final  String servicioActualizarLugar = "actualizar_lugar.php";
     public static final  String servicioOlvideLaContrasenia ="olvide_la_contrasenia.php";
+    public static final  String servicioOlvideLaContraseniaAdmin ="olvide_la_contrasenia_admin.php";
     public static final  String servicioEspecialidadLugar="especialidad_lugarMedico.php";
     public static final  String servicioEspecialidadesDisponibles="especialidades_disponibles.php";
     public static final  String servicioListadoEspecialidadLugar="listar_lugar_especialidad.php";

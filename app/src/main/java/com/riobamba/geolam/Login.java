@@ -57,8 +57,10 @@ public class Login extends AppCompatActivity {
         });
 
         btnRecuperar.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, RecuperacionContrasenia.class);
-            startActivity(intent);
+            Intent intent2 = new Intent(Login.this, RecuperacionContrasenia.class);
+            intent2.putExtra("usuario","2");
+            startActivity(intent2);
+
         });
 
         btnRegistro.setOnClickListener(v -> {
@@ -67,7 +69,7 @@ public class Login extends AppCompatActivity {
         });
 
         btnAdmin.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, InicioAdmin.class);
+            Intent intent = new Intent(Login.this, login_admin.class);
             startActivity(intent);
         });
 
