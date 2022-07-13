@@ -40,5 +40,6 @@ public class WebService {
     public static final  String servicioOlvideLaContrasenia ="olvide_la_contrasenia.php";
     public static final  String servicioEspecialidadLugar="especialidad_lugarMedico.php";
     public static final  String servicioEspecialidadesDisponibles="especialidades_disponibles.php";
+    public static final  String servicioListadoEspecialidadLugar="listar_lugar_especialidad.php";
 
 }

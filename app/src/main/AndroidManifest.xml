@@ -22,6 +22,9 @@
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
         <activity
+            android:name=".EspecialidadLugar"
+            android:exported="false" />
+        <activity
             android:name=".login_admin"
             android:exported="false" />
         <activity
