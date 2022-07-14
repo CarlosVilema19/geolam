@@ -72,7 +72,7 @@ public class IngresoOpinion extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha enviado con éxito", Toast.LENGTH_SHORT).show();
-
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
