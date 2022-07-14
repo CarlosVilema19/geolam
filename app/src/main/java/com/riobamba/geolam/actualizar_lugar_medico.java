@@ -14,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,10 +80,17 @@ public class actualizar_lugar_medico extends AppCompatActivity {
     ArrayList<String> opcionesTipologia = new ArrayList<>();
     ArrayList<String> opcionesCategoria= new ArrayList<>();
     //autocomplete
-    private ListadoCategoriaAdaptador adaptadorCategoria;
-    private ListadoTipologiaAdaptador adaptadorTipo;
+   // private ListadoCategoriaAdaptador adaptadorCategoria;
+    //private ListadoTipologiaAdaptador adaptadorTipo;
+    String listCatNombres;
+    ArrayList<String> opcionesCategoriaNombres=new ArrayList<>();
+
+    String listTipologiasNombres;
+    ArrayList<String> opcionesTipologiaNombres= new ArrayList<>();
+
     AutoCompleteTextView autoCompleteOpcionesCategoria;
     AutoCompleteTextView autoCompleteOpcionesTipologia;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,16 +99,17 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
         //AutoCompleteTextView
 
-        adaptadorCategoria = new ListadoCategoriaAdaptador(this);
+        //adaptadorCategoria = new ListadoCategoriaAdaptador(this);
         autoCompleteOpcionesCategoria=findViewById(R.id.autoCat2);
 
-        adaptadorTipo= new ListadoTipologiaAdaptador(this);
+        //adaptadorTipo= new ListadoTipologiaAdaptador(this);
         autoCompleteOpcionesTipologia=findViewById(R.id.autoTipologia2);
 
         //Adaptador
-        autoCompleteOpcionesCategoria.setAdapter(adaptadorCategoria);
+        //autoCompleteOpcionesCategoria.setAdapter(adaptadorCategoria);
 
-        autoCompleteOpcionesTipologia.setAdapter(adaptadorTipo);
+       // autoCompleteOpcionesTipologia.setAdapter(adaptadorTipo);
+
         tvIdLugarMedico=findViewById(R.id.TextViewIDLugar_);
         txtTipologia = findViewById(R.id.autoTipologia2);
         txtCategoria= findViewById(R.id.autoCat2);
@@ -117,6 +126,8 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         btnGuardarInfo= findViewById(R.id.btn_guardarLugar);
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfotoL);
         ivFotoL = findViewById(R.id.imageViewLugar);
+
+
         btnGuardarInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,19 +150,22 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
             }
         });
-        //Autocomplete Tiplogía & Categoría
+
+        //Lugar Médico
+        actualizarDatos();
+
+
+    }
+
+    private void actualizarDatos() {
         categoria();
         tipologia();
 
-        //Lugar Médico
-        RequestQueue queue3= Volley.newRequestQueue(this);
         String url3=WebService.urlRaiz+WebService.servicioObtenerDatosLugarMedico;
-
         StringRequest stringRequest3= new StringRequest(Request.Method.GET,url3,
                 response ->
                 {
                     try{
-
 
                         JSONArray array= new JSONArray(response);
                         for(int i=0;i<array.length();i++) {
@@ -173,12 +187,9 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                             txtLongitud.setText(object.getString("LONGITUD"));
                             txtDescripcion.setText(object.getString("DESCRIPCION_LUGAR"));
                             //ObtenerCategoria-Tipología
-
-                            autoCompleteOpcionesCategoria.setText(autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString(),false);
-
-                            autoCompleteOpcionesTipologia.setText(autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString(),false);
-
                         }
+                        autoCompleteOpcionesTipologia.setText(autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString(),false);
+                        autoCompleteOpcionesCategoria.setText(autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString(),false);
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -187,16 +198,15 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
         });
         stringRequest3.setTag("REQUEST");
+        RequestQueue queue3= Volley.newRequestQueue(this);
         queue3.add(stringRequest3);
-
-
 
     }
 
     private void categoria() {
         //Conexión al Servidor- Consulta AutoComplete Categoría
 
-        RequestQueue queue2= Volley.newRequestQueue(this);
+
         String url2=WebService.urlRaiz+WebService.servicioListarCategoria;
         //adaptadorTipo.clear();
         StringRequest stringRequest2= new StringRequest(Request.Method.GET,url2,
@@ -209,11 +219,16 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                         for(int i=0;i<array.length();i++){
 
                             JSONObject object = array.getJSONObject(i);
-                            JSONObject object2 = array.getJSONObject(i);
-                            ListadoCategoria cat=new ListadoCategoria(object);
-                            adaptadorCategoria.add(cat);
-                            listIDCat = ( object2.getString("ID_CATEGORIA"));
+                            //JSONObject object2 = array.getJSONObject(i);
+                            //ListadoCategoria cat=new ListadoCategoria(object);
+                            //adaptadorCategoria.add(cat);
+                            listCatNombres=(object.getString("DESCRIPCION_CATEGORIA"));
+                            opcionesCategoriaNombres.add(listCatNombres);
+                            listIDCat = ( object.getString("ID_CATEGORIA"));
                             opcionesCategoria.add(listIDCat);
+                            ArrayAdapter adapter;
+                            adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesCategoriaNombres);
+                            autoCompleteOpcionesCategoria.setAdapter(adapter);
 
 
                         }
@@ -230,7 +245,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                                 String c= opcionesCategoria.get(position);
                                 pCat=c;
                                 retornaIdCategoria(pCat);
-                                //Toast.makeText(getApplicationContext(), "Item Categoria: " +pCat, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(), "Item Categoria: " +pCat, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -243,13 +258,17 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
 
         });
+        RequestQueue queue2= Volley.newRequestQueue(this);
         stringRequest2.setTag("REQUEST");
         queue2.add(stringRequest2);
+
+
+
     }
 
     private void tipologia() {
         //Conexión al Servidor- Consulta AutoComplete Tipología
-        RequestQueue queue= Volley.newRequestQueue(this);
+
         String url=WebService.urlRaiz+WebService.servicioListarTipologia;
         //adaptadorTipo.clear();
         StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
@@ -262,12 +281,18 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                         for(int i=0;i<array.length();i++){
 
                             JSONObject object = array.getJSONObject(i);
-                            JSONObject object2 = array.getJSONObject(i);
-                            ListadoTipologia tipo=new ListadoTipologia(object);
+                            //JSONObject object2 = array.getJSONObject(i);
+                            //ListadoTipologia tipo=new ListadoTipologia(object);
                             //Carga de datos
-                            adaptadorTipo.add(tipo);
-                            listIDTipo = ( object2.getString("ID_TIPOLOGIA_LUGAR"));
+                            //adaptadorTipo.add(tipo);
+                            listTipologiasNombres=(object.getString("DESCRIPCION_TIPO_LUGAR"));
+                            opcionesTipologiaNombres.add(listTipologiasNombres);
+                            listIDTipo = ( object.getString("ID_TIPOLOGIA_LUGAR"));
                             opcionesTipologia.add(listIDTipo);
+                            ArrayAdapter adapter;
+                            adapter=new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, opcionesTipologiaNombres);
+                            autoCompleteOpcionesTipologia.setAdapter(adapter);
+
                         }
 
                         autoCompleteOpcionesTipologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -299,7 +324,9 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
         });
         stringRequest.setTag("REQUEST");
+        RequestQueue queue= Volley.newRequestQueue(this);
         queue.add(stringRequest);
+
     }
 
 
@@ -311,7 +338,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(getApplicationContext(), "Item Categoria: " + posCategoria, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), "Item Categoria: " + posCategoria, Toast.LENGTH_SHORT).show();
         return posCategoria;
     }
 
@@ -323,7 +350,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(getApplicationContext(), "Item Tipo: " + posTipologia, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), "Item Tipo: " + posTipologia, Toast.LENGTH_SHORT).show();
        return posTipologia;
     }
 

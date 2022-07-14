@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content"
 
                             android:layout_marginTop="15dp"
-
+                            android:singleLine="true"
                             android:hint="@string/correo_electronico_restablecer"
                             />
                     </com.google.android.material.textfield.TextInputLayout>

@@ -31,7 +31,7 @@ import java.util.Map;
 public class login_admin extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     TextInputLayout errorPass, errorEmail;
-    Button btnLogin, btnRecuperarAdmin;
+    Button btnLogin, btnRecuperarAdmin, btnUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class login_admin extends AppCompatActivity {
         edtPassword = findViewById(R.id.edcontraseniaAdmin);
         btnLogin = findViewById(R.id.btniniciosesionAdmin);
         btnRecuperarAdmin = findViewById(R.id.btnolvidarcontraseniaAdmin);
-
+        btnUsuario=findViewById(R.id.btnUsuario);
 
 
         btnLogin.setOnClickListener(view -> {
@@ -53,6 +53,10 @@ public class login_admin extends AppCompatActivity {
         btnRecuperarAdmin.setOnClickListener(v -> {
             Intent intent = new Intent(login_admin.this, RecuperacionContrasenia.class);
             intent.putExtra("admin","1");
+            startActivity(intent);
+        });
+        btnUsuario.setOnClickListener(v -> {
+            Intent intent = new Intent(login_admin.this, Login.class);
             startActivity(intent);
         });
 
