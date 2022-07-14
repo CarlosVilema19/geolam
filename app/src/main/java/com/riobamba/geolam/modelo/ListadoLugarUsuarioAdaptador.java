@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -67,7 +68,16 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final TextView idLugar;
         private final CardView btnMedicoUsuario;
         private final CardView btnEspecialidadUsuario;
-        private final Button btnCalificar;
+        private final CardView btnCalificar;
+        private final TextView whatsapp;
+        private final TextView paginaWeb;
+        private final TextView calificacion;
+        private final LinearLayout telefonoLL;
+        private final LinearLayout whatsappLL;
+        private final LinearLayout paginaWebLL;
+        private final LinearLayout descripcionLL;
+
+
 
 
 
@@ -91,6 +101,14 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             btnCalificar = view.findViewById(R.id.btnCalificar);
             idLugar = view.findViewById(R.id.tvIdLugar);
             btnEspecialidadUsuario = view.findViewById(R.id. btnEspecialidadUsuario);
+            whatsapp = view.findViewById(R.id.tvWhatsapp);
+            paginaWeb = view.findViewById(R.id.tvWeb);
+            calificacion = view.findViewById(R.id.tvCalificacion);
+            telefonoLL = view.findViewById(R.id.llTelefono);
+            whatsappLL = view.findViewById(R.id.llWhatsapp);
+            paginaWebLL = view.findViewById(R.id.llPaginaWeb);
+            descripcionLL = view.findViewById(R.id.llDescripcion);
+
 
 
         }
@@ -119,12 +137,21 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
                 .into(viewHolder.imagenLugar);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        //Controla que si el campo esta vacio se oculta el titulo
+        if(listadoLugar.getWhastapp().equals("")){viewHolder.whatsappLL.setVisibility(View.GONE);}
+        if(listadoLugar.getPaginaWeb().equals("")){viewHolder.paginaWebLL.setVisibility(View.GONE);}
+        if(listadoLugar.getTelefonoLugar().equals("")){viewHolder.telefonoLL.setVisibility(View.GONE);}
+        if(listadoLugar.getDireccionLugar().equals("")){viewHolder.descripcionLL.setVisibility(View.GONE);}
+
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
         viewHolder.informacionLugar.setText(listadoLugar.getInformacionLugar());
         viewHolder.categoriaLugar.setText(listadoLugar.getCategoriaLugar());
         viewHolder.tipologiaLugar.setText(listadoLugar.getTipologiaLugar());
+        viewHolder.whatsapp.setText(listadoLugar.getWhastapp());
+        viewHolder.paginaWeb.setText(listadoLugar.getPaginaWeb());
+        viewHolder.calificacion.setText(String.valueOf(listadoLugar.getCalificacion()));
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getIdLugar()));
 
        // viewHolder.btnEspecialidadUsuario.setCardBackgroundColor(ContextCompat.getColor(this.mCtx, R.color.teal_700));

@@ -91,7 +91,10 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getString("informacion"),
                                 obj.getString("categoria"),
                                 obj.getString("tipologia"),
-                                obj.getInt("id_lugar")
+                                obj.getInt("id_lugar"),
+                                obj.getString("whatsapp"),
+                                obj.getString("pagina_web"),
+                                (float)obj.getDouble("CALIFICACION")
                         ));
 
                     }

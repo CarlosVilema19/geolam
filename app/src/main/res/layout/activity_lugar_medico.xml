@@ -85,6 +85,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="5dp"
+                                android:textSize="16sp"
                                 android:text="Médicos" />
 
                             <TextView
@@ -135,6 +136,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:textSize="16sp"
                                 android:layout_marginStart="5dp"
                                 android:text="Especialidades">
 
@@ -152,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -162,7 +165,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:text="Nombre"
-                        android:textSize="18sp"
+                        android:textAllCaps="true"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
 
@@ -181,7 +185,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
-                        android:text="Tipologia" />
+                        android:text="Tipologia"
+                        android:textSize="18sp"/>
 
                     <TextView
                         android:id="@+id/tvCategoria"
@@ -189,6 +194,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"
                         android:text="Categoria" />
 
 
@@ -198,119 +205,294 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
-
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txdireccion"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:text="Dirección"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvDireccion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txdireccion"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="20dp"
-                        android:text="@string/rec_direccion_lugar" />
+                        <ImageView
+                            android:id="@+id/ivCalificacion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_outline_24" />
+
+                        <TextView
+                            android:id="@+id/tvCalificacion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:text="Calificación"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtelefono"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:text="Teléfono"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvTelefono"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/rec_telefono_lugar" />
-                </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivDireccion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_add_location_24" />
+
+                        <TextView
+                            android:id="@+id/txdireccion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:text="Dirección"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/rec_direccion_lugar"
+                        android:textSize="18dp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivTelefono"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_phone_24" />
+
+                        <TextView
+                            android:id="@+id/txtelefono"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="Teléfono"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="18dp"
+                        android:textSize="18sp"
+                        android:text="@string/rec_telefono_lugar" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llWhatsapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivWhatsapp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_whatsapp_24" />
+
+                        <TextView
+                            android:id="@+id/txWhatsapp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:text="Whatsapp"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvWhatsapp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="Whatsapp"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPaginaWeb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivWeb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_language_24" />
+
+                        <TextView
+                            android:id="@+id/txWeb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:text="Página Web"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvWeb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="Página Web"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/llDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginEnd="2dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txdescripcion"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tvNombreLugar"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:text="Información extra"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivInfoExtra"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_post_add_24" />
+
+                        <TextView
+                            android:id="@+id/txdescripcion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:text="Información extra"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvInformacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txdescripcion"
                         android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textSize="18sp"
                         android:text="@string/rec_descripcion_lugar" />
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/layout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnCalificar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@android:color/transparent"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txcalificacion"
+                        android:id="@+id/tvCalificar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
-                        android:text="Califique este lugar"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/btnCalificar"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textSize="18sp"
                         android:layout_gravity="center"
-                        android:text="Calificar" />
+                        android:text="Califique este lugar"
+                        android:textStyle="italic"/>
 
-                </LinearLayout>
 
+
+                </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="155dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#000" />
 
                 <ScrollView
                     android:layout_width="match_parent"

@@ -46,6 +46,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         private final TextView telefonoLugar;
         private final ImageView imagenLugar;
         private final TextView idLugar;
+        private final TextView categoria;
 
 
 
@@ -59,6 +60,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             telefonoLugar = view.findViewById(R.id.tvTelefonoLista);
             imagenLugar = view.findViewById(R.id.ivImagenLugarLista);
             idLugar = view.findViewById(R.id.tvId);
+            categoria = view.findViewById(R.id.tvCategoria);
         }
 
         /*public TextView getTextView() {
@@ -89,6 +91,7 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
         viewHolder.telefonoLugar.setText(listadoLugar.getTelefonoLugar());
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
+        viewHolder.categoria.setText(listadoLugar.getCategoria());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

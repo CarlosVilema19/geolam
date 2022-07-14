@@ -85,7 +85,8 @@ public class EspecialidadLugar extends AppCompatActivity {
                                     obj.getString("telefono"),
                                     obj.getString("imagen_lugar"),
                                     obj.getInt("id_lugar"),
-                                    ""
+                                    "",
+                                    obj.getString("descripcion_categoria")
                             ));
 
                         }

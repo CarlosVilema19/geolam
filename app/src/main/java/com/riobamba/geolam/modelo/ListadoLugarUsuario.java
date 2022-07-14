@@ -11,8 +11,13 @@ public class ListadoLugarUsuario implements Serializable {
     String nombreLugar, direccionLugar, telefonoLugar;
     String imagenLugar, informacionLugar, categoriaLugar, tipologiaLugar;
     Integer idLugar;
+    String whastapp, paginaWeb;
+    Float calificacion;
 
-    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, String informacionLugar, String categoriaLugar, String tipologiaLugar, Integer idLugar) {
+    public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar,
+                               String imagenLugar, String informacionLugar, String categoriaLugar,
+                               String tipologiaLugar, Integer idLugar, String whastapp,String paginaWeb,
+                               Float calificacion) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
@@ -21,6 +26,9 @@ public class ListadoLugarUsuario implements Serializable {
         this.categoriaLugar = categoriaLugar;
         this.tipologiaLugar = tipologiaLugar;
         this.idLugar = idLugar;
+        this.whastapp=whastapp;
+        this.paginaWeb = paginaWeb;
+        this.calificacion = calificacion;
 
     }
 
@@ -54,5 +62,17 @@ public class ListadoLugarUsuario implements Serializable {
 
     public Integer getIdLugar() {
         return idLugar;
+    }
+
+    public String getWhastapp() {
+        return whastapp;
+    }
+
+    public String getPaginaWeb() {
+        return paginaWeb;
+    }
+
+    public Float getCalificacion() {
+        return calificacion;
     }
 }
