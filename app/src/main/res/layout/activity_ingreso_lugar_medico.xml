@@ -26,7 +26,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:orientation="vertical"
                 android:paddingBottom="50dp">
@@ -56,8 +56,9 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cont2"
+                    android:layout_width="200dp"
+                    android:layout_height="145dp"
                     android:layout_gravity="center_horizontal"
 
                     >
@@ -65,13 +66,11 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageViewLugar"
                         android:layout_width="match_parent"
-                        android:layout_height="190dp"
+                        android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:padding="5dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="15dp"
+
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_image_24"
                         android:tag="bg1"
@@ -79,7 +78,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:strokeColor="@android:color/white"
-                        app:strokeWidth="8dp"
+                        app:strokeWidth="1sp"
 
 
                         />
@@ -91,14 +90,12 @@
                         style="@style/Widget.Material3.Button.TextButton.Icon"
                         android:layout_width="50dp"
                         android:layout_height="55dp"
-                        android:layout_marginLeft="244dp"
-                        android:layout_marginTop="145dp"
+                        android:layout_marginStart="145dp"
 
-                        android:layout_marginRight="2dp"
+                        android:layout_marginTop="88dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
-                        app:iconTint="#FFFFFF"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        app:iconTint="#FFFFFF" />
 
                 </RelativeLayout>
 
@@ -106,7 +103,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:layout_below="@id/cont2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -348,8 +345,9 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°'.-_,:;"
+
                         android:hint="@string/rec_descripcion_lugar"
+                        android:maxLines="10"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>

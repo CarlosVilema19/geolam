@@ -17,14 +17,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 import com.riobamba.geolam.modelo.WebService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
 public class IngresoTipologia extends AppCompatActivity {
 
     EditText txtTipologia;
+    TextInputLayout errorTipologia;
     Button btnAgregar, btnTipologiaAgregada;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +41,13 @@ public class IngresoTipologia extends AppCompatActivity {
         txtTipologia = findViewById(R.id.etTipologia);
         btnAgregar = findViewById(R.id.btnAgregarTipologia);
         btnTipologiaAgregada = findViewById(R.id.btnTipologiaAgregada);
+        errorTipologia=findViewById(R.id.txTipo);
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 /*ConexionTipologia conexionTipologia = new ConexionTipologia();
                 conexionTipologia.insertarUsusario(txtTipologia);*/
-                insertarTipologia();
+                validarTipologia();
             }
         });
 
@@ -53,7 +61,67 @@ public class IngresoTipologia extends AppCompatActivity {
 
 
 
+
     }
+    private void validarTipologia(){
+        if(validarCamposVacios()==1) {
+            String url = WebService.urlRaiz + WebService.servicioValidarExistenciaTipologia;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    response ->
+                    {
+
+                        try {
+
+                            JSONObject object = new JSONObject( URLDecoder.decode( response, "UTF-8" ));
+                            String existencia = object.getString("valida");
+
+                            if (existencia.equals("existe")) {
+
+                                errorTipologia.setError("¡Esta tipología ya existe!");
+                                errorTipologia.requestFocus();
+
+                            } else {
+
+                                    insertarTipologia();
+
+
+                            }
+                        } catch (JSONException | UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    },error ->{
+                Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
+
+            })
+
+
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("descripcion_tipo_lugar",txtTipologia.getText().toString().toUpperCase().trim());
+
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
+
+    }
+    private int validarCamposVacios() {
+       // errorTipologia.setError(null);
+        int camposVacios=0;
+        if (!txtTipologia.getText().toString().equals("")) {
+            camposVacios=1;
+        }
+        else {
+            txtTipologia.setError("¡Ingrese una Tipología!");
+            txtTipologia.requestFocus();
+        }
+        return camposVacios;
+    }
+
 
     private void insertarTipologia() {
         String url = WebService.urlRaiz + WebService.servicioAgregarTipologia;
@@ -73,7 +141,7 @@ public class IngresoTipologia extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("descripcion_tipo_lugar", txtTipologia.getText().toString());
+                parametros.put("descripcion_tipo_lugar",txtTipologia.getText().toString().toUpperCase().trim());
                 return parametros;
             }
         };

@@ -100,7 +100,9 @@ public class registrar extends AppCompatActivity {
                     showFileChooser();
                 }
                 else {
-                    insertarUsusario();
+
+                  // PICK_IMAGE_REQUEST=1;
+                    //insertarUsusario();
                 }
 
             }
