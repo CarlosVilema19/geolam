@@ -244,7 +244,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
                 nombreLugar = mapaList.get(i).getNombreLugar();
                 direccionLugar = mapaList.get(i).getDireccionLugar();
 
-                DecimalFormat formato1 = new DecimalFormat("#.0");
+                DecimalFormat formato1 = new DecimalFormat("#0.0");
                 String distancia = formato1.format(proceso.obtenerDistancia(lat, lng, latitud,longitud));
 
                 distanciaString = "Distancia: " + distancia + " " + "Km";
