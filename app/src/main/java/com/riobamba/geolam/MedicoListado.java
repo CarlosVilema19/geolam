@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
     SearchView txtBuscar;
     ListadoMedicoAdaptador myadapter;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+String id_lugar;
 
 
 
@@ -60,10 +62,26 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
         lugarList = new ArrayList<>();
 
         txtBuscar = findViewById(R.id.svBuscar);
-        myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
 
+        myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
         txtBuscar.setOnQueryTextListener(this);
-        //llamar al mostrar resultado
+        /*txtBuscar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            myadapter.filtrado(query);
+
+            return true;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+
+            myadapter.filtrado(newText);
+            return true;
+        }
+        });
+*/
+            //llamar al mostrar resultado
 
         toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -75,11 +93,13 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
 
     public void MostrarResultado()
     {
+
+
         //URL del web service
         String url = WebService.urlRaiz + WebService.servicioListarMedicoUsu;
         //asignar el id_lugar guardado
         SharedPreferences preferences = getSharedPreferences("id_lugar_med", Context.MODE_PRIVATE);
-        String id_lugar = preferences.getString("estado_id","");
+        id_lugar = preferences.getString("estado_id","");
 
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
@@ -124,19 +144,22 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
         requestQueue.add(stringRequest);
 
     }
-
+/*
     @Override
     public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
 
-        return false;
+        return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
 
-        myadapter.filtrado(newText);
-        return false;
-    }
+            myadapter.filtrado(newText);
+
+        return true;
+    }*/
+
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
@@ -153,4 +176,22 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
     }
+
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            myadapter.filtrado(query);
+
+            return true;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            myadapter.filtrado(newText);
+
+            return true;
+        }
+
+
+
 }
