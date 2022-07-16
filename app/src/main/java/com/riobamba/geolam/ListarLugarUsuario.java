@@ -20,11 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugar;
-import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
-import com.riobamba.geolam.modelo.ListadoUsuariosAdmin;
-import com.riobamba.geolam.modelo.ListadoUsuariosAdminAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 

@@ -21,6 +21,7 @@ import com.riobamba.geolam.R;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLugarUsuarioAdaptador.ViewHolder> {
@@ -76,6 +77,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final LinearLayout whatsappLL;
         private final LinearLayout paginaWebLL;
         private final LinearLayout descripcionLL;
+        private final LinearLayout calificacionLL;
 
 
 
@@ -108,6 +110,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             whatsappLL = view.findViewById(R.id.llWhatsapp);
             paginaWebLL = view.findViewById(R.id.llPaginaWeb);
             descripcionLL = view.findViewById(R.id.llDescripcion);
+            calificacionLL = view.findViewById(R.id.llCalificacion);
 
 
 
@@ -142,6 +145,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         if(listadoLugar.getPaginaWeb().equals("")){viewHolder.paginaWebLL.setVisibility(View.GONE);}
         if(listadoLugar.getTelefonoLugar().equals("")){viewHolder.telefonoLL.setVisibility(View.GONE);}
         if(listadoLugar.getDireccionLugar().equals("")){viewHolder.descripcionLL.setVisibility(View.GONE);}
+        if(listadoLugar.getCalificacion().equals(0F)){viewHolder.calificacionLL.setVisibility(View.GONE);}
+
 
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
@@ -151,7 +156,11 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.tipologiaLugar.setText(listadoLugar.getTipologiaLugar());
         viewHolder.whatsapp.setText(listadoLugar.getWhastapp());
         viewHolder.paginaWeb.setText(listadoLugar.getPaginaWeb());
-        viewHolder.calificacion.setText(String.valueOf(listadoLugar.getCalificacion()));
+
+        DecimalFormat formato1 = new DecimalFormat("#0.0");
+        String distancia = formato1.format(listadoLugar.getCalificacion());
+
+        viewHolder.calificacion.setText(distancia);
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getIdLugar()));
 
        // viewHolder.btnEspecialidadUsuario.setCardBackgroundColor(ContextCompat.getColor(this.mCtx, R.color.teal_700));
