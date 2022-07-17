@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -47,6 +50,7 @@ public class Listado extends AppCompatActivity {
     Toolbar toolbar = new Toolbar();
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,36 @@ public class Listado extends AppCompatActivity {
 
         MostrarResultado();
     }
+
+    @Override public void onBackPressed() { }  //Anula la flecha de regreso del telefono
+
+    @Override  // Muestra un mensaje para salir de la app
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea salir de Geolam?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
     public void MostrarResultado()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -104,7 +138,6 @@ public class Listado extends AppCompatActivity {
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);
     }
-    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
 
 
     //Metodos para la barra inferior
@@ -123,32 +156,25 @@ public class Listado extends AppCompatActivity {
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
     }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        toolbar.ejecutarItemSelected(this,item);
-        if(item.getItemId()==R.id.iCerrarSesion)
-        {
-            guardarEstadoButton();
-            Intent intent = new Intent(Listado.this, Login.class);
-            startActivity(intent);
-        }
-
-        if(item.getItemId()==R.id.iSalir)
-        {
-            finish();
-        }
-
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(this, item, this,this);
         return super.onOptionsItemSelected(item);
     }
-    public void guardarEstadoButton()
+
+    //Funcion para recordar el inicio de sesion
+   public void guardarEstadoButton()
     {
-        //SharedPreferences = getSharedPreferences("email", Context.MODE_PRIVATE);
         SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
         boolean estado = false;
         SharedPreferences.Editor editor = preferences.edit();
@@ -160,7 +186,6 @@ public class Listado extends AppCompatActivity {
         SharedPreferences.Editor editor1 = preferences1.edit();
         editor1.putBoolean("estado_inicio_admin",estado1);
         editor1.commit();
-
     }
 
 

@@ -63,6 +63,9 @@ public class login_admin extends AppCompatActivity {
 
     }
 
+    @Override public void onBackPressed() { }
+
+
     private void validarUsuario(){
         if(validarCamposVacios()==1) {
             String url = WebService.urlRaiz + WebService.servicioValidarAdministrador;

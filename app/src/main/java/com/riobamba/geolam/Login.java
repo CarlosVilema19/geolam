@@ -81,6 +81,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+     @Override public void onBackPressed() { }
     /*
     private void ejecutar(){
         final Handler handler= new Handler() {
