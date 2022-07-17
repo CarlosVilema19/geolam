@@ -19,6 +19,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.WebService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +41,8 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ConexionTipologia conexionTipologia = new ConexionTipologia();
-                insertarEspecialidad();
+                validarEspecialidad();
+
             }
         });
         btnVerAgregados.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +52,62 @@ public class IngresoEspecialidad extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void validarEspecialidad(){
+        if(validarCamposVacios()==1) {
+            String url = WebService.urlRaiz + WebService.servicioValidarExistenciaEspecialidad;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    response ->
+                    {
+
+                        try {
+
+                            JSONObject object = new JSONObject( URLDecoder.decode( response, "UTF-8" ));
+                            String existencia = object.getString("valida");
+
+                            if (existencia.equals("existe")) {
+
+                                txtEspecialidad.setError("¡Esta especialidad ya existe!");
+                                txtEspecialidad.requestFocus();
+
+                            } else {
+                                    insertarEspecialidad();
+
+                            }
+                        } catch (JSONException | UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    },error ->{
+                Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
+
+            })
+
+
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("descripcion_especialidad",txtEspecialidad.getText().toString().toUpperCase().trim());
+
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
+
+    }
+    private int validarCamposVacios() {
+
+        int camposVacios=0;
+        if (!txtEspecialidad.getText().toString().equals("")) {
+            camposVacios=1;
+        }
+        else {
+            txtEspecialidad.setError("¡Ingrese una Especialidad!");
+            txtEspecialidad.requestFocus();
+        }
+        return camposVacios;
     }
 
     private void insertarEspecialidad() {
@@ -66,7 +128,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("descripcion_especialidad", txtEspecialidad.getText().toString());
+                parametros.put("descripcion_especialidad",txtEspecialidad.getText().toString().toUpperCase().trim());
                 return parametros;
             }
         };
@@ -74,9 +136,5 @@ public class IngresoEspecialidad extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
+
 }

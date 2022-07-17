@@ -3,9 +3,12 @@ package com.riobamba.geolam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,6 +34,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
@@ -51,6 +56,8 @@ public class Login extends AppCompatActivity {
         btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
         btnRegistro = findViewById(R.id.btnRegistroUsu);
         btnAdmin = findViewById(R.id.btnAdmin);
+
+        conexionInternet();
 
         btnLogin.setOnClickListener(view -> {
             validarUsuario();
@@ -74,7 +81,114 @@ public class Login extends AppCompatActivity {
         });
 
     }
-    @Override public void onBackPressed() { }
+     @Override public void onBackPressed() { }
+    /*
+    private void ejecutar(){
+        final Handler handler= new Handler() {
+            @Override
+            public void publish(LogRecord record) {
+                
+            }
+
+            @Override
+            public void flush() {
+
+            }
+
+            @Override
+            public void close() throws SecurityException {
+
+            }
+        };
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                metodoEjecutar();//llamamos nuestro metodo
+                handler.postDelayed(this,10000);//se ejecutara cada 10 segundos
+            }
+        },5000);//empezara a ejecutarse después de 5 milisegundos
+    }
+*/
+    /*
+    private void ejecutar(){
+        final Handler handler= new Handler() {
+            final long EXECUTION_TIME = 60000; // 1 minuto
+
+    handler.postDelayed(new
+
+            Runnable() {
+
+                @Override
+                public void run () {
+
+                    ObtDatos();
+
+                    handler.postDelayed(this, EXECUTION_TIME);
+                }
+            },EXECUTION_TIME);
+        }*/
+    private void conexionInternet() {
+        //Internet
+        Log.e("netHabilitada",Boolean.toString(isNetDisponible() ));
+        String Habilitada, acceso;
+        Habilitada=Boolean.toString(isNetDisponible());
+        Log.e("accInternet",   Boolean.toString(isOnlineNet()));
+        String Acceso=Boolean.toString(isOnlineNet());
+        if( Habilitada.equals("true") && Acceso.equals("true")){
+            // Intent intent2 = new Intent(Login.this, Login.class);
+            //startActivity(intent2);
+        }else {
+            if( Habilitada.equals("true") && Acceso.equals("false"))
+            {
+                Intent intent2 = new Intent(Login.this, conexion_internet.class);
+                startActivity(intent2);
+                finish();
+            }else
+            {
+                if( Habilitada.equals("false") && Acceso.equals("true")) {
+                    Intent intent2 = new Intent(Login.this, conexion_internet.class);
+                    startActivity(intent2);
+                    finish();
+                }
+                else{
+                    if ( Habilitada.equals("false") && Acceso.equals("false")){
+                        Intent intent2 = new Intent(Login.this, conexion_internet.class);
+                        startActivity(intent2);
+                        finish();
+                    }
+
+                }
+            }
+        }
+        // Toast.makeText(getApplicationContext(), "habili"+Boolean.toString(isNetDisponible()).toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "scc"+Boolean.toString(isOnlineNet()).toString(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    private boolean isNetDisponible() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
+
+        return (actNetInfo != null && actNetInfo.isConnected());
+    }
+
+    public boolean isOnlineNet() {
+
+        try {
+            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.es");
+
+            int val           = p.waitFor();
+            boolean reachable = (val == 0);
+            return reachable;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     private void validarUsuario(){
         if(validarCamposVacios()==1) {

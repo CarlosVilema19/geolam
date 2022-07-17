@@ -4,17 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.riobamba.geolam.R;
-import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 import java.util.stream.Collectors;
 
 public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAdaptador.ViewHolder> {
@@ -56,28 +56,34 @@ public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAd
 
     public void filtrado(final String txtBuscar)
     {
+       // lugarList.clear();
+
         if(txtBuscar.length() == 0)
         {
             lugarList.clear();
             lugarList.addAll(medicListOriginal);
         }else{
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            if(txtBuscar.length()!=0) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
-                List<ListadoMedico> collection = lugarList.stream()
-                        .filter(i -> i.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase()))
-                        .collect(Collectors.toList());
-                lugarList.clear();
-                lugarList.addAll(collection);
-            }else{
-                lugarList.clear();
-                for (ListadoMedico l:medicListOriginal) {
-                    if(l.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase()))
-                    {
-                        lugarList.add(l);
-                    }
+                    List<ListadoMedico> collection = lugarList.stream()
+                            .filter(i -> i.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    lugarList.clear();
+                    lugarList.addAll(collection);
+                } //else {
+                    lugarList.clear();
+                    for (ListadoMedico l : medicListOriginal) {
+                        if (l.getNombreMedico().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                            lugarList.add(l);
+                        }
+                   // }
                 }
             }
         }
+        //medicListOriginal.clear();
+       // lugarList.clear();
         notifyDataSetChanged();
     }
 

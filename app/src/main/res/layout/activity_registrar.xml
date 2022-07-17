@@ -65,8 +65,10 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cont"
+                    android:layout_width="220dp"
+                    android:layout_height="170dp"
+                    android:layout_gravity="center_horizontal"
 
                     >
 
@@ -92,32 +94,29 @@
 
                         />
 
-
                     <com.google.android.material.button.MaterialButton
 
                         android:id="@+id/btn_cargarfoto"
                         style="@style/Widget.Material3.Button.TextButton.Icon"
                         android:layout_width="50dp"
                         android:layout_height="55dp"
-                        android:layout_marginLeft="180dp"
-                        android:layout_marginTop="100dp"
-
-                        android:layout_marginRight="18dp"
-
-
+                       android:layout_marginTop="100dp"
+                        android:layout_marginStart="145dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
                         app:iconTint="#FFFFFF" />
 
+
+
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:layout_below="@id/cont"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
 
                     >
