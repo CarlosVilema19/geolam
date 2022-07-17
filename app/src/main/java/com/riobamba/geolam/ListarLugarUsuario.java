@@ -3,6 +3,7 @@ package com.riobamba.geolam;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
+import com.riobamba.geolam.modelo.ListadoOpinion;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -43,9 +45,6 @@ public class ListarLugarUsuario extends AppCompatActivity
     Integer item;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,6 @@ public class ListarLugarUsuario extends AppCompatActivity
         toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         MostrarResultado(listadoLugar);
-
     }
 
 
@@ -112,6 +110,12 @@ public class ListarLugarUsuario extends AppCompatActivity
                         public void onClick(ListadoLugarUsuario item) {
                             moveToOpinion(item);
                         }
+                    },new ListadoLugarUsuarioAdaptador.OnClickComenListener() {
+                        @Override
+                        public void onClick3(ListadoLugarUsuario item) {
+                            moveToVerComentario(item);
+
+                        }
                     });
                     recyclerView.setAdapter(myadapter);
 
@@ -152,6 +156,11 @@ public class ListarLugarUsuario extends AppCompatActivity
     public void moveToOpinion(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,IngresoOpinion.class);
+        intent.putExtra("ListadoLugar",item);
+        startActivity(intent);}
+    public void moveToVerComentario(ListadoLugarUsuario item)
+    {
+        Intent intent = new Intent(this, OpinionListado.class);
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);}
 

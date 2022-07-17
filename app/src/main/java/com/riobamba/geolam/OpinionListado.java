@@ -23,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoOpinion;
 import com.riobamba.geolam.modelo.ListadoOpinionAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -50,13 +51,17 @@ public class OpinionListado extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         opinionList = new ArrayList<>();
+
+        ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
+
         //llamar al mostrar resultado
-        MostrarResultado();
+        MostrarResultado(listadoLugarUsuario);
     }
 
-    public void MostrarResultado()
+    public void MostrarResultado(ListadoLugarUsuario listado)
     {
         //URL del web service
+        String idLugar = listado.getIdLugar().toString();
         String url = WebService.urlRaiz + WebService.servicioListarOpinion;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
@@ -73,7 +78,8 @@ public class OpinionListado extends AppCompatActivity {
                                         obj.getString("comentario"),
                                         obj.getString("imagen"),
                                         obj.getInt("id_opinion"),
-                                        (float) obj.getDouble("calificacion")
+                                        (float) obj.getDouble("calificacion"),
+                                        obj.getString("email")
                                 ));
                             }
                             ListadoOpinionAdaptador myadapter = new ListadoOpinionAdaptador(OpinionListado.this, opinionList,
@@ -97,7 +103,14 @@ public class OpinionListado extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", idLugar);
+                return parametros;
+            }
+        };
 
         Volley.newRequestQueue(this).add(stringRequest);
 

@@ -7,14 +7,17 @@ public class ListadoOpinion implements Serializable {
     String nombreUsuario, fechaOpinion, comentario, imagenUsuario;
     Integer  idOpinion;
     Float calificacion;
+    String email;
 
-    public ListadoOpinion(String nombreUsuario, String fechaOpinion, String comentario, String imagenUsuario, Integer idOpinion, Float calificacion) {
+    public ListadoOpinion(String nombreUsuario, String fechaOpinion, String comentario,
+                          String imagenUsuario, Integer idOpinion, Float calificacion, String email) {
         this.nombreUsuario = nombreUsuario;
         this.fechaOpinion = fechaOpinion;
         this.comentario = comentario;
         this.imagenUsuario = imagenUsuario;
         this.idOpinion = idOpinion;
         this.calificacion = calificacion;
+        this.email = email;
     }
 
 
@@ -40,5 +43,9 @@ public class ListadoOpinion implements Serializable {
 
     public Float getCalificacion() {
         return calificacion;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

@@ -31,6 +31,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
     final ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2;
     final ListadoLugarUsuarioAdaptador.OnClickListener listener3;
+    final ListadoLugarUsuarioAdaptador.OnClickComenListener listener4;
 
 
     public interface OnItemClickListener{
@@ -45,12 +46,21 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         void onClick(ListadoLugarUsuario item);
     }
 
-    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList, ListadoLugarUsuarioAdaptador.OnItemClickListener listener,ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2,ListadoLugarUsuarioAdaptador.OnClickListener listener3){
+    public interface OnClickComenListener{
+        void onClick3(ListadoLugarUsuario item);
+    }
+
+    public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList,
+                                        ListadoLugarUsuarioAdaptador.OnItemClickListener listener,
+                                        ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2,
+                                        ListadoLugarUsuarioAdaptador.OnClickListener listener3,
+                                        ListadoLugarUsuarioAdaptador.OnClickComenListener listener4){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
         this.listener2 = listener2;
         this.listener3 = listener3;
+        this.listener4 = listener4;
     }
     View view1;
     public void viewEjem (View v)
@@ -70,6 +80,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final CardView btnMedicoUsuario;
         private final CardView btnEspecialidadUsuario;
         private final CardView btnCalificar;
+        private final CardView btnComentario;
         private final TextView whatsapp;
         private final TextView paginaWeb;
         private final TextView calificacion;
@@ -101,6 +112,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             tipologiaLugar = view.findViewById(R.id.tvTipologia);
             btnMedicoUsuario = view.findViewById(R.id.btnMedicoUsuario);
             btnCalificar = view.findViewById(R.id.btnCalificar);
+            btnComentario = view.findViewById(R.id.btnVerComentario);
             idLugar = view.findViewById(R.id.tvIdLugar);
             btnEspecialidadUsuario = view.findViewById(R.id. btnEspecialidadUsuario);
             whatsapp = view.findViewById(R.id.tvWhatsapp);
@@ -182,6 +194,12 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             @Override
             public void onClick(View v) {
                 listener3.onClick(listadoLugar);
+            }
+        });
+        viewHolder.btnComentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener4.onClick3(listadoLugar);
             }
         });
     }

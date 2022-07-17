@@ -82,7 +82,7 @@ public class Inicio extends AppCompatActivity {
     //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        toolbar.ejecutarItemSelected(this,item);
+        //toolbar.ejecutarItemSelected(this,item);
         if(item.getItemId()==R.id.iCerrarSesion)
         {
             guardarEstadoButton();

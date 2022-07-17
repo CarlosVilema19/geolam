@@ -74,6 +74,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+    @Override public void onBackPressed() { }
 
     private void validarUsuario(){
         if(validarCamposVacios()==1) {

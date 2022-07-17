@@ -1,6 +1,7 @@
 package com.riobamba.geolam.modelo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,11 @@ public class ListadoOpinionAdaptador extends RecyclerView.Adapter<ListadoOpinion
         viewHolder.calificacion.setText(String.valueOf(listadoOpinion.getCalificacion()));
         viewHolder.fechaIngreso.setText(listadoOpinion.getFechaOpinion());
         viewHolder.comentario.setText(listadoOpinion.getComentario());
+
+        SharedPreferences preferences = mCtx.getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
+        if(!email.equals(listadoOpinion.getEmail())){viewHolder.btnBorrar.setVisibility(View.GONE);}
 
         viewHolder.btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
