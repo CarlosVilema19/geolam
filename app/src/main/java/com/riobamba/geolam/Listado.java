@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -132,11 +133,19 @@ public class Listado extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
-    public void moveToDescription(ListadoLugar item)
-    {
-        Intent intent = new Intent(this,ListarLugarUsuario.class);
+    public void moveToDescription(ListadoLugar item){
+
+        final ProgressDialog loading = ProgressDialog.show(this, "Cargando...", "Espere por favor");
+        Intent intent = new Intent(Listado.this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
-        startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                loading.dismiss();
+            }
+        },1200);
+
     }
 
 

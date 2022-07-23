@@ -15,7 +15,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
             android:elevation="10dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
@@ -26,7 +29,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
 
@@ -49,27 +51,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
-                    android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/btnMedicoUsuario"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"                        android:clickable="true"
+                        android:layout_weight="1"
+                        android:clickable="true"
                         android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        >
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="10dp"
-                            android:layout_gravity="center"
                             android:layout_marginBottom="10dp"
                             android:orientation="horizontal">
 
@@ -85,8 +87,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="5dp"
-                                android:textSize="16sp"
-                                android:text="Médicos" />
+                                android:text="Médicos"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/tvIdLugar"
@@ -106,20 +108,19 @@
                         android:id="@+id/btnEspecialidadUsuario"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:clickable="true"
                         android:focusable="true"
-                        android:layout_weight="1"
-                        android:foreground="?android:attr/selectableItemBackground"
-                         >
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:layout_gravity="center"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -133,9 +134,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:textSize="16sp"
                                 android:layout_marginStart="5dp"
-                                android:text="Especialidades">
+                                android:text="Especialidades"
+                                android:textSize="14sp">
 
                             </TextView>
 
@@ -149,9 +150,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp"
-                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -163,7 +164,7 @@
                         android:layout_marginEnd="15dp"
                         android:text="Nombre"
                         android:textAllCaps="true"
-                        android:textSize="20sp"
+                        android:textSize="19sp"
                         android:textStyle="bold" />
 
 
@@ -183,7 +184,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:text="Tipologia"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvCategoria"
@@ -191,9 +192,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
-                        android:textSize="18sp"
+                        android:text="Categoria"
                         android:textAllCaps="true"
-                        android:text="Categoria" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -210,8 +211,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -228,24 +229,28 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:text="Calificación"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -262,7 +267,7 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:text="Dirección"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -274,7 +279,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="@string/rec_direccion_lugar"
-                        android:textSize="18dp"/>
+                        android:textSize="16dp" />
                 </LinearLayout>
 
 
@@ -285,13 +290,16 @@
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -307,7 +315,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
                             android:text="Teléfono"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -319,8 +327,8 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="18dp"
-                        android:textSize="18sp"
-                        android:text="@string/rec_telefono_lugar" />
+                        android:text="@string/rec_telefono_lugar"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -330,13 +338,16 @@
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -353,7 +364,7 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:text="Whatsapp"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -365,7 +376,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="Whatsapp"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -375,13 +386,16 @@
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -398,7 +412,7 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:text="Página Web"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -410,9 +424,8 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="Página Web"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -421,15 +434,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -445,7 +458,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
                             android:text="Información extra"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -456,73 +469,115 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="10dp"
-                        android:textSize="18sp"
-                        android:text="@string/rec_descripcion_lugar" />
+                        android:text="@string/rec_descripcion_lugar"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnCalificar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    app:cardBackgroundColor="#FF027FCC"
+                    app:cardCornerRadius="5dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/btnCalificar"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:cardBackgroundColor="#0098CB"
-                        android:layout_weight="1"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:orientation="vertical">
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tvCalificar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:textColor="@color/white"
                             android:text="Califique este lugar"
-                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:layout_marginEnd="5dp"
                             android:textStyle="italic" />
 
+                        <ImageView
+                            android:id="@+id/ivEstrella1"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_border_24" />
+                        <ImageView
+                            android:id="@+id/ivEstrella2"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_border_24" />
+                        <ImageView
+                            android:id="@+id/ivEstrella3"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_border_24" />
+                        <ImageView
+                            android:id="@+id/ivEstrella4"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_border_24" />
+                        <ImageView
+                            android:id="@+id/ivEstrella5"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
-                    </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/btnVerComentario"
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnVerComentario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/tvVerComentario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:layout_weight="1"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvVerComentario"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:text="Ver otros comentarios"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
+                        android:text="Ver otros comentarios"
+                        android:textColor="@color/black"
+                        android:textSize="5sp"
+                        android:textStyle="italic" />
 
 
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_margin="15dp"
+                    android:textStyle="bold"
+                    android:text="Opiniones" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

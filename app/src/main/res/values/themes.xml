@@ -2,16 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Geolam" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@android:color/holo_blue_dark</item>
+        <item name="colorPrimary">#FF027FCC</item>
         <item name="colorPrimaryVariant">#43FA4B</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="fontFamily">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@android:color/holo_blue_dark</item>
+        <item name="colorSecondaryVariant">#FF027FCC</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@android:color/holo_blue_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#FF027FCC</item>
         <!-- Customize your theme here. -->
     </style>
 

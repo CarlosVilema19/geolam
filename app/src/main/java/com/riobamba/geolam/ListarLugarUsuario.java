@@ -1,16 +1,21 @@
 package com.riobamba.geolam;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,6 +29,7 @@ import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
 import com.riobamba.geolam.modelo.ListadoOpinion;
+import com.riobamba.geolam.modelo.ListadoOpinionAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -32,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +49,11 @@ public class ListarLugarUsuario extends AppCompatActivity
 
     List<ListadoLugarUsuario> lugarList;
     RecyclerView recyclerView;
+    RecyclerView recyclerView2;
+    List<ListadoOpinion> opinionList;
     Integer item;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+    LinearLayout paginaWeb;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,12 +64,22 @@ public class ListarLugarUsuario extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        recyclerView2 = findViewById(R.id.rvOpinion);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+
         lugarList = new ArrayList<>();
         ListadoLugar listadoLugar = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
 
         toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         MostrarResultado(listadoLugar);
+
+        paginaWeb = findViewById(R.id.llPaginaWeb);
+
+        opinionList = new ArrayList<>();
+        MostrarResultadoOpi(listadoLugar);
+
     }
 
 
@@ -94,7 +114,7 @@ public class ListarLugarUsuario extends AppCompatActivity
 
                     }
 
-                    ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList, new ListadoLugarUsuarioAdaptador.OnItemClickListener() {
+                    ListadoLugarUsuarioAdaptador myadapter = new ListadoLugarUsuarioAdaptador(ListarLugarUsuario.this, lugarList, Collections.singletonList(listadoLugar), new ListadoLugarUsuarioAdaptador.OnItemClickListener() {
                         @Override
                         public void onItemClick(ListadoLugarUsuario item) {
                             moveToMedico(item);
@@ -107,7 +127,7 @@ public class ListarLugarUsuario extends AppCompatActivity
                         }
                     },new ListadoLugarUsuarioAdaptador.OnClickListener() {
                         @Override
-                        public void onClick(ListadoLugarUsuario item) {
+                        public void onClick(ListadoLugar item) {
                             moveToOpinion(item);
                         }
                     },new ListadoLugarUsuarioAdaptador.OnClickComenListener() {
@@ -142,6 +162,148 @@ public class ListarLugarUsuario extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+
+    public void MostrarResultadoOpi(ListadoLugar listadoLugar)
+    {
+        //URL del web service
+        String idLugar = listadoLugar.getId().toString();
+
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
+        String url = WebService.urlRaiz + WebService.servicioListarOpinion;
+        //Metodo String Request
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject obj = array.getJSONObject(i);
+                                opinionList.add(new ListadoOpinion(
+                                        obj.getString("nombre_usuario"),
+                                        obj.getString("fecha_ingreso"),
+                                        obj.getString("comentario"),
+                                        obj.getString("imagen"),
+                                        obj.getInt("id_opinion"),
+                                        (float) obj.getDouble("calificacion"),
+                                        obj.getString("email")
+                                ));
+                            }
+                            ListadoOpinionAdaptador myadapter = new ListadoOpinionAdaptador(ListarLugarUsuario.this, opinionList,
+                                    new ListadoOpinionAdaptador.OnClickListener() {
+
+                                        @Override//llamada al método para borrar presionando sobre el botón
+                                        public void onClick(ListadoOpinion item) {
+                                            mensajeConfirmacion(item, listadoLugar);
+                                        }
+                                    });
+                            recyclerView2.setAdapter(myadapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", idLugar);
+                parametros.put("email", email);
+                return parametros;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
+
+    }
+
+    public void moveToEliminar(ListadoOpinion button, ListadoLugar listadoLugar) //Método para eliminar presionando sobre un botón
+    {
+        String idOpinion = button.getIdOpinion().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioEliminarOpinion; //URL del web service
+
+        final ProgressDialog loading = ProgressDialog.show(ListarLugarUsuario.this, "Eliminando...", "Espere por favor");
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Oculta el progress dialog de confirmacion
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ListarLugarUsuario.this,ListarLugarUsuario.class);
+                intent.putExtra("ListadoLugar",listadoLugar);
+                startActivity(intent);
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_opinion", idOpinion);
+                loading.dismiss();
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void mensajeConfirmacion(ListadoOpinion item, ListadoLugar listadoLugar) { //Método para confirmar la eliminación
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListarLugarUsuario.this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿Desea eliminar su opinión?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                moveToEliminar(item, listadoLugar);
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void moveToMedico(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,MedicoListado.class);
@@ -153,7 +315,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         Intent intent = new Intent(this,ListadoEspecialidad.class);
         intent.putExtra("ListadoLugar",item);
         startActivity(intent);}
-    public void moveToOpinion(ListadoLugarUsuario item)
+    public void moveToOpinion(ListadoLugar item)
     {
         Intent intent = new Intent(this,IngresoOpinion.class);
         intent.putExtra("ListadoLugar",item);

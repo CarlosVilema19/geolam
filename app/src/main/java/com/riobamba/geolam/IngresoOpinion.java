@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -40,7 +42,10 @@ public class IngresoOpinion extends AppCompatActivity {
         ingresarOpinion = findViewById(R.id.etIngresarOpinion);
         btnEnviarOpinion = findViewById(R.id.btnEnviarOpinion);
         calficacionLugar = findViewById(R.id.rbCalificacion);
-        ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
+
+        //ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
+
+        ListadoLugar listadoLugarUsuario = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
 
         toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -53,12 +58,12 @@ public class IngresoOpinion extends AppCompatActivity {
 
     }
 
-    private void insertarOpinion(ListadoLugarUsuario listadoLugarUsuario) {
+    private void insertarOpinion(ListadoLugar listadoLugarUsuario) {
 
         SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
         String email = preferences.getString("estado_correo","");
 
-        String idLugar = listadoLugarUsuario.getIdLugar().toString();
+        String idLugar = listadoLugarUsuario.getId().toString();
 
         String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
 
@@ -66,7 +71,14 @@ public class IngresoOpinion extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Gracias por calificar", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(IngresoOpinion.this,ListarLugarUsuario.class);
+                intent.putExtra("ListadoLugar",listadoLugarUsuario);
+                startActivity(intent);
                 finish();
+
+
+                //finish();
             }
         }, new Response.ErrorListener() {
             @Override

@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
