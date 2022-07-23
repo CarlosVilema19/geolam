@@ -1,6 +1,10 @@
 package com.riobamba.geolam.modelo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.telecom.Call;
+import android.telecom.CallScreeningService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -21,6 +26,7 @@ import com.riobamba.geolam.R;
 
 import org.w3c.dom.Text;
 
+import java.net.URI;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -28,10 +34,12 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
 
     private final Context mCtx;
     private final List<ListadoLugarUsuario> lugarList;
+    private final List<ListadoLugar> lugarList2;
     final ListadoLugarUsuarioAdaptador.OnItemClickListener listener;
     final ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2;
     final ListadoLugarUsuarioAdaptador.OnClickListener listener3;
     final ListadoLugarUsuarioAdaptador.OnClickComenListener listener4;
+    String url;
 
 
     public interface OnItemClickListener{
@@ -43,7 +51,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     }
 
     public interface OnClickListener{
-        void onClick(ListadoLugarUsuario item);
+        void onClick(ListadoLugar item);
     }
 
     public interface OnClickComenListener{
@@ -51,12 +59,14 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     }
 
     public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList,
+                                        List<ListadoLugar> lugarList2,
                                         ListadoLugarUsuarioAdaptador.OnItemClickListener listener,
                                         ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2,
                                         ListadoLugarUsuarioAdaptador.OnClickListener listener3,
                                         ListadoLugarUsuarioAdaptador.OnClickComenListener listener4){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
+        this.lugarList2 = lugarList2;
         this.listener = listener;
         this.listener2 = listener2;
         this.listener3 = listener3;
@@ -146,6 +156,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         ListadoLugarUsuario listadoLugar = lugarList.get(position);
+        ListadoLugar listadoLugar2 = lugarList2.get(position);
         //Cargar Imagen
         Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
@@ -159,6 +170,22 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         if(listadoLugar.getDireccionLugar().equals("")){viewHolder.descripcionLL.setVisibility(View.GONE);}
         if(listadoLugar.getCalificacion().equals(0F)){viewHolder.calificacionLL.setVisibility(View.GONE);}
 
+        viewHolder.paginaWebLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(mCtx, "Pagina web", Toast.LENGTH_SHORT).show();
+                 Uri link = Uri.parse(listadoLugar.getPaginaWeb());
+                Intent intent = new Intent(Intent.ACTION_VIEW,link);
+                mCtx.startActivity(intent);
+            }
+        });
+
+        viewHolder.telefonoLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.direccionLugar.setText(listadoLugar.getDireccionLugar());
@@ -193,7 +220,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.btnCalificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener3.onClick(listadoLugar);
+                listener3.onClick(listadoLugar2);
             }
         });
         viewHolder.btnComentario.setOnClickListener(new View.OnClickListener() {

@@ -102,9 +102,23 @@ public class LugarMapa extends AppCompatActivity {
     }
     public void moveToDescription(ListadoLugar item)
     {
-        Intent intent = new Intent(this,ListarLugarUsuario.class);
+        /*Intent intent = new Intent(this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
-        startActivity(intent);
+        startActivity(intent);*/
+
+        final ProgressDialog loading = ProgressDialog.show(this, "Cargando...", "Espere por favor");
+        Intent intent = new Intent(LugarMapa.this,ListarLugarUsuario.class);
+        intent.putExtra("ListadoLugar",item);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                loading.dismiss();
+            }
+        },1200);
+
+
+
     }
 
     //Metodos para la barra inferior
