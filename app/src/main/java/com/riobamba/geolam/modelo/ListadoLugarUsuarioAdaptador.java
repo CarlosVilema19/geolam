@@ -179,11 +179,23 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
                 mCtx.startActivity(intent);
             }
         });
-
         viewHolder.telefonoLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(mCtx, "Pagina web", Toast.LENGTH_SHORT).show();
+                /*Uri telefono = Uri.parse(listadoLugar.getTelefonoLugar());
+                Intent intent = new Intent(Intent.ACTION_CALL, telefono);
+                mCtx.startActivity(intent);*/
+            }
+        });
 
+        viewHolder.whatsappLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(mCtx, "Pagina web", Toast.LENGTH_SHORT).show();
+                /*Uri whatsapp = Uri.parse(listadoLugar.getWhastapp());
+                Intent intent = new Intent(Intent.ACTION_SENDTO, whatsapp);
+                mCtx.startActivity(intent);*/
             }
         });
 
