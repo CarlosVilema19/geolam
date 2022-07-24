@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -14,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -46,6 +48,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.riobamba.geolam.Listado;
+import com.riobamba.geolam.ListarLugarUsuario;
 import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
@@ -260,6 +264,20 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
 
                 //distancias[i] = Arrays.toString(new String[]{distanciaString});
             }
+
+             /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+               @Override
+                public boolean onMarkerClick(Marker marker) {
+                    Intent intent = new Intent(ConexionMapa.this, LugarMapa.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });*/
+
+
+
+
+
             //guardarDistancia(distancias);//guardar las distancias de cada lugar
             CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
             mMap.animateCamera(miUbicacion);
