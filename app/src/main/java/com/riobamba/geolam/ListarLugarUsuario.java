@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -54,6 +56,7 @@ public class ListarLugarUsuario extends AppCompatActivity
     Integer item;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     LinearLayout paginaWeb;
+    String nombreLugar = "Lugar de atención médica";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,6 @@ public class ListarLugarUsuario extends AppCompatActivity
         lugarList = new ArrayList<>();
         ListadoLugar listadoLugar = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
 
-        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         MostrarResultado(listadoLugar);
 
@@ -79,6 +81,8 @@ public class ListarLugarUsuario extends AppCompatActivity
 
         opinionList = new ArrayList<>();
         MostrarResultadoOpi(listadoLugar);
+        toolbar.show(this, nombreLugar, true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
 
     }
 
@@ -285,25 +289,6 @@ public class ListarLugarUsuario extends AppCompatActivity
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void moveToMedico(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this,MedicoListado.class);
@@ -352,5 +337,23 @@ public class ListarLugarUsuario extends AppCompatActivity
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
     }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
 }

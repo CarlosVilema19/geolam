@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,13 +7,15 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     tools:context=".registrar">
+    <include layout="@layout/activity_menu_toolbar" />
     <androidx.cardview.widget.CardView
+        android:layout_below="@+id/iMenuSupe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="25dp"
         app:cardUseCompatPadding="true"
         android:elevation="10dp"
@@ -26,8 +28,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:paddingBottom="25dp"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
 
 
@@ -183,4 +184,4 @@
     </androidx.cardview.widget.CardView>
 
 
-</LinearLayout>
+</RelativeLayout>

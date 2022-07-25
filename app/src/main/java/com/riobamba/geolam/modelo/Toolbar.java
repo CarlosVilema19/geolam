@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.riobamba.geolam.Bienvenida;
+import com.riobamba.geolam.DatosPersonalesUsu;
 import com.riobamba.geolam.EspecialidadListadoUsuario;
 import com.riobamba.geolam.Inicio;
 import com.riobamba.geolam.InicioAdmin;
@@ -29,6 +30,7 @@ public class Toolbar extends AppCompatActivity{
     public Class<Bienvenida> inicioClass = Bienvenida.class;
     public Class<ConexionMapa> conexionMapaClass = ConexionMapa.class;
     public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
+    public Class<DatosPersonalesUsu> datosUsuClass = DatosPersonalesUsu.class;
     public Class<Login> login = Login.class;
     public Context ctx;
 
@@ -45,7 +47,7 @@ public class Toolbar extends AppCompatActivity{
 
     }
 
-    public void ejecutarItemSelected(Context ctx, MenuItem item, AppCompatActivity activities, Listado listado)
+    public void ejecutarItemSelected(MenuItem item, AppCompatActivity activities)
     {
         if(item.getItemId()==R.id.iInicioMenu){
             activities.startActivity(new Intent (ctx,inicioClass));
@@ -55,14 +57,23 @@ public class Toolbar extends AppCompatActivity{
         }
         if(item.getItemId()==R.id.iCerrarSesion)
         {
-            listado.guardarEstadoButton();
+            guardarEstadoButton(activities);
             activities.startActivity(new Intent(ctx, login));
+        }
+        if(item.getItemId()==R.id.iMisDatos)
+        {
+            activities.startActivity(new Intent(ctx, datosUsuClass));
+        }
+
+        if(item.getItemId()==android.R.id.home)
+        {
+            activities.finish();
         }
 
     }
 
 
-    public void ejecutarItemAdmin(Context ctx, MenuItem item, AppCompatActivity activities, InicioAdmin inicioAdmin)
+    /*public void ejecutarItemAdmin(Context ctx, MenuItem item, AppCompatActivity activities)
     {
         if(item.getItemId()==R.id.iInicioMenu){
             activities.startActivity(new Intent (ctx,inicioClass));
@@ -72,11 +83,15 @@ public class Toolbar extends AppCompatActivity{
         }
         if(item.getItemId()==R.id.iCerrarSesion)
         {
-            inicioAdmin.guardarEstadoButton();
+            guardarEstadoButton(activities);
             activities.startActivity(new Intent(ctx, login));
         }
+        if(item.getItemId()==R.id.iMisDatos)
+        {
+            activities.startActivity(new Intent(ctx, datosUsuClass));
+        }
 
-    }
+    }*/
 
 
     public Intent retornarInicio() {return new Intent(ctx, inicioClass);}
@@ -103,4 +118,21 @@ public class Toolbar extends AppCompatActivity{
                     });
             builder.show();
     }
+
+
+    public void guardarEstadoButton(AppCompatActivity activities)
+    {
+        SharedPreferences preferences = activities.getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
+        boolean estado = false;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("estado_inicio",estado);
+        editor.commit();
+
+        SharedPreferences preferences1 = activities.getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
+        boolean estado1 = false;
+        SharedPreferences.Editor editor1 = preferences1.edit();
+        editor1.putBoolean("estado_inicio_admin",estado1);
+        editor1.commit();
+    }
+
 }

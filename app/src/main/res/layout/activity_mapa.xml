@@ -35,19 +35,24 @@
 
     </LinearLayout>
 
-
     <com.google.android.material.button.MaterialButton
+
         android:id="@+id/btnLugaresCercanosMapa"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
         android:layout_above="@+id/iMenuInfe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
-        android:text="Ver lugares cercanos"
-        map:cornerRadius="12dp"/>
+        map:iconGravity="end"
+        android:layout_marginBottom="55dp"
+        android:backgroundTint="#027FCC"
+        app:icon="@drawable/ic_baseline_add_home_work_24"
+        app:iconTint="#FFFFFF" />
+
+
+
 
 </RelativeLayout>
 

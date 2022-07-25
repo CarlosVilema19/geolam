@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -36,17 +39,21 @@ public class ListadoTipologia extends AppCompatActivity {
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
     ListadoLugarAdminAdaptador adaptador;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_items);
+        setContentView(R.layout.activity_item_admin);
 
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
         //llamar al mostrar resultado
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
         MostrarResultado();
     }
 
@@ -165,4 +172,20 @@ public class ListadoTipologia extends AppCompatActivity {
         });
         dialogo1.show();
     }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
 }

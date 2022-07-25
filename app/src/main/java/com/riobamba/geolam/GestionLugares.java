@@ -1,15 +1,20 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.riobamba.geolam.modelo.Toolbar;
 
 public class GestionLugares extends AppCompatActivity {
     Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico, btnAsignarMedico, btnAsignarEspecialidades,
             btnActualizarLugarMedico;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,9 @@ public class GestionLugares extends AppCompatActivity {
         btnAsignarMedico=findViewById(R.id.btnAsignarMedico);
         btnAsignarEspecialidades=findViewById(R.id.btnAsignarEspecialidad);
         btnActualizarLugarMedico=findViewById(R.id.btnActualizarLugar);
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
+
         btnTipologia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,4 +87,21 @@ public class GestionLugares extends AppCompatActivity {
         });
 
     }
+
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador.ViewHolder> {
 
     private final Context mCtx;
     private final List<ListadoLugarAdmin> lugarList;
     final com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador.OnItemClickListener listener;
-
+    private final List<ListadoLugarAdmin> espeListOriginal;
 
 
     public interface OnItemClickListener{
@@ -27,10 +29,12 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
     }
 
 
-    public ListadoEspecialidadAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador.OnItemClickListener listener){
+    public ListadoEspecialidadAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, ListadoEspecialidadAdaptador.OnItemClickListener listener){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
+        espeListOriginal = new ArrayList<>();
+        espeListOriginal.addAll(lugarList);
     }
     View view1;
     public void viewEjem (View v)
@@ -53,6 +57,40 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
         /*public TextView getTextView() {
             return textView;
         }*/
+    }
+
+
+    public void filtrado(final String txtBuscar)
+    {
+        // lugarList.clear();
+
+        if(txtBuscar.length() == 0)
+        {
+            lugarList.clear();
+            lugarList.addAll(espeListOriginal);
+        }else{
+            if(txtBuscar.length()!=0) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoLugarAdmin> collection = lugarList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    lugarList.clear();
+                    lugarList.addAll(collection);
+                } //else {
+                lugarList.clear();
+                for (ListadoLugarAdmin l : espeListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                        lugarList.add(l);
+                    }
+                    // }
+                }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)

@@ -1,10 +1,12 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONException;
@@ -30,6 +33,8 @@ import java.util.Map;
 public class IngresoEspecialidad extends AppCompatActivity {
     EditText txtEspecialidad;
     Button btnAgregar, btnVerAgregados;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,9 @@ public class IngresoEspecialidad extends AppCompatActivity {
         txtEspecialidad = findViewById(R.id.etEspecialidad);
         btnAgregar = findViewById(R.id.btnAgregarEspecialidad);
         btnVerAgregados = findViewById(R.id.btnEspecialidadAgregada);
+
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -135,6 +143,19 @@ public class IngresoEspecialidad extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
 
 }

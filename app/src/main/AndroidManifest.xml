@@ -46,8 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".ListarLugarUsuario"
-            android:exported="false"
-            android:parentActivityName=".Listado" />
+            android:exported="false"/>
         <activity
             android:name=".RecuperacionContrasenia"
             android:exported="false" />
@@ -82,8 +81,7 @@
             android:exported="false" />
         <activity
             android:name=".InicioAdmin"
-            android:exported="false"
-            android:parentActivityName=".Inicio" />
+            android:exported="false" />
         <activity
             android:name=".IngresoTipologia"
             android:exported="false" />
@@ -120,31 +118,30 @@
             android:exported="true" />
         <activity
             android:name=".ListadoEspecialidad"
-            android:exported="true"
-            android:parentActivityName=".Listado" />
+            android:exported="true"/>
         <activity
             android:name=".MedicoListado"
-            android:exported="true"
-            android:parentActivityName=".Listado" />
+            android:exported="true" />
         <activity
             android:name=".IngresoOpinion"
             android:exported="true" />
         <activity
             android:name=".OpinionListado"
-            android:exported="true"
-            android:parentActivityName=".Listado" />
+            android:exported="true" />
         <activity
             android:name=".Menu"
             android:exported="true" />
         <activity
             android:name=".EspecialidadListadoUsuario"
-            android:exported="true"
-            android:parentActivityName=".Listado" />
+            android:exported="true" />
         <activity
             android:name=".EspecialidadListadoAdmin"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DatosPersonalesUsu"
             android:exported="true" />
         <activity
             android:name=".Bienvenida"
