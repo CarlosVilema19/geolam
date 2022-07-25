@@ -13,10 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.ListadoLugar;
-import com.riobamba.geolam.modelo.ListadoMedico;
-import com.riobamba.geolam.modelo.ListadoMedicoAdaptador;
+import com.riobamba.geolam.modelo.DatosPersonales;
+import com.riobamba.geolam.modelo.DatosPersonalesAdaptador;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdmin;
+import com.riobamba.geolam.modelo.ListadoUsuariosAdminAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -42,68 +40,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicoListado extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class DatosPersonalesUsu extends AppCompatActivity {
     //Declarar la lista y el recycler view
-    List<ListadoMedico> lugarList;
+    List<DatosPersonales> datosList;
     RecyclerView recyclerView;
-    SearchView txtBuscar;
-    ListadoMedicoAdaptador myadapter;
+    DatosPersonalesAdaptador adaptador;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-    String id_lugar;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_items);
+        setContentView(R.layout.activity_datos_item);
 
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        lugarList = new ArrayList<>();
-
-        txtBuscar = findViewById(R.id.svBuscar);
-
-        myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
-        txtBuscar.setOnQueryTextListener(this);
-        /*txtBuscar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            myadapter.filtrado(query);
-
-            return true;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String newText) {
-
-            myadapter.filtrado(newText);
-            return true;
-        }
-        });
-*/
-            //llamar al mostrar resultado
+        datosList = new ArrayList<>();
+        toolbar.show(this, "Mis datos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
-        toolbar.show(this, "Médicos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-
+        //llamar al mostrar resultado
         MostrarResultado();
-
-
-
     }
 
     public void MostrarResultado()
     {
-
+        //obtener el correo del usuario logueado
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
 
         //URL del web service
-        String url = WebService.urlRaiz + WebService.servicioListarMedicoUsu;
-        //asignar el id_lugar guardado
-        SharedPreferences preferences = getSharedPreferences("id_lugar_med", Context.MODE_PRIVATE);
-        id_lugar = preferences.getString("estado_id","");
-
+        String url = WebService.urlRaiz + WebService.servicioDatosPersonales;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -113,14 +80,27 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
-                                lugarList.add(new ListadoMedico(
-                                        obj.getString("nombre_medico"),
-                                        obj.getString("especialidad"),
-                                        obj.getString("descripcion_medico"),
-                                        obj.getInt("id_medico")
+                                datosList.add(new DatosPersonales(
+                                        obj.getString("nombre_usuario"),
+                                        obj.getString("apellido_usuario"),
+                                        obj.getString("email"),
+                                        obj.getString("imagen"),
+                                        obj.getString("descripcion_tipo_usuario"),
+                                        obj.getInt("id_tipo_usuario"),
+                                        obj.getInt("edad")
                                 ));
                             }
-                            myadapter = new ListadoMedicoAdaptador(MedicoListado.this, lugarList);
+                            DatosPersonalesAdaptador myadapter = new DatosPersonalesAdaptador(DatosPersonalesUsu.this, datosList,
+                                    new DatosPersonalesAdaptador.OnItemClickListener() {
+                                        @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
+                                        public void onItemClick(DatosPersonales item) {moveToGuardar(item);}
+                                    }, new DatosPersonalesAdaptador.OnClickListener() {
+
+                                @Override//llamada al método para borrar presionando sobre el botón
+                                public void onClick(DatosPersonales item) {
+                                    moveToCancelar(item);
+                                }
+                            });
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -138,45 +118,24 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar", id_lugar);
+                parametros.put("email", email);
                 return parametros;
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        Volley.newRequestQueue(this).add(stringRequest);
 
     }
-
-    //Metodos para la barra inferior
-    public void moverInicio(View view) //dirige al Inicio
+    public void moveToGuardar(DatosPersonales item)// Método para Guardar
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show();
     }
-    public void moverMapa(View view)    //dirige al mapa
+
+    public void moveToCancelar(DatosPersonales item) //Método para Cancelar
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
-    }
-    public void moverEspe(View view)    //dirige a la especialidad
-    {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        finish();
     }
 
-
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            myadapter.filtrado(query);
-            return true;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            myadapter.filtrado(newText);
-            return true;
-        }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
@@ -192,5 +151,7 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }

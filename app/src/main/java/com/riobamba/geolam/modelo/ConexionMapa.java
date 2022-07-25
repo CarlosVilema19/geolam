@@ -1,7 +1,9 @@
 package com.riobamba.geolam.modelo;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -16,6 +18,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -64,7 +67,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback {
+public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallback {
    // private GoogleMap mMap;
     private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
@@ -107,10 +110,6 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //llamada a la funcion para obtener las coordenadas
-        mapaList = new ArrayList<>();
-        obtenerCoordenadas();
-
         binding = ActivityMapaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -118,6 +117,10 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
+
+        //llamada a la funcion para obtener las coordenadas
+        mapaList = new ArrayList<>();
+        obtenerCoordenadas();
 
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +132,7 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
         });
 
 
+        toolbar.show(this, "Lugares cercanos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
         // Hago uso de FusedLocationProviderClient
@@ -149,7 +153,6 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
 
                 // Cuando obtenemos la coordenadas de ubicación del usuario, agregamos
                 // un marcador para la ubicación del usuario con el método agregarMarcador()
-                // el cual crearé más adelante
                 for (Location location : locationResult.getLocations()) {
                     agregarMarcador(location.getLatitude(),location.getLongitude());
                     //Log.e("Coordenadas: ", location.toString());
@@ -435,6 +438,21 @@ public class ConexionMapa extends FragmentActivity implements OnMapReadyCallback
     {
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
+    }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
     }
 
 }

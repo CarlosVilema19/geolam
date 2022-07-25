@@ -27,7 +27,7 @@ public class InicioAdmin extends AppCompatActivity {
         btnGestionLugar= findViewById(R.id.btnGestionLugar);
         btnGestionUsuario= findViewById(R.id.btnGestionUsuario);
 
-        toolbar.show(this, "Geolam", false);
+        toolbar.show(this, "Inicio", false);
 
 
         btnGestionLugar.setOnClickListener(new View.OnClickListener() {
@@ -88,26 +88,8 @@ public class InicioAdmin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         toolbar.getContexto(this);
-        toolbar.ejecutarItemAdmin(this, item, this,this);
+        toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void guardarEstadoButton()
-    {
-        SharedPreferences preferences1 = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
-        boolean estado1 = false;
-        SharedPreferences.Editor editor1 = preferences1.edit();
-        editor1.putBoolean("estado_inicio_admin",estado1);
-        editor1.commit();
-
-        SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
-        boolean estado = false;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("estado_inicio",estado);
-        editor.commit();
-
-
     }
 
 

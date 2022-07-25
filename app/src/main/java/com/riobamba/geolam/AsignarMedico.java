@@ -1,10 +1,12 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,7 @@ import com.riobamba.geolam.modelo.ListadoAsignarLugarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedicoAdaptador;
 import com.riobamba.geolam.modelo.ListadoAsignarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarMedicoAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -51,7 +54,10 @@ public class AsignarMedico extends AppCompatActivity {
     String listLugarMedicoNombres;
 
     Button btnGuardarAsignacion;
-String guardarValor;
+
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
+    String guardarValor;
     //Listado ID Médico - Especialidades - Lugares Medicos
     ArrayList<String> opcionesMedicoID= new ArrayList<>();
     ArrayList<String> opcionesEspecialidadID= new ArrayList<>();
@@ -94,6 +100,10 @@ String guardarValor;
        // adaptadorLugarMedico= new ListadoAsignarLugarMedicoAdaptador(this);
       autoCompleteOpcionesLugarMedico =findViewById(R.id.autoLugar);
        // autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
+
+
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
 
         btnGuardarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,4 +428,20 @@ String guardarValor;
 
 
         }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
     }

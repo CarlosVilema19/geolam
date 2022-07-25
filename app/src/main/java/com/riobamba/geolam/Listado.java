@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,6 +32,7 @@ import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
+import com.riobamba.geolam.modelo.ListadoMedicoAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -44,13 +46,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarException;
 
-public class Listado extends AppCompatActivity {
+public class Listado extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
     Toolbar toolbar = new Toolbar();
-
-
+    SearchView txtBuscar;
+    ListadoLugarAdaptador myadapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,12 @@ public class Listado extends AppCompatActivity {
 
         lugarList = new ArrayList<>();
 
-        toolbar.show(this, "Geolam", false);
+
+        txtBuscar = findViewById(R.id.svBuscar);
+        myadapter = new ListadoLugarAdaptador(Listado.this, lugarList,this::moveToDescription);
+        txtBuscar.setOnQueryTextListener(this);
+
+        toolbar.show(this, "Inicio", false);
 
         MostrarResultado();
     }
@@ -119,7 +126,7 @@ public class Listado extends AppCompatActivity {
                                     obj.getString("descripcion_categoria")
                             ));
                         }
-                        ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, item -> moveToDescription(item));
+                        ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, this::moveToDescription);
                         recyclerView.setAdapter(myadapter);
 
 
@@ -177,7 +184,7 @@ public class Listado extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         toolbar.getContexto(this);
-        toolbar.ejecutarItemSelected(this, item, this,this);
+        toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
 
@@ -197,7 +204,17 @@ public class Listado extends AppCompatActivity {
         editor1.commit();
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado2(query);
+        return true;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado2(newText);
+        return true;
+    }
 }
 
 

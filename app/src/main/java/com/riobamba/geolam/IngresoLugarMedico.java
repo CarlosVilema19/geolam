@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
@@ -33,6 +35,7 @@ import com.riobamba.geolam.modelo.ListadoCategoria;
 import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
 import com.riobamba.geolam.modelo.ListadoTipologia;
 import com.riobamba.geolam.modelo.ListadoTipologiaAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -61,6 +64,8 @@ public class IngresoLugarMedico extends AppCompatActivity {
     String idTipologia;
     String listIDCat;
     String listIDTipo;
+
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     //Imagen
     private Button btnCargarImagen;
@@ -95,6 +100,8 @@ public class IngresoLugarMedico extends AppCompatActivity {
         autoCompleteOpcionesCategoria.setAdapter(adaptadorCategoria);
 
         autoCompleteOpcionesTipologia.setAdapter(adaptadorTipo);
+
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
         //Conexión al Servidor- Consulta AutoComplete Tipología
@@ -1021,5 +1028,22 @@ private int validarWhatsapp(){
 
     }
     */
+
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

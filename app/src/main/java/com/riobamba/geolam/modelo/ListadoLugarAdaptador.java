@@ -13,13 +13,16 @@ import com.bumptech.glide.Glide;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdaptador.ViewHolder> {
 
     private final Context mCtx;
     private final List<ListadoLugar> lugarList;
     final ListadoLugarAdaptador.OnItemClickListener listener;
+    private final List<ListadoLugar> lugarListOriginal;
 
     public interface OnItemClickListener{
         void onItemClick(ListadoLugar item);
@@ -33,6 +36,8 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
+        lugarListOriginal = new ArrayList<>();
+        lugarListOriginal.addAll(lugarList);
     }
     View view1;
     public void viewEjem (View v)
@@ -67,6 +72,41 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             return textView;
         }*/
     }
+
+
+    public void filtrado2(final String txtBuscar)
+    {
+        // lugarList.clear();
+
+        if(txtBuscar.length() == 0)
+        {
+            lugarList.clear();
+            lugarList.addAll(lugarListOriginal);
+        }else{
+            txtBuscar.length();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                List<ListadoLugar> collection = lugarList.stream()
+                        .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                lugarList.clear();
+                lugarList.addAll(collection);
+            } //else {
+            lugarList.clear();
+            for (ListadoLugar l : lugarListOriginal) {
+                if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                    lugarList.add(l);
+                }
+                // }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
+    }
+
+
 
     // Create new views (invoked by the layout manager)
     @Override

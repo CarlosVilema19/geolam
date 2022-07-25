@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +13,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoMedicoAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -37,13 +41,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoEspecialidad extends AppCompatActivity {
+public class ListadoEspecialidad extends AppCompatActivity implements SearchView.OnQueryTextListener{
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
-    ListadoEspecialidadAdaptador adaptador;
+    SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
+    ListadoEspecialidadAdaptador myadapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +59,12 @@ public class ListadoEspecialidad extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
         //llamar al mostrar resultado
-        toolbar.show(this, "Geolam", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Especialidades", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
+        txtBuscar = findViewById(R.id.svBuscar);
+
+        myadapter = new ListadoEspecialidadAdaptador(ListadoEspecialidad.this, lugarList,this::moveToDescription);
+        txtBuscar.setOnQueryTextListener(this);
 
         MostrarResultado();
     }
@@ -136,4 +144,34 @@ public class ListadoEspecialidad extends AppCompatActivity {
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return true;
+    }
+
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
