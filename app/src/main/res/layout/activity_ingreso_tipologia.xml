@@ -78,6 +78,7 @@
                             android:layout_marginTop="15dp"
                             android:gravity="left"
                             android:hint="@string/ingreso_tipologia"
+                            android:maxLength="49"
                             android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>

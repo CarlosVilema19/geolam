@@ -158,9 +158,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="75dp"
                     android:layout_marginTop="25dp"
-                    android:layout_marginRight="80dp"
+                    android:layout_marginRight="75dp"
                     android:text="Guardar"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />
@@ -169,9 +169,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="75dp"
 
-                    android:layout_marginRight="80dp"
+                    android:layout_marginRight="75dp"
                     android:text="Agregados"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />

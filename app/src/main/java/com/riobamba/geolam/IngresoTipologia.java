@@ -77,8 +77,8 @@ public class IngresoTipologia extends AppCompatActivity {
 
                             if (existencia.equals("existe")) {
 
-                                errorTipologia.setError("¡Esta tipología ya existe!");
-                                errorTipologia.requestFocus();
+                               txtTipologia.setError("¡Esta tipología ya existe!");
+                                txtTipologia.requestFocus();
 
                             } else {
 

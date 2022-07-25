@@ -68,6 +68,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:gravity="left"
+                            android:maxLength="50"
                             android:layout_below="@id/etEspecialidad"
                             android:hint="@string/ingrese_especilidad"
                             android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
