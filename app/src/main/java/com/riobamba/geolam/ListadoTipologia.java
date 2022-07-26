@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,14 +35,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoTipologia extends AppCompatActivity {
+public class ListadoTipologia extends AppCompatActivity implements SearchView.OnQueryTextListener {
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
+    SearchView txtBuscar;
     ListadoLugarAdminAdaptador adaptador;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
-
+    ListadoLugarAdminAdaptador myadapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,8 @@ public class ListadoTipologia extends AppCompatActivity {
         lugarList = new ArrayList<>();
         //llamar al mostrar resultado
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-
+        txtBuscar = findViewById(R.id.svBuscar);
+        txtBuscar.setOnQueryTextListener(this);
         MostrarResultado();
     }
 
@@ -75,7 +77,7 @@ public class ListadoTipologia extends AppCompatActivity {
                                         obj.getInt("id_tipologia_lugar")
                                 ));
                             }
-                            ListadoLugarAdminAdaptador myadapter = new ListadoLugarAdminAdaptador(ListadoTipologia.this, lugarList,
+                           myadapter = new ListadoLugarAdminAdaptador(ListadoTipologia.this, lugarList,
                                     new ListadoLugarAdminAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
@@ -188,4 +190,15 @@ public class ListadoTipologia extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return true;
+    }
 }
