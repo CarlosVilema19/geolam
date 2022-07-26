@@ -15,6 +15,7 @@ import android.graphics.PostProcessor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +40,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EspecialidadListadoUsuario extends AppCompatActivity {
+public class EspecialidadListadoUsuario extends AppCompatActivity implements SearchView.OnQueryTextListener {
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
-    ListadoEspecialidadAdaptador adaptador;
+    SearchView txtBuscar;
+    ListadoEspecialidadAdaptador myadapter;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
@@ -56,6 +58,7 @@ public class EspecialidadListadoUsuario extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
+        txtBuscar = findViewById(R.id.svBuscar);
         //llamar al mostrar resultado
         toolbar.show(this, "Especialidades", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -79,10 +82,10 @@ public class EspecialidadListadoUsuario extends AppCompatActivity {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("DESCRIPCION_ESPECIALIDAD"),
-                                        obj.getInt("ID_ESPECIALIDAD")
+                                        Integer.parseInt(obj.getString("ID_ESPECIALIDAD"))
                                 ));
                             }
-                            ListadoEspecialidadAdaptador myadapter = new ListadoEspecialidadAdaptador(EspecialidadListadoUsuario.this, lugarList,
+                            myadapter = new ListadoEspecialidadAdaptador(EspecialidadListadoUsuario.this, lugarList,
                                     new ListadoEspecialidadAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
@@ -145,4 +148,20 @@ public class EspecialidadListadoUsuario extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        myadapter.filtrado(query);
+        //myadapter.filtrado2(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        myadapter.filtrado(newText);
+        //myadapter.filtrado2(newText);
+        return true;
+
+    }
 }

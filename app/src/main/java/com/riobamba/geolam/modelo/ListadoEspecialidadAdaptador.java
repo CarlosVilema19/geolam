@@ -22,6 +22,7 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
     private final List<ListadoLugarAdmin> lugarList;
     final com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador.OnItemClickListener listener;
     private final List<ListadoLugarAdmin> espeListOriginal;
+    private final List<ListadoLugarAdmin> espeList;
 
 
     public interface OnItemClickListener{
@@ -35,6 +36,8 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
         this.listener = listener;
         espeListOriginal = new ArrayList<>();
         espeListOriginal.addAll(lugarList);
+        espeList = new ArrayList<>();
+        espeList.addAll(espeListOriginal);
     }
     View view1;
     public void viewEjem (View v)
@@ -58,7 +61,40 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
             return textView;
         }*/
     }
+/*
+    public void filtrado2(final String txtBuscar)
+    {
+        // lugarList.clear();
 
+        if(txtBuscar.length() == 0)
+        {
+            espeList.clear();
+            espeList.addAll(espeListOriginal);
+        }else{
+            if(txtBuscar.length()!=0) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoLugarAdmin> collection = espeList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    espeList.clear();
+                    espeList.addAll(collection);
+                } //else {
+                espeList.clear();
+                for (ListadoLugarAdmin l : espeListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                        espeList.add(l);
+                    }
+                    // }
+                }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
+    }
+*/
 
     public void filtrado(final String txtBuscar)
     {
