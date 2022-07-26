@@ -49,6 +49,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         private final TextView descripcionTipo;
         private final ImageButton btnBorrar;
         private final ImageView imagenUsuarios;
+        private final ImageButton btnActualizar;
 
 
 
@@ -64,6 +65,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
             idTipoUsuarios = view.findViewById(R.id.tvIdTipo);
             descripcionTipo = view.findViewById(R.id.tvDescripcionTipo);
             imagenUsuarios = view.findViewById(R.id.ivImagenUsuariosLista);
+            btnActualizar = view.findViewById(R.id.ibActualizarLista);
 
         }
 
@@ -96,6 +98,7 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         viewHolder.emailUsuarios.setText(listadousuarios.getEmailUsuarios());
         viewHolder.descripcionTipo.setText(listadousuarios.getDescripcionTipo());
         viewHolder.idTipoUsuarios.setText(String.valueOf(listadousuarios.getIdTipoUsuarios()));
+        viewHolder.btnActualizar.setVisibility(View.GONE);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

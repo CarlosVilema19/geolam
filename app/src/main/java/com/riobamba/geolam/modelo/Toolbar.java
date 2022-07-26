@@ -90,7 +90,6 @@ public class Toolbar extends AppCompatActivity{
         {
             activities.startActivity(new Intent(ctx, datosUsuClass));
         }
-
     }*/
 
 
