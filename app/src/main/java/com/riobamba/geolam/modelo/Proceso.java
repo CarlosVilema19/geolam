@@ -1,6 +1,11 @@
 package com.riobamba.geolam.modelo;
 
+import android.content.Intent;
+
+import java.text.DecimalFormat;
+
 public class Proceso {
+    double temp = 100000;
 
     public double obtenerDistancia(Double latitudUsu, Double longitudUsu, Float latitudLug, Float longitudLug)
     {
@@ -24,5 +29,19 @@ public class Proceso {
     }
 
 
-
+    public String verCercano(Double[] distancias, String[] lugarCerca, Integer count ) {
+        String lugarDist = "null";
+        String dist;
+        DecimalFormat formato2 = new DecimalFormat("#0.0");
+        for(int i = 0; i<count;i++)
+        {
+            if(distancias[i]< temp)
+            {
+                temp = distancias[i];
+                dist = formato2.format(temp);
+                lugarDist = lugarCerca[i] + " a "+ dist + " Km";
+            }
+        }
+        return  lugarDist;
+    }
 }
