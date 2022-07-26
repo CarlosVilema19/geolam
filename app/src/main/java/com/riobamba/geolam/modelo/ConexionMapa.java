@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -102,7 +103,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     // Mapa de Google
     private GoogleMap mMap;
 
-
+    TextView lugarDistancia;
+    Double distanciaCerca;
 
 
     @RequiresApi(api = Build.VERSION_CODES.S)
@@ -130,7 +132,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
-
+        lugarDistancia = findViewById(R.id.tvDistancia);
 
         toolbar.show(this, "Lugares cercanos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -229,7 +231,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         LatLng riobamba = new LatLng(-1.67435, -78.6483);
         LatLng coordenadas = new LatLng(lat, lng);//coordenadas de mi posicion
         String distanciaString;
-        String[] distancias = new String[count];
+        Double[] distancias = new Double[count];
+        String[] lugarCerca = new String[count];
+        Proceso proceso = new Proceso();
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -244,7 +248,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
             for (int i = 0; i < count; i++)
             {
-                Proceso proceso = new Proceso();
 
                 latitud = mapaList.get(i).getLatitud();
                 longitud = mapaList.get(i).getLongitud();
@@ -256,6 +259,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
                 distanciaString = "Distancia: " + distancia + " " + "Km";
 
+                distancias[i] = proceso.obtenerDistancia(lat, lng, latitud,longitud);
+                lugarCerca[i] = nombreLugar;
 
                 LatLng lugarMedico = new LatLng(latitud, longitud);
                 mMap.addMarker(new MarkerOptions()
@@ -265,23 +270,10 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         .icon(puntero)
                         .icon(iconoPuntero));
 
-                //distancias[i] = Arrays.toString(new String[]{distanciaString});
             }
 
-             /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-               @Override
-                public boolean onMarkerClick(Marker marker) {
-                    Intent intent = new Intent(ConexionMapa.this, LugarMapa.class);
-                    startActivity(intent);
-                    return true;
-                }
-            });*/
+            lugarDistancia.setText(proceso.verCercano(distancias, lugarCerca,count));
 
-
-
-
-
-            //guardarDistancia(distancias);//guardar las distancias de cada lugar
             CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
             mMap.animateCamera(miUbicacion);
         }
