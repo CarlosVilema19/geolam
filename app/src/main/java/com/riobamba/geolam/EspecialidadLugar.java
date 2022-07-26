@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,22 +42,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarException;
 
-public class EspecialidadLugar extends AppCompatActivity {
+public class EspecialidadLugar extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
+    LugarMapaAdaptador myadapter;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
+    SearchView txtBuscar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_items);
-
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        txtBuscar = findViewById(R.id.svBuscar);
+        txtBuscar.setOnQueryTextListener(this);
         lugarList = new ArrayList<>();
         ListadoLugarAdmin listadoLugar = (ListadoLugarAdmin) getIntent().getSerializableExtra("ListadoLugarAdmin");
 
@@ -98,7 +100,7 @@ public class EspecialidadLugar extends AppCompatActivity {
 
                         }
 
-                        LugarMapaAdaptador myadapter = new LugarMapaAdaptador(EspecialidadLugar.this, lugarList, item -> moveToDescription(item));
+                       myadapter = new LugarMapaAdaptador(EspecialidadLugar.this, lugarList, item -> moveToDescription(item));
                         recyclerView.setAdapter(myadapter);
 
 
@@ -155,6 +157,18 @@ public class EspecialidadLugar extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return true;
     }
 }
 

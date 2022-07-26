@@ -259,7 +259,7 @@ public class RecuperacionContrasenia extends AppCompatActivity  {
                     } catch (JSONException | UnsupportedEncodingException e) {
                         // e.printStackTrace();
                         progressdialog.dismiss();
-                        errorEmail.setError("¡Correo inválido!");
+                        errorEmail.setError("¡Error en el servidor!");
                         errorEmail.requestFocus();
                         //Toast.makeText(getApplicationContext(), "Correo inválido", Toast.LENGTH_SHORT).show();
                     }

@@ -92,7 +92,7 @@ public class ListadoEspecialidad extends AppCompatActivity implements SearchView
                                         obj.getInt("id_especialidad")
                                 ));
                             }
-                            ListadoEspecialidadAdaptador myadapter = new ListadoEspecialidadAdaptador(ListadoEspecialidad.this, lugarList,
+                             myadapter = new ListadoEspecialidadAdaptador(ListadoEspecialidad.this, lugarList,
                                     new ListadoEspecialidadAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}

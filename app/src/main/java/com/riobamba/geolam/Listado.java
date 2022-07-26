@@ -126,7 +126,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                                     obj.getString("descripcion_categoria")
                             ));
                         }
-                        ListadoLugarAdaptador myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, this::moveToDescription);
+                       myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, this::moveToDescription);
                         recyclerView.setAdapter(myadapter);
 
 

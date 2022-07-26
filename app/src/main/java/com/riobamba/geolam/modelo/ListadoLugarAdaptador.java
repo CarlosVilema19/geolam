@@ -83,22 +83,24 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
             lugarList.clear();
             lugarList.addAll(lugarListOriginal);
         }else{
-            txtBuscar.length();
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            if(txtBuscar.length()!=0) {
 
-                List<ListadoLugar> collection = lugarList.stream()
-                        .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
-                        .collect(Collectors.toList());
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoLugar> collection = lugarList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    lugarList.clear();
+                    lugarList.addAll(collection);
+                } //else {
                 lugarList.clear();
-                lugarList.addAll(collection);
-            } //else {
-            lugarList.clear();
-            for (ListadoLugar l : lugarListOriginal) {
-                if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+                for (ListadoLugar l : lugarListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
 
-                    lugarList.add(l);
+                        lugarList.add(l);
+                    }
+                    // }
                 }
-                // }
             }
         }
         //medicListOriginal.clear();
@@ -110,16 +112,16 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ListadoLugarAdaptador.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.activity_listado_card, null);
-        return new ViewHolder(view);
+        return new ListadoLugarAdaptador.ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ListadoLugarAdaptador.ViewHolder viewHolder, int position) {
         ListadoLugar listadoLugar = lugarList.get(position);
         //Cargar Imagen
         Glide.with(mCtx)

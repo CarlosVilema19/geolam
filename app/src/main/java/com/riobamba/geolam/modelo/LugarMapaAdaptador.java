@@ -13,13 +13,49 @@ import com.bumptech.glide.Glide;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.ViewHolder> {
 
     private final Context mCtx;
     private final List<ListadoLugar> lugarList;
     final LugarMapaAdaptador.OnItemClickListener listener;
+    private final List<ListadoLugar> lugarListOriginal;
+    public void filtrado(String txtBuscar) {
+
+        // lugarList.clear();
+
+        if(txtBuscar.length() == 0)
+        {
+            lugarList.clear();
+            lugarList.addAll(lugarListOriginal);
+        }else{
+            if(txtBuscar.length()!=0) {
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoLugar> collection = lugarList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    lugarList.clear();
+                    lugarList.addAll(collection);
+                } //else {
+                lugarList.clear();
+                for (ListadoLugar l : lugarListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                        lugarList.add(l);
+                    }
+                    // }
+                }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
+    }
 
     public interface OnItemClickListener{
         void onItemClick(ListadoLugar item);
@@ -33,6 +69,8 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
+        lugarListOriginal = new ArrayList<>();
+        lugarListOriginal.addAll(lugarList);
     }
     View view1;
     public void viewEjem (View v)
