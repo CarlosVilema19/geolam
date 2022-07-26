@@ -59,6 +59,7 @@ public class EspecialidadListadoUsuario extends AppCompatActivity implements Sea
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
         txtBuscar = findViewById(R.id.svBuscar);
+        txtBuscar.setOnQueryTextListener(this);
         //llamar al mostrar resultado
         toolbar.show(this, "Especialidades", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
