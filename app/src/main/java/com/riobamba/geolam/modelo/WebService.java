@@ -14,6 +14,7 @@ public class WebService {
     public static final  String servicioValidarUsuario = "validar_usuario2.php";
     public static final  String servicioValidarAdministrador = "validar_admin.php";
     public static final  String servicioInsertar = "insertar_.php";
+    public static final  String servicioInsertarAdmin = "insertar_admin.php";
     public static final  String servicioEliminarLugar = "eliminar_lugar.php";
     public static final  String servicioListarUsuariosAdmin = "listar_usuarios_admin.php";
     public static final  String servicioEliminarUsuarios = "eliminar_usuarios.php";

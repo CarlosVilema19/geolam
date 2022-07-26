@@ -47,9 +47,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class registrar extends AppCompatActivity {
+public class RegistroAdmin extends AppCompatActivity {
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
     Button btnInsert;
     TextView login;
@@ -83,22 +84,25 @@ public class registrar extends AppCompatActivity {
         login=findViewById(R.id.txsignup);
 
         toolbar.show(this,"Registro",true);
+        login.setText("Ver Registrados");
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(registrar.this, Login.class);
+                Intent intent = new Intent(RegistroAdmin.this, ListadoUsuariosAdminControl.class);
                 startActivity(intent);
             }
         });
-
 
         //Imagen
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfoto);
         btnInsert = findViewById(R.id.btn_register);
         ivFoto = findViewById(R.id.imageViewPerfil);
 
-
+        /*setSupportActionBar(findViewById(R.id.toolbar));
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Registro");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +113,7 @@ public class registrar extends AppCompatActivity {
                 }
                 else {
 
-                  // PICK_IMAGE_REQUEST=1;
+                    // PICK_IMAGE_REQUEST=1;
                     //insertarUsusario();
                 }
 
@@ -126,7 +130,7 @@ public class registrar extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-               // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -150,7 +154,7 @@ public class registrar extends AppCompatActivity {
                 {
                     insertarUsusario();
                 }
-             else
+                else
                 {
                     btnInsert=findViewById(R.id.btn_register);
 
@@ -162,6 +166,12 @@ public class registrar extends AppCompatActivity {
 
     }
 
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         toolbar.getContexto(this);
@@ -171,15 +181,14 @@ public class registrar extends AppCompatActivity {
 
     //Bitmap
 
-
     public String getStringImagen(Bitmap bmp) {
 
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(CompressFormat.JPEG, 100, baos);
-            byte[] imageBytes = baos.toByteArray();
-            String  encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-            return encodedImage;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String  encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     public int validarCampos(){
@@ -187,48 +196,48 @@ public class registrar extends AppCompatActivity {
         int respuesta =0;
         String nameImage= String.valueOf(ivFoto.getTag());
 
-            if(nameImage.equals("bg1") && txtEmail.getText().toString().equals("") && txtName.getText().toString().equals("") && txtApe.getText().toString().equals("") && txtEdad.getText().toString().equals("")
+        if(nameImage.equals("bg1") && txtEmail.getText().toString().equals("") && txtName.getText().toString().equals("") && txtApe.getText().toString().equals("") && txtEdad.getText().toString().equals("")
                 && txtSexo.getText().toString().equals("") && pass.getText().toString().equals("") && confirmPass.getText().toString().equals("")){
-                Toast.makeText(registrar.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
-                txtEmail.setError("Ingrese el correo eletrónico");
-                txtEmail.requestFocus();
-                txtName.setError("Ingrese el nombre");
-                txtApe.setError("Ingrese el apellido");
-                txtEdad.setError("Ingrese la edad");
-                //txtSexo.setError("Seleccione el sexo");
-                pass.setError("Ingrese la contraseña");
-                confirmPass.setError("Ingrese nuevamente la contraseña");
-            }
-            else{ if(nameImage.equals("bg1")){Toast.makeText(registrar.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
-            else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(registrar.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
-                txtEmail.setError("Ingrese el correo eletrónico");
-                txtEmail.requestFocus();
-            }
-            else {if(txtName.getText().toString().equals("")){
-                txtName.setError("Ingrese el nombre");
-                txtName.requestFocus();
-            }
-            else {if(txtApe.getText().toString().equals("")){
-                txtApe.setError("Ingrese el apellido");
-                txtApe.requestFocus();
-            }
-            else {if(txtEdad.getText().toString().equals("")){
+            Toast.makeText(RegistroAdmin.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
+            txtEmail.setError("Ingrese el correo eletrónico");
+            txtEmail.requestFocus();
+            txtName.setError("Ingrese el nombre");
+            txtApe.setError("Ingrese el apellido");
+            txtEdad.setError("Ingrese la edad");
+            //txtSexo.setError("Seleccione el sexo");
+            pass.setError("Ingrese la contraseña");
+            confirmPass.setError("Ingrese nuevamente la contraseña");
+        }
+        else{ if(nameImage.equals("bg1")){Toast.makeText(RegistroAdmin.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
+        else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(RegistroAdmin.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
+            txtEmail.setError("Ingrese el correo eletrónico");
+            txtEmail.requestFocus();
+        }
+        else {if(txtName.getText().toString().equals("")){
+            txtName.setError("Ingrese el nombre");
+            txtName.requestFocus();
+        }
+        else {if(txtApe.getText().toString().equals("")){
+            txtApe.setError("Ingrese el apellido");
+            txtApe.requestFocus();
+        }
+        else {if(txtEdad.getText().toString().equals("")){
 
-            }
-            else {if (txtSexo.getText().toString().equals("")) {
-                Toast.makeText(this, "Por favor seleccione el sexo", Toast.LENGTH_SHORT).show();
-            }
-            else {if (pass.getText().toString().equals("")) {
-                pass.setError("Ingrese la contraseña");
-                pass.requestFocus();
-            }
-            else {if(confirmPass.getText().toString().equals("")){
-                confirmPass.setError("Confirme la contraseña");
-                confirmPass.requestFocus();
+        }
+        else {if (txtSexo.getText().toString().equals("")) {
+            Toast.makeText(this, "Por favor seleccione el sexo", Toast.LENGTH_SHORT).show();
+        }
+        else {if (pass.getText().toString().equals("")) {
+            pass.setError("Ingrese la contraseña");
+            pass.requestFocus();
+        }
+        else {if(confirmPass.getText().toString().equals("")){
+            confirmPass.setError("Confirme la contraseña");
+            confirmPass.requestFocus();
 
-            }
-                respuesta=2;
-                }
+        }
+            respuesta=2;
+        }
 
         }}}}}}}
 
@@ -236,22 +245,22 @@ public class registrar extends AppCompatActivity {
         {
             if(validarEmail()==1&&validarNombre()==1&&validarApellido()==1&&validarEdad()==1&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
             {
-                //Toast.makeText(registrar.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RegistroAdmin.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
                 respuesta=1;
 
             }
             else {
-                //Toast.makeText(registrar.this, "Alguno da 0", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RegistroAdmin.this, "Alguno da 0", Toast.LENGTH_SHORT).show();
             }
 
         }
         else{
 
-            //Toast.makeText(registrar.this, "No coinside alguna función", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegistroAdmin.this, "No coinside alguna función", Toast.LENGTH_SHORT).show();
         }
 
 
-    //}
+        //}
 
         return respuesta;
     }
@@ -264,9 +273,9 @@ public class registrar extends AppCompatActivity {
 
         // Comparar si está en el rango
 
-            int numero = Integer.parseInt(Edad);
+        int numero = Integer.parseInt(Edad);
         if (numero >= 15 && numero <= 100) {
-            //Toast.makeText(registrar.this, "Edad correcta", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegistroAdmin.this, "Edad correcta", Toast.LENGTH_SHORT).show();
 
             datCorrecto=1;
         } else {
@@ -291,7 +300,7 @@ public class registrar extends AppCompatActivity {
         int datCorrecto=0;
         String passwordInput = pass.getText().toString().trim();
         if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            Toast.makeText(registrar.this, "La contraseña es demasiado débil o fuera de rango", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegistroAdmin.this, "La contraseña es demasiado débil o fuera de rango", Toast.LENGTH_SHORT).show();
             pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)");
             pass.requestFocus();
         }
@@ -311,7 +320,7 @@ public class registrar extends AppCompatActivity {
 
         // Comparar si son iguales
         if (contrasenia.equals(confirmContrasenia)) {
-            //Toast.makeText(registrar.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegistroAdmin.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
@@ -350,7 +359,7 @@ public class registrar extends AppCompatActivity {
             }
 
         }
-    return emailCorrecto;
+        return emailCorrecto;
 
     }
 
@@ -392,18 +401,18 @@ public class registrar extends AppCompatActivity {
 
     private int validaExistenciaCorreo(ArrayList<String> opcionesCorreoUsuario) {
         int correcto=0;
-       if( opcionesCorreoUsuario.contains(txtEmail.getText().toString().trim()))
-       {
+        if( opcionesCorreoUsuario.contains(txtEmail.getText().toString().trim()))
+        {
 
-           //Toast.makeText(this, "¡Error! Usuario ya registrado", Toast.LENGTH_SHORT).show();
-           txtEmail.setError("Usuario ya registrado");
-           txtEmail.requestFocus();
-       }
-       else {
+            //Toast.makeText(this, "¡Error! Usuario ya registrado", Toast.LENGTH_SHORT).show();
+            txtEmail.setError("Usuario ya registrado");
+            txtEmail.requestFocus();
+        }
+        else {
 
-           correcto=1;
-       }
-    return correcto;
+            correcto=1;
+        }
+        return correcto;
 
     }
 
@@ -454,7 +463,7 @@ public class registrar extends AppCompatActivity {
     }
     private void insertarUsusario() {
 
-        String url = WebService.urlRaiz+WebService.servicioInsertar;
+        String url = WebService.urlRaiz+WebService.servicioInsertarAdmin;
         final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -463,7 +472,6 @@ public class registrar extends AppCompatActivity {
                 loading.dismiss();
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), Login.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -480,7 +488,7 @@ public class registrar extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Convertir bits a cadena
                 String imagen = getStringImagen(bitmap); //Imagen
-              ;
+                ;
                 //Obtener el nombre de la imagen
                 String nombreImagen = txtEmail.getText().toString().trim();
 

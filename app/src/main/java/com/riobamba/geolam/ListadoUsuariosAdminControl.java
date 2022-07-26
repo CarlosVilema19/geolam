@@ -54,7 +54,7 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         usuariosList = new ArrayList<>();
         //llamar al mostrar resultado
-        toolbar.show(this, "Gestión de usuarios", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Usuarios Registrados", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         MostrarResultado();
     }
