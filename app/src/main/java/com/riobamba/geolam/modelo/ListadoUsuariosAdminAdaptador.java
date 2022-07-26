@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoUsuariosAdminAdaptador.ViewHolder> {
 
@@ -21,6 +23,39 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
     private final List<ListadoUsuariosAdmin> usuariosList;
     final ListadoUsuariosAdminAdaptador.OnItemClickListener listener;
     final ListadoUsuariosAdminAdaptador.OnClickListener listener2;
+    private final List<ListadoUsuariosAdmin> usuariosListOriginal;
+    public void filtrado(String txtBuscar) {
+        // lugarList.clear();
+
+        if(txtBuscar.length() == 0)
+        {
+            usuariosList.clear();
+            usuariosList.addAll(usuariosListOriginal);
+        }else{
+            if(txtBuscar.length()!=0) {
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoUsuariosAdmin> collection = usuariosList.stream()
+                            .filter(i -> i.getNombreUsuarios().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    usuariosList.clear();
+                    usuariosList.addAll(collection);
+                } //else {
+                usuariosList.clear();
+                for (ListadoUsuariosAdmin l : usuariosListOriginal) {
+                    if (l.getNombreUsuarios().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                        usuariosList.add(l);
+                    }
+                    // }
+                }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
+    }
 
     public interface OnItemClickListener{
         void onItemClick(ListadoUsuariosAdmin item);
@@ -35,6 +70,8 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         this.usuariosList = usuariosList;
         this.listener = listener;
         this.listener2 = listener2;
+        usuariosListOriginal = new ArrayList<>();
+        usuariosListOriginal.addAll(usuariosList);
     }
     View view1;
     public void viewEjem (View v)

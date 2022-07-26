@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.riobamba.geolam.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLugarAdminAdaptador.ViewHolder> {
 
@@ -20,7 +22,38 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     final ListadoLugarAdminAdaptador.OnItemClickListener listener;
     final ListadoLugarAdminAdaptador.OnClickListener listener2;
     final ListadoLugarAdminAdaptador.OnClickActListener listener3;
+    private final List<ListadoLugarAdmin> TipoListOriginal;
 
+    public void filtrado(String txtBuscar) {
+        if(txtBuscar.length() == 0)
+        {
+            lugarList.clear();
+            lugarList.addAll(TipoListOriginal);
+        }else{
+            if(txtBuscar.length()!=0) {
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    List<ListadoLugarAdmin> collection = lugarList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                            .collect(Collectors.toList());
+                    lugarList.clear();
+                    lugarList.addAll(collection);
+                } //else {
+                lugarList.clear();
+                for (ListadoLugarAdmin l :TipoListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+
+                        lugarList.add(l);
+                    }
+                    // }
+                }
+            }
+        }
+        //medicListOriginal.clear();
+        // lugarList.clear();
+        notifyDataSetChanged();
+    }
 
 
     public interface OnItemClickListener{
@@ -41,6 +74,8 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         this.listener = listener;
         this.listener2 = listener2;
         this.listener3 = listener3;
+        TipoListOriginal=new ArrayList<>();
+        TipoListOriginal.addAll(lugarList);
     }
     View view1;
     public void viewEjem (View v)

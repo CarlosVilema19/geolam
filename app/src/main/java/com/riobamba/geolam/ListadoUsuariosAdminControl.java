@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.PostProcessor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,11 +37,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoUsuariosAdminControl extends AppCompatActivity {
+public class ListadoUsuariosAdminControl extends AppCompatActivity implements SearchView.OnQueryTextListener{
     //Declarar la lista y el recycler view
     List<ListadoUsuariosAdmin> usuariosList;
     RecyclerView recyclerView;
-    ListadoUsuariosAdminAdaptador adaptador;
+    ListadoUsuariosAdminAdaptador myadapter;
+    SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
@@ -53,6 +55,10 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         usuariosList = new ArrayList<>();
+
+        txtBuscar = findViewById(R.id.svBuscar);
+        txtBuscar.setOnQueryTextListener(this);
+
         //llamar al mostrar resultado
         toolbar.show(this, "Usuarios Registrados", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -80,7 +86,7 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity {
                                         obj.getInt("id_tipo_usuario")
                                 ));
                             }
-                            ListadoUsuariosAdminAdaptador myadapter = new ListadoUsuariosAdminAdaptador(ListadoUsuariosAdminControl.this, usuariosList,
+                            myadapter = new ListadoUsuariosAdminAdaptador(ListadoUsuariosAdminControl.this, usuariosList,
                                     new ListadoUsuariosAdminAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoUsuariosAdmin item) {moveToDescription(item);}
@@ -178,5 +184,17 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return true;
     }
 }

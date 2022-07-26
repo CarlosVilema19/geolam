@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,11 +35,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoCrud extends AppCompatActivity {
+public class ListadoCrud extends AppCompatActivity implements SearchView.OnQueryTextListener{
 //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
-    ListadoLugarAdminAdaptador adaptador;
+
+    ListadoLugarAdminAdaptador myadapter;
+    SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
@@ -51,6 +54,9 @@ public class ListadoCrud extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
+        txtBuscar = findViewById(R.id.svBuscar);
+        txtBuscar.setOnQueryTextListener(this);
+
     //llamar al mostrar resultado
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -75,7 +81,7 @@ public class ListadoCrud extends AppCompatActivity {
                                         obj.getInt("id_lugar")
                                 ));
                             }
-                            ListadoLugarAdminAdaptador myadapter = new ListadoLugarAdminAdaptador(ListadoCrud.this, lugarList,
+                            myadapter = new ListadoLugarAdminAdaptador(ListadoCrud.this, lugarList,
                                     new ListadoLugarAdminAdaptador.OnItemClickListener() {
                                 @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                 public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
@@ -190,4 +196,15 @@ public class ListadoCrud extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return true;
+    }
 }
