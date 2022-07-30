@@ -89,6 +89,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         private final ImageButton btnBorrar;
         private final ImageButton btnActualizar;
 
+
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
@@ -120,7 +121,9 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
-        viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
+        viewHolder.idLugar.setVisibility(View.VISIBLE);
+        String texto = "Id: " + listadoLugar.getId();
+        viewHolder.idLugar.setText(texto);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
