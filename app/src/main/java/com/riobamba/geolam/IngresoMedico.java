@@ -66,7 +66,7 @@ public class IngresoMedico extends AppCompatActivity {
         btnMostrarAgregado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMedico.this, MedicoListado.class);
+                Intent intent = new Intent(IngresoMedico.this, MedicoAdmin.class);
                 startActivity(intent);}
         });
 

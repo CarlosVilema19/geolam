@@ -147,6 +147,9 @@
             android:name=".RegistroAdmin"
             android:exported="true" />
         <activity
+            android:name=".MedicoAdmin"
+            android:exported="true" />
+        <activity
             android:name=".Bienvenida"
             android:exported="true">
             <intent-filter>
