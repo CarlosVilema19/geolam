@@ -105,9 +105,6 @@
             android:name=".Inicio"
             android:exported="true" />
         <activity
-            android:name=".ListadoTipologia"
-            android:exported="true" />
-        <activity
             android:name=".ListadoUsuariosAdminControl"
             android:exported="true" />
         <activity
@@ -148,6 +145,9 @@
             android:exported="true" />
         <activity
             android:name=".MedicoAdmin"
+            android:exported="true" />
+        <activity
+            android:name=".Tipologia"
             android:exported="true" />
         <activity
             android:name=".Bienvenida"

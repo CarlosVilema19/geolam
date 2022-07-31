@@ -156,7 +156,7 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity implements Se
     public void mensajeConfirmacion(ListadoUsuariosAdmin item) { //Método para confirmar la eliminación
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListadoUsuariosAdminControl.this);
         dialogo1.setTitle("Importante");
-        dialogo1.setMessage("¿Desea Eliminar el item?");
+        dialogo1.setMessage("Se eliminará todos los campos asociados a este usuario. ¿Desea continuar?");
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {

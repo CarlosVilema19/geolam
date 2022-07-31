@@ -43,7 +43,7 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
     ListadoLugarAdminAdaptador myadapter;
     SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
+    Integer tipo = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
                                 public void onClick(ListadoLugarAdmin item) {
                                     moveToActualizar(item);
                                 }
-                            });
+                            }, tipo);
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {

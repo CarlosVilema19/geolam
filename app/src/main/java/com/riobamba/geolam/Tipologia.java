@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoTipologia extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Tipologia extends AppCompatActivity implements SearchView.OnQueryTextListener {
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
@@ -43,11 +43,11 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
     ListadoLugarAdminAdaptador adaptador;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     ListadoLugarAdminAdaptador myadapter;
+    Integer tipo = 1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_admin);
-
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,7 +77,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                                         obj.getInt("id_tipologia_lugar")
                                 ));
                             }
-                           myadapter = new ListadoLugarAdminAdaptador(ListadoTipologia.this, lugarList,
+                            myadapter = new ListadoLugarAdminAdaptador(Tipologia.this, lugarList,
                                     new ListadoLugarAdminAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
@@ -93,7 +93,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                                 public void onClick(ListadoLugarAdmin item) {
                                     moveToActualizar(item);
                                 }
-                            });
+                            }, tipo);
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -117,9 +117,9 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
     }
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        Intent intent = new Intent(this,actualizar_lugar_medico.class);
+        /*Intent intent = new Intent(this,actualizar_lugar_medico.class);
         intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
@@ -127,7 +127,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
         String idLugar = button.getId().toString();
         String url2 = WebService.urlRaiz+WebService.servicioEliminarTipologia; //URL del web service
 
-        final ProgressDialog loading = ProgressDialog.show(ListadoTipologia.this, "Eliminando...", "Espere por favor");
+        final ProgressDialog loading = ProgressDialog.show(Tipologia.this, "Eliminando...", "Espere por favor");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
             @Override
@@ -135,7 +135,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                 //Oculta el progress dialog de confirmacion
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), ListadoTipologia.class));
+                startActivity(new Intent(getApplicationContext(), Tipologia.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -158,7 +158,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
     }
 
     public void mensajeConfirmacion(ListadoLugarAdmin item) { //Método para confirmar la eliminación
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListadoTipologia.this);
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Tipologia.this);
         dialogo1.setTitle("Importante");
         dialogo1.setMessage("Se eliminaran todos los lugares pertenecientes a esta tipología ¿Desea Continuar?");
         dialogo1.setCancelable(false);

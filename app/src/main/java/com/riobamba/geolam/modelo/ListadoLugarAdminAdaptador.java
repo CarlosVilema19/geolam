@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.riobamba.geolam.R;
+import com.riobamba.geolam.Tipologia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     final ListadoLugarAdminAdaptador.OnClickListener listener2;
     final ListadoLugarAdminAdaptador.OnClickActListener listener3;
     private final List<ListadoLugarAdmin> TipoListOriginal;
+    Integer tipo;
 
     public void filtrado(String txtBuscar) {
         if(txtBuscar.length() == 0)
@@ -68,7 +70,12 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         void onClick(ListadoLugarAdmin button);
     }
 
-    public ListadoLugarAdminAdaptador(Context mCtx, List<ListadoLugarAdmin> lugarList, OnItemClickListener listener, OnClickListener listener2, OnClickActListener listener3){
+    public ListadoLugarAdminAdaptador(Context mCtx,
+                                      List<ListadoLugarAdmin> lugarList,
+                                      OnItemClickListener listener,
+                                      OnClickListener listener2,
+                                      OnClickActListener listener3,
+                                      Integer tipo){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
@@ -76,6 +83,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         this.listener3 = listener3;
         TipoListOriginal=new ArrayList<>();
         TipoListOriginal.addAll(lugarList);
+        this.tipo = tipo;
     }
     View view1;
     public void viewEjem (View v)
@@ -137,6 +145,10 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
                 listener2.onClick(listadoLugar);
             }
         });
+
+        if(tipo == 1){viewHolder.btnActualizar.setVisibility(View.GONE);
+            viewHolder.idLugar.setVisibility(View.GONE);}
+        if(tipo == 2){viewHolder.idLugar.setVisibility(View.GONE);}
 
         viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override

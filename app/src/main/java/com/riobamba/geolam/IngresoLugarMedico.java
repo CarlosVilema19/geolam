@@ -529,7 +529,6 @@ public class IngresoLugarMedico extends AppCompatActivity {
                         for(int i=0;i<array.length();i++){
 
                             JSONObject object = array.getJSONObject(i);
-                            ListadoTipologia tipo=new ListadoTipologia(object);
                             //Carga de datos
                             adaptadorTipo.add(tipo);
 
