@@ -69,7 +69,6 @@ public ListadoTipologiaAdaptador(@NonNull Context context){
             ListadoTipologia listTipo = getItem(position);
             tvTipo.setText(listTipo.toString());
             //TextView id= view.findViewById(R.id.viewItem2);
-            //ListadoTipologia listTipo2 = getItem(position);
            // id.setText(listTipo.ofInt());
         }
 

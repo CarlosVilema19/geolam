@@ -12,8 +12,8 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class GestionLugares extends AppCompatActivity {
-    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico, btnAsignarMedico, btnAsignarEspecialidades,
-            btnActualizarLugarMedico;
+    Button  btnTipologia, btnEspecialidad, btnLugares, btnMedico,
+            btnAsignarMedico, btnAsignarEspecialidades;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
@@ -27,7 +27,6 @@ public class GestionLugares extends AppCompatActivity {
         btnLugares=findViewById(R.id.btnLugares);
         btnAsignarMedico=findViewById(R.id.btnAsignarMedico);
         btnAsignarEspecialidades=findViewById(R.id.btnAsignarEspecialidad);
-        btnActualizarLugarMedico=findViewById(R.id.btnActualizarLugar);
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
@@ -35,14 +34,6 @@ public class GestionLugares extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GestionLugares.this, IngresoTipologia.class);
-                startActivity(intent);
-            }
-        });
-
-        btnActualizarLugarMedico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GestionLugares.this, actualizar_lugar_medico.class);
                 startActivity(intent);
             }
         });
