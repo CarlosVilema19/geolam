@@ -52,5 +52,7 @@ public class WebService {
     public static final  String servicioMedicoAdmin="medico_admin.php";
     public static final  String servicioEliminarMedico="eliminar_medico.php";
     public static final  String servicioEliminarEspecialidad="eliminar_especialidad.php";
+    public static final  String servicioAsignacionMedicoTrabaja="asignacion_medico_trabaja.php";
+    public static final  String servicioEliminarAsignacionMedtrab="eliminar_asignacion_medtrab.php";
 
 }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,7 @@ public class AsignarMedico extends AppCompatActivity {
     String listLugarMedicoNombres;
 
     Button btnGuardarAsignacion;
+    Button btnAsignaciones;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -86,6 +88,7 @@ public class AsignarMedico extends AppCompatActivity {
         tvIdEspecialidad=findViewById(R.id.TextViewIDEspecialidad);
         tvIdLugarMedico=findViewById(R.id.TextViewIDLugar);
         btnGuardarAsignacion = findViewById(R.id.btn_guardarAsignarMedic);
+        btnAsignaciones = findViewById(R.id.btnAsignaciones);
 
         //AutoComplete
         //adaptadorMedico=new ListadoAsignarMedicoAdaptador(this);
@@ -103,6 +106,15 @@ public class AsignarMedico extends AppCompatActivity {
 
 
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
+
+        btnAsignaciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsignarMedico.this, MedicoAsignacion.class);
+                startActivity(intent);
+            }
+        });
 
 
         btnGuardarAsignacion.setOnClickListener(new View.OnClickListener() {

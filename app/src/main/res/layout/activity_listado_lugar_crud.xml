@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
+                android:textAllCaps="true"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/tvId"
@@ -47,13 +48,15 @@
 
 
         <LinearLayout
+            android:id="@+id/llButtonList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="4dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="25dp"
-
+            android:gravity="center"
+            android:layout_centerVertical="true"
             android:orientation="vertical">
 
 
@@ -73,6 +76,7 @@
                 android:layout_width="30dp"
                 android:layout_height="28dp"
                 android:layout_margin="5dp"
+                android:layout_gravity="center"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:focusable="true"
