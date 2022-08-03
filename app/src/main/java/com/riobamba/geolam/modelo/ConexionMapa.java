@@ -53,9 +53,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.riobamba.geolam.Listado;
+import com.riobamba.geolam.ListadoUsuariosAdminControl;
 import com.riobamba.geolam.ListarLugarUsuario;
 import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.R;
+import com.riobamba.geolam.RegistroAdmin;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
 
 import org.json.JSONArray;
@@ -118,6 +120,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
         //llamada a la funcion para obtener las coordenadas
@@ -146,12 +149,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         // Con LocationCallback enviamos notificaciones de la ubicación del usuario
         mlocationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
+            public void onLocationResult(@NonNull LocationResult locationResult) {
 
                 // Si no hay coordenadas de la ubicación del usuario le pasamos un return
-                if (locationResult == null) {
-                    return;
-                }
 
                 // Cuando obtenemos la coordenadas de ubicación del usuario, agregamos
                 // un marcador para la ubicación del usuario con el método agregarMarcador()
@@ -159,8 +159,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                     agregarMarcador(location.getLatitude(),location.getLongitude());
                     //Log.e("Coordenadas: ", location.toString());
                 }
-
-            };
+                super.onLocationResult(locationResult);
+            }
         };
 
         // Obtenemos actualizaciones de la ubicación del usuario
@@ -172,7 +172,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
         // Verificamos la configuración de los permisos de ubicación
         checkLocationSetting(builder);
-
         //habilitarUbicacion();
 
 
@@ -189,13 +188,12 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
     }
 
     public void obtenerCoordenadas()
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
         String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
@@ -285,9 +283,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         SharedPreferences.Editor editor = preferences.edit();
         for(int i = 0; i <= count; i++)
         {
-            editor.putString("distancia_mapa", distancia.toString());
+            editor.putString("distancia_mapa", Arrays.toString(distancia));
         }
-        editor.commit();
+        editor.apply();
 
     }
 
@@ -321,10 +319,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         Task<LocationSettingsResponse> task = cliente.checkLocationSettings(builder.build());
 
         // Adjuntamos OnSuccessListener a la task o tarea
-        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+        task.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-
                 // Si la configuración de ubicación es correcta,
                 // se puede iniciar solicitudes de ubicación del usuario
                 // mediante el método iniciarActualizacionesUbicacion() que crearé más abajo.
@@ -334,10 +331,10 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         // Adjuntamos addOnCompleteListener a la task para gestionar si la tarea se realiza correctamente
-        task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
 
+        task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
             @Override
-            public void onComplete(Task<LocationSettingsResponse> task) {
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
                     // En try podemos hacer 'algo', si la configuración de ubicación es correcta,
@@ -434,7 +431,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
