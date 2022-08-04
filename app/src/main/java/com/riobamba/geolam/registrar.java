@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.util.Base64;
@@ -22,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.hash.Hashing;
+import com.riobamba.geolam.modelo.Proceso;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -44,7 +47,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -69,6 +75,14 @@ public class registrar extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST = 1;
     int emailCorrecto = 0;
 
+    String edadUsu = "";
+    private int dia,mes,anio;
+    Button btnFechaIngreso;
+    EditText txtFechaingreso;
+
+    String edadCalculada;
+    String fechaNac;
+
     //Items Sexo F y M
     AutoCompleteTextView autoCompleteTxtEdSexo;
     ArrayAdapter<String> adapterItems;
@@ -91,6 +105,51 @@ public class registrar extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        //Calendario Edad
+
+        txtFechaingreso = findViewById(R.id.edFecha);
+        txtEdad = findViewById(R.id.ededad);
+        btnFechaIngreso = findViewById(R.id.btnFechaIngreso);
+        Proceso proc = new Proceso();
+
+        btnFechaIngreso.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(v==btnFechaIngreso)
+                {
+                    final Calendar calen = Calendar.getInstance();
+                    dia = calen.get(Calendar.DAY_OF_MONTH);
+                    mes = calen.get(Calendar.MONTH);
+                    anio = calen.get(Calendar.YEAR);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(registrar.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            String fecha = dayOfMonth+"/"+(month+1)+"/"+year;
+                            DecimalFormat formato2 = new DecimalFormat("#00");
+                            fechaNac = year+formato2.format((month+1))+formato2.format(dayOfMonth);
+                            txtFechaingreso.setText(fecha);
+                            //Edad en en anios y meses
+                            edadCalculada = proc.calcularEdad(year,month+1,dayOfMonth);
+                            //Edad en anios
+                            edadUsu = proc.calcularEdadAnios(year,month+1,dayOfMonth);
+                            txtEdad.setText(edadCalculada);
+
+
+                        }
+                    },dia,mes,anio);
+                    datePickerDialog.show();
+                    datePickerDialog.getDatePicker().setMaxDate(new Date().getTime()-(proc.calcularAniosMili(15)));
+                    datePickerDialog.getDatePicker().setMinDate(new Date().getTime()-(proc.calcularAniosMili(100)));
+                }
+
+            }
+        });
+
+
+
+
 
 
         //Imagen
@@ -136,7 +195,6 @@ public class registrar extends AppCompatActivity {
         txtEmail = findViewById(R.id.etemail);
         txtName = findViewById(R.id.ednombre);
         txtApe = findViewById(R.id.edapellido);
-        txtEdad = findViewById(R.id.ededad);
         txtSexo = findViewById(R.id.edsexo);
         pass = findViewById(R.id.etcontrasenia);
         confirmPass=findViewById(R.id.etconfirmcontrasenia);
@@ -234,7 +292,7 @@ public class registrar extends AppCompatActivity {
 
         if(respuesta==2)
         {
-            if(validarEmail()==1&&validarNombre()==1&&validarApellido()==1&&validarEdad()==1&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
+            if(validarEmail()==1&&validarNombre()==1&&validarApellido()==1&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
             {
                 //Toast.makeText(registrar.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
                 respuesta=1;
@@ -258,7 +316,7 @@ public class registrar extends AppCompatActivity {
 
 
 
-    private int validarEdad(){
+    /*private int validarEdad(){
         int datCorrecto=0;
         String Edad = txtEdad.getText().toString();
 
@@ -278,8 +336,11 @@ public class registrar extends AppCompatActivity {
 
 
 
+
+
+
         return datCorrecto;
-    }
+    }*/
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[@#$%^&+=*])"+     // al menos un caracter especial
@@ -489,9 +550,10 @@ public class registrar extends AppCompatActivity {
                 parametros.put("email", txtEmail.getText().toString().trim());
                 parametros.put("nombre_usuario", txtName.getText().toString().trim());
                 parametros.put("apellido_usuario", txtApe.getText().toString().trim());
-                parametros.put("edad", txtEdad.getText().toString().trim());
+                parametros.put("edad", edadUsu);
                 parametros.put("sexo", txtSexo.getText().toString());
                 parametros.put("contrasenia", getSHA256(pass.getText().toString().trim()));
+                parametros.put("fecha_nacimiento", fechaNac);//String.valueOf(fechaNacimiento));
 
                 //Imagen
 

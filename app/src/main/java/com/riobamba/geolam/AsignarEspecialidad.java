@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
     String listIDLugarMedicoID;
     String listIDLugarMedicoNombres;
     Button btnGuardarAsig;
+    Button btnAsig;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -71,6 +73,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
         tvIdEspecialidad = findViewById(R.id.TextViewIDEspecialidad2);
         tvIdLugarMedico = findViewById(R.id.TextViewIDLugarMedico2);
         btnGuardarAsig = findViewById(R.id.btn_guardarAsigEspecialidad);
+        btnAsig = findViewById(R.id.btnAsignacionEspe);
 
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -84,6 +87,13 @@ public class AsignarEspecialidad extends AppCompatActivity {
         //autoCompleteOpcionesLugarMedico.setAdapter(adaptadorLugarMedico);
 
 
+        btnAsig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsignarEspecialidad.this, EspecialidadAsignacion.class);
+                startActivity(intent);
+            }
+        });
 
         //Conexión al Servidor- Consulta AutoComplete Especialidad
 

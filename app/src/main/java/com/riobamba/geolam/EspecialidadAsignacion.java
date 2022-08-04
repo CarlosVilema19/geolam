@@ -22,8 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.AsignacionEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.AsignacionMedico;
-import com.riobamba.geolam.modelo.AsignacionMedicoAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -36,12 +36,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.OnQueryTextListener*/{
+public class EspecialidadAsignacion extends AppCompatActivity /*implements SearchView.OnQueryTextListener*/{
     //Declarar la lista y el recycler view
     List<AsignacionMedico> lugarList;
     RecyclerView recyclerView;
 
-    AsignacionMedicoAdaptador myadapter;
+    AsignacionEspecialidadAdaptador myadapter;
     SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     Integer tipo = 1;
@@ -68,7 +68,7 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
     public void MostrarResultado()
     {
         //URL del web service
-        String url = WebService.urlRaiz + WebService.servicioAsignacionMedicoTrabaja;
+        String url = WebService.urlRaiz + WebService.servicioAsignacionEspeLugar;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -81,23 +81,23 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
                                 lugarList.add(new AsignacionMedico(
                                         obj.getString("nombre_lugar"),
                                         obj.getString("especialidad"),
-                                        obj.getString("nombre_medico"),
+                                        "",
                                         obj.getInt("id_lugar"),
                                         obj.getInt("id_especialidad"),
-                                        obj.getInt("id_medico")
+                                        0
                                 ));
                             }
-                            myadapter = new AsignacionMedicoAdaptador(MedicoAsignacion.this, lugarList,
-                                    new AsignacionMedicoAdaptador.OnItemClickListener() {
+                            myadapter = new AsignacionEspecialidadAdaptador(EspecialidadAsignacion.this, lugarList,
+                                    new AsignacionEspecialidadAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(AsignacionMedico item) {moveToDescription(item);}
-                                    }, new AsignacionMedicoAdaptador.OnClickListener() {
+                                    }, new AsignacionEspecialidadAdaptador.OnClickListener() {
 
                                 @Override//llamada al método para borrar presionando sobre el botón
                                 public void onClick(AsignacionMedico item) {
                                     mensajeConfirmacion(item);
                                 }
-                            }, new AsignacionMedicoAdaptador.OnClickActListener() {
+                            }, new AsignacionEspecialidadAdaptador.OnClickActListener() {
 
                                 @Override//llamada al método para borrar presionando sobre el botón
                                 public void onClick(AsignacionMedico item) {
@@ -135,10 +135,9 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
     {
         String idLugar = button.getIdLugar().toString();
         String idEspecialidad = button.getIdEspecialidad().toString();
-        String idMedico = button.getIdMedico().toString();
-        String url2 = WebService.urlRaiz+WebService.servicioEliminarAsignacionMedtrab; //URL del web service
+        String url2 = WebService.urlRaiz+WebService.servicioEliminarAsignacionEspe; //URL del web service
 
-        final ProgressDialog loading = ProgressDialog.show(MedicoAsignacion.this, "Eliminando...", "Espere por favor");
+        final ProgressDialog loading = ProgressDialog.show(EspecialidadAsignacion.this, "Eliminando...", "Espere por favor");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
             @Override
@@ -146,7 +145,7 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
                 //Oculta el progress dialog de confirmacion
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MedicoAsignacion.class));
+                startActivity(new Intent(getApplicationContext(), EspecialidadAsignacion.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -160,7 +159,6 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", idLugar);
                 parametros.put("id_especialidad", idEspecialidad);
-                parametros.put("id_medico", idMedico);
                 loading.dismiss();
                 return parametros;
             }
@@ -171,9 +169,9 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
     }
 
     public void mensajeConfirmacion(AsignacionMedico item) { //Método para confirmar la eliminación
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(MedicoAsignacion.this);
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(EspecialidadAsignacion.this);
         dialogo1.setTitle("Importante");
-        dialogo1.setMessage("¿Desea eliminar esta asignación?");
+        dialogo1.setMessage("Los datos asociados a esta asignación también se eliminarán ¿Desea continuar?");
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
