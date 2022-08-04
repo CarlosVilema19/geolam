@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -43,7 +45,7 @@ public class RecuperacionContrasenia extends AppCompatActivity  {
 
     String usuario2;
     String admin2;
-
+    Toolbar toolbar = new Toolbar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class RecuperacionContrasenia extends AppCompatActivity  {
         Intent recibirUsuario = getIntent();
         usuario2 = recibirUsuario.getStringExtra("usuario");
 
+        toolbar.show(this,"Restablecer contraseña",true);
         Intent recibirAdmin = getIntent();
         admin2 = recibirAdmin.getStringExtra("admin");
         //AlertDialog dialog = builder.create();
@@ -326,6 +329,13 @@ public class RecuperacionContrasenia extends AppCompatActivity  {
 
         stringRequest.setTag("REQUEST");
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -8,9 +8,7 @@ public class WebService {
     public static final  String servicioAgregarEspecialidad = "agregar_especialidad.php";
     public static final  String servicioAgregarTipologia = "agregar_tipologia.php";
     public static final  String servicioAgregarMedico = "agregar_medico.php";
-    //public static final  String servicioInsertarLugar = "insertar_lugar.php";
     public static final  String servicioInsertarLugar = "insertar_lugar2.php";
-    //public static final  String servicioValidarUsuario = "validar_usuario.php";
     public static final  String servicioValidarUsuario = "validar_usuario2.php";
     public static final  String servicioValidarAdministrador = "validar_admin.php";
     public static final  String servicioInsertar = "insertar_.php";
@@ -31,10 +29,10 @@ public class WebService {
     public static final  String servicioAsignarLugarMedico=  "asignarLugarMedico.php";
     public static final  String servicioInsertarOpinion = "insertar_opinion.php";
     public static final  String servicioIngresarMedicoTrabaja= "ingreso_medico_trabaja2.php";
-    public  static final  String servicioIngresarEspecialidadLugar= "ingreso_especialidadLugar.php";
-    public  static final  String servicioExistenciaCorreo="existencia_correo.php";
-    public  static final  String servicioExistenciaCorreoRC="existencia_correo_RC.php";
-    public  static final  String servicioExistenciaCorreoRCUsuario="existencia_correo_RC_Usuario.php";
+    public static final  String servicioIngresarEspecialidadLugar= "ingreso_especialidadLugar.php";
+    public static final  String servicioExistenciaCorreo="existencia_correo.php";
+    public static final  String servicioExistenciaCorreoRC="existencia_correo_RC.php";
+    public static final  String servicioExistenciaCorreoRCUsuario="existencia_correo_RC_Usuario.php";
     public static final  String servicioListarOpinion = "listar_opinion.php";
     public static final  String servicioEliminarOpinion = "eliminar_opinion.php";
     public static final  String servicioIDMedico = "id_medico.php";
@@ -54,5 +52,8 @@ public class WebService {
     public static final  String servicioEliminarEspecialidad="eliminar_especialidad.php";
     public static final  String servicioAsignacionMedicoTrabaja="asignacion_medico_trabaja.php";
     public static final  String servicioEliminarAsignacionMedtrab="eliminar_asignacion_medtrab.php";
+    public static final  String servicioAsignacionEspeLugar="asignacion_especialidad_lugar.php";
+    public static final  String servicioEliminarAsignacionEspe="eliminar_asignacion_especialidad.php";
+
 
 }
