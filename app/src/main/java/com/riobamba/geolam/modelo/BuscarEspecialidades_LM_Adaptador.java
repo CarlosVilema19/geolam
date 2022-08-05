@@ -1,6 +1,7 @@
 package com.riobamba.geolam.modelo;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.riobamba.geolam.BuscarEspecialidades_LM;
@@ -17,6 +19,7 @@ import com.riobamba.geolam.Buscar_Especialidades;
 import com.riobamba.geolam.R;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class BuscarEspecialidades_LM_Adaptador extends ArrayAdapter<BuscarEspecialidades_LM> {
     private ArrayList<BuscarEspecialidades_LM> arrayList= new ArrayList<>();
@@ -51,14 +54,16 @@ public class BuscarEspecialidades_LM_Adaptador extends ArrayAdapter<BuscarEspeci
    @Override
     public  void add(@Nullable BuscarEspecialidades_LM object)
    {
+       //arrayList.clear();
        arrayList.add(object);
        notifyDataSetChanged();
    }
 
    @Override
     public void clear(){
-       // arrayList= new ArrayList<>();
-        arrayList.clear();
+       arrayList= new ArrayList<>();
+       // arrayList.clear();
+
         notifyDataSetChanged();
    }
 
@@ -76,4 +81,6 @@ public class BuscarEspecialidades_LM_Adaptador extends ArrayAdapter<BuscarEspeci
         }
        return view;
    }
+
+
 }
