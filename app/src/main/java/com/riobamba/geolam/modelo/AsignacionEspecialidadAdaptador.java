@@ -1,6 +1,7 @@
 package com.riobamba.geolam.modelo;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLugarAdminAdaptador.ViewHolder> {
+public class AsignacionEspecialidadAdaptador extends RecyclerView.Adapter<AsignacionEspecialidadAdaptador.ViewHolder> {
 
     private final Context mCtx;
-    private final List<ListadoLugarAdmin> lugarList;
-    final ListadoLugarAdminAdaptador.OnItemClickListener listener;
-    final ListadoLugarAdminAdaptador.OnClickListener listener2;
-    final ListadoLugarAdminAdaptador.OnClickActListener listener3;
-    private final List<ListadoLugarAdmin> TipoListOriginal;
+    private final List<AsignacionMedico> lugarList;
+    final AsignacionEspecialidadAdaptador.OnItemClickListener listener;
+    final AsignacionEspecialidadAdaptador.OnClickListener listener2;
+    final AsignacionEspecialidadAdaptador.OnClickActListener listener3;
+    private final List<AsignacionMedico> TipoListOriginal;
     Integer tipo;
-
+/*
     public void filtrado(String txtBuscar) {
         if(txtBuscar.length() == 0)
         {
@@ -55,27 +56,27 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         //medicListOriginal.clear();
         // lugarList.clear();
         notifyDataSetChanged();
-    }
+    }*/
 
 
     public interface OnItemClickListener{
-        void onItemClick(ListadoLugarAdmin item);
+        void onItemClick(AsignacionMedico item);
     }
 
     public interface OnClickListener{
-        void onClick(ListadoLugarAdmin button);
+        void onClick(AsignacionMedico button);
     }
 
     public interface OnClickActListener{
-        void onClick(ListadoLugarAdmin button);
+        void onClick(AsignacionMedico button);
     }
 
-    public ListadoLugarAdminAdaptador(Context mCtx,
-                                      List<ListadoLugarAdmin> lugarList,
-                                      OnItemClickListener listener,
-                                      OnClickListener listener2,
-                                      OnClickActListener listener3,
-                                      Integer tipo){
+    public AsignacionEspecialidadAdaptador(Context mCtx,
+                                     List<AsignacionMedico> lugarList,
+                                     OnItemClickListener listener,
+                                     OnClickListener listener2,
+                                     OnClickActListener listener3,
+                                     Integer tipo){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
@@ -125,13 +126,24 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        ListadoLugarAdmin listadoLugar = lugarList.get(position);
+        AsignacionMedico listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
-        viewHolder.idLugar.setVisibility(View.VISIBLE);
-        String texto = "Id: " + listadoLugar.getId();
-        viewHolder.idLugar.setText(texto);
+
+        String lug, med, esp;
+
+        med = "<b>Médico: </b>";
+        esp = "<b>Especalidad: </b>";
+        lug = "<br/><br/><b>Lugar: </b>";
+
+
+        String texto = esp + listadoLugar.getEspecialidad()  +
+                lug+ listadoLugar.getNombreLugar();
+
+
+        viewHolder.nombreLugar.setText(Html.fromHtml(texto));
+        viewHolder.nombreLugar.setTextSize(16);
+        viewHolder.idLugar.setVisibility(View.GONE);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,12 +162,6 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
             viewHolder.idLugar.setVisibility(View.GONE);}
         if(tipo == 2){viewHolder.idLugar.setVisibility(View.GONE);}
 
-        viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener3.onClick(listadoLugar);
-            }
-        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -164,6 +170,3 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         return lugarList.size();
     }
 }
-
-
-

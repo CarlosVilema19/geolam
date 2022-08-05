@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="false"
@@ -107,9 +108,6 @@
             android:name=".Inicio"
             android:exported="true" />
         <activity
-            android:name=".ListadoTipologia"
-            android:exported="true" />
-        <activity
             android:name=".ListadoUsuariosAdminControl"
             android:exported="true" />
         <activity
@@ -147,6 +145,18 @@
             android:exported="true" />
         <activity
             android:name=".RegistroAdmin"
+            android:exported="true" />
+        <activity
+            android:name=".MedicoAdmin"
+            android:exported="true" />
+        <activity
+            android:name=".Tipologia"
+            android:exported="true" />
+        <activity
+            android:name=".MedicoAsignacion"
+            android:exported="true" />
+        <activity
+            android:name=".EspecialidadAsignacion"
             android:exported="true" />
         <activity
             android:name=".Bienvenida"

@@ -1,8 +1,8 @@
 package com.riobamba.geolam.modelo;
 
-import android.content.Intent;
-
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Proceso {
     double temp = 100000;
@@ -43,5 +43,50 @@ public class Proceso {
             }
         }
         return  lugarDist;
+    }
+
+    public String calcularEdad(int anio, int mes, int dia)
+    {
+        Period period;
+        String meses;
+        LocalDate nacimiento, actual;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            nacimiento = LocalDate.of(anio, mes, dia);
+            actual = LocalDate.now();
+            // using period
+            period = Period.between(nacimiento, actual);
+            if(period.getMonths()==1) {meses = " mes";}
+            else{meses = " meses";}
+            return period.getYears()+" años" /*+ period.getMonths()+meses*/;
+        } else return "";
+    }
+
+    public String calcularEdadAnios(int anio, int mes, int dia)
+    {
+        Period period;
+        String meses;
+        LocalDate nacimiento, actual;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            nacimiento = LocalDate.of(anio, mes, dia);
+            actual = LocalDate.now();
+            // using period
+            period = Period.between(nacimiento, actual);
+            if(period.getMonths()==1) {meses = " mes";}
+            else{meses = " meses";}
+            return String.valueOf(period.getYears());
+        } else return "";
+    }
+
+
+
+
+
+    public  long calcularAniosMili(int anios)
+    {
+        return ((long) anios *365*24*60*60*1000)+
+                ((long) (anios / 4) *24*60*60*1000)+
+                (24*60*60*1000);
     }
 }

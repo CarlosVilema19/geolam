@@ -10,8 +10,26 @@
     <include
         layout="@layout/activity_menu_toolbar"
         />
-    <androidx.cardview.widget.CardView
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAsignaciones"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/iMenuSupe"
+        android:layout_alignParentEnd="true"
+        android:background="#00FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/consultar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/btnAsignaciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"

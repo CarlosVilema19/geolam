@@ -60,7 +60,7 @@
     <string name="rec_pagina_web">Página Web (opcional)</string>
     <string name="rec_latitud_lugar">Latitud</string>
     <string name="rec_longitud_lugar">Longitud</string>
-    <string name="rec_guardar_informacion">Guardar</string>
+    <string name="rec_guardar_informacion">Añadir</string>
     <string name="restabecer">Enviar</string>
     <string name="correo_electronico_restablecer">Correo electrónico</string>
     <string name="mensaje_restablecer">Enviaremos una nueva contraseña a tu correo</string>
@@ -92,4 +92,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="consultar">Consultar</string>
+    <string name="mensaje">Se enviará un enlace de recuperación a tu correo</string>
 </resources>

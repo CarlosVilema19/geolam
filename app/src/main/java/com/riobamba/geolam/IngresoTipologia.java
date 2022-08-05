@@ -61,7 +61,7 @@ public class IngresoTipologia extends AppCompatActivity {
         btnTipologiaAgregada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoTipologia.this, ListadoTipologia.class);
+                Intent intent = new Intent(IngresoTipologia.this, Tipologia.class);
                 startActivity(intent);
             }
         });

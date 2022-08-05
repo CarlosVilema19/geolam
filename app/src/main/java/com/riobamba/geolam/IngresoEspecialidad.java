@@ -125,6 +125,8 @@ public class IngresoEspecialidad extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(IngresoEspecialidad.this, EspecialidadListadoAdmin.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override

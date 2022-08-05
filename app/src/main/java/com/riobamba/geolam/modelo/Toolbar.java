@@ -75,26 +75,6 @@ public class Toolbar extends AppCompatActivity{
     }
 
 
-    /*public void ejecutarItemAdmin(Context ctx, MenuItem item, AppCompatActivity activities)
-    {
-        if(item.getItemId()==R.id.iInicioMenu){
-            activities.startActivity(new Intent (ctx,inicioClass));
-        }
-        if(item.getItemId()==R.id.iSalir){
-            salir(activities);
-        }
-        if(item.getItemId()==R.id.iCerrarSesion)
-        {
-            guardarEstadoButton(activities);
-            activities.startActivity(new Intent(ctx, login));
-        }
-        if(item.getItemId()==R.id.iMisDatos)
-        {
-            activities.startActivity(new Intent(ctx, datosUsuClass));
-        }
-    }*/
-
-
     public Intent retornarInicio() {return new Intent(ctx, inicioClass);}
     public Intent retornarMapa() {return new Intent(ctx, conexionMapaClass);}
     public Intent retornarEspecialidad() {return new Intent(ctx, listadoEspecialidadClass);}

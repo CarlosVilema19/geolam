@@ -43,7 +43,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
     ListadoLugarAdminAdaptador myadapter;
     SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
+    Integer tipo = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
                                 public void onClick(ListadoLugarAdmin item) {
                                     moveToActualizar(item);
                                 }
-                            });
+                            }, tipo);
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -118,9 +118,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
     }
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        Intent intent = new Intent(this,LugarMedico.class);
-        intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);
+
     }
 
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item

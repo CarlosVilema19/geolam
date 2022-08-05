@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
@@ -32,8 +34,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ListadoCategoria;
 import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
+import com.riobamba.geolam.modelo.ListadoLugar;
+import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.ListadoTipologia;
 import com.riobamba.geolam.modelo.ListadoTipologiaAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -91,13 +96,14 @@ public class actualizar_lugar_medico extends AppCompatActivity {
     AutoCompleteTextView autoCompleteOpcionesCategoria;
     AutoCompleteTextView autoCompleteOpcionesTipologia;
 
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_lugar_medico);
 
-        //AutoCompleteTextView
+        toolbar.show(this, "Actualizar Datos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         //adaptadorCategoria = new ListadoCategoriaAdaptador(this);
         autoCompleteOpcionesCategoria=findViewById(R.id.autoCat2);
@@ -152,17 +158,20 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         });
 
         //Lugar Médico
-        actualizarDatos();
+        ListadoLugarAdmin listadoLugar = (ListadoLugarAdmin) getIntent().getSerializableExtra("ListadoLugarAdmin");
+        actualizarDatos(listadoLugar);
 
 
     }
 
-    private void actualizarDatos() {
+    private void actualizarDatos(ListadoLugarAdmin listadoLugar) {
         categoria();
         tipologia();
 
+        String id_lugar = listadoLugar.getId().toString();
+
         String url3=WebService.urlRaiz+WebService.servicioObtenerDatosLugarMedico;
-        StringRequest stringRequest3= new StringRequest(Request.Method.GET,url3,
+        StringRequest stringRequest3= new StringRequest(Request.Method.POST,url3,
                 response ->
                 {
                     try{
@@ -195,7 +204,14 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                     }
                 },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
 
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", id_lugar);
+                return parametros;
+            }
+        };
         stringRequest3.setTag("REQUEST");
         RequestQueue queue3= Volley.newRequestQueue(this);
         queue3.add(stringRequest3);
@@ -281,7 +297,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
                             JSONObject object = array.getJSONObject(i);
                             //JSONObject object2 = array.getJSONObject(i);
-                            //ListadoTipologia tipo=new ListadoTipologia(object);
                             //Carga de datos
                             //adaptadorTipo.add(tipo);
                             listTipologiasNombres=(object.getString("DESCRIPCION_TIPO_LUGAR"));
@@ -729,7 +744,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 loading.dismiss();
 
                 //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Se ha actualizado el lugar correctamente", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(getApplicationContext(), Login.class));
                 //finish();
             }
@@ -778,5 +793,18 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         //Agregar solicitud a la cola
         requestQueue.add(stringRequest);
     }
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
 }

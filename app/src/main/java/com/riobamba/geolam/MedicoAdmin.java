@@ -35,14 +35,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListadoTipologia extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQueryTextListener{
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
-    SearchView txtBuscar;
-    ListadoLugarAdminAdaptador adaptador;
-    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+
     ListadoLugarAdminAdaptador myadapter;
+    SearchView txtBuscar;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+    Integer tipo = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,17 +54,19 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
-        //llamar al mostrar resultado
-        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
         txtBuscar = findViewById(R.id.svBuscar);
         txtBuscar.setOnQueryTextListener(this);
+
+        //llamar al mostrar resultado
+        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
         MostrarResultado();
     }
 
     public void MostrarResultado()
     {
         //URL del web service
-        String url = WebService.urlRaiz + WebService.servicioListarTipologiaAdmin;
+        String url = WebService.urlRaiz + WebService.servicioMedicoAdmin;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -73,11 +77,11 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
-                                        obj.getString("descripcion_tipo_lugar"),
-                                        obj.getInt("id_tipologia_lugar")
+                                        obj.getString("nombre_medico"),
+                                        obj.getInt("id_medico")
                                 ));
                             }
-                           myadapter = new ListadoLugarAdminAdaptador(ListadoTipologia.this, lugarList,
+                            myadapter = new ListadoLugarAdminAdaptador(MedicoAdmin.this, lugarList,
                                     new ListadoLugarAdminAdaptador.OnItemClickListener() {
                                         @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
                                         public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
@@ -93,7 +97,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                                 public void onClick(ListadoLugarAdmin item) {
                                     moveToActualizar(item);
                                 }
-                            });
+                            }, tipo);
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -115,19 +119,19 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
     }
+
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        Intent intent = new Intent(this,actualizar_lugar_medico.class);
+        /*Intent intent = new Intent(this,actualizar_lugar_medico.class);
         intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);
+        startActivity(intent);*/
     }
-
     public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
     {
-        String idLugar = button.getId().toString();
-        String url2 = WebService.urlRaiz+WebService.servicioEliminarTipologia; //URL del web service
+        String idMedico = button.getId().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioEliminarMedico; //URL del web service
 
-        final ProgressDialog loading = ProgressDialog.show(ListadoTipologia.this, "Eliminando...", "Espere por favor");
+        final ProgressDialog loading = ProgressDialog.show(MedicoAdmin.this, "Eliminando...", "Espere por favor");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
             @Override
@@ -135,7 +139,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
                 //Oculta el progress dialog de confirmacion
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), ListadoTipologia.class));
+                startActivity(new Intent(getApplicationContext(), MedicoAdmin.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -147,7 +151,7 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_tipologia_lugar", idLugar);
+                parametros.put("id_medico", idMedico);
                 loading.dismiss();
                 return parametros;
             }
@@ -158,9 +162,9 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
     }
 
     public void mensajeConfirmacion(ListadoLugarAdmin item) { //Método para confirmar la eliminación
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ListadoTipologia.this);
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(MedicoAdmin.this);
         dialogo1.setTitle("Importante");
-        dialogo1.setMessage("Se eliminaran todos los lugares pertenecientes a esta tipología ¿Desea Continuar?");
+        dialogo1.setMessage("Se eliminarán todos los campos asociados al médico ¿Desea continuar?");
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
@@ -174,7 +178,6 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
         });
         dialogo1.show();
     }
-
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -192,13 +195,13 @@ public class ListadoTipologia extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        myadapter.filtrado(query);
+       // myadapter.filtrado(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        myadapter.filtrado(newText);
+       // myadapter.filtrado(newText);
         return true;
     }
 }

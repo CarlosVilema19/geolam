@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.EspecialidadAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -44,7 +45,7 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
-    ListadoEspecialidadAdaptador myadapter;
+    EspecialidadAdminAdaptador myadapter;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     SearchView txtBuscar;
 
@@ -85,11 +86,19 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
                                         obj.getInt("ID_ESPECIALIDAD")
                                 ));
                             }
-                           myadapter = new ListadoEspecialidadAdaptador(EspecialidadListadoAdmin.this, lugarList,
-                                    new ListadoEspecialidadAdaptador.OnItemClickListener() {
-                                        @Override//llamada al método para llamar a una pantalla cuando se presiona sobre el item
-                                        public void onItemClick(ListadoLugarAdmin item) {moveToDescription(item);}
-                                    });
+                           myadapter = new EspecialidadAdminAdaptador(EspecialidadListadoAdmin.this, lugarList,
+                                   new EspecialidadAdminAdaptador.OnItemClickListener() {
+                                       @Override
+//llamada al método para llamar a una pantalla cuando se presiona sobre el item
+                                       public void onItemClick(ListadoLugarAdmin item) {
+                                           moveToDescription(item);
+                                       }
+                                   }, new EspecialidadAdminAdaptador.OnElimListener() {
+                               @Override
+                               public void onItemClick(ListadoLugarAdmin item) {
+                                   mensajeConfirmacion(item);
+                               }
+                           });
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -111,8 +120,67 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
     }
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
+        //Espacio para poner el actualizar
+    }
+
+
+    public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
+    {
+        String idEspecialidad = button.getId().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioEliminarEspecialidad; //URL del web service
+
+        final ProgressDialog loading = ProgressDialog.show(EspecialidadListadoAdmin.this, "Eliminando...", "Espere por favor");
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Oculta el progress dialog de confirmacion
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), "Se eliminó correctamente", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), EspecialidadListadoAdmin.class));
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_especialidad", idEspecialidad);
+                loading.dismiss();
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
     }
+
+    public void mensajeConfirmacion(ListadoLugarAdmin item) { //Método para confirmar la eliminación
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(EspecialidadListadoAdmin.this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("Se eliminarán todos los campos asociados a la especialidad ¿Desea continuar?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                moveToEliminar(item);
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
+    }
+
+
+
+
+
 
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
