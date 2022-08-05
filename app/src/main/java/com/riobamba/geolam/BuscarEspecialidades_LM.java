@@ -29,7 +29,7 @@ public BuscarEspecialidades_LM(JSONObject object)
 }
 
     public String getNombreLugar() {
-        return nombreLugar.toUpperCase();
+        return nombreLugar.toLowerCase();
     }
 
     public String getImagenLugar() {
