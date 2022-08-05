@@ -49,5 +49,7 @@ public class WebService {
     public static final  String servicioValidarExistenciaTipologia="existencia_tipologia.php";
     public static final  String servicioValidarExistenciaEspecialidad="existencia_especialidad.php";
     public static final  String servicioDatosPersonales="datos_personales.php";
-
+    public static final  String servicioObtenerDatosPersonales="obtener_dat_personales.php";
+    public static final  String servicioModificarDatosPersonales="modificar_dat_personales.php";
+    public static final  String servicioBuscarEspeLM="Buscar_EspeLM.php";
 }

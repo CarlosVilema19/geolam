@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 
 import java.util.List;
-
+/*
 public class DatosPersonalesAdaptador extends RecyclerView.Adapter<DatosPersonalesAdaptador.ViewHolder> {
 
     private final Context mCtx;
@@ -76,8 +76,9 @@ public class DatosPersonalesAdaptador extends RecyclerView.Adapter<DatosPersonal
         /*public TextView getTextView() {
             return textView;
         }*/
-    }
+    //}
 
+/*
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -131,3 +132,4 @@ public class DatosPersonalesAdaptador extends RecyclerView.Adapter<DatosPersonal
     }
 }
 
+*/

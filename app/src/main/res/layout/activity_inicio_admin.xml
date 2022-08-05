@@ -45,6 +45,13 @@
             app:cornerRadius="10dp"
             android:text="@string/gestion_de_usuarios" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBuscarEspeLug"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cornerRadius="10dp"
+            android:text="Buscar Especialidad-LugarM" />
+
     </LinearLayout>
 </RelativeLayout>
 </RelativeLayout>
