@@ -47,6 +47,9 @@ public class WebService {
     public static final  String servicioValidarExistenciaTipologia="existencia_tipologia.php";
     public static final  String servicioValidarExistenciaEspecialidad="existencia_especialidad.php";
     public static final  String servicioDatosPersonales="datos_personales.php";
+    public static final  String servicioObtenerDatosPersonales="obtener_dat_personales.php";
+    public static final  String servicioModificarDatosPersonales="modificar_dat_personales.php";
+    public static final  String servicioBuscarEspeLM="Buscar_EspeLM.php";
     public static final  String servicioMedicoAdmin="medico_admin.php";
     public static final  String servicioEliminarMedico="eliminar_medico.php";
     public static final  String servicioEliminarEspecialidad="eliminar_especialidad.php";
@@ -54,6 +57,4 @@ public class WebService {
     public static final  String servicioEliminarAsignacionMedtrab="eliminar_asignacion_medtrab.php";
     public static final  String servicioAsignacionEspeLugar="asignacion_especialidad_lugar.php";
     public static final  String servicioEliminarAsignacionEspe="eliminar_asignacion_especialidad.php";
-
-
 }

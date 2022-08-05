@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="2sp">
+    android:padding="3sp">
 <TextView
     android:id="@+id/viewItem"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:textStyle="bold"
 
    />
 

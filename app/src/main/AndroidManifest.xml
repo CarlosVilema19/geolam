@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
+        <activity
+            android:name=".Buscar_Especialidades"
+            android:exported="false" />
         <activity
             android:name=".conexion_internet"
             android:exported="false" />
@@ -47,7 +49,7 @@
             android:exported="true" />
         <activity
             android:name=".ListarLugarUsuario"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".RecuperacionContrasenia"
             android:exported="true" />
@@ -116,7 +118,7 @@
             android:exported="true" />
         <activity
             android:name=".ListadoEspecialidad"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".MedicoListado"
             android:exported="true" />
@@ -139,7 +141,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".DatosPersonalesUsu"
+            android:name=".DatosPersonalesUsuario"
             android:exported="true" />
         <activity
             android:name=".RegistroAdmin"

@@ -199,7 +199,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                         }
                         autoCompleteOpcionesTipologia.setText(autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString(),false);
                         autoCompleteOpcionesCategoria.setText(autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString(),false);
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
