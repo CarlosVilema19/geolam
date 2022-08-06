@@ -135,6 +135,7 @@
                         android:layout_height="wrap_content"
                         android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°.-_"
                         android:gravity="left"
+                        android:textAllCaps="true"
                         android:hint="@string/rec_nombre_del_lugar"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
