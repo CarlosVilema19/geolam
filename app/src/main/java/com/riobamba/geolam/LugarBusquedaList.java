@@ -22,7 +22,7 @@ package com.riobamba.geolam;
         import com.android.volley.toolbox.StringRequest;
         import com.android.volley.toolbox.Volley;
         import com.riobamba.geolam.modelo.ListadoLugar;
-        import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
+        import com.riobamba.geolam.modelo.LugarMapaAdaptador;
         import com.riobamba.geolam.modelo.Toolbar;
         import com.riobamba.geolam.modelo.WebService;
 
@@ -41,7 +41,7 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
     RecyclerView recyclerView;
     Toolbar toolbar = new Toolbar();
     SearchView txtBuscar;
-    ListadoLugarAdaptador myadapter;
+    LugarMapaAdaptador myadapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
 
 
         txtBuscar = findViewById(R.id.svBuscar);
-        myadapter = new ListadoLugarAdaptador(LugarBusquedaList.this, lugarList,this::moveToDescription);
+        myadapter = new LugarMapaAdaptador(LugarBusquedaList.this, lugarList,this::moveToDescription);
         txtBuscar.setOnQueryTextListener(this);
 
         toolbar.show(this, "Lugares", true);
@@ -99,7 +99,7 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
                                     obj.getString("descripcion_categoria")
                             ));
                         }
-                        myadapter = new ListadoLugarAdaptador(LugarBusquedaList.this, lugarList, this::moveToDescription);
+                        myadapter = new LugarMapaAdaptador(LugarBusquedaList.this, lugarList, this::moveToDescription);
                         recyclerView.setAdapter(myadapter);
 
 
@@ -188,14 +188,14 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        myadapter.filtrado2(query);
-        return true;
+        myadapter.filtrado(query);
+        return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        myadapter.filtrado2(newText);
-        return true;
+        myadapter.filtrado(newText);
+        return false;
     }
 }
 
