@@ -112,9 +112,9 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("categoria", cate);
+                parametros.put("categoria",cate);
                 parametros.put("tipologia",tipo );
-                parametros.put("especialidad", espe);
+                parametros.put("especialidad",espe);
                 return parametros;
             }
         };
