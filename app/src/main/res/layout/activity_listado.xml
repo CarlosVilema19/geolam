@@ -36,7 +36,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="70dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="10dp">
 
@@ -48,7 +48,7 @@
 
                         <ImageView
                             android:id="@+id/ivImagenLugarLista"
-                            android:layout_width="70dp"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
 

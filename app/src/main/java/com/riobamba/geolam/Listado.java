@@ -11,12 +11,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.ConexionMapa;
@@ -53,6 +56,9 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     Toolbar toolbar = new Toolbar();
     SearchView txtBuscar;
     ListadoLugarAdaptador myadapter;
+    String ruta;
+    String urlImagenLugar;
+    String urlSinEspacios;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,7 +126,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                                     obj.getString("nombre_lugar"),
                                     obj.getString("direccion"),
                                     obj.getString("telefono"),
-                                    obj.getString("imagen_lugar"),
+                                    imagenReturn(obj.getString("imagen_lugar")),
                                     obj.getInt("id_lugar"),
                                     "",
                                     obj.getString("descripcion_categoria")
@@ -215,6 +221,25 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         myadapter.filtrado2(newText);
         return true;
     }
+
+//Obtener la url real
+    private String imagenReturn(String url) {
+        if(url.contains(WebService.imagenRaiz)) {
+            urlSinEspacios = url.replace(" ", "%20");
+            String data = urlSinEspacios;
+            String[] split = data.split(WebService.imagenRaiz);
+            ruta = null;
+            for (int i = 0; i < split.length; i++) {
+                ruta = split[1];
+            }
+            urlImagenLugar= WebService.urlRaiz+ruta;
+        }
+        else{
+            urlImagenLugar=urlSinEspacios;
+        }
+        return  urlImagenLugar;
+    }
+
 }
 
 

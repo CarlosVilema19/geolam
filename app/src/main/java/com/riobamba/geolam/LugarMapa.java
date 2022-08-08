@@ -48,6 +48,9 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     SearchView txtBuscar;
     LugarMapaAdaptador myadapter;
+    String ruta;
+    String urlImagenLugar;
+    String urlSinEspacios;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,7 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
                                     obj.getString("nombre_lugar"),
                                     obj.getString("direccion"),
                                     obj.getString("telefono"),
-                                    obj.getString("imagen_lugar"),
+                                    imagenReturn(obj.getString("imagen_lugar")),
                                     obj.getInt("id_lugar"),
                                     "",
                                     obj.getString("descripcion_categoria")
@@ -167,6 +170,24 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
     public boolean onQueryTextChange(String newText) {
         myadapter.filtrado(newText);
         return false;
+    }
+
+    //Obtener la url real
+    private String imagenReturn(String url) {
+        if(url.contains(WebService.imagenRaiz)) {
+            urlSinEspacios = url.replace(" ", "%20");
+            String data = urlSinEspacios;
+            String[] split = data.split(WebService.imagenRaiz);
+            ruta = null;
+            for (int i = 0; i < split.length; i++) {
+                ruta = split[1];
+            }
+            urlImagenLugar= WebService.urlRaiz+ruta;
+        }
+        else{
+            urlImagenLugar=urlSinEspacios;
+        }
+        return  urlImagenLugar;
     }
 }
 

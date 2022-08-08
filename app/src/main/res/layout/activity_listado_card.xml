@@ -7,7 +7,6 @@
     android:animateLayoutChanges="true"
     tools:context=".Listado"
     android:orientation="vertical"
-    app:cardElevation="4dp"
     app:cardCornerRadius="10dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -24,8 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="6dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,22 +31,20 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="10dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="10dp">
+                        >
 
                         <ImageView
                             android:id="@+id/ivImagenLugarLista"
                             android:layout_width="wrap_content"
-                            android:layout_height="200dp"
+                            android:layout_height="450dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
                     </androidx.cardview.widget.CardView>
