@@ -168,6 +168,13 @@
             android:name=".EspecialidadAsignacion"
             android:exported="true" />
         <activity
+            android:name=".LugarBusqueda"
+            android:exported="true" />
+        <activity
+            android:name=".LugarBusquedaList"
+            android:exported="true" />
+
+        <activity
             android:name=".Bienvenida"
             android:exported="true">
             <intent-filter>

@@ -58,6 +58,13 @@
             app:cornerRadius="10dp"
             android:text="Reportes" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBusLugar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cornerRadius="10dp"
+            android:text="Buscar Lugar" />
+
     </LinearLayout>
 </RelativeLayout>
 </RelativeLayout>
