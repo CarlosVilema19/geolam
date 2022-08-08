@@ -37,6 +37,7 @@ import org.w3c.dom.UserDataHandler;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TemplatePDF {
     private Context context;
@@ -118,6 +119,10 @@ public class TemplatePDF {
 
     public void crearTabla (String[] header, ArrayList<String[]>lugares){
         try{
+            Iterator it = lugares.iterator();
+            while(it.hasNext()) {
+                System.out.println(it.next());
+            }
         paragraph= new Paragraph(); // va la tabla
         paragraph.setFont(fText); // formato de la tabla
         PdfPTable pdfPTable=new PdfPTable(header.length); //columnas que va a tener
@@ -137,7 +142,7 @@ public class TemplatePDF {
             for( indexC=0; indexC<header.length;indexC++){ //Columnas
                 pdfPCell= new PdfPCell(new Phrase(row[indexC]));
                 pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                pdfPCell.setFixedHeight(40);
+                pdfPCell.setFixedHeight(20);
                 pdfPTable.addCell(pdfPCell);
             }
         }
