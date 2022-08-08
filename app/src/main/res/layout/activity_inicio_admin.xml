@@ -51,6 +51,12 @@
             android:layout_height="100dp"
             app:cornerRadius="10dp"
             android:text="Buscar Especialidad-LugarM" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReportes"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cornerRadius="10dp"
+            android:text="Reportes" />
 
     </LinearLayout>
 </RelativeLayout>
