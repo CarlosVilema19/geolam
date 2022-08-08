@@ -173,6 +173,9 @@
         <activity
             android:name=".LugarBusquedaList"
             android:exported="true" />
+        <activity
+            android:name=".Busqueda"
+            android:exported="true" />
 
         <activity
             android:name=".Bienvenida"

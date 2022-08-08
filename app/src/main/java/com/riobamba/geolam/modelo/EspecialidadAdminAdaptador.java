@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 
@@ -59,6 +62,8 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
         private final TextView idLugar;
         private final ImageButton btnActualizar;
         private final ImageButton btnBorrar;
+        public ImageView imagenEspe;
+        public CardView cardEspe;
 
         public ViewHolder(View view) {
             super(view);
@@ -68,6 +73,8 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
             idLugar = view.findViewById(R.id.tvId);
             btnActualizar = view.findViewById(R.id.ibActualizarLista);
             btnBorrar = view.findViewById(R.id.ibBorrarLista);
+            imagenEspe = view.findViewById(R.id.ivLogo);
+            cardEspe = view.findViewById(R.id.cvLogo);
             
         }
 
@@ -124,6 +131,13 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
         ListadoLugarAdmin listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+
+        viewHolder.cardEspe.setVisibility(View.VISIBLE);
+
+        Glide.with(mCtx)
+                .load(listadoLugar.getImagen())
+                .into(viewHolder.imagenEspe);
+
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.idLugar.setVisibility(View.GONE);
         viewHolder.btnActualizar.setVisibility(View.GONE);

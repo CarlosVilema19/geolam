@@ -78,7 +78,8 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("nombre_medico"),
-                                        obj.getInt("id_medico")
+                                        obj.getInt("id_medico"),
+                                        ""
                                 ));
                             }
                             myadapter = new ListadoLugarAdminAdaptador(MedicoAdmin.this, lugarList,

@@ -19,15 +19,36 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
->
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLogo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:foregroundGravity="center"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_baseline_local_hospital_24" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <LinearLayout
+            android:id="@+id/llNombre"
+            android:layout_toEndOf="@id/cvLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="70dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="5dp"
             android:layout_centerVertical="true"
             android:orientation="vertical">
@@ -52,11 +73,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginStart="4dp"
             android:layout_marginTop="2dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
-            android:layout_centerVertical="true"
             android:orientation="vertical">
 
 
@@ -65,22 +86,22 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:focusable="true"
                 android:backgroundTint="#00FFFFFF"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:srcCompat="@drawable/ic_baseline_system_update_alt_24" />
 
             <ImageButton
                 android:id="@+id/ibBorrarLista"
                 android:layout_width="30dp"
                 android:layout_height="28dp"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:focusable="true"
+                android:layout_margin="5dp"
                 android:backgroundTint="#75FFFFFF"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 
         </LinearLayout>

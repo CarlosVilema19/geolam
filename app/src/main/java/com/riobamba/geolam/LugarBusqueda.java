@@ -57,6 +57,10 @@ public class LugarBusqueda extends AppCompatActivity {
     Button btnBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     String categoria, tipologia, especialidad;
+    //Items Sexo F y M
+    AutoCompleteTextView autoCompleteTxtEdSexo;
+    ArrayAdapter<String> adapterItems;
+    String[] items = {"NINGUNO","PRIVADO", "PUBLICO"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,25 @@ public class LugarBusqueda extends AppCompatActivity {
         btnBuscar = findViewById(R.id.btnBuscar);
 
         toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
+        //Items Sexo F y M Autocomplete
+        autoCompleteTxtEdSexo = findViewById(R.id.edBusCate);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.lista_items, items);
+        autoCompleteTxtEdSexo.setAdapter(adapterItems);
+        autoCompleteTxtEdSexo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
+                if(item.equals("NINGUNO"))
+                {
+                    autoCompleteTxtEdSexo.setText("");
+                }
+
+            }
+
+        });
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

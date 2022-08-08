@@ -74,7 +74,8 @@ public class Tipologia extends AppCompatActivity implements SearchView.OnQueryTe
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("descripcion_tipo_lugar"),
-                                        obj.getInt("id_tipologia_lugar")
+                                        obj.getInt("id_tipologia_lugar"),
+                                        ""
                                 ));
                             }
                             myadapter = new ListadoLugarAdminAdaptador(Tipologia.this, lugarList,

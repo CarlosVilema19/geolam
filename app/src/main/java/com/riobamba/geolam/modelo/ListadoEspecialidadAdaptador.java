@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 
@@ -48,6 +50,7 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nombreLugar;
         private final TextView idLugar;
+        private final ImageView imagenEspe;
 
         public ViewHolder(View view) {
             super(view);
@@ -55,6 +58,7 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
 
             nombreLugar = view.findViewById(R.id.tvNombreEspecialidadLista);
             idLugar = view.findViewById(R.id.tvIdEspecialidadLista);
+            imagenEspe = view.findViewById(R.id.ivImagenEspecialidad);
         }
 
         /*public TextView getTextView() {
@@ -144,6 +148,11 @@ public class ListadoEspecialidadAdaptador extends RecyclerView.Adapter<com.rioba
         ListadoLugarAdmin listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+
+        Glide.with(mCtx)
+                .load(listadoLugar.getImagen())
+                .into(viewHolder.imagenEspe);
+
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getId()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

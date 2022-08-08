@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.riobamba.geolam.Bienvenida;
 //import com.riobamba.geolam.DatosPersonalesUsu;
+import com.riobamba.geolam.Busqueda;
 import com.riobamba.geolam.DatosPersonalesUsuario;
 import com.riobamba.geolam.EspecialidadListadoUsuario;
 import com.riobamba.geolam.Inicio;
@@ -30,7 +31,8 @@ public class Toolbar extends AppCompatActivity{
 
     public Class<Bienvenida> inicioClass = Bienvenida.class;
     public Class<ConexionMapa> conexionMapaClass = ConexionMapa.class;
-    public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
+    public Class<Busqueda> listadoEspecialidadClass = Busqueda.class;
+   // public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
    // public Class<DatosPersonalesUsu> datosUsuClass = DatosPersonalesUsu.class;
     public  Class <DatosPersonalesUsuario> datosUsuClass= DatosPersonalesUsuario.class;
     public Class<Login> login = Login.class;

@@ -83,7 +83,8 @@ public class EspecialidadListadoUsuario extends AppCompatActivity implements Sea
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("DESCRIPCION_ESPECIALIDAD"),
-                                        Integer.parseInt(obj.getString("ID_ESPECIALIDAD"))
+                                        Integer.parseInt(obj.getString("ID_ESPECIALIDAD")),
+                                        obj.getString("imagen")
                                 ));
                             }
                             myadapter = new ListadoEspecialidadAdaptador(EspecialidadListadoUsuario.this, lugarList,
