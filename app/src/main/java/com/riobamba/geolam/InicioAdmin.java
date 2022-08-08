@@ -17,7 +17,8 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class InicioAdmin extends AppCompatActivity {
-    Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnBuscarLugar;
+Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnBuscarLugar;
+
     Toolbar toolbar = new Toolbar();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class InicioAdmin extends AppCompatActivity {
         btnGestionLugar= findViewById(R.id.btnGestionLugar);
         btnGestionUsuario= findViewById(R.id.btnGestionUsuario);
         btnBuscarEspeLugar= findViewById(R.id.btnBuscarEspeLug);
+        btnReportes=findViewById(R.id.btnReportes);
         btnBuscarLugar = findViewById(R.id.btnBusLugar);
 
         toolbar.show(this, "Inicio", false);
@@ -36,6 +38,14 @@ public class InicioAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InicioAdmin.this, GestionLugares.class);
+                startActivity(intent);
+            }
+        });
+
+        btnReportes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InicioAdmin.this, ReportesAdmin.class);
                 startActivity(intent);
             }
         });

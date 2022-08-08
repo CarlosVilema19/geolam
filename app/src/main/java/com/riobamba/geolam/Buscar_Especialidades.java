@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
@@ -15,27 +14,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.BuscarEspecialidades_LM_Adaptador;
+import com.riobamba.geolam.modelo.BuscarEspecialidadesLMAdaptador;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Buscar_Especialidades extends AppCompatActivity {
-          BuscarEspecialidades_LM_Adaptador adaptador;
+          BuscarEspecialidadesLMAdaptador adaptador;
           AutoCompleteTextView actv;
     //BuscarEspecialidades_LM espeLug;
     // private BuscarEspecialidades_LM espeLug=new BuscarEspecialidades_LM(null);
@@ -45,7 +34,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_especialidades);
-        adaptador = new BuscarEspecialidades_LM_Adaptador(this);
+        adaptador = new BuscarEspecialidadesLMAdaptador(this);
 
 
 

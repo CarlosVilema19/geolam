@@ -21,11 +21,11 @@ import com.riobamba.geolam.R;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class BuscarEspecialidades_LM_Adaptador extends ArrayAdapter<BuscarEspecialidades_LM> {
+public class BuscarEspecialidadesLMAdaptador extends ArrayAdapter<BuscarEspecialidades_LM> {
     private ArrayList<BuscarEspecialidades_LM> arrayList= new ArrayList<>();
     private Context context;
 
-    public  BuscarEspecialidades_LM_Adaptador(@NonNull Context context){
+    public BuscarEspecialidadesLMAdaptador(@NonNull Context context){
 
         super(context, R.layout.item_view2);
         this.context=context;
