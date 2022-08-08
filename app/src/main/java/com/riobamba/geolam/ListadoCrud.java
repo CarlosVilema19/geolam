@@ -44,6 +44,9 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
     SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     Integer tipo = 2;
+    String ruta;
+    String urlImagenLugar;
+    String urlSinEspacios;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,8 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("nombre_lugar"),
-                                        obj.getInt("id_lugar")
+                                        obj.getInt("id_lugar"),
+                                        imagenReturn(obj.getString("imagen"))
                                 ));
                             }
                             myadapter = new ListadoLugarAdminAdaptador(ListadoCrud.this, lugarList,
@@ -204,5 +208,23 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
     public boolean onQueryTextChange(String newText) {
         myadapter.filtrado(newText);
         return true;
+    }
+
+    //Obtener la url real
+    private String imagenReturn(String url) {
+        if(url.contains(WebService.imagenRaiz)) {
+            urlSinEspacios = url.replace(" ", "%20");
+            String data = urlSinEspacios;
+            String[] split = data.split(WebService.imagenRaiz);
+            ruta = null;
+            for (int i = 0; i < split.length; i++) {
+                ruta = split[1];
+            }
+            urlImagenLugar= WebService.urlRaiz+ruta;
+        }
+        else{
+            urlImagenLugar=urlSinEspacios;
+        }
+        return  urlImagenLugar;
     }
 }

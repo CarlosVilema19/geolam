@@ -67,7 +67,7 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
         btnBuscarLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioAdmin.this, LugarBusqueda.class);
+                Intent intent = new Intent(InicioAdmin.this, Busqueda.class);
                 startActivity(intent);
             }
         });

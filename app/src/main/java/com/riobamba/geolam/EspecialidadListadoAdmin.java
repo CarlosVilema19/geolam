@@ -83,7 +83,8 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("DESCRIPCION_ESPECIALIDAD"),
-                                        obj.getInt("ID_ESPECIALIDAD")
+                                        obj.getInt("ID_ESPECIALIDAD"),
+                                        obj.getString("imagen")
                                 ));
                             }
                            myadapter = new EspecialidadAdminAdaptador(EspecialidadListadoAdmin.this, lugarList,

@@ -47,23 +47,21 @@
 
                 <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
+                    android:hint="Categoría">
 
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/edBusCate"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:hint="Categoría"
-                        tools:ignore="TextContrastCheck,TextContrastCheck" />
+                        android:inputType="none"
+                        android:textSize="14sp"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -82,6 +80,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:hint="Tipología"
+                        android:inputType="textCapCharacters"
+                        android:textAllCaps="true"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -102,6 +102,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:hint="Especialidad"
+                        android:textAllCaps="true"
+                        android:inputType="textCapCharacters"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>

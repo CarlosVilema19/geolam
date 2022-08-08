@@ -89,7 +89,8 @@ public class ListadoEspecialidad extends AppCompatActivity implements SearchView
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(
                                         obj.getString("descripcion_especialidad"),
-                                        obj.getInt("id_especialidad")
+                                        obj.getInt("id_especialidad"),
+                                        obj.getString("imagen")
                                 ));
                             }
                              myadapter = new ListadoEspecialidadAdaptador(ListadoEspecialidad.this, lugarList,

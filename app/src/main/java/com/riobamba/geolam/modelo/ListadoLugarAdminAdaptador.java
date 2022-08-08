@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.Tipologia;
 
@@ -96,6 +99,8 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         private final TextView idLugar;
         private final ImageButton btnBorrar;
         private final ImageButton btnActualizar;
+        public ImageView imagenLugar;
+        public CardView cardLugar;
 
 
         public ViewHolder(View view) {
@@ -106,6 +111,8 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
             idLugar = view.findViewById(R.id.tvId);
             btnBorrar = view.findViewById(R.id.ibBorrarLista);
             btnActualizar = view.findViewById(R.id.ibActualizarLista);
+            imagenLugar = view.findViewById(R.id.ivLogo);
+            cardLugar = view.findViewById(R.id.cvLogo);
         }
 
         /*public TextView getTextView() {
@@ -128,6 +135,11 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         ListadoLugarAdmin listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+
+        Glide.with(mCtx)
+                .load(listadoLugar.getImagen())
+                .into(viewHolder.imagenLugar);
+
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.idLugar.setVisibility(View.VISIBLE);
         String texto = "Id: " + listadoLugar.getId();
@@ -148,7 +160,8 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
 
         if(tipo == 1){viewHolder.btnActualizar.setVisibility(View.GONE);
             viewHolder.idLugar.setVisibility(View.GONE);}
-        if(tipo == 2){viewHolder.idLugar.setVisibility(View.GONE);}
+        if(tipo == 2){viewHolder.idLugar.setVisibility(View.GONE);
+            viewHolder.cardLugar.setVisibility(View.VISIBLE);}
 
         viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
