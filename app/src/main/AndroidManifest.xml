@@ -176,6 +176,16 @@
         <activity
             android:name=".Busqueda"
             android:exported="true" />
+        <activity
+            android:name=".MedicoBusqueda"
+            android:exported="true" />
+        <activity
+            android:name=".MedicoBusquedaList"
+            android:exported="true" />
+        <activity
+            android:name=".MedicoUsuario"
+            android:exported="true" />
+
 
         <activity
             android:name=".Bienvenida"

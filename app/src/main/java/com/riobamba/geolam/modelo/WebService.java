@@ -60,4 +60,6 @@ public class WebService {
     public static final  String servicioEliminarAsignacionEspe="eliminar_asignacion_especialidad.php";
     public static final  String servicioReporteUsuarios="reporte_usuarios.php";
     public static final  String servicioBusquedaLugar="busqueda_lugar.php";
+    public static final  String servicioBusquedaMedico="busqueda_medico.php";
+    public static final  String servicioMedicoUsuario="medico_usuario.php";
 }

@@ -173,22 +173,6 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
         return super.onOptionsItemSelected(item);
     }
 
-    //Funcion para recordar el inicio de sesion
-    public void guardarEstadoButton()
-    {
-        SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
-        boolean estado = false;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("estado_inicio",estado);
-        editor.commit();
-
-        SharedPreferences preferences1 = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
-        boolean estado1 = false;
-        SharedPreferences.Editor editor1 = preferences1.edit();
-        editor1.putBoolean("estado_inicio_admin",estado1);
-        editor1.commit();
-    }
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         myadapter.filtrado(query);
