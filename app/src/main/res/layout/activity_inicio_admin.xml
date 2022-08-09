@@ -36,9 +36,13 @@
             app:backgroundTint="@null"
             android:background="@drawable/degradado2"
             android:id="@+id/btnGestionLugar"
+
+            android:drawableRight="@drawable/ic_baseline_groups_24"
+
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cornerRadius="10dp"
+            android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:text="@string/gestion_de_lugares" />
 
@@ -46,25 +50,34 @@
             android:id="@+id/btnGestionUsuario"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+
+            android:textStyle="bold"
             android:drawableRight="@drawable/ic_baseline_groups_24"
+
             android:text="@string/gestion_de_usuarios"
             app:backgroundTint="@null"
             android:background="@drawable/degradado2"
-            app:cornerRadius="10dp" />
+            app:cornerRadius="10dp"
+            android:layout_marginBottom="5dp"
+            />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReportes"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textStyle="bold"
+            android:drawableRight="@drawable/ic_baseline_article_24"
+            app:backgroundTint="@null"
+            android:background="@drawable/degradado2"
+            app:cornerRadius="10dp"
+            android:text="Reportes" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBuscarEspeLug"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cornerRadius="10dp"
-            android:text="Buscar Especialidad-LugarM" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReportes"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:cornerRadius="10dp"
-            android:text="Reportes" />
-
+            android:text="Buscar Especialidad-LugarM"
+            />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBusLugar"
             android:layout_width="match_parent"
