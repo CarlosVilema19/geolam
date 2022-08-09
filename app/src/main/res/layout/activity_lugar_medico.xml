@@ -75,6 +75,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="5dp"
+                                android:textColor="@color/black"
                                 android:text="Médicos"
                                 android:textSize="14sp" />
 
@@ -124,6 +125,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="5dp"
                                 android:text="Especialidades"
+                                android:textColor="@color/black"
                                 android:textSize="14sp">
 
                             </TextView>
@@ -151,6 +153,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:text="Nombre"
+                        android:textColor="@color/black"
                         android:textAllCaps="true"
                         android:textSize="19sp"
                         android:textStyle="bold" />
@@ -172,6 +175,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:text="Tipologia"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
@@ -181,6 +185,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:text="Categoria"
+                        android:textColor="@color/black"
                         android:textAllCaps="true"
                         android:textSize="16sp" />
 
@@ -217,6 +222,7 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:text="Calificación"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -267,6 +273,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="@string/rec_direccion_lugar"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
                 </LinearLayout>
 
@@ -316,6 +323,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="18dp"
                         android:text="@string/rec_telefono_lugar"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -364,6 +372,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="Whatsapp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -412,6 +421,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="20dp"
                         android:text="Página Web"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -458,6 +468,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="10dp"
                         android:text="@string/rec_descripcion_lugar"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
                 </LinearLayout>
 

@@ -61,6 +61,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:text="Nombre Usuario"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -84,6 +85,7 @@
                             android:layout_height="15dp"
                             android:layout_gravity="center"
                             android:text="Calificacion"
+                            android:textColor="@color/black"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -99,6 +101,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Fecha"
+                            android:textColor="@color/black"
                             android:textSize="12sp" />
 
                         <TextView
@@ -118,6 +121,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:text="Comentario"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
                 </LinearLayout>

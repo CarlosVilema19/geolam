@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:layout_gravity="center_horizontal"
     tools:context=".OpinionListado">
 
@@ -24,7 +25,7 @@
             app:cardCornerRadius="10dp"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_marginBottom="30dp"
             app:cardUseCompatPadding="true"
             android:elevation="10dp"
@@ -57,6 +58,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
                         android:text="Calificación"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <RatingBar
@@ -79,35 +82,39 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txopinion"
-                        android:layout_width="wrap_content"
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginRight="15dp"
-                        android:text="Opinión"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="2dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etIngresarOpinion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:hint="Opinión General"
+                        android:hint="Opinión"
+                        android:textColor="@color/black"
                         android:maxLength="200"
                         android:minHeight="48dp"
-                        android:textSize="15dp">
+                        android:textSize="16sp">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEnviarOpinion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginStart="35dp"
                         android:text="Enviar" />
                 </LinearLayout>
 
