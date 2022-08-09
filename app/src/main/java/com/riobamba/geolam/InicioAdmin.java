@@ -50,13 +50,13 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
             }
         });
 
-        btnBuscarEspeLugar.setOnClickListener(new View.OnClickListener() {
+       /* btnBuscarEspeLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InicioAdmin.this, Buscar_Especialidades.class);
                 startActivity(intent);
             }
-        });
+        });*/
         btnGestionUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,13 +64,13 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
                 startActivity(intent);
             }
         });
-        btnBuscarLugar.setOnClickListener(new View.OnClickListener() {
+        /*btnBuscarLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InicioAdmin.this, Busqueda.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override public void onBackPressed() { }  //Anula la flecha de regreso del telefono
