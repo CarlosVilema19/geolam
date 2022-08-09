@@ -1,31 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-
+    android:background="@color/background"
     tools:context=".Buscar_Especialidades">
-    <TextView
+
+    <include layout="@layout/activity_menu_toolbar" />
+    <include layout="@layout/activity_toolbar_infe" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/iMenuSupe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingrese un nombre de Lugar médico"
-        android:textStyle="bold"
-        android:layout_marginRight="40sp"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="40sp"
-        />
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:id="@+id/autoCompleteLugar"
-        android:layout_height="wrap_content"
-        android:hint="Escriba un Nombre"
-        android:layout_marginRight="40sp"
-        android:layout_marginLeft="40sp"
-        />
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        app:cardUseCompatPadding="true"
+        android:elevation="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Especialidades"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Ingrese un lugar de atención médica"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:hint="Lugar de atención médica">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteLugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBuscarEspe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="75dp"
+                android:drawableEnd="@drawable/ic_baseline_search_24"
+                android:text="Buscar"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
+    android:background="@color/background"
     tools:context=".registrar">
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
@@ -16,9 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         app:cardUseCompatPadding="true"
         android:elevation="10dp"
         >
@@ -38,12 +40,21 @@
                     android:id="@+id/txBusquedaLu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Buscar por lugar"
+                    android:text="Lugares de atención médica"
+                    android:layout_marginBottom="10dp"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Escoja una categoría"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -51,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
                     android:hint="Categoría">
 
@@ -64,13 +75,23 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Ingrese una tipología"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -86,13 +107,23 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Ingrese una especialidad"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText

@@ -1,11 +1,14 @@
 package com.riobamba.geolam;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.BuscarEspecialidadesLMAdaptador;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -28,6 +32,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
           AutoCompleteTextView actv;
     //BuscarEspecialidades_LM espeLug;
     // private BuscarEspecialidades_LM espeLug=new BuscarEspecialidades_LM(null);
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
     @Override
@@ -35,6 +40,8 @@ public class Buscar_Especialidades extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_especialidades);
         adaptador = new BuscarEspecialidadesLMAdaptador(this);
+
+        toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
 
@@ -156,4 +163,37 @@ public class Buscar_Especialidades extends AppCompatActivity {
 
         }
     }
+
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Metodos para la barra inferior
+    public void moverInicio(View view) //dirige al Inicio
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarInicio());
+    }
+    public void moverMapa(View view)    //dirige al mapa
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarMapa());
+    }
+    public void moverEspe(View view)    //dirige a la especialidad
+    {
+        toolbar.getContexto(this);
+        startActivity(toolbar.retornarEspecialidad());
+    }
+
 }
