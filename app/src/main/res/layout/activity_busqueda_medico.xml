@@ -10,17 +10,21 @@
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_above="@+id/iMenuInfe"
+        >
+
 
     <androidx.cardview.widget.CardView
-        android:layout_below="@+id/iMenuSupe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        app:cardUseCompatPadding="true"
         android:elevation="10dp"
         >
 
@@ -31,7 +35,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
 
@@ -71,9 +77,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
+                        android:digits="@string/digitos_aceptados"
                         android:hint="Lugar de trabajo"
                         android:inputType="textCapCharacters"
-                        android:textAllCaps="true"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:hint="Especialidad"
-                        android:textAllCaps="true"
+                        android:digits="@string/digitos_aceptados"
                         android:inputType="textCapCharacters"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -119,6 +125,7 @@
                     android:layout_marginLeft="75dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="75dp"
+                    android:layout_marginBottom="25dp"
                     android:drawableEnd="@drawable/ic_baseline_search_24"
                     android:text="Buscar"
                     android:textColor="@android:color/white"
@@ -130,5 +137,5 @@
 
     </androidx.cardview.widget.CardView>
 
-
+    </RelativeLayout>
 </RelativeLayout>

@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InicioAdmin">
-    <include
-        layout="@layout/activity_menu_toolbar"/>
+
+    <include layout="@layout/activity_menu_toolbar"/>
+
 <RelativeLayout
+    android:layout_below="@+id/iMenuSupe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
@@ -19,12 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-
         android:foregroundTint="#00FFFFFF"
         android:src="@mipmap/ic_launcher_foreground" />
 
     <LinearLayout
+        android:layout_marginTop="25dp"
         android:id="@+id/menuLinearLayout"
         android:layout_below="@+id/viewlogo2"
         android:layout_width="fill_parent"
@@ -36,9 +37,7 @@
             app:backgroundTint="@null"
             android:background="@drawable/degradado2"
             android:id="@+id/btnGestionLugar"
-
             android:drawableRight="@drawable/hospital"
-
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cornerRadius="10dp"
@@ -71,19 +70,22 @@
             android:background="@drawable/degradado2"
             app:cornerRadius="10dp"
             android:text="Reportes" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBuscarEspeLug"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:cornerRadius="10dp"
             android:text="Buscar Especialidad-LugarM"
-            />
+            android:visibility="gone"
+            app:cornerRadius="10dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBusLugar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:cornerRadius="10dp"
-            android:text="Buscar Lugar" />
+            android:text="Buscar Lugar"
+            android:visibility="gone"
+            app:cornerRadius="10dp" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -185,6 +185,9 @@
         <activity
             android:name=".MedicoUsuario"
             android:exported="true" />
+        <activity
+            android:name=".EspecialidadBusquedaList"
+            android:exported="true" />
 
 
         <activity

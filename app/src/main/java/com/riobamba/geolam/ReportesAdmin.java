@@ -2,9 +2,11 @@ package com.riobamba.geolam;
 
 import static android.app.PendingIntent.getActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.TemplatePDF;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -34,7 +37,7 @@ public class ReportesAdmin extends AppCompatActivity {
     private ArrayList<String[]> rows3 = new ArrayList<>();
     private ArrayList<String[]> rows = null;
     Button btnGenerarPdf;
-
+    Toolbar toolbar = new Toolbar();
 
 
     // ArrayList<String[]>rows=null;
@@ -59,6 +62,8 @@ public class ReportesAdmin extends AppCompatActivity {
 
             }
         });
+
+        toolbar.show(this, "Inicio", true);
     }
 
 
@@ -233,5 +238,19 @@ public void pdf(){
 
         }*/
         return rows3;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
     }
 }
