@@ -5,12 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReportesAdmin">
-<Button
-   android:id="@+id/btnGenerar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:text="Button"
-    />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="125dp"
+        android:layout_gravity="center_vertical"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txReportes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="25dp"
+                        android:text="@string/tituloReportes"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+
+                        />
+                </RelativeLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGenerar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="20sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Usuarios Registrados"
+                    android:textStyle="normal"
+                    android:textSize="12dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/degradado2"
+                    android:drawableLeft="@drawable/ic_baseline_groups_24"
+
+
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>
