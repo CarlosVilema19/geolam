@@ -96,6 +96,6 @@
     <string name="mensaje">Se enviará un enlace de recuperación a tu correo</string>
     <string name="tituloReportes">Reportes</string>
 
-    <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ -_.,</string>
+    <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ-_.,0123456789</string>
 
 </resources>
