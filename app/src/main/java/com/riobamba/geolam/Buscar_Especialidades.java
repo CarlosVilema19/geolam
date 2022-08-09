@@ -4,12 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,6 +35,9 @@ import java.util.Map;
 public class Buscar_Especialidades extends AppCompatActivity {
           BuscarEspecialidadesLMAdaptador adaptador;
           AutoCompleteTextView actv;
+          Button btnBuscarEsp;
+          String lugar;
+          EditText txtLugar;
     //BuscarEspecialidades_LM espeLug;
     // private BuscarEspecialidades_LM espeLug=new BuscarEspecialidades_LM(null);
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
@@ -40,9 +48,9 @@ public class Buscar_Especialidades extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_especialidades);
         adaptador = new BuscarEspecialidadesLMAdaptador(this);
+        btnBuscarEsp = findViewById(R.id.btnBuscarEspe);
 
         toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-
 
 
         //Autocomplete
@@ -57,7 +65,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
         actv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//actv.showDropDown();
+                //actv.showDropDown();
              //actv.showDropDown();
                 //s.toString().replaceAll("^\\s*","");
                // adaptador.clear();
@@ -71,7 +79,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
                 String a;
 
                 a= s.toString().replaceAll("^\\s*","");;
-                Toast.makeText(getApplicationContext(),a, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),a, Toast.LENGTH_SHORT).show();
                     makeRequest(s.toString());
 
                // }else{
@@ -92,6 +100,23 @@ public class Buscar_Especialidades extends AppCompatActivity {
             }
         });
 
+        btnBuscarEsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lugar = actv.getText().toString();
+
+                if(lugar.equals(""))
+                {
+                    Toast.makeText(Buscar_Especialidades.this, "Ingrese al menos un campo", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    guardarLugar(lugar);
+                    Intent intent = new Intent(Buscar_Especialidades.this, EspecialidadBusquedaList.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
 
     }
 
@@ -101,7 +126,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
         if (!text.equals("")) {
             adaptador.clear();
             //  text.replaceAll("^\\s*","");
-            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
             String url2;
 
             // URLConnection jc= url2.openConnection();
@@ -194,6 +219,14 @@ public class Buscar_Especialidades extends AppCompatActivity {
     {
         toolbar.getContexto(this);
         startActivity(toolbar.retornarEspecialidad());
+    }
+
+    public void guardarLugar(String lugarEspe)
+    {
+        SharedPreferences preferences = getSharedPreferences("lugarEspe", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("lugarEspe", lugarEspe);
+        editor.apply();
     }
 
 }
