@@ -32,15 +32,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="10dp">
 
                 <ImageView
                     android:id="@+id/ivImagenMedico"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_baseline_co_present_24" />
+                    app:srcCompat="@drawable/logomedico" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:id="@+id/llLugar"

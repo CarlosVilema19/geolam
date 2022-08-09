@@ -17,7 +17,7 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class Busqueda extends AppCompatActivity {
-    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe ;
+    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe, btnBusAvanMed, btnBusRapMed ;
 
     Toolbar toolbar = new Toolbar();
     @Override
@@ -28,6 +28,8 @@ public class Busqueda extends AppCompatActivity {
         btnBusAvanLug = findViewById(R.id.btnBusAvanLugar);
         btnBusRapLug = findViewById(R.id.btnBusRapLugar);
         btnBusRapEspe = findViewById(R.id.btnBusRapEspe);
+        btnBusAvanMed = findViewById(R.id.btnBusAvanMed);
+        btnBusRapMed = findViewById(R.id.btnBusRapMed);
 
         toolbar.show(this, "Búsqueda", true);
 
@@ -52,6 +54,22 @@ public class Busqueda extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Busqueda.this, EspecialidadListadoUsuario.class);
+                startActivity(intent);
+            }
+        });
+
+        btnBusAvanMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Busqueda.this, MedicoBusqueda.class);
+                startActivity(intent);
+            }
+        });
+
+        btnBusRapMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Busqueda.this, MedicoUsuario.class);
                 startActivity(intent);
             }
         });
