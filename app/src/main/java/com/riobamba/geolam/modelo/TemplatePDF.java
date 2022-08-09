@@ -2,6 +2,7 @@ package com.riobamba.geolam.modelo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Environment;
 import android.util.Log;
 
@@ -37,6 +38,7 @@ import org.w3c.dom.UserDataHandler;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class TemplatePDF {
@@ -46,9 +48,12 @@ public class TemplatePDF {
     private PdfWriter pdfWriter;
     private Paragraph paragraph;
     private Font fTitle = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
-    private Font fsubTitle = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+    private Font fsubTitle = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD,new BaseColor(255,255,255));
+    private Font fsubTitle2 = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private Font fText = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+    private Font fTextNormal = new Font(Font.FontFamily.TIMES_ROMAN, 13, Font.NORMAL);
     private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, BaseColor.GREEN);
+    private Font fDate = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
 
     public TemplatePDF(Context context) {
         this.context = context;
@@ -66,13 +71,13 @@ public class TemplatePDF {
     }
 
     private void crearArchivo() {
-        File folder = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"Geolam_ReportesPDF");
+        File folder = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"Reportes GEOLAM");
         //File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Geolam_ReportesPDF");
         if (!folder.exists())//{ //verifica si ya existe la carpeta
 
             folder.mkdirs();
 
-            pdfArchivo = new File(folder, "ReporteGeneral.pdf");
+            pdfArchivo = new File(folder, "Reporte Usuarios Registrados.pdf");
 
 
     }
@@ -92,8 +97,8 @@ public class TemplatePDF {
         try {
             paragraph = new Paragraph();
             addChildP(new Paragraph(title, fTitle));
-            addChildP(new Paragraph(subTitle, fsubTitle));
-            addChildP(new Paragraph("Generado: " + date, fHighText));
+            addChildP(new Paragraph(subTitle, fsubTitle2));
+            addChildP(new Paragraph("Generado: " + date, fDate));
             paragraph.setSpacingAfter(30);
             document.add(paragraph);
         } catch (Exception e) {
@@ -108,8 +113,8 @@ public class TemplatePDF {
 
     public void addParagraph(String text){
         try {
-            paragraph = new Paragraph(text, fText);
-            paragraph.setSpacingAfter(5);
+            paragraph = new Paragraph(text, fTextNormal);
+            paragraph.setSpacingAfter(15);
             paragraph.setSpacingBefore(5);
             document.add(paragraph);
         } catch (Exception e) {
@@ -119,10 +124,19 @@ public class TemplatePDF {
 
     public void crearTabla (String[] header, ArrayList<String[]>lugares){
         try{
+/*
+            for(int j=0; j<lugares.size();j++) {
+
+                System.out.println(Arrays.toString(lugares.get(j)));
+
+            }
+            */
+
+            /*
             Iterator it = lugares.iterator();
             while(it.hasNext()) {
                 System.out.println(it.next());
-            }
+            }*/
         paragraph= new Paragraph(); // va la tabla
         paragraph.setFont(fText); // formato de la tabla
         PdfPTable pdfPTable=new PdfPTable(header.length); //columnas que va a tener
@@ -132,8 +146,10 @@ public class TemplatePDF {
         while(indexC<header.length){ // menor al total de columnas que tiene la tabla
             pdfPCell=new PdfPCell(new Phrase(header[indexC++], fsubTitle));// enviamos el texto que va a ir en la celda
             pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            pdfPCell.setBackgroundColor(BaseColor.GREEN);
+            pdfPCell.setBackgroundColor(new BaseColor(12,183,242));
+
             pdfPTable.addCell(pdfPCell);
+
         }
         //llenar el resto de la tabla
         for(int indexR=0; indexR<lugares.size();indexR++){
