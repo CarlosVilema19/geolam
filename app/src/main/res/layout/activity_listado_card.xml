@@ -67,6 +67,7 @@
                         android:layout_gravity="center"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:textColor="@color/black"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
                         android:layout_marginTop="5dp"
@@ -95,6 +96,7 @@
                             android:layout_gravity="center"
                             android:ellipsize="end"
                             android:maxLines="1"
+                            android:textColor="@color/black"
                             android:text="Categoria"
                             android:textAllCaps="true"
                             android:textSize="15sp"
@@ -121,6 +123,7 @@
                             android:layout_marginStart="2dp"
                             android:ellipsize="end"
                             android:maxLines="1"
+                            android:textColor="@color/black"
                             android:text="@string/direccion_listado"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -145,6 +148,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="2dp"
                             android:text="Telefono"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView

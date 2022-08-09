@@ -58,12 +58,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
+                android:textColor="@color/black"
                 android:textAllCaps="true"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/tvId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
 

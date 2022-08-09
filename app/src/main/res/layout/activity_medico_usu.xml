@@ -65,6 +65,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nombre"
+                            android:textColor="@color/black"
                             android:textSize="18sp" />
 
                         <LinearLayout
@@ -74,11 +75,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/black"
                                 android:text="Id: " />
 
                             <TextView
                                 android:id="@+id/tvIdMedicoLista"
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/black"
                                 android:layout_height="wrap_content"
                                 android:text="Id" />
                         </LinearLayout>
@@ -87,12 +90,14 @@
                             android:id="@+id/tvEspecialidadMedicoLista"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Especialidad" />
 
                         <TextView
                             android:id="@+id/tvDescripcionMedicoLista"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Descripcion" />
 
                     </LinearLayout>
