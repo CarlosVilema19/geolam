@@ -18,6 +18,7 @@ import com.riobamba.geolam.Bienvenida;
 import com.riobamba.geolam.Busqueda;
 import com.riobamba.geolam.DatosPersonalesUsuario;
 import com.riobamba.geolam.EspecialidadListadoUsuario;
+import com.riobamba.geolam.InfoApp;
 import com.riobamba.geolam.Inicio;
 import com.riobamba.geolam.InicioAdmin;
 import com.riobamba.geolam.Listado;
@@ -35,6 +36,7 @@ public class Toolbar extends AppCompatActivity{
    // public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
    // public Class<DatosPersonalesUsu> datosUsuClass = DatosPersonalesUsu.class;
     public  Class <DatosPersonalesUsuario> datosUsuClass= DatosPersonalesUsuario.class;
+    public  Class <InfoApp> infoAppClass= InfoApp.class;
     public Class<Login> login = Login.class;
     public Context ctx;
 
@@ -72,6 +74,11 @@ public class Toolbar extends AppCompatActivity{
         if(item.getItemId()==android.R.id.home)
         {
             activities.finish();
+        }
+
+        if(item.getItemId()==R.id.iAcercaApp)
+        {
+            activities.startActivity(new Intent(ctx, infoAppClass));
         }
 
     }
