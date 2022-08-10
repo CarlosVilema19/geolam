@@ -87,7 +87,8 @@ public class MedicoUsuario extends AppCompatActivity implements SearchView.OnQue
                                         obj.getString("nombre_medico"),
                                         obj.getString("especialidad"),
                                         obj.getString("descripcion_medico"),
-                                        obj.getInt("id_medico")
+                                        obj.getInt("id_medico"),
+                                        obj.getString("lugar_trabaja")
                                 ));
                             }
                             myadapter = new ListadoMedicoAdaptador(MedicoUsuario.this, lugarList);

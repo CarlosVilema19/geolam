@@ -41,6 +41,7 @@ public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAd
         private final TextView especialidadLugar;
         private final TextView descripcionLugar;
         private final TextView idLugar;
+        private final TextView lugarTrabaja;
 
         public ViewHolder(View view) {
             super(view);
@@ -50,6 +51,7 @@ public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAd
             especialidadLugar = view.findViewById(R.id.tvEspecialidadMedicoLista);
             descripcionLugar = view.findViewById(R.id.tvDescripcionMedicoLista);
             idLugar = view.findViewById(R.id.tvIdMedicoLista);
+            lugarTrabaja = view.findViewById(R.id.tvLugarTrabaja);
         }
 
     }
@@ -106,6 +108,7 @@ public class ListadoMedicoAdaptador extends RecyclerView.Adapter<ListadoMedicoAd
         viewHolder.especialidadLugar.setText(listadoLugar.getEspecialidadMedico());
         viewHolder.descripcionLugar.setText(listadoLugar.getDescripcionMedico());
         viewHolder.idLugar.setText(String.valueOf(listadoLugar.getIdMedico()));
+        viewHolder.lugarTrabaja.setText(listadoLugar.getLugarTrabaja());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

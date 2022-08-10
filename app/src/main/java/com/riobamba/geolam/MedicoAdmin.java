@@ -39,9 +39,10 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
     //Declarar la lista y el recycler view
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
+    SearchView txtBuscar;
+
 
     ListadoLugarAdminAdaptador myadapter;
-    SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     Integer tipo = 0;
 
@@ -196,13 +197,13 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-       // myadapter.filtrado(query);
+        myadapter.filtrado(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-       // myadapter.filtrado(newText);
+        myadapter.filtrado(newText);
         return true;
     }
 }

@@ -60,6 +60,7 @@ public class IngresoMedico extends AppCompatActivity {
         btnAgregarMedico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 insertarMedico();
+
             }
         });
 
@@ -120,6 +121,12 @@ public class IngresoMedico extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
 
+                txtApellidoMedico.setText("");
+                txtDescripcionMedico.setText("");
+                txtNombreMedico.setText("");
+                finish();
+                Intent intent = new Intent(IngresoMedico.this, IngresoMedico.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
