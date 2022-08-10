@@ -45,11 +45,24 @@
                 android:id="@+id/btnTipologia"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/tipo"
+                android:layout_marginBottom="10dp"
                 android:text="@string/tipologia"
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLugares"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/lugar"
+
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:text="@string/lugares_de_atencion_medica"
@@ -59,6 +72,12 @@
                 android:id="@+id/btnEspecialidad"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/espe"
                 android:text="@string/especialidades"
                 app:cornerRadius="10dp" />
 
@@ -67,12 +86,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:text="@string/medicos"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/doc"
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAsignarEspecialidad"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/lista"
                 android:text="Asignar Especialidad"
                 app:cornerRadius="10dp" />
 
@@ -80,6 +111,12 @@
                 android:id="@+id/btnAsignarMedico"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/degradado2"
+                android:drawableRight="@drawable/lista"
                 android:text="Asignar Médicos"
                 app:cornerRadius="10dp" />
         </LinearLayout>
