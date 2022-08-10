@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    tools:context=".registrar">
+    tools:context=".IngresoMedico">
     <include layout="@layout/activity_menu_toolbar" />
 
     <com.google.android.material.button.MaterialButton
@@ -109,8 +109,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txregistrate"
+                        android:inputType="textCapCharacters"
                         android:layout_marginTop="15dp"
-                        android:gravity="left"
+                        android:digits="@string/digitos_aceptados"
                         android:hint="@string/nombre_medico"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -131,7 +132,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/etemail"
                         android:layout_marginTop="3dp"
-                        android:gravity="left"
+                        android:digits="@string/digitos_aceptados"
+                        android:inputType="textCapCharacters"
                         android:hint="@string/apellido_medico"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -163,8 +165,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="85dp"
                         android:layout_below="@id/ednombre"
+                        android:inputType="textCapCharacters"
                         android:hint="@string/descripcion_medico"
-
+                        android:digits="@string/digitos_aceptados"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
