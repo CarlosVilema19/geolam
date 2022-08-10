@@ -6,12 +6,14 @@ public class ListadoMedico implements Serializable {
 
     String nombreMedico, especialidadMedico, descripcionMedico;
     Integer idMedico;
+    String lugarTrabaja;
 
-    public ListadoMedico(String nombreMedico, String especialidadMedico, String descripcionMedico, Integer idMedico) {
+    public ListadoMedico(String nombreMedico, String especialidadMedico, String descripcionMedico, Integer idMedico, String lugarTrabaja) {
         this.nombreMedico = nombreMedico;
         this.especialidadMedico = especialidadMedico;
         this.descripcionMedico = descripcionMedico;
         this.idMedico = idMedico;
+        this.lugarTrabaja = lugarTrabaja;
     }
 
     public String getNombreMedico() {
@@ -28,5 +30,9 @@ public class ListadoMedico implements Serializable {
 
     public Integer getIdMedico() {
         return idMedico;
+    }
+
+    public String getLugarTrabaja() {
+        return lugarTrabaja;
     }
 }

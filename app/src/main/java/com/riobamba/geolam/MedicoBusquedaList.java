@@ -97,7 +97,8 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
                                     obj.getString("nombre_medico"),
                                     obj.getString("especialidad"),
                                     obj.getString("descripcion_medico"),
-                                    obj.getInt("id_medico")
+                                    obj.getInt("id_medico"),
+                                    obj.getString("lugar_trabaja")
                             ));
                         }
                         myadapter = new ListadoMedicoAdaptador(MedicoBusquedaList.this, lugarList);
