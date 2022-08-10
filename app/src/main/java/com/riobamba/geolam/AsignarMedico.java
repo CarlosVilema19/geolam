@@ -347,15 +347,18 @@ public class AsignarMedico extends AppCompatActivity {
 
                     //Mostrando el mensaje de la respuesta
                     Toast.makeText(getApplicationContext(), "Se ha asignado el médico correctamente", Toast.LENGTH_SHORT).show();
-                    tvIdEspecialidad.setText(null);
-                    tvIdMedico.setText(null);
-                    tvIdLugarMedico.setText(null);
+                    tvIdEspecialidad.setText("");
+                    tvIdMedico.setText("");
+                    tvIdLugarMedico.setText("");
                     autoCompleteOpcionesMedico.clearListSelection();
                     autoCompleteOpcionesEspecialidad.clearListSelection();
                     autoCompleteOpcionesLugarMedico.clearListSelection();
                     autoCompleteOpcionesLugarMedico.requestFocus();
                     autoCompleteOpcionesEspecialidad.requestFocus();
                     autoCompleteOpcionesMedico.requestFocus();
+                    finish();
+                    Intent intent = new Intent(AsignarMedico.this, AsignarMedico.class);
+                    startActivity(intent);
 
                     //startActivity(new Intent(getApplicationContext(), Login.class));
                     //finish();
