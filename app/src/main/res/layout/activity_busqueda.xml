@@ -70,7 +70,7 @@
                                 android:layout_width="190dp"
                                 android:layout_height="190dp"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/lugar" />
+                                app:srcCompat="@drawable/lugarmed" />
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
