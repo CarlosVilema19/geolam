@@ -26,7 +26,7 @@
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
         <activity
-            android:name=".ReportesAdmin"
+            android:name=".ReportesAdminUsuarios"
             android:exported="false" />
         <activity
             android:name=".ViewPDF"

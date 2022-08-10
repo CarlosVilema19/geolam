@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportesAdmin">
+    tools:context=".ReportesAdminUsuarios">
 
     <include layout="@layout/activity_menu_toolbar"/>
 
@@ -57,7 +57,7 @@
                 </RelativeLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGenerar"
+                    android:id="@+id/btnGenerarPDFUsuarios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20sp"
@@ -71,12 +71,35 @@
                     app:backgroundTint="@null"
                     android:background="@drawable/degradado2"
                     android:drawableLeft="@drawable/ic_baseline_groups_24"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGenerarPDFLugaresVisitados"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Lugares más visitados"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/degradado2"
+                    android:drawableLeft="@drawable/hospital"
+                    />
 
 
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/grafica"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     />
 
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </RelativeLayout>
