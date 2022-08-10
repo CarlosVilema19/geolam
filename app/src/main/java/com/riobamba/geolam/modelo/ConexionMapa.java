@@ -68,6 +68,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallback {
@@ -77,9 +78,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     List<ListadoMapa> mapaList;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-
-
-    Integer count;
+    Integer count =0 ;
+    Double[] distancias;
+    String[] lugarCerca;
 
     // Estado del Settings de verificación de permisos del GPS
     private static final int REQUEST_CHECK_SETTINGS = 102;
@@ -97,7 +98,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
     // La clase LocationRequest sirve para  para solicitar las actualizaciones
     // de ubicación de FusedLocationProviderApi
-    public com.google.android.gms.location.LocationRequest mLocationRequest;
+    public LocationRequest mLocationRequest;
 
     // Marcador para la ubicación del usuario
     Marker marker;
@@ -113,10 +114,10 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMapaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mapaList = new ArrayList<>();
+        obtenerCoordenadas();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
@@ -124,9 +125,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         //llamada a la funcion para obtener las coordenadas
-        mapaList = new ArrayList<>();
-        obtenerCoordenadas();
-
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,20 +137,18 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
         toolbar.show(this, "Lugares cercanos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
+        //obtenerCoordenadas();
+        //agregarMarcador(-1.6128,-78.85620);
 
         // Hago uso de FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         // Método para obtener la última ubicación del usuario
         obtenerUltimaUbicacion();
-
         // Con LocationCallback enviamos notificaciones de la ubicación del usuario
         mlocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
-
                 // Si no hay coordenadas de la ubicación del usuario le pasamos un return
-
                 // Cuando obtenemos la coordenadas de ubicación del usuario, agregamos
                 // un marcador para la ubicación del usuario con el método agregarMarcador()
                 for (Location location : locationResult.getLocations()) {
@@ -190,10 +186,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+        //obtenerCoordenadas();
+       // agregarMarcador(-1.6128,-78.85620);
     }
 
     public void obtenerCoordenadas()
     {
+
         String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
@@ -208,6 +207,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                     (float) obj.getDouble("longitud"),
                                     obj.getString("nombre_lugar"),
                                     obj.getString("direccion")
+
                             ));
                         }
                     } catch (JSONException e) {
@@ -216,7 +216,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                     }
 
                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
-
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -229,8 +228,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         LatLng riobamba = new LatLng(-1.67435, -78.6483);
         LatLng coordenadas = new LatLng(lat, lng);//coordenadas de mi posicion
         String distanciaString;
-        Double[] distancias = new Double[count];
-        String[] lugarCerca = new String[count];
+        lugarCerca = new String[count];
+        distancias = new Double[count];
         Proceso proceso = new Proceso();
 
 
@@ -251,7 +250,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 longitud = mapaList.get(i).getLongitud();
                 nombreLugar = mapaList.get(i).getNombreLugar();
                 direccionLugar = mapaList.get(i).getDireccionLugar();
-
                 DecimalFormat formato1 = new DecimalFormat("#0.0");
                 String distancia = formato1.format(proceso.obtenerDistancia(lat, lng, latitud,longitud));
 
@@ -277,21 +275,16 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    public void guardarDistancia(String[] distancia)
+    public void guardarContador(Integer contador)
     {
-        SharedPreferences preferences = getSharedPreferences("distanciaMapa", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("contador", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        for(int i = 0; i <= count; i++)
-        {
-            editor.putString("distancia_mapa", Arrays.toString(distancia));
-        }
+        editor.putInt("contador", contador);
         editor.apply();
-
     }
 
     private void obtenerUltimaUbicacion() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 dialogoSolicitarPermisoGPS();
             }
@@ -299,6 +292,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @RequiresApi(api = Build.VERSION_CODES.S)
+
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = LocationRequest.create();
         mLocationRequest.setInterval(30000);
@@ -319,6 +313,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         Task<LocationSettingsResponse> task = cliente.checkLocationSettings(builder.build());
 
         // Adjuntamos OnSuccessListener a la task o tarea
+
         task.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
@@ -337,7 +332,16 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
             public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
+
                     // En try podemos hacer 'algo', si la configuración de ubicación es correcta,
+                    // Mostramos el diálogo llamando a startResolutionForResult()
+                    // y es verificado el resultado en el método onActivityResult()
+
+                    //response.getLocationSettingsStates().isLocationPresent();
+                   // obtenerCoordenadas();
+                    //count = 17;
+                    //Objects.requireNonNull(response.getLocationSettingsStates()).isLocationUsable();
+
 
                 } catch (ApiException exception) {
                     switch (exception.getStatusCode()) {
@@ -372,7 +376,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void iniciarActualizacionesUbicacion() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    Activity#requestPermissions
