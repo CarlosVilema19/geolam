@@ -249,9 +249,22 @@ public class AsignarEspecialidad extends AppCompatActivity {
                 loading.dismiss();
 
                 //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(getApplicationContext(), Login.class));
                 //finish();
+
+
+
+                if((tvIdEspecialidad.getText().toString().equals("")&&tvIdLugarMedico.getText().toString().equals(""))||(tvIdEspecialidad.getText().toString().equals(""))||(tvIdLugarMedico.getText().toString().equals("")))
+                {
+                    Toast.makeText(AsignarEspecialidad.this, "Llene todos los campos", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+
+                }
+
+
             }
         }, new Response.ErrorListener() {
             @Override
