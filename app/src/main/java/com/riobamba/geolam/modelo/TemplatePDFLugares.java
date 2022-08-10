@@ -2,46 +2,38 @@ package com.riobamba.geolam.modelo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.riobamba.geolam.R;
+import com.riobamba.geolam.ReportesAdminUsuarios;
 import com.riobamba.geolam.ViewPDF;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMConfiguration;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DOMImplementation;
-
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Text;
-import org.w3c.dom.UserDataHandler;
-
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
-public class TemplatePDF {
+public class TemplatePDFLugares {
     private Context context;
     private File pdfArchivo;
     private Document document;
@@ -54,9 +46,13 @@ public class TemplatePDF {
     private Font fTextNormal = new Font(Font.FontFamily.TIMES_ROMAN, 13, Font.NORMAL);
     private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, BaseColor.GREEN);
     private Font fDate = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
-
-    public TemplatePDF(Context context) {
+    File folder;
+    public TemplatePDFLugares(Context context) {
         this.context = context;
+    }
+
+    public TemplatePDFLugares() {
+
     }
 
     public void abrirDocumento() {
@@ -71,13 +67,13 @@ public class TemplatePDF {
     }
 
     private void crearArchivo() {
-        File folder = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"Reportes GEOLAM");
+        folder = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"Reportes GEOLAM");
         //File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Geolam_ReportesPDF");
         if (!folder.exists())//{ //verifica si ya existe la carpeta
 
             folder.mkdirs();
 
-            pdfArchivo = new File(folder, "Reporte Usuarios Registrados.pdf");
+            pdfArchivo = new File(folder, "Reporte Lugares más visitados.pdf");
 
 
     }
@@ -144,9 +140,10 @@ public class TemplatePDF {
             //obtener la fila
             String [] row=lugares.get(indexR);
             for( indexC=0; indexC<header.length;indexC++){ //Columnas
-                pdfPCell= new PdfPCell(new Phrase(row[indexC]));
+                pdfPCell= new PdfPCell(new Phrase(row[indexC],fTextNormal));
                 pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                pdfPCell.setFixedHeight(20);
+                pdfPCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                pdfPCell.setFixedHeight(35);
                 pdfPTable.addCell(pdfPCell);
             }
         }
@@ -158,7 +155,33 @@ public class TemplatePDF {
             Log.e("crearTabla", e.toString());
         }
          }
+    public void addImgName () {
+        try{
 
+            /*Drawable drawable = ContextCompat.getDrawable(context, R.drawable.descarga);
+            Image image = Image.getInstance(drawable + "Geo" + ".jpg");
+           */
+            ReportesAdminUsuarios rep= new ReportesAdminUsuarios();
+            //rep.graf();
+            Drawable d = context.getResources().getDrawable(R.drawable.descarga);
+           BitmapDrawable bitDw = ((BitmapDrawable) d);
+            Bitmap bmp = bitDw.getBitmap();
+           // Bitmap bmp = null;
+            //bmp.sameAs(rep.grafi());
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+           Image image = Image.getInstance(stream.toByteArray());
+
+            image.setSpacingBefore(5);
+
+            image.setSpacingAfter(5);
+            image.scaleToFit(400,400);
+            image.setAlignment(Element.ALIGN_CENTER);
+            document.add(image);
+        }catch (Exception e){
+            Log.e("addImgName ", e.toString());
+        }
+    }
 public void viewPDF(){
     Intent intent = new Intent(context, ViewPDF.class);
     intent.putExtra("path", pdfArchivo.getAbsolutePath());

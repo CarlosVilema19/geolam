@@ -25,10 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
+
+          <activity
+            android:name=".ReportesAdminUsuarios"
+            android:exported="false" />
         <activity
             android:name=".InfoApp"
             android:exported="false" />
-        <activity
+         <activity
             android:name=".ReportesAdmin"
             android:exported="false" />
         <activity
