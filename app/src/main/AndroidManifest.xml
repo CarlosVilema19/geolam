@@ -32,9 +32,6 @@
         <activity
             android:name=".InfoApp"
             android:exported="false" />
-         <activity
-            android:name=".ReportesAdmin"
-            android:exported="false" />
         <activity
             android:name=".ViewPDF"
             android:exported="false" />
