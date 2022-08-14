@@ -115,18 +115,18 @@ public class MedicoUsuario extends AppCompatActivity implements SearchView.OnQue
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        toolbar.getActividad(this,this);
+        toolbar.retornarInicio();
     }
     public void moverMapa(View view)    //dirige al mapa
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
+        toolbar.getActividad(this,this);
+        toolbar.retornarMapa();
     }
     public void moverEspe(View view)    //dirige a la especialidad
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        toolbar.getActividad(this,this);
+        toolbar.retornarEspecialidad();
     }
 
 

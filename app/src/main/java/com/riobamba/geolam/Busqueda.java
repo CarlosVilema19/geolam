@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -17,7 +18,7 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class Busqueda extends AppCompatActivity {
-    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe, btnBusAvanMed, btnBusRapMed, btnBusAvanEspe ;
+    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe, btnBusAvanMed, btnBusRapMed, btnBusAvanEspe, btnBusSombra ;
 
     Toolbar toolbar = new Toolbar();
     @Override
@@ -33,7 +34,8 @@ public class Busqueda extends AppCompatActivity {
         btnBusAvanEspe = findViewById(R.id.btnBusAvanEspe);
 
         toolbar.show(this, "Búsqueda", true);
-
+        btnBusSombra = findViewById(R.id.btnEspecialidad);
+        btnBusSombra.setBackgroundColor(Color.argb(30,128,128,128));
 
         btnBusRapLug.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,18 +107,18 @@ public class Busqueda extends AppCompatActivity {
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        toolbar.getActividad(this,this);
+        toolbar.retornarInicio();
     }
     public void moverMapa(View view)    //dirige al mapa
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
+        toolbar.getActividad(this,this);
+        toolbar.retornarMapa();
     }
     public void moverEspe(View view)    //dirige a la especialidad
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        toolbar.getActividad(this,this);
+        toolbar.retornarEspecialidad();
     }
 
 

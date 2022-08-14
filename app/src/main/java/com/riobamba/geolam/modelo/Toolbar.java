@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,18 +33,25 @@ import java.util.Objects;
 public class Toolbar extends AppCompatActivity{
 
     public Class<Bienvenida> inicioClass = Bienvenida.class;
+    public Class<Listado> inicioUsuClass = Listado.class;
     public Class<ConexionMapa> conexionMapaClass = ConexionMapa.class;
-    public Class<Busqueda> listadoEspecialidadClass = Busqueda.class;
-   // public Class<EspecialidadListadoUsuario> listadoEspecialidadClass = EspecialidadListadoUsuario.class;
-   // public Class<DatosPersonalesUsu> datosUsuClass = DatosPersonalesUsu.class;
+    public Class<Busqueda> busquedaClass = Busqueda.class;
     public  Class <DatosPersonalesUsuario> datosUsuClass= DatosPersonalesUsuario.class;
     public  Class <InfoApp> infoAppClass= InfoApp.class;
     public Class<Login> login = Login.class;
+
     public Context ctx;
+    public AppCompatActivity actividad;
 
     public void getContexto(Context ctx)
     {
         this.ctx = ctx;
+    }
+
+    public void getActividad(Context ctx, AppCompatActivity actividad)
+    {
+        this.ctx = ctx;
+        this.actividad = actividad;
     }
 
     public void show(AppCompatActivity activities,String titulo , Boolean flechaRegreso )
@@ -63,30 +72,37 @@ public class Toolbar extends AppCompatActivity{
         }
         if(item.getItemId()==R.id.iCerrarSesion)
         {
-            guardarEstadoButton(activities);
-            activities.startActivity(new Intent(ctx, login));
+            cerrarSesion(activities);
         }
         if(item.getItemId()==R.id.iMisDatos)
         {
             activities.startActivity(new Intent(ctx, datosUsuClass));
         }
-
         if(item.getItemId()==android.R.id.home)
         {
             activities.finish();
         }
-
         if(item.getItemId()==R.id.iAcercaApp)
         {
             activities.startActivity(new Intent(ctx, infoAppClass));
         }
-
     }
 
+    public void retornarInicio() {
+        Intent intent = new Intent(ctx, inicioUsuClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        actividad.startActivity(intent);
+        actividad.overridePendingTransition(0,0);}
 
-    public Intent retornarInicio() {return new Intent(ctx, inicioClass);}
-    public Intent retornarMapa() {return new Intent(ctx, conexionMapaClass);}
-    public Intent retornarEspecialidad() {return new Intent(ctx, listadoEspecialidadClass);}
+    public void retornarMapa() {Intent intent = new Intent(ctx, conexionMapaClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        actividad.startActivity(intent);
+        actividad.overridePendingTransition(0,0);}
+
+    public void retornarEspecialidad() {Intent intent = new Intent(ctx, busquedaClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        actividad.startActivity(intent);
+        actividad.overridePendingTransition(0,0);}
 
 
     public void salir (AppCompatActivity activities) {
@@ -107,6 +123,24 @@ public class Toolbar extends AppCompatActivity{
                         }
                     });
             builder.show();
+    }
+
+    public void cerrarSesion (AppCompatActivity activities) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        builder.setMessage("¿Desea cerrar sesión?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        guardarEstadoButton(activities);
+                        activities.startActivity(new Intent(ctx, login));
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
     }
 
 

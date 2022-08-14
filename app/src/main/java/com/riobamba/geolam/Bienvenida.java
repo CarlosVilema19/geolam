@@ -1,6 +1,7 @@
 package com.riobamba.geolam;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ public class Bienvenida extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
         SharedPreferences preferencesAdmin = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
 
