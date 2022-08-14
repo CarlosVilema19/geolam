@@ -73,15 +73,25 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/nombre_lugar_listado"
                         android:textAllCaps="true"
+                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvTelefonoLista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tipologia"
+                        android:layout_marginStart="4dp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="4dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -99,8 +109,7 @@
                             android:textColor="@color/black"
                             android:text="Categoria"
                             android:textAllCaps="true"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -131,6 +140,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
 
@@ -138,18 +148,7 @@
                             android:id="@+id/imageView2"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_baseline_phone_24" />
-
-                        <TextView
-                            android:id="@+id/tvTelefonoLista"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="2dp"
-                            android:text="Telefono"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            android:layout_gravity="center"/>
 
                         <TextView
                             android:id="@+id/tvId"
