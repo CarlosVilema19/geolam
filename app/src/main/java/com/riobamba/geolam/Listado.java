@@ -61,7 +61,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
-    public Button btnInicio;
+    public Button btnInicio, btnInicioPul;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,14 +74,25 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
         lugarList = new ArrayList<>();
 
-        btnInicio = findViewById(R.id.btnInicio);
-        btnInicio.setBackgroundColor(Color.argb(30,128,128,128));
-
         txtBuscar = findViewById(R.id.svBuscar);
         myadapter = new ListadoLugarAdaptador(Listado.this, lugarList,this::moveToDescription);
         txtBuscar.setOnQueryTextListener(this);
 
         toolbar.show(this, "Inicio", false);
+
+        //Senalar el icono donde pulsa en el menu inferior
+        btnInicioPul = findViewById(R.id.btnInicio);
+        btnInicio = findViewById(R.id.btnInicio2);
+        toolbar.obtenerBotIni(btnInicio,btnInicioPul);
+
+        btnInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Listado.this, Listado.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         MostrarResultado();
     }

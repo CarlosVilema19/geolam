@@ -53,6 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.riobamba.geolam.Busqueda;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.ListadoUsuariosAdminControl;
 import com.riobamba.geolam.ListarLugarUsuario;
@@ -82,7 +83,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     Integer count =0 ;
     Double[] distancias;
     String[] lugarCerca;
-    Button btnMapa;
+    Button btnMapa, btnMapaPul;
 
     // Estado del Settings de verificación de permisos del GPS
     private static final int REQUEST_CHECK_SETTINGS = 102;
@@ -126,9 +127,20 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        btnMapa = findViewById(R.id.btnLugaresCercanos);
-        btnMapa.setBackgroundColor(Color.argb(30,128,128,128));
+        //Senalar el icono donde pulsa en el menu inferior
+        btnMapa = findViewById(R.id.btnLugaresCercanos2);
+        btnMapaPul = findViewById(R.id.btnLugaresCercanos);
+        toolbar.obtenerBotIni(btnMapa,btnMapaPul);
 
+
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConexionMapa.this, ConexionMapa.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         //llamada a la funcion para obtener las coordenadas
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {

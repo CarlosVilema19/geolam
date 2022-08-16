@@ -39,7 +39,6 @@ public class Toolbar extends AppCompatActivity{
     public  Class <DatosPersonalesUsuario> datosUsuClass= DatosPersonalesUsuario.class;
     public  Class <InfoApp> infoAppClass= InfoApp.class;
     public Class<Login> login = Login.class;
-
     public Context ctx;
     public AppCompatActivity actividad;
 
@@ -59,9 +58,14 @@ public class Toolbar extends AppCompatActivity{
         activities.setSupportActionBar(activities.findViewById(R.id.toolbar));
         Objects.requireNonNull(activities.getSupportActionBar()).setTitle(titulo);
         activities.getSupportActionBar().setDisplayHomeAsUpEnabled(flechaRegreso);
-
+        activities.overridePendingTransition(0,0);
     }
 
+    public void obtenerBotIni(Button icon, Button iconPul)
+    {
+        icon.setVisibility(View.VISIBLE);
+        iconPul.setVisibility(View.GONE);
+    }
     public void ejecutarItemSelected(MenuItem item, AppCompatActivity activities)
     {
         if(item.getItemId()==R.id.iInicioMenu){
@@ -81,6 +85,7 @@ public class Toolbar extends AppCompatActivity{
         if(item.getItemId()==android.R.id.home)
         {
             activities.finish();
+            activities.overridePendingTransition(0,0);
         }
         if(item.getItemId()==R.id.iAcercaApp)
         {
@@ -102,8 +107,8 @@ public class Toolbar extends AppCompatActivity{
     public void retornarEspecialidad() {Intent intent = new Intent(ctx, busquedaClass);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         actividad.startActivity(intent);
-        actividad.overridePendingTransition(0,0);}
-
+        actividad.overridePendingTransition(0,0);
+    }
 
     public void salir (AppCompatActivity activities) {
             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -150,13 +155,13 @@ public class Toolbar extends AppCompatActivity{
         boolean estado = false;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("estado_inicio",estado);
-        editor.commit();
+        editor.apply();
 
         SharedPreferences preferences1 = activities.getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
         boolean estado1 = false;
         SharedPreferences.Editor editor1 = preferences1.edit();
         editor1.putBoolean("estado_inicio_admin",estado1);
-        editor1.commit();
+        editor1.apply();
     }
 
 }
