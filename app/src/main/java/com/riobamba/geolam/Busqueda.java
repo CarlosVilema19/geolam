@@ -18,7 +18,7 @@ import android.widget.Button;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class Busqueda extends AppCompatActivity {
-    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe, btnBusAvanMed, btnBusRapMed, btnBusAvanEspe, btnBusSombra ;
+    Button btnBusRapLug, btnBusAvanLug, btnBusRapEspe, btnBusAvanMed, btnBusRapMed, btnBusAvanEspe, btnBusSombra, btnBusSombraPul ;
 
     Toolbar toolbar = new Toolbar();
     @Override
@@ -34,8 +34,20 @@ public class Busqueda extends AppCompatActivity {
         btnBusAvanEspe = findViewById(R.id.btnBusAvanEspe);
 
         toolbar.show(this, "Búsqueda", true);
-        btnBusSombra = findViewById(R.id.btnEspecialidad);
-        btnBusSombra.setBackgroundColor(Color.argb(30,128,128,128));
+
+        btnBusSombra = findViewById(R.id.btnEspecialidad2);
+        btnBusSombraPul = findViewById(R.id.btnEspecialidad);
+        toolbar.obtenerBotIni(btnBusSombra,btnBusSombraPul);
+
+        btnBusSombra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Busqueda.this, Busqueda.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         btnBusRapLug.setOnClickListener(new View.OnClickListener() {
             @Override

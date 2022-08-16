@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,19 +14,17 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="225dp"
                     android:layout_gravity="center_horizontal">
-
                     <ImageView
                         android:id="@+id/imagenlugar"
                         android:layout_width="wrap_content"
@@ -35,24 +32,68 @@
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
                         android:foregroundTint="#00FFFFFF" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.button.MaterialButton
+
+                            android:id="@+id/btnFavoritoDes"
+                            style="@style/Widget.Material3.Button.TextButton.Icon"
+                            android:layout_width="55dp"
+                            android:layout_height="62dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="25dp"
+                            android:backgroundTint="@color/base2"
+                            app:icon="@drawable/ic_baseline_favorite_border_24"
+                            app:iconGravity="end"
+                            app:iconTint="#FFFFFF" />
+
+                        <com.google.android.material.button.MaterialButton
+
+                            android:id="@+id/btnFavoritoAct"
+                            style="@style/Widget.Material3.Button.TextButton.Icon"
+                            android:layout_width="55dp"
+                            android:layout_height="62dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="25dp"
+                            android:backgroundTint="@color/base2"
+                            app:iconGravity="end"
+                            app:icon="@drawable/ic_baseline_favorite_24"
+                            android:visibility="gone"
+                            app:iconTint="#FFFFFF" />
+                    </RelativeLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/btnMedicoUsuario"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/borde"
+                        android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_margin="1dp"
+                        android:id="@+id/btnMedicoUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardCornerRadius="5dp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
@@ -92,14 +133,25 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/btnEspecialidadUsuario"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_margin="2dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/borde"
+                        android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnEspecialidadUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_margin="1dp"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardCornerRadius="5dp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
@@ -133,6 +185,7 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -472,26 +525,33 @@
                         android:textSize="15sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/borde"
+                    android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_marginTop="10dp"
                     android:id="@+id/btnCalificar"
+                    android:layout_margin="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@android:color/transparent"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical"
-                    app:cardBackgroundColor="#FF027FCC">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_margin="10dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -500,10 +560,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Califique este lugar"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
                             android:layout_marginEnd="5dp"
-                            android:textStyle="italic" />
+                            android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/ivEstrella1"
@@ -541,6 +601,7 @@
 
 
                 </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnVerComentario"
@@ -552,7 +613,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvVerComentario"
@@ -567,16 +628,31 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_margin="15dp"
-                    android:textStyle="bold"
-                    android:text="Opiniones" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp">
 
+                    <ImageView
+                        android:id="@+id/ivComentario"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="2dp"
+                        app:srcCompat="@drawable/ic_baseline_comment_24" />
+
+                    <TextView
+                        android:layout_toRightOf="@+id/ivComentario"
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Opiniones"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

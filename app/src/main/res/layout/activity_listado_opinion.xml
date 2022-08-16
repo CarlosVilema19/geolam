@@ -27,8 +27,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:cardCornerRadius="10dp">
 
 
+                <ImageView
+                    android:id="@+id/ivImagenUsuarioOpinion"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_baseline_person_add_alt_1_24" />
+
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
                     android:id="@+id/llOpinion"
                     android:layout_width="match_parent"
@@ -45,15 +60,6 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ivImagenUsuarioOpinion"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:paddingLeft="2dp"
-                            android:paddingRight="2dp"
-                            app:srcCompat="@drawable/ic_baseline_person_add_alt_1_24" />
-
                         <TextView
                             android:id="@+id/tvNombreUsuariosOpinion"
                             android:layout_width="wrap_content"
@@ -61,8 +67,9 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:text="Nombre Usuario"
+                            android:textAllCaps="true"
                             android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -72,8 +79,8 @@
 
                         <ImageView
                             android:id="@+id/iImagenUsuariosOpinion"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:layout_width="18sp"
+                            android:layout_height="18sp"
                             android:layout_gravity="center"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
@@ -101,6 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Fecha"
+                            android:layout_marginStart="18dp"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
@@ -122,7 +130,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Comentario"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 

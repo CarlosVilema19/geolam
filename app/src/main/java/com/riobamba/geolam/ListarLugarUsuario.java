@@ -1,6 +1,7 @@
 package com.riobamba.geolam;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -116,7 +117,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getInt("id_lugar"),
                                 obj.getString("whatsapp"),
                                 obj.getString("pagina_web"),
-                                (float)obj.getDouble("CALIFICACION")
+                                (float)obj.getDouble("CALIFICACION"),
+                                obj.getInt("favorito")
                         ));
 
                     }
@@ -142,6 +144,16 @@ public class ListarLugarUsuario extends AppCompatActivity
                         public void onClick3(ListadoLugarUsuario item) {
                             moveToVerComentario(item);
 
+                        }
+                    },new ListadoLugarUsuarioAdaptador.OnClickFavDesListener() {
+                        @Override
+                        public void onClick4(ListadoLugarUsuario item) {
+                            moveToFavDes(item);
+                        }
+                    },new ListadoLugarUsuarioAdaptador.OnClickFavAcListener() {
+                        @Override
+                        public void onClick5(ListadoLugarUsuario item) {
+                            moveToFavAc(item);
                         }
                     });
                     recyclerView.setAdapter(myadapter);
@@ -290,7 +302,55 @@ public class ListarLugarUsuario extends AppCompatActivity
         dialogo1.show();
     }
 
+    public void moveToFavDes(ListadoLugarUsuario item)
+    {
+        String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoAc;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", item.getIdLugar().toString());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 
+    public void moveToFavAc(ListadoLugarUsuario item)
+    {
+        String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoDes;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", item.getIdLugar().toString());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 
     public void moveToMedico(ListadoLugarUsuario item)
     {
