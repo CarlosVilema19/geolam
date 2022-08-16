@@ -93,6 +93,9 @@ public class ListarLugarUsuario extends AppCompatActivity
 
     public void MostrarResultado(ListadoLugar listadoLugar)
     {
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
         String idLugar = listadoLugar.getId().toString();
         String url2 = WebService.urlRaiz+WebService.servicioListarLugaresUsuario; //URL del web service
 
@@ -148,12 +151,12 @@ public class ListarLugarUsuario extends AppCompatActivity
                     },new ListadoLugarUsuarioAdaptador.OnClickFavDesListener() {
                         @Override
                         public void onClick4(ListadoLugarUsuario item) {
-                            moveToFavDes(item);
+                            moveToFavDes(item,email);
                         }
                     },new ListadoLugarUsuarioAdaptador.OnClickFavAcListener() {
                         @Override
                         public void onClick5(ListadoLugarUsuario item) {
-                            moveToFavAc(item);
+                            moveToFavAc(item,email);
                         }
                     });
                     recyclerView.setAdapter(myadapter);
@@ -175,6 +178,7 @@ public class ListarLugarUsuario extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", idLugar);
+                parametros.put("email", email);
                 return parametros;
             }
         };
@@ -302,7 +306,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         dialogo1.show();
     }
 
-    public void moveToFavDes(ListadoLugarUsuario item)
+    public void moveToFavDes(ListadoLugarUsuario item, String email)
     {
         String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoAc;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -320,6 +324,7 @@ public class ListarLugarUsuario extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", item.getIdLugar().toString());
+                parametros.put("email", email);
                 return parametros;
             }
         };
@@ -327,7 +332,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         requestQueue.add(stringRequest);
     }
 
-    public void moveToFavAc(ListadoLugarUsuario item)
+    public void moveToFavAc(ListadoLugarUsuario item, String email)
     {
         String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoDes;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -345,6 +350,7 @@ public class ListarLugarUsuario extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", item.getIdLugar().toString());
+                parametros.put("email", email);
                 return parametros;
             }
         };
