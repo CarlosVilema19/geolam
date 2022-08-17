@@ -12,7 +12,7 @@
         android:id="@+id/bnvMenuInfe"
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:background="@color/white"
+        android:background="@color/backinfe"
         app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -30,18 +30,51 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:clickable="true"
+                android:drawableTop="@drawable/ic_baseline_map_242"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="moverMapa"
+                android:text="Cercanos"
+                android:textAllCaps="false"
+                android:textColor="@color/iconinfe"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLugaresCercanos2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:clickable="true"
                 android:drawableTop="@drawable/ic_baseline_map_24"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:onClick="moverMapa"
                 android:text="Cercanos"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
-
+                android:textColor="@color/base"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnInicio"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_baseline_home_242"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="moverInicio"
+                android:text="Inicio"
+                android:textAllCaps="false"
+                android:textColor="@color/iconinfe"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnInicio2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -53,8 +86,10 @@
                 android:onClick="moverInicio"
                 android:text="Inicio"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textColor="@color/base"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEspecialidad"
@@ -71,8 +106,28 @@
                 android:textAllCaps="false"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
+                android:textColor="@color/iconinfe"
                 android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEspecialidad2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_baseline_search_2422"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="moverEspe"
+                android:text="Búsqueda"
+                android:textAllCaps="false"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="@color/base"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

@@ -39,6 +39,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     final ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2;
     final ListadoLugarUsuarioAdaptador.OnClickListener listener3;
     final ListadoLugarUsuarioAdaptador.OnClickComenListener listener4;
+    final ListadoLugarUsuarioAdaptador.OnClickFavDesListener listener5;
+    final ListadoLugarUsuarioAdaptador.OnClickFavAcListener listener6;
     String url;
 
 
@@ -57,13 +59,21 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
     public interface OnClickComenListener{
         void onClick3(ListadoLugarUsuario item);
     }
+    public interface OnClickFavDesListener{
+        void onClick4(ListadoLugarUsuario item);
+    }
+    public interface OnClickFavAcListener{
+        void onClick5(ListadoLugarUsuario item);
+    }
 
     public ListadoLugarUsuarioAdaptador(Context mCtx, List<ListadoLugarUsuario> lugarList,
                                         List<ListadoLugar> lugarList2,
                                         ListadoLugarUsuarioAdaptador.OnItemClickListener listener,
                                         ListadoLugarUsuarioAdaptador.OnClickEspeListener listener2,
                                         ListadoLugarUsuarioAdaptador.OnClickListener listener3,
-                                        ListadoLugarUsuarioAdaptador.OnClickComenListener listener4){
+                                        ListadoLugarUsuarioAdaptador.OnClickComenListener listener4,
+                                        ListadoLugarUsuarioAdaptador.OnClickFavDesListener listener5,
+                                        ListadoLugarUsuarioAdaptador.OnClickFavAcListener listener6){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.lugarList2 = lugarList2;
@@ -71,6 +81,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         this.listener2 = listener2;
         this.listener3 = listener3;
         this.listener4 = listener4;
+        this.listener5 = listener5;
+        this.listener6 = listener6;
     }
     View view1;
     public void viewEjem (View v)
@@ -99,6 +111,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final LinearLayout paginaWebLL;
         private final LinearLayout descripcionLL;
         private final LinearLayout calificacionLL;
+        private final Button btnFavDes;
+        private final Button btnFavAct;
 
 
 
@@ -133,6 +147,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             paginaWebLL = view.findViewById(R.id.llPaginaWeb);
             descripcionLL = view.findViewById(R.id.llDescripcion);
             calificacionLL = view.findViewById(R.id.llCalificacion);
+            btnFavDes = view.findViewById(R.id.btnFavoritoDes);
+            btnFavAct  = view.findViewById(R.id.btnFavoritoAct);
 
 
 
@@ -216,6 +232,15 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
 
        // viewHolder.btnEspecialidadUsuario.setCardBackgroundColor(ContextCompat.getColor(this.mCtx, R.color.teal_700));
 
+        if (listadoLugar.getFavorito().equals(1))
+        {
+            viewHolder.btnFavAct.setVisibility(View.VISIBLE);
+            viewHolder.btnFavDes.setVisibility(View.GONE);
+        }else
+        {
+            viewHolder.btnFavAct.setVisibility(View.GONE);
+            viewHolder.btnFavDes.setVisibility(View.VISIBLE);
+        }
 
         viewHolder.btnMedicoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,6 +264,24 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             @Override
             public void onClick(View v) {
                 listener4.onClick3(listadoLugar);
+            }
+        });
+        viewHolder.btnFavDes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener5.onClick4(listadoLugar);
+                viewHolder.btnFavAct.setVisibility(View.VISIBLE);
+                viewHolder.btnFavDes.setVisibility(View.GONE);
+                Toast.makeText(mCtx, "Se ha añadido a lugares favoritos", Toast.LENGTH_SHORT).show();
+            }
+        });
+        viewHolder.btnFavAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener6.onClick5(listadoLugar);
+                viewHolder.btnFavAct.setVisibility(View.GONE);
+                viewHolder.btnFavDes.setVisibility(View.VISIBLE);
+                Toast.makeText(mCtx, "Se ha quitado de lugares favoritos", Toast.LENGTH_SHORT).show();
             }
         });
     }

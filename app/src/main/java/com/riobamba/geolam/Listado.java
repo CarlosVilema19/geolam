@@ -12,12 +12,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -59,6 +61,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
+    public Button btnInicio, btnInicioPul;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,12 +74,25 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
         lugarList = new ArrayList<>();
 
-
         txtBuscar = findViewById(R.id.svBuscar);
         myadapter = new ListadoLugarAdaptador(Listado.this, lugarList,this::moveToDescription);
         txtBuscar.setOnQueryTextListener(this);
 
         toolbar.show(this, "Inicio", false);
+
+        //Senalar el icono donde pulsa en el menu inferior
+        btnInicioPul = findViewById(R.id.btnInicio);
+        btnInicio = findViewById(R.id.btnInicio2);
+        toolbar.obtenerBotIni(btnInicio,btnInicioPul);
+
+        btnInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Listado.this, Listado.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         MostrarResultado();
     }
@@ -165,18 +181,18 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        toolbar.getActividad(this,this);
+        toolbar.retornarInicio();
     }
     public void moverMapa(View view)    //dirige al mapa
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
+        toolbar.getActividad(this,this);
+        toolbar.retornarMapa();
     }
     public void moverEspe(View view)    //dirige a la especialidad
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        toolbar.getActividad(this,this);
+        toolbar.retornarEspecialidad();
     }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar

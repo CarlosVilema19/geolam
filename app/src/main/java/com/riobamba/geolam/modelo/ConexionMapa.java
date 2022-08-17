@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.riobamba.geolam.Busqueda;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.ListadoUsuariosAdminControl;
 import com.riobamba.geolam.ListarLugarUsuario;
@@ -81,6 +83,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     Integer count =0 ;
     Double[] distancias;
     String[] lugarCerca;
+    Button btnMapa, btnMapaPul;
 
     // Estado del Settings de verificación de permisos del GPS
     private static final int REQUEST_CHECK_SETTINGS = 102;
@@ -124,6 +127,20 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
+        //Senalar el icono donde pulsa en el menu inferior
+        btnMapa = findViewById(R.id.btnLugaresCercanos2);
+        btnMapaPul = findViewById(R.id.btnLugaresCercanos);
+        toolbar.obtenerBotIni(btnMapa,btnMapaPul);
+
+
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConexionMapa.this, ConexionMapa.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         //llamada a la funcion para obtener las coordenadas
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +238,38 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void agregarMarcador(double lat, double lng) {
+
+        String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                response -> {
+                    try {
+                        Toast.makeText(this, "Aquí no es el error, sigue buscando :v", Toast.LENGTH_SHORT).show();
+                        JSONArray array = new JSONArray(response);
+                        count = array.length();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject obj = array.getJSONObject(i);
+                            mapaList.add(new ListadoMapa(
+                                    (float) obj.getDouble("latitud"),
+                                    (float) obj.getDouble("longitud"),
+                                    obj.getString("nombre_lugar"),
+                                    obj.getString("direccion")
+
+                            ));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+
+                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+        Volley.newRequestQueue(this).add(stringRequest);
+
+
+
+
+
+
         Float latitud, longitud;
         String nombreLugar, direccionLugar;
         BitmapDescriptor puntero = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
@@ -267,6 +316,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         .icon(iconoPuntero));
 
             }
+           // Toast.makeText(this, count.toString(), Toast.LENGTH_SHORT).show();
 
             lugarDistancia.setText(proceso.verCercano(distancias, lugarCerca,count));
 
@@ -419,18 +469,18 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        toolbar.getActividad(this,this);
+        toolbar.retornarInicio();
     }
     public void moverMapa(View view)    //dirige al mapa
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
+        toolbar.getActividad(this,this);
+        toolbar.retornarMapa();
     }
     public void moverEspe(View view)    //dirige a la especialidad
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        toolbar.getActividad(this,this);
+        toolbar.retornarEspecialidad();
     }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar

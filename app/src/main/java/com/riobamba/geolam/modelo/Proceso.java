@@ -1,5 +1,10 @@
 package com.riobamba.geolam.modelo;
 
+import android.content.Context;
+import android.content.Intent;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -89,4 +94,14 @@ public class Proceso {
                 ((long) (anios / 4) *24*60*60*1000)+
                 (24*60*60*1000);
     }
+
+
+    public void cancelarAnimacion(AppCompatActivity activities)
+    {
+        //Intent intent = activities.
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+       // activities.overridePendingTransition(0,0);
+    }
+
+
 }

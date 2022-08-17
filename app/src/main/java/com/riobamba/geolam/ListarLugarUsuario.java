@@ -1,6 +1,7 @@
 package com.riobamba.geolam;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -92,6 +93,9 @@ public class ListarLugarUsuario extends AppCompatActivity
 
     public void MostrarResultado(ListadoLugar listadoLugar)
     {
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
         String idLugar = listadoLugar.getId().toString();
         String url2 = WebService.urlRaiz+WebService.servicioListarLugaresUsuario; //URL del web service
 
@@ -116,7 +120,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getInt("id_lugar"),
                                 obj.getString("whatsapp"),
                                 obj.getString("pagina_web"),
-                                (float)obj.getDouble("CALIFICACION")
+                                (float)obj.getDouble("CALIFICACION"),
+                                obj.getInt("favorito")
                         ));
 
                     }
@@ -143,6 +148,16 @@ public class ListarLugarUsuario extends AppCompatActivity
                             moveToVerComentario(item);
 
                         }
+                    },new ListadoLugarUsuarioAdaptador.OnClickFavDesListener() {
+                        @Override
+                        public void onClick4(ListadoLugarUsuario item) {
+                            moveToFavDes(item,email);
+                        }
+                    },new ListadoLugarUsuarioAdaptador.OnClickFavAcListener() {
+                        @Override
+                        public void onClick5(ListadoLugarUsuario item) {
+                            moveToFavAc(item,email);
+                        }
                     });
                     recyclerView.setAdapter(myadapter);
 
@@ -163,6 +178,7 @@ public class ListarLugarUsuario extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", idLugar);
+                parametros.put("email", email);
                 return parametros;
             }
         };
@@ -290,7 +306,57 @@ public class ListarLugarUsuario extends AppCompatActivity
         dialogo1.show();
     }
 
+    public void moveToFavDes(ListadoLugarUsuario item, String email)
+    {
+        String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoAc;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", item.getIdLugar().toString());
+                parametros.put("email", email);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 
+    public void moveToFavAc(ListadoLugarUsuario item, String email)
+    {
+        String url = WebService.urlRaiz +WebService.servicioActualizarFavoritoDes;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", item.getIdLugar().toString());
+                parametros.put("email", email);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 
     public void moveToMedico(ListadoLugarUsuario item)
     {
@@ -327,18 +393,18 @@ public class ListarLugarUsuario extends AppCompatActivity
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarInicio());
+        toolbar.getActividad(this,this);
+        toolbar.retornarInicio();
     }
     public void moverMapa(View view)    //dirige al mapa
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarMapa());
+        toolbar.getActividad(this,this);
+        toolbar.retornarMapa();
     }
     public void moverEspe(View view)    //dirige a la especialidad
     {
-        toolbar.getContexto(this);
-        startActivity(toolbar.retornarEspecialidad());
+        toolbar.getActividad(this,this);
+        toolbar.retornarEspecialidad();
     }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
