@@ -44,7 +44,7 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
         btnReportes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioAdmin.this, ReportesAdminUsuarios.class);
+                Intent intent = new Intent(InicioAdmin.this, ReportesAdmin.class);
                 startActivity(intent);
             }
         });

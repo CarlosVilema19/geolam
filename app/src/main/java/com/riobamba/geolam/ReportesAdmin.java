@@ -5,12 +5,14 @@ import static android.app.PendingIntent.getActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,7 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ReportesAdminUsuarios extends AppCompatActivity {
+public class ReportesAdmin extends AppCompatActivity {
     //VARIABLES PARA PDF DE LISTADO DE USUARIOS
     private String[] header = {"Tipo de usuario", "Nombre"};
     private String shorText = "Lista de usuarios registrados en la aplicación Geolam";
@@ -41,8 +43,9 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
     private TemplatePDF templatePDF;
     private ArrayList<String[]> rowsUsuarios = new ArrayList<>();
     private ArrayList<String[]> rows = null;
-    Button btnGenerarPdfUsu;
+    Button btnGenerarPdfUsu,prueba;
     Bitmap mBitmap;
+    RelativeLayout rl;
 
     //VARIABLES PARA PDF DE LUGARES DE ATENCIÓN MÉDICA MÁS VISITADOS
     private ArrayList<String[]> rowsLugares = new ArrayList<>();
@@ -51,10 +54,11 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
     private String[] header2 = {"Nombre", "Número de vistas"};
     private String shorText2 = "Top 10 de los lugares de atención médica más visitados";
     Button btnGenerarPdfLugares;
+
     Toolbar toolbar = new Toolbar();
 
     //Gráfica
-  public GraphView grafica;
+    public GraphView grafica;
     String id,nombre,vistas;
 
 
@@ -62,25 +66,32 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         usuarios();
-        lugares();
-        grafi();
+        //lugares();
+
         setContentView(R.layout.activity_reportes_admin);
         btnGenerarPdfUsu = findViewById(R.id.btnGenerarPDFUsuarios);
         btnGenerarPdfLugares = findViewById(R.id.btnGenerarPDFLugaresVisitados);
         grafica=findViewById(R.id.grafica);
+        rl=findViewById(R.id.Rlay);
+
+
+      // grafi();
+        prueba = findViewById(R.id.btnprueba);
 
 
         btnGenerarPdfUsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+/*
                 if (usuarios() == 1) {
                     if (rowsUsuarios.size() > 0) {
-//
+
                         pdf();
                     }
                 }
-
+*/
+                Intent intent = new Intent(ReportesAdmin.this, ReporteGraficoUsuarios.class);
+                startActivity(intent);
             }
         });
 
@@ -90,11 +101,21 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
 
                 if (lugares() == 1) {
                     if (rowsLugares.size() > 0) {
-//
+
                         pdf2();
                     }
                 }
 
+
+
+            }
+        });
+
+        prueba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReportesAdmin.this, ReporteGraficoTop.class);
+                startActivity(intent);
             }
         });
 
@@ -110,44 +131,7 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
 
     }
 
-    public void grafico()
-    {
-        //DATOS DE LAS BARRASM O PUNTOS XY
 
-            BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]
-                    {
-                            // Arrays.stream(rowsLugares.get(0)).toArray();
-                            // rows.add(new String[]{id, nombre});
-        //for(int j=0; j<rowsLugares.size();j++) {
-        //System.out.println(Arrays.toString(rowsLugares.get(j)))
-                            new DataPoint(Double.parseDouble("willy"), 5),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6),
-   // }
-                    });
-
-        //Añade los datos
-        grafica.addSeries(series);
-        //Estilo a las barras
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint data) {
-                return Color.rgb((int) data.getX()*255/4, (int) data.getY()*255/6, 100);
-            }
-        });
-
-        //ESPACIO ENTRE LAS BARRAS
-        series.setSpacing(20);
-
-        //Dibujar la gráfica
-        series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.BLUE);
-
-
-
-    }
     public void pdf() {
 
         templatePDF = new TemplatePDF(getApplicationContext());
@@ -265,7 +249,7 @@ public class ReportesAdminUsuarios extends AppCompatActivity {
     }
 
     private void graf(int id, String nombre, String vistas) {
-id=id+1;
+        id=id+1;
         DataPoint[] series = new DataPoint[]
                 {
                         new DataPoint(id, Double.parseDouble(vistas)),
@@ -311,17 +295,10 @@ id=id+1;
 
     }
 
-public void graf (View view){
-
-    View myBarCodeView = view.getRootView();
-    myBarCodeView.setDrawingCacheEnabled(true);
-   mBitmap = myBarCodeView.getDrawingCache();
-
-}
     public Bitmap grafi () {
-        View myBarCodeView = new View(getApplicationContext());
-        myBarCodeView.setDrawingCacheEnabled(true);
-        mBitmap = myBarCodeView.getDrawingCache();
+        rl.setDrawingCacheEnabled(true);
+        mBitmap =Bitmap.createBitmap(rl.getDrawingCache());
+        rl.setDrawingCacheEnabled(false);
     return mBitmap;
     }
 
@@ -340,7 +317,9 @@ public void graf (View view){
         templatePDFLug.addMetada("Lista de Lugares de atención médica", "Lugares con más vistas", "Geolam");
         templatePDFLug.addTitles("Reporte - GEOLAM", "Lugares con más vistas", fecha());
         templatePDFLug.addParagraph(shorText2);
-        templatePDFLug.addImgName();
+        ReporteGraficoTop repor=new ReporteGraficoTop();
+
+        templatePDFLug.addImgName(repor.mBitmap);
         templatePDFLug.crearTabla(header2, retornar2());
         templatePDFLug.cerrarDocumento();
         templatePDFLug.viewPDF();
