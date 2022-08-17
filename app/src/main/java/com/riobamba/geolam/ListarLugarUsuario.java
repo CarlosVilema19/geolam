@@ -121,7 +121,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getString("whatsapp"),
                                 obj.getString("pagina_web"),
                                 (float)obj.getDouble("CALIFICACION"),
-                                obj.getInt("favorito")
+                                obj.getInt("favorito"),
+                                obj.getInt("estado_opi")
                         ));
 
                     }
@@ -373,7 +374,9 @@ public class ListarLugarUsuario extends AppCompatActivity
     {
         Intent intent = new Intent(this,IngresoOpinion.class);
         intent.putExtra("ListadoLugar",item);
-        startActivity(intent);}
+        startActivity(intent);
+        finish();
+    }
     public void moveToVerComentario(ListadoLugarUsuario item)
     {
         Intent intent = new Intent(this, OpinionListado.class);

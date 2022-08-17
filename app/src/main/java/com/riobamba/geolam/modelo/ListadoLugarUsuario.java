@@ -14,11 +14,12 @@ public class ListadoLugarUsuario implements Serializable {
     String whastapp, paginaWeb;
     Float calificacion;
     Integer favorito;
+    Integer estadoOpi;
 
     public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar,
                                String imagenLugar, String informacionLugar, String categoriaLugar,
                                String tipologiaLugar, Integer idLugar, String whastapp,String paginaWeb,
-                               Float calificacion, Integer favorito) {
+                               Float calificacion, Integer favorito, Integer estadoOpi) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
@@ -31,6 +32,7 @@ public class ListadoLugarUsuario implements Serializable {
         this.paginaWeb = paginaWeb;
         this.calificacion = calificacion;
         this.favorito = favorito;
+        this.estadoOpi = estadoOpi;
 
     }
 
@@ -80,5 +82,9 @@ public class ListadoLugarUsuario implements Serializable {
 
     public Integer getFavorito() {
         return favorito;
+    }
+
+    public Integer getEstadoOpi() {
+        return estadoOpi;
     }
 }

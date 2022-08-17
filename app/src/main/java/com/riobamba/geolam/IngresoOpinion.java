@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class IngresoOpinion extends AppCompatActivity {
     EditText ingresarOpinion;
-    Button btnEnviarOpinion;
+    Button btnEnviarOpinion, btnCancelarOpinion;
     RatingBar calficacionLugar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -43,21 +43,38 @@ public class IngresoOpinion extends AppCompatActivity {
 
         ingresarOpinion = findViewById(R.id.etIngresarOpinion);
         btnEnviarOpinion = findViewById(R.id.btnEnviarOpinion);
+        btnCancelarOpinion = findViewById(R.id.btnCancelarOpinion);
         calficacionLugar = findViewById(R.id.rbCalificacion);
 
         //ListadoLugarUsuario listadoLugarUsuario = (ListadoLugarUsuario) getIntent().getSerializableExtra("ListadoLugar");
 
         ListadoLugar listadoLugarUsuario = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
 
-        toolbar.show(this, "Calificación", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Calificación", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnEnviarOpinion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                insertarOpinion(listadoLugarUsuario);
+                if(calficacionLugar.getRating() == 0)
+                {
+                    Toast.makeText(IngresoOpinion.this, "No ha ingresado una calificación", Toast.LENGTH_SHORT).show();
+                }
+                else{insertarOpinion(listadoLugarUsuario);}
+            }
+        });
+
+        btnCancelarOpinion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                cancelarOpinion(listadoLugarUsuario);
             }
         });
 
 
+    }
+    private void cancelarOpinion(ListadoLugar listadoLugarUsuario) {
+        Intent intent = new Intent(IngresoOpinion.this,ListarLugarUsuario.class);
+        intent.putExtra("ListadoLugar",listadoLugarUsuario);
+        startActivity(intent);
+        finish();
     }
 
     private void insertarOpinion(ListadoLugar listadoLugarUsuario) {
@@ -72,15 +89,11 @@ public class IngresoOpinion extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Gracias por calificar", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(IngresoOpinion.this,ListarLugarUsuario.class);
-                intent.putExtra("ListadoLugar",listadoLugarUsuario);
-                startActivity(intent);
-                finish();
-
-
-                //finish();
+                    Toast.makeText(getApplicationContext(), "Gracias por calificar", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(IngresoOpinion.this, ListarLugarUsuario.class);
+                    intent.putExtra("ListadoLugar", listadoLugarUsuario);
+                    startActivity(intent);
+                    finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -148,13 +161,6 @@ public class IngresoOpinion extends AppCompatActivity {
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
+    public void onBackPressed() {}
 }

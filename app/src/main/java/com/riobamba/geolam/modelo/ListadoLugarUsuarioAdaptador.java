@@ -113,14 +113,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final LinearLayout calificacionLL;
         private final Button btnFavDes;
         private final Button btnFavAct;
-
-
-
-
-
-
-
-
+        private final LinearLayout llBtnCalif;
 
 
         public ViewHolder(View view) {
@@ -149,14 +142,9 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             calificacionLL = view.findViewById(R.id.llCalificacion);
             btnFavDes = view.findViewById(R.id.btnFavoritoDes);
             btnFavAct  = view.findViewById(R.id.btnFavoritoAct);
-
-
+            llBtnCalif = view.findViewById(R.id.llBtnCalificar);
 
         }
-
-        /*public TextView getTextView() {
-            return textView;
-        }*/
     }
 
     // Create new views (invoked by the layout manager)
@@ -185,6 +173,19 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         if(listadoLugar.getTelefonoLugar().equals("")){viewHolder.telefonoLL.setVisibility(View.GONE);}
         if(listadoLugar.getDireccionLugar().equals("")){viewHolder.descripcionLL.setVisibility(View.GONE);}
         if(listadoLugar.getCalificacion().equals(0F)){viewHolder.calificacionLL.setVisibility(View.GONE);}
+        if(listadoLugar.getEstadoOpi().equals(1)) {viewHolder.llBtnCalif.setVisibility(View.GONE);}
+        if (listadoLugar.getFavorito().equals(1))
+        {
+            viewHolder.btnFavAct.setVisibility(View.VISIBLE);
+            viewHolder.btnFavDes.setVisibility(View.GONE);
+        }else
+        {
+            viewHolder.btnFavAct.setVisibility(View.GONE);
+            viewHolder.btnFavDes.setVisibility(View.VISIBLE);
+        }
+
+
+
 
         viewHolder.paginaWebLL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,15 +233,6 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
 
        // viewHolder.btnEspecialidadUsuario.setCardBackgroundColor(ContextCompat.getColor(this.mCtx, R.color.teal_700));
 
-        if (listadoLugar.getFavorito().equals(1))
-        {
-            viewHolder.btnFavAct.setVisibility(View.VISIBLE);
-            viewHolder.btnFavDes.setVisibility(View.GONE);
-        }else
-        {
-            viewHolder.btnFavAct.setVisibility(View.GONE);
-            viewHolder.btnFavDes.setVisibility(View.VISIBLE);
-        }
 
         viewHolder.btnMedicoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
