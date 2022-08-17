@@ -43,6 +43,9 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity implements Se
     RecyclerView recyclerView;
     ListadoUsuariosAdminAdaptador myadapter;
     SearchView txtBuscar;
+    String ruta;
+    String urlImagenLugar;
+    String urlSinEspacios;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
 
@@ -81,7 +84,7 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity implements Se
                                 usuariosList.add(new ListadoUsuariosAdmin(
                                         obj.getString("nombre_usuario"),
                                         obj.getString("email"),
-                                        obj.getString("imagen"),
+                                        imagenReturn(obj.getString("imagen")),
                                         obj.getString("descripcion_tipo_usuario"),
                                         obj.getInt("id_tipo_usuario")
                                 ));
@@ -196,5 +199,23 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity implements Se
     public boolean onQueryTextChange(String newText) {
         myadapter.filtrado(newText);
         return true;
+    }
+
+    //Obtener la url real
+    private String imagenReturn(String url) {
+        if(url.contains(WebService.imagenRaiz)) {
+            urlSinEspacios = url.replace(" ", "%20");
+            String data = urlSinEspacios;
+            String[] split = data.split(WebService.imagenRaiz);
+            ruta = null;
+            for (int i = 0; i < split.length; i++) {
+                ruta = split[1];
+            }
+            urlImagenLugar= WebService.urlRaiz+ruta;
+        }
+        else{
+            urlImagenLugar=urlSinEspacios;
+        }
+        return  urlImagenLugar;
     }
 }
