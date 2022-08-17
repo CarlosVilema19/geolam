@@ -31,7 +31,9 @@
         <activity
             android:name=".ReporteGraficoTop"
             android:exported="false" />
-    
+        <activity
+            android:name=".ReportesAdmin"
+            android:exported="false" />
         <activity
             android:name=".InfoApp"
             android:exported="false" />
