@@ -4,23 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportesAdminUsuarios">
+
+    tools:context=".ReportesAdmin">
 
     <include layout="@layout/activity_menu_toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/iMenuSupe"
+
         >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/card"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="25dp"
-        android:foregroundGravity="center"
+        android:layout_marginBottom="25dp"
+        android:layout_centerVertical="true"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true">
@@ -76,10 +80,11 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGenerarPDFLugaresVisitados"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="1sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="1dp"
+                    android:visibility="invisible"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center_horizontal"
                     android:text="Lugares más visitados"
@@ -90,16 +95,41 @@
                     android:drawableLeft="@drawable/hospital"
                     />
 
-
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/grafica"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnprueba"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Lugares mas vistos   "
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/degradado2"
+                    android:drawableLeft="@drawable/hospital"
                     />
+
+
 
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:id="@+id/Rlay"
+            android:layout_below="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/grafica"
+            android:layout_width="match_parent"
+            android:visibility="invisible"
+            android:layout_height="1dp"
 
+
+            />
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

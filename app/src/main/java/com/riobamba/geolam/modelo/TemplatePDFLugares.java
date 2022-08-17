@@ -2,15 +2,9 @@ package com.riobamba.geolam.modelo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
-
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -23,14 +17,11 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.riobamba.geolam.R;
-import com.riobamba.geolam.ReportesAdminUsuarios;
 import com.riobamba.geolam.ViewPDF;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class TemplatePDFLugares {
@@ -123,6 +114,7 @@ public class TemplatePDFLugares {
 
         paragraph= new Paragraph(); // va la tabla
         paragraph.setFont(fText); // formato de la tabla
+            paragraph.setSpacingBefore(15);
         PdfPTable pdfPTable=new PdfPTable(header.length); //columnas que va a tener
         pdfPTable.setWidthPercentage(100); //porcentaje del ancho de la tabla
         PdfPCell pdfPCell; //celdas de la tabla
@@ -130,8 +122,9 @@ public class TemplatePDFLugares {
         while(indexC<header.length){ // menor al total de columnas que tiene la tabla
             pdfPCell=new PdfPCell(new Phrase(header[indexC++], fsubTitle));// enviamos el texto que va a ir en la celda
             pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            pdfPCell.setBackgroundColor(new BaseColor(12,183,242));
-
+            pdfPCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            pdfPCell.setBackgroundColor(new BaseColor(0,140,255));
+            pdfPCell.setFixedHeight(35);
             pdfPTable.addCell(pdfPCell);
 
         }
@@ -149,24 +142,26 @@ public class TemplatePDFLugares {
         }
 
         paragraph.add(pdfPTable);
+        //paragraph.setSpacingAfter(30);
 
         document.add(paragraph);
         } catch (Exception e) {
             Log.e("crearTabla", e.toString());
         }
          }
-    public void addImgName () {
+    public void addImgName(Bitmap grafi) {
         try{
 
             /*Drawable drawable = ContextCompat.getDrawable(context, R.drawable.descarga);
             Image image = Image.getInstance(drawable + "Geo" + ".jpg");
            */
-            ReportesAdminUsuarios rep= new ReportesAdminUsuarios();
+            //ReportesAdminUsuarios rep= new ReportesAdminUsuarios();
             //rep.graf();
-            Drawable d = context.getResources().getDrawable(R.drawable.descarga);
+           /* Drawable d = context.getResources().getDrawable(R.drawable.geo);
            BitmapDrawable bitDw = ((BitmapDrawable) d);
-            Bitmap bmp = bitDw.getBitmap();
-           // Bitmap bmp = null;
+            Bitmap bmp = bitDw.getBitmap();*/
+
+           Bitmap bmp = grafi;
             //bmp.sameAs(rep.grafi());
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
