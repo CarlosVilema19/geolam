@@ -15,6 +15,7 @@ import android.graphics.PostProcessor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,8 @@ public class EspecialidadBusquedaList extends AppCompatActivity implements Searc
     SearchView txtBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     ListadoEspecialidadAdaptador myadapter;
+    LinearLayout referencia;
+    TextView textoReferencia, tituRefeBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,13 @@ public class EspecialidadBusquedaList extends AppCompatActivity implements Searc
         myadapter = new ListadoEspecialidadAdaptador(EspecialidadBusquedaList.this, lugarList,this::moveToDescription);
         txtBuscar.setOnQueryTextListener(this);
 
+        referencia = findViewById(R.id.llTituRefe);
+        textoReferencia = findViewById(R.id.tvTituRefe);
+        referencia.setVisibility(View.VISIBLE);
+        tituRefeBus = findViewById(R.id.tvTituRefeBus);
+        String titu = "Buscar por: ";
+        tituRefeBus.setText(titu);
+
         MostrarResultado();
     }
 
@@ -76,8 +86,13 @@ public class EspecialidadBusquedaList extends AppCompatActivity implements Searc
 
         //asignar el id_lugar guardado
         SharedPreferences preferences1 = getSharedPreferences("lugarEspe", Context.MODE_PRIVATE);
-
         String lugarEspe = preferences1.getString("lugarEspe","");
+
+        String espe1;
+
+        if(lugarEspe.equals("")) {espe1 = "";}else {espe1 = lugarEspe;}
+
+        textoReferencia.setText(espe1);
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {

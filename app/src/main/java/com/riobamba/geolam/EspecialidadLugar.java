@@ -9,11 +9,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -52,6 +55,8 @@ public class EspecialidadLugar extends AppCompatActivity implements SearchView.O
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
+    LinearLayout referencia;
+    TextView textoReferencia;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,14 @@ public class EspecialidadLugar extends AppCompatActivity implements SearchView.O
         ListadoLugarAdmin listadoLugar = (ListadoLugarAdmin) getIntent().getSerializableExtra("ListadoLugarAdmin");
 
         toolbar.show(this, "Lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+
+        referencia = findViewById(R.id.llTituRefe);
+        textoReferencia = findViewById(R.id.tvTituRefe);
+
+        referencia.setVisibility(View.VISIBLE);
+        String text = listadoLugar.getNombreLugar();
+        textoReferencia.setText(text);
+        //textoReferencia.setTextColor(Color.blue(1));
 
         MostrarResultado(listadoLugar);
     }

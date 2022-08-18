@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -46,9 +48,9 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
     Toolbar toolbar = new Toolbar();
     SearchView txtBuscar;
     ListadoMedicoAdaptador myadapter;
-    String ruta;
-    String urlImagenLugar;
-    String urlSinEspacios;
+    LinearLayout referencia;
+    TextView textoReferencia, tituRefeBus;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,12 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
 
         //LugarBusqueda lugarBusqueda = (LugarBusqueda) getIntent().getSerializableExtra("LugarBusqueda");
 
+        referencia = findViewById(R.id.llTituRefe);
+        textoReferencia = findViewById(R.id.tvTituRefe);
+        referencia.setVisibility(View.VISIBLE);
+        tituRefeBus = findViewById(R.id.tvTituRefeBus);
+        String titu = "Buscar por: ";
+        tituRefeBus.setText(titu);
 
         MostrarResultado();
     }
@@ -83,10 +91,15 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
 
         String lugar = preferences1.getString("lugar","");
         String espe = preferences2.getString("espeMed","");
-        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String lug1, espe1;
+        if(lugar.equals("")) {lug1 = "";}else if(espe.equals("")) {lug1 = lugar;}else{lug1 = lugar +" - ";}
+        if(espe.equals("")) {espe1 = "";}else {espe1 = espe;}
+
+        String text = lug1 + espe1;
+        textoReferencia.setText(text);
+
         String url = WebService.urlRaiz + WebService.servicioBusquedaMedico;
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 response -> {
                     try {

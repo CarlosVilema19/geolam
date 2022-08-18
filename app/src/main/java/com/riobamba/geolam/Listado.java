@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -66,12 +67,13 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     CardView lugar, lugarEspe, lugarFav, lugarPub, lugarPri;
     Toolbar toolbar = new Toolbar();
     SearchView txtBuscar;
+    TextView espeVerMas, vistoVerMas, favVerMas, pubVerMas, priVerMas;
     ListadoLugarAdaptador myadapter;
     EspecialidadInicioAdaptador myadapterEspe;
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
-    Integer aux = 0;
+    Integer elementosInicio = 5;
     public Button btnInicio, btnInicioPul;
 
     @Override
@@ -84,6 +86,11 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         lugarFav = findViewById(R.id.cvListadoFav);
         lugarPub = findViewById(R.id.cvListadoPub);
         lugarPri = findViewById(R.id.cvListadoPri);
+        espeVerMas = findViewById(R.id.tvListadoEspeMas);
+        vistoVerMas = findViewById(R.id.tvListadoMas);
+        favVerMas = findViewById(R.id.tvListadoFavMas);
+        pubVerMas = findViewById(R.id.tvListadoPubMas);
+        priVerMas = findViewById(R.id.tvListadoPriMas);
 
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
@@ -131,11 +138,55 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                 finish();
             }
         });
+
+        espeVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Listado.this, EspecialidadListadoUsuario.class);
+                startActivity(intent);
+            }
+        });
+        vistoVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarTitulo("Lugares más vistos");
+                Intent intent = new Intent(Listado.this, LugarMapa.class);
+                startActivity(intent);
+            }
+        });
+        favVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Listado.this, LugarFavorito.class);
+                startActivity(intent);
+            }
+        });
+        pubVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarTitulo("Lugares públicos");
+                guardarCate("1");
+                Intent intent = new Intent(Listado.this, LugarPubPri.class);
+                startActivity(intent);
+            }
+        });
+        priVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarTitulo("Lugares privados");
+                guardarCate("2");
+                Intent intent = new Intent(Listado.this, LugarPubPri.class);
+                startActivity(intent);
+            }
+        });
+
+
         MostrarResultadoEspe();
         MostrarResultado();
         MostrarResultadoFav();
         MostrarResultadoPub();
         MostrarResultadoPri();
+
 
     }
 
@@ -176,8 +227,8 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                 response -> {
                     try {
                         JSONArray array = new JSONArray(response);
-
-                        for (int i = 0; i < array.length(); i++) {
+                        int max = Math.min(array.length(), elementosInicio);
+                        for (int i = 0; i < max; i++) {
                             JSONObject obj = array.getJSONObject(i);
                             lugarList.add(new ListadoLugar(
                                     obj.getString("nombre_lugar"),
@@ -189,8 +240,10 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                                     obj.getString("descripcion_categoria")
                             ));
                         }
+
                        myadapter = new ListadoLugarAdaptador(Listado.this, lugarList, this::moveToDescription);
                         recyclerView.setAdapter(myadapter);
+
 
 
                     } catch (JSONException e) {
@@ -218,7 +271,8 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                         JSONArray array = new JSONArray(response);
                         if(array.length()==0){lugarFav.setVisibility(View.GONE);}
                         else {
-                            for (int i = 0; i < array.length(); i++) {
+                            int max = Math.min(array.length(), elementosInicio);
+                            for (int i = 0; i < max; i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList2.add(new ListadoLugar(
                                         obj.getString("nombre_lugar"),
@@ -264,7 +318,8 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                         JSONArray array = new JSONArray(response);
                         if(array.length()==0){lugarPub.setVisibility(View.GONE);}
                         else {
-                            for (int i = 0; i < array.length(); i++) {
+                            int max = Math.min(array.length(), elementosInicio);
+                            for (int i = 0; i < max; i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList3.add(new ListadoLugar(
                                         obj.getString("nombre_lugar"),
@@ -307,7 +362,8 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                         JSONArray array = new JSONArray(response);
                         if(array.length()==0){lugarPri.setVisibility(View.GONE);}
                         else {
-                            for (int i = 0; i < array.length(); i++) {
+                            int max = Math.min(array.length(), elementosInicio);
+                            for (int i = 0; i < max; i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList4.add(new ListadoLugar(
                                         obj.getString("nombre_lugar"),
@@ -411,15 +467,6 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         startActivity(intent);
     }
 
-
-
-
-
-
-
-
-
-
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio
     {
@@ -452,20 +499,22 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         return super.onOptionsItemSelected(item);
     }
 
-    //Funcion para recordar el inicio de sesion
-   public void guardarEstadoButton()
+    //Funcion para guardar el titulo de la actividad
+   public void guardarTitulo(String titulo)
     {
-        SharedPreferences preferences = getSharedPreferences("omitir_log", Context.MODE_PRIVATE);
-        boolean estado = false;
+        SharedPreferences preferences = getSharedPreferences("tituloRefe", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("estado_inicio",estado);
-        editor.commit();
+        editor.putString("tituloRefe",titulo);
+        editor.apply();
+    }
 
-        SharedPreferences preferences1 = getSharedPreferences("omitir_log_admin", Context.MODE_PRIVATE);
-        boolean estado1 = false;
-        SharedPreferences.Editor editor1 = preferences1.edit();
-        editor1.putBoolean("estado_inicio_admin",estado1);
-        editor1.commit();
+    //Funcion para guardar la categoria
+    public void guardarCate(String cate)
+    {
+        SharedPreferences preferences = getSharedPreferences("categoriaLug", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("categoriaLug",cate);
+        editor.apply();
     }
 
     @Override

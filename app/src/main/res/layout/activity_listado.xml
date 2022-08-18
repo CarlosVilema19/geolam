@@ -1,186 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
-    tools:context=".Listado"
-    android:orientation="vertical"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="10dp"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:focusable="true"
-    app:cardUseCompatPadding="true">
+    android:focusable="true">
 
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:layout_margin="1dp">
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="6dp">
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="6dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="10dp">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         app:cardCornerRadius="10dp">
 
-                        <ImageView
-                            android:id="@+id/ivImagenLugarLista"
-                            android:layout_width="120dp"
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            app:cardCornerRadius="10dp">
 
-                            app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
+                            <ImageView
+                                android:id="@+id/ivImagenLugarLista"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
+                        </androidx.cardview.widget.CardView>
+
                     </androidx.cardview.widget.CardView>
 
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:id="@+id/llLugar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp">
-
-                    <TextView
-                        android:id="@+id/tvNombreLugarLista"
+                    <LinearLayout
+                        android:id="@+id/llLugar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@color/black"
+                        android:layout_marginStart="4dp"
+                        android:orientation="vertical"
                         android:paddingLeft="2dp"
-                        android:layout_marginTop="5dp"
-                        android:paddingRight="2dp"
-                        android:text="@string/nombre_lugar_listado"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/tvTelefonoLista"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tipologia"
-                        android:textAllCaps="true"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="2dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/ivCategoria"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        android:paddingRight="2dp">
 
                         <TextView
-                            android:id="@+id/tvCategoria"
+                            android:id="@+id/tvNombreLugarLista"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="2dp"
                             android:ellipsize="end"
-                            android:textColor="@color/black"
                             android:maxLines="1"
-                            android:text="Categoria"
+                            android:textColor="@color/black"
+                            android:paddingLeft="2dp"
+                            android:layout_marginTop="5dp"
+                            android:paddingRight="2dp"
+                            android:text="@string/nombre_lugar_listado"
                             android:textAllCaps="true"
-                            android:textSize="13sp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/ivDireccion"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_baseline_add_location_24"
-
-                            />
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
 
                         <TextView
-                            android:id="@+id/tvDireccionLista"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            android:text="@string/direccion_listado"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/ivTelefono"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_baseline_phone_24"
-
-                            />
-
-
-                        <TextView
-                            android:id="@+id/tvId"
+                            android:id="@+id/tvTelefonoLista"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tipologia"
+                            android:textAllCaps="true"
+                            android:layout_marginStart="2dp"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Id"
-                            android:textSize="13sp"
-                            android:visibility="invisible" />
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivCategoria"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/tvCategoria"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="2dp"
+                                android:ellipsize="end"
+                                android:textColor="@color/black"
+                                android:maxLines="1"
+                                android:text="Categoria"
+                                android:textAllCaps="true"
+                                android:textSize="13sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivDireccion"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_baseline_add_location_24"
+
+                                />
+
+                            <TextView
+                                android:id="@+id/tvDireccionLista"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:text="@string/direccion_listado"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivTelefono"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_baseline_phone_24"
+
+                                />
+
+
+                            <TextView
+                                android:id="@+id/tvId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Id"
+                                android:textSize="13sp"
+                                android:visibility="invisible" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvDistancia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvDistancia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+</RelativeLayout>
 

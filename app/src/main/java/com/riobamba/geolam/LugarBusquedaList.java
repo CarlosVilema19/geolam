@@ -13,7 +13,9 @@ package com.riobamba.geolam;
         import android.os.Handler;
         import android.view.MenuItem;
         import android.view.View;
+        import android.widget.LinearLayout;
         import android.widget.SearchView;
+        import android.widget.TextView;
         import android.widget.Toast;
 
         import com.android.volley.AuthFailureError;
@@ -45,6 +47,8 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
+    LinearLayout referencia;
+    TextView textoReferencia, tituRefeBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,12 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
 
         //LugarBusqueda lugarBusqueda = (LugarBusqueda) getIntent().getSerializableExtra("LugarBusqueda");
 
+        referencia = findViewById(R.id.llTituRefe);
+        textoReferencia = findViewById(R.id.tvTituRefe);
+        referencia.setVisibility(View.VISIBLE);
+        tituRefeBus = findViewById(R.id.tvTituRefeBus);
+        String titu = "Buscar por: ";
+        tituRefeBus.setText(titu);
 
         MostrarResultado();
     }
@@ -81,7 +91,15 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
         String cate = preferences.getString("cate","");
         String tipo = preferences1.getString("tipo","");
         String espe = preferences2.getString("espe","");
-        RequestQueue queue = Volley.newRequestQueue(this);
+        String cate1, tipo1, espe1;
+
+        if(cate.equals("")) {cate1 = "";}else if(tipo.equals("") && espe.equals("")) {cate1 = cate;} else {cate1 = cate + " - ";}
+        if(tipo.equals("")) {tipo1 = "";}else if(espe.equals("")) {tipo1 = tipo;}else{tipo1 = tipo +" - ";}
+        if(espe.equals("")) {espe1 = "";}else {espe1 = espe;}
+
+        String text = cate1 + tipo1 + espe1;
+        textoReferencia.setText(text);
+
         String url = WebService.urlRaiz + WebService.servicioBusquedaLugar;
 
 
