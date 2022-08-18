@@ -52,6 +52,7 @@ public class Busqueda extends AppCompatActivity {
         btnBusRapLug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                guardarTitulo("Lugares");
                 Intent intent = new Intent(Busqueda.this, LugarMapa.class);
                 startActivity(intent);
             }
@@ -99,6 +100,14 @@ public class Busqueda extends AppCompatActivity {
 
 
 
+    }
+
+    private void guardarTitulo(String titulo) {
+
+        SharedPreferences preferences = getSharedPreferences("tituloRefe", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("tituloRefe",titulo);
+        editor.apply();
     }
 
 

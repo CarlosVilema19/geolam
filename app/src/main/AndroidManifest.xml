@@ -197,6 +197,12 @@
             android:name=".EspecialidadBusquedaList"
             android:exported="true" />
         <activity
+            android:name=".LugarFavorito"
+            android:exported="true" />
+        <activity
+            android:name=".LugarPubPri"
+            android:exported="true" />
+        <activity
             android:name=".Bienvenida"
             android:exported="true" >
             <intent-filter>

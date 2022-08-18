@@ -146,6 +146,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                guardarTitulo("Lugares");
                 Intent intent = new Intent(ConexionMapa.this, LugarMapa.class);
                 startActivity(intent);
             }
@@ -496,6 +497,15 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    //Funcion para guardar el titulo de la actividad
+    public void guardarTitulo(String titulo)
+    {
+        SharedPreferences preferences = getSharedPreferences("tituloRefe", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("tituloRefe",titulo);
+        editor.apply();
     }
 
 }

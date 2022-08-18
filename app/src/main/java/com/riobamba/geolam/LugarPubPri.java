@@ -1,6 +1,7 @@
 package com.riobamba.geolam;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarException;
 
-public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryTextListener {
+public class LugarPubPri extends AppCompatActivity implements  SearchView.OnQueryTextListener {
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
@@ -61,12 +62,8 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_items);
 
-       /* referencia = findViewById(R.id.llReferencia);
-        textoReferencia = findViewById(R.id.tvReferencia);
-        referencia.setVisibility(View.VISIBLE);*/
         SharedPreferences preferences = getSharedPreferences("tituloRefe", Context.MODE_PRIVATE);
         String text = preferences.getString("tituloRefe","");
-        //textoReferencia.setText(text);
 
         recyclerView = findViewById(R.id.rvListado);
         recyclerView.setHasFixedSize(true);
@@ -80,12 +77,9 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
     }
     public void MostrarResultado()
     {
-        /*SharedPreferences preferences = getSharedPreferences("distanciaMapa", Context.MODE_PRIVATE);
-        preferences.getString("distancia_mapa","50 Km" );*/
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = WebService.urlRaiz + WebService.servicioListarLugares;
+        SharedPreferences preferences = getSharedPreferences("categoriaLug", Context.MODE_PRIVATE);
+        String categoria = preferences.getString("categoriaLug","");
+        String url = WebService.urlRaiz + WebService.servicioLugarCategoria;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 response -> {
@@ -104,7 +98,7 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
                                     obj.getString("descripcion_categoria")
                             ));
                         }
-                        myadapter = new LugarMapaAdaptador(LugarMapa.this, lugarList, item -> moveToDescription(item));
+                        myadapter = new LugarMapaAdaptador(LugarPubPri.this, lugarList, item -> moveToDescription(item));
                         recyclerView.setAdapter(myadapter);
 
 
@@ -113,19 +107,23 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("categoria", categoria);
+                return parametros;
+            }
+        };
 
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
     public void moveToDescription(ListadoLugar item)
     {
-        /*Intent intent = new Intent(this,ListarLugarUsuario.class);
-        intent.putExtra("ListadoLugar",item);
-        startActivity(intent);*/
-
         final ProgressDialog loading = ProgressDialog.show(this, "Cargando...", "Espere por favor");
-        Intent intent = new Intent(LugarMapa.this,ListarLugarUsuario.class);
+        Intent intent = new Intent(LugarPubPri.this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -134,9 +132,6 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
                 loading.dismiss();
             }
         },1200);
-
-
-
     }
 
     //Metodos para la barra inferior
@@ -201,6 +196,5 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
         return  urlImagenLugar;
     }
 }
-
 
 

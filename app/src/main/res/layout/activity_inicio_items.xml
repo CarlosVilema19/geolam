@@ -68,6 +68,26 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvListadoEspeMas"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/borde"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="Ver más"
+                    android:textAlignment="center"
+                    android:textColor="@color/base"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_below="@+id/tvListadoEspe"
                     android:id="@+id/rvListadoEspe"
@@ -97,8 +117,28 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Lugares de atención médica más vistos"
+                    android:text="Lugares más vistos"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvListadoMas"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/borde"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="Ver más"
+                    android:textAlignment="center"
+                    android:textColor="@color/base"
                     android:textSize="16sp"
                     android:textStyle="bold" />
                 <androidx.recyclerview.widget.RecyclerView
@@ -132,8 +172,28 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Favoritos"
+                    android:text="Mis lugares favoritos"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvListadoFavMas"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/borde"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="Ver más"
+                    android:textAlignment="center"
+                    android:textColor="@color/base"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -166,8 +226,28 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:text="Lugares de atención médica públicos"
+                            android:text="Lugares públicos"
                             android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvListadoPubMas"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/borde"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:text="Ver más"
+                            android:textAlignment="center"
+                            android:textColor="@color/base"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -191,14 +271,38 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
                             android:id="@+id/tvListadoPri"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="Lugares de atención médica privados"
-                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="Lugares privados"
                             android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvListadoPriMas"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/borde"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:text="Ver más"
+                            android:textAlignment="center"
+                            android:textColor="@color/base"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView

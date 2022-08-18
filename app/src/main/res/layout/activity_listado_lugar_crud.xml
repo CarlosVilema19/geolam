@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
-    android:orientation="vertical"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    app:cardUseCompatPadding="true"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:focusable="true"
-    tools:context=".ListadoCrud">
+    android:focusable="true">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:animateLayoutChanges="true"
+        android:layout_margin="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +58,7 @@
                 android:text="Nombre"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/tvId"
                 android:layout_width="match_parent"
@@ -109,8 +107,8 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
 
 
 
