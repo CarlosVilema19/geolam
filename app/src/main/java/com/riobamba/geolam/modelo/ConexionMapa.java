@@ -5,8 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +12,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,9 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.ApiException;
@@ -48,42 +43,33 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.riobamba.geolam.Busqueda;
-import com.riobamba.geolam.Listado;
-import com.riobamba.geolam.ListadoUsuariosAdminControl;
-import com.riobamba.geolam.ListarLugarUsuario;
 import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.R;
-import com.riobamba.geolam.RegistroAdmin;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallback {
-   // private GoogleMap mMap;
-    private ActivityMapaBinding binding;
     Button btnListarLugarCercano;
     List<ListadoMapa> mapaList;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-    Integer count =0 ;
+    Integer count =0, count2 = 0; // contadores para verificar si la conexion se establece correctamente
     Double[] distancias;
     String[] lugarCerca;
     Button btnMapa, btnMapaPul;
+    private GoogleMap mMap;
+    TextView lugarDistancia;
+    ProgressDialog loading; //Mensaje de carga en el mapa
+
 
     // Estado del Settings de verificación de permisos del GPS
     private static final int REQUEST_CHECK_SETTINGS = 102;
@@ -103,21 +89,11 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     // de ubicación de FusedLocationProviderApi
     public LocationRequest mLocationRequest;
 
-    // Marcador para la ubicación del usuario
-    Marker marker;
-
-    // Mapa de Google
-    private GoogleMap mMap;
-
-    TextView lugarDistancia;
-    Double distanciaCerca;
-
-
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMapaBinding.inflate(getLayoutInflater());
+        ActivityMapaBinding binding = ActivityMapaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mapaList = new ArrayList<>();
         obtenerCoordenadas();
@@ -166,12 +142,24 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         mlocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
-                // Si no hay coordenadas de la ubicación del usuario le pasamos un return
-                // Cuando obtenemos la coordenadas de ubicación del usuario, agregamos
-                // un marcador para la ubicación del usuario con el método agregarMarcador()
+
+                //Verifica si la conexion es ccorrecta
                 for (Location location : locationResult.getLocations()) {
-                    agregarMarcador(location.getLatitude(),location.getLongitude());
-                    //Log.e("Coordenadas: ", location.toString());
+                    loading = ProgressDialog.show(ConexionMapa.this, "Cargando...", "Espere por favor");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if(count2 == 0){
+                                Toast.makeText(ConexionMapa.this, "Se produjo un error, intente nuevamente", Toast.LENGTH_SHORT).show();
+                                loading.dismiss();
+                                finish();
+                            }else
+                            {
+                                agregarMarcador(location.getLatitude(),location.getLongitude());
+                            }
+                        }
+                    },1500);
                 }
                 super.onLocationResult(locationResult);
             }
@@ -186,9 +174,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
         // Verificamos la configuración de los permisos de ubicación
         checkLocationSetting(builder);
-        //habilitarUbicacion();
-
-
 
     }
 
@@ -202,20 +187,15 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mMap = googleMap;
-        //obtenerCoordenadas();
-       // agregarMarcador(-1.6128,-78.85620);
-    }
+    public void onMapReady(@NonNull GoogleMap googleMap) {mMap = googleMap;}
 
     public void obtenerCoordenadas()
     {
-
         String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 response -> {
                     try {
+
                         JSONArray array = new JSONArray(response);
                         count = array.length();
                         for (int i = 0; i < array.length(); i++) {
@@ -225,52 +205,20 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                     (float) obj.getDouble("longitud"),
                                     obj.getString("nombre_lugar"),
                                     obj.getString("direccion")
-
                             ));
                         }
+                        count2 =1;
                     } catch (JSONException e) {
                         e.printStackTrace();
-
                     }
 
                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-
     private void agregarMarcador(double lat, double lng) {
-
-        String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
-                response -> {
-                    try {
-                        Toast.makeText(this, "Aquí no es el error, sigue buscando :v", Toast.LENGTH_SHORT).show();
-                        JSONArray array = new JSONArray(response);
-                        count = array.length();
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject obj = array.getJSONObject(i);
-                            mapaList.add(new ListadoMapa(
-                                    (float) obj.getDouble("latitud"),
-                                    (float) obj.getDouble("longitud"),
-                                    obj.getString("nombre_lugar"),
-                                    obj.getString("direccion")
-
-                            ));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-
-                    }
-
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
-        Volley.newRequestQueue(this).add(stringRequest);
-
-
-
-
-
-
+        loading.dismiss();
+        Toast.makeText(this, "Carga exitosa", Toast.LENGTH_SHORT).show();
         Float latitud, longitud;
         String nombreLugar, direccionLugar;
         BitmapDescriptor puntero = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
@@ -282,12 +230,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         distancias = new Double[count];
         Proceso proceso = new Proceso();
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-
-            //if (marker != null) marker.remove();
             mMap.addMarker(new MarkerOptions()
                     .position(riobamba)
                     .icon(puntero)
@@ -295,7 +240,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
             for (int i = 0; i < count; i++)
             {
-
                 latitud = mapaList.get(i).getLatitud();
                 longitud = mapaList.get(i).getLongitud();
                 nombreLugar = mapaList.get(i).getNombreLugar();
@@ -315,23 +259,12 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         .snippet(distanciaString)
                         .icon(puntero)
                         .icon(iconoPuntero));
-
             }
-           // Toast.makeText(this, count.toString(), Toast.LENGTH_SHORT).show();
-
             lugarDistancia.setText(proceso.verCercano(distancias, lugarCerca,count));
 
             CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
             mMap.animateCamera(miUbicacion);
         }
-    }
-
-    public void guardarContador(Integer contador)
-    {
-        SharedPreferences preferences = getSharedPreferences("contador", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("contador", contador);
-        editor.apply();
     }
 
     private void obtenerUltimaUbicacion() {
@@ -354,7 +287,6 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void checkLocationSetting(LocationSettingsRequest.Builder builder) {
-
         builder.setAlwaysShow(true);
 
         // Dentro de la variable 'cliente' iniciamos LocationServices, para los servicios de ubicación
@@ -375,29 +307,19 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 //return;
             }
         });
-
         // Adjuntamos addOnCompleteListener a la task para gestionar si la tarea se realiza correctamente
-
         task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
             @Override
             public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-
-                    // En try podemos hacer 'algo', si la configuración de ubicación es correcta,
+                    // En try ponemos hacer 'algo', si la configuración de ubicación es correcta,
                     // Mostramos el diálogo llamando a startResolutionForResult()
                     // y es verificado el resultado en el método onActivityResult()
-
-                    //response.getLocationSettingsStates().isLocationPresent();
-                   // obtenerCoordenadas();
-                    //count = 17;
-                    //Objects.requireNonNull(response.getLocationSettingsStates()).isLocationUsable();
-
 
                 } catch (ApiException exception) {
                     switch (exception.getStatusCode()) {
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
                             // La configuración de ubicación no está satisfecha.
                             // Le mostramos al usuario un diálogo de confirmación de uso de GPS.
                             try {
@@ -434,19 +356,16 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 return;
             }
         }
-
         // Obtenemos la ubicación más reciente
         fusedLocationClient.requestLocationUpdates(mLocationRequest,
                 mlocationCallback,
                 null /* Looper */);
     }
-
-
-
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(mlocationCallback);
     }
 
+    //Controla si acepta o no los peermisos de ubicacion para activar el gps
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -455,12 +374,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 // Se cumplen todas las configuraciones de ubicación.
                 // La aplicación envía solicitudes de ubicación del usuario.
                 iniciarActualizacionesUbicacion();
+                //Toast.makeText(ConexionMapa.this, "Si llega", Toast.LENGTH_SHORT).show();
             } else {
                 checkLocationSetting(builder);
             }
         }
     }
-
+    //Solicitar permisos de acceso cuando se usa por primera vez  la app
     private void dialogoSolicitarPermisoGPS(){
         if (ActivityCompat.checkSelfPermission(ConexionMapa.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(ConexionMapa.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -507,5 +427,4 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         editor.putString("tituloRefe",titulo);
         editor.apply();
     }
-
 }
