@@ -104,4 +104,14 @@ public class Proceso {
     }
 
 
+    public Double verDistanciaCercano(Double[] distancias, Integer count) {
+        for(int i = 0; i<count;i++)
+        {
+            if(distancias[i]< temp)
+            {
+                temp = distancias[i];
+            }
+        }
+        return  temp;
+    }
 }
