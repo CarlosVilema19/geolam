@@ -6,8 +6,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -261,6 +263,26 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         .icon(iconoPuntero));
             }
             lugarDistancia.setText(proceso.verCercano(distancias, lugarCerca,count));
+
+            String text = proceso.verDistanciaCercano(distancias,count).toString();
+            if(proceso.verDistanciaCercano(distancias,count)>5)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("El lugar de atención médica más cercano se encuentra a una distancia mayor a los 5 Km ¿Desea continuar?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
+                builder.show();
+            }
 
             CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
             mMap.animateCamera(miUbicacion);
