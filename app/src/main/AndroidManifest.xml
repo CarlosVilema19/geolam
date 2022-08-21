@@ -203,6 +203,9 @@
             android:name=".LugarPubPri"
             android:exported="true" />
         <activity
+            android:name=".MapaLugarCerca"
+            android:exported="true" />
+        <activity
             android:name=".Bienvenida"
             android:exported="true" >
             <intent-filter>

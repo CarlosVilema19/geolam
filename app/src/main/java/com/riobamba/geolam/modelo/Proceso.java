@@ -1,10 +1,5 @@
 package com.riobamba.geolam.modelo;
 
-import android.content.Context;
-import android.content.Intent;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -84,23 +79,11 @@ public class Proceso {
         } else return "";
     }
 
-
-
-
-
     public  long calcularAniosMili(int anios)
     {
         return ((long) anios *365*24*60*60*1000)+
                 ((long) (anios / 4) *24*60*60*1000)+
                 (24*60*60*1000);
-    }
-
-
-    public void cancelarAnimacion(AppCompatActivity activities)
-    {
-        //Intent intent = activities.
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-       // activities.overridePendingTransition(0,0);
     }
 
 
@@ -114,4 +97,22 @@ public class Proceso {
         }
         return  temp;
     }
+
+    //Proceso para ordenar los lugares de atencion medica
+    public void ordenarDistancia(String[] data, Integer[] numOrden) {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data.length - 1; j++) {
+                if (Float.parseFloat(data[j]) > Float.parseFloat(data[j + 1])) {
+                    String temp = data[j];
+                    int num = numOrden[j];
+                    data[j] = data[j + 1];
+                    numOrden[j] = numOrden[j+1];
+                    data[j + 1] = temp;
+                    numOrden[j+1] = num;
+                }
+            }
+        }
+    }
+
+
 }

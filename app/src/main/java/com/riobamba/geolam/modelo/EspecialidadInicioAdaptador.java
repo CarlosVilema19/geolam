@@ -107,7 +107,7 @@ public class EspecialidadInicioAdaptador extends RecyclerView.Adapter<com.riobam
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(com.riobamba.geolam.modelo.EspecialidadInicioAdaptador.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(EspecialidadInicioAdaptador.ViewHolder viewHolder, int position) {
         ListadoLugarAdmin listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element

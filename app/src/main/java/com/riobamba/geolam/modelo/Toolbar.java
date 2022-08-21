@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.riobamba.geolam.Bienvenida;
 //import com.riobamba.geolam.DatosPersonalesUsu;
@@ -59,6 +60,7 @@ public class Toolbar extends AppCompatActivity{
         Objects.requireNonNull(activities.getSupportActionBar()).setTitle(titulo);
         activities.getSupportActionBar().setDisplayHomeAsUpEnabled(flechaRegreso);
         activities.overridePendingTransition(0,0);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public void obtenerBotIni(Button icon, Button iconPul)
