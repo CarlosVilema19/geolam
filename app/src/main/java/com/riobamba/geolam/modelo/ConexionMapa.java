@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.AlertDialog;
@@ -50,6 +51,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.riobamba.geolam.LugarMapa;
+import com.riobamba.geolam.MapaLugarCerca;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
 import org.json.JSONArray;
@@ -62,7 +64,7 @@ import java.util.List;
 public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallback {
     Button btnListarLugarCercano;
     List<ListadoMapa> mapaList;
-
+    String[] distanc;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     Integer count =0, count2 = 0; // contadores para verificar si la conexion se establece correctamente
     Double[] distancias;
@@ -124,8 +126,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guardarTitulo("Lugares");
-                Intent intent = new Intent(ConexionMapa.this, LugarMapa.class);
+                guardarTitulo("Lugares más cercanos");
+                Intent intent = new Intent(ConexionMapa.this, MapaLugarCerca.class);
+                intent.putExtra("MapaLugarCerca", distanc);
                 startActivity(intent);
             }
         });
@@ -221,6 +224,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     private void agregarMarcador(double lat, double lng) {
         loading.dismiss();
         Toast.makeText(this, "Carga exitosa", Toast.LENGTH_SHORT).show();
+        btnListarLugarCercano.setVisibility(View.VISIBLE);
         Float latitud, longitud;
         String nombreLugar, direccionLugar;
         BitmapDescriptor puntero = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
@@ -230,6 +234,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         String distanciaString;
         lugarCerca = new String[count];
         distancias = new Double[count];
+        distanc = new String[count];
         Proceso proceso = new Proceso();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -250,6 +255,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 String distancia = formato1.format(proceso.obtenerDistancia(lat, lng, latitud,longitud));
 
                 distanciaString = "Distancia: " + distancia + " " + "Km";
+                //pasa las distancias a la siguiente actividad
+                distanc[i] = distancia;
 
                 distancias[i] = proceso.obtenerDistancia(lat, lng, latitud,longitud);
                 lugarCerca[i] = nombreLugar;

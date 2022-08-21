@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.itextpdf.text.pdf.parser.Line;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
 
@@ -86,7 +89,7 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
         private final TextView idLugar;
         private final TextView distanciaLugar;
         private final TextView categoria;
-
+        private final LinearLayout llDistancia;
 
 
 
@@ -102,12 +105,13 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
             idLugar = view.findViewById(R.id.tvId);
             distanciaLugar = view.findViewById(R.id.tvDistancia);
             categoria = view.findViewById(R.id.tvCategoria);
+            llDistancia = view.findViewById(R.id.llDistancia);
         }
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.activity_listado, null);
@@ -116,8 +120,14 @@ public class LugarMapaAdaptador extends RecyclerView.Adapter<LugarMapaAdaptador.
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         ListadoLugar listadoLugar = lugarList.get(position);
+
+        if(!listadoLugar.getDistancia().equals(""))
+        {
+            viewHolder.llDistancia.setVisibility(View.VISIBLE);
+        }
+
         //Cargar Imagen
         Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())

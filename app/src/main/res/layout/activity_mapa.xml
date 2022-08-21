@@ -42,14 +42,15 @@
         android:layout_width="55dp"
         android:layout_height="60dp"
         android:layout_above="@+id/iMenuInfe"
-        android:layout_marginEnd="20dp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
-        map:iconGravity="end"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="55dp"
-        android:backgroundTint="#027FCC"
+        android:backgroundTint="@color/base"
         app:icon="@drawable/ic_baseline_add_home_work_24"
-        app:iconTint="#FFFFFF" />
+        app:iconTint="#FFFFFF"
+        android:visibility="gone"
+        map:iconGravity="end" />
 
     <androidx.cardview.widget.CardView
         android:layout_above="@+id/iMenuInfe"
