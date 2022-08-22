@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 
 import androidx.annotation.Nullable;
@@ -30,7 +32,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 //import com.riobamba.geolam.modelo.DatosPersonalesAdaptador;
 import com.google.common.hash.Hashing;
+import com.itextpdf.text.pdf.fonts.cmaps.CMapCache;
 import com.riobamba.geolam.modelo.WebService;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +45,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,20 +89,43 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
 
         //Variables
-        txtName =findViewById(R.id.etNombre);
-        txtApe =findViewById(R.id.etApellido);
+        txtName =findViewById(R.id.etNombre3);
+        txtApe =findViewById(R.id.etApellido3);
         txtEdad=findViewById(R.id.etEdad);
         txtContraseniaAntigua=findViewById(R.id.etContraAntes);
         txtContraseniaNueva= findViewById(R.id.etNuevaContra);
         txtConfirmarContrasenia=findViewById(R.id.etConfirContra);
-        ivFotoP=findViewById(R.id.ivPerfil);
+        ivFotoP= (ImageView) findViewById(R.id.ivPerfil3);
         btnGuardarCambios=findViewById(R.id.btnGuardarCambiosUsu);
         btnCancelar=findViewById(R.id.btnCancelar);
-        btnCargarImagen=findViewById(R.id.btn_cargarf2);
-        tvEmail = findViewById(R.id.tvEmailUsu);
+        btnCargarImagen=findViewById(R.id.btn_cargarf3);
+        tvEmail = findViewById(R.id.tvEmailUsu1);
         btnVerificarContraseniaAntigua=findViewById(R.id.btnVerificarContrasenia);
-        txtConfirmarContrasenia.setEnabled(false);
-        txtContraseniaNueva.setEnabled(false);
+
+        //ivFotoP.setImageBitmap(null);
+        //ivFotoP.setBackground(null);
+//        ivFotoP.setBackgroundResource(0);
+//        ivFotoP.destroyDrawingCache();
+  //      ivFotoP.buildDrawingCache();
+        //ivFotoP.getDrawingCache();
+       // ivFotoP.setImageDrawable(null);
+        //ivFotoP.invalidate();
+        //ivFotoP.setImageResource(0);
+
+      //  urlImagenLugar=null;
+
+
+        //ivFotoP.destroyDrawingCache();
+        //ivFotoP.willNotCacheDrawing();
+      //  txtConfirmarContrasenia.setEnabled(false);
+       // txtContraseniaNueva.setEnabled(false);
+        /*bitmap = BitmapFactory.decodeResource(this.getResources(), 0);
+        ivFotoP.setImageBitmap(bitmap);
+        ivFotoP.setImageBitmap(null);
+
+       ivFotoP.setDrawingCacheEnabled(true);
+*/
+        MostrarResultado();
 
 
 
@@ -119,14 +147,14 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (v.equals(btnCargarImagen) ) {
+                if (v==btnCargarImagen) {
                     showFileChooser();
                 }
 
 
             }
         });
-MostrarResultado();
+
 
     }
     public void showFileChooser() {
@@ -141,6 +169,18 @@ MostrarResultado();
     }
     public void MostrarResultado()
     {
+        /*
+        ivFotoP.destroyDrawingCache();
+        ivFotoP.buildDrawingCache();
+        ivFotoP.setBackgroundResource(0);
+       ivFotoP.getDrawingCache();
+        ivFotoP.setImageDrawable(null);
+        ivFotoP.invalidate();
+        */
+
+        final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
+
+
         //obtener el correo del usuario logueado
         SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
         String email = preferences.getString("estado_correo","");
@@ -156,14 +196,33 @@ MostrarResultado();
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
+
+
+                                //ivFotoP.setDrawingCacheEnabled(false);
+                               // ivFotoP.clearFocus();
+
                                 String urlImage=obj.getString("imagen");
-                                imagenReturn(urlImage);
-                                tvEmail.setText(obj.getString("email"));
-                                txtName.setText(obj.getString("nombre_usuario"));
-                                txtApe.setText(obj.getString("apellido_usuario"));
-                                txtEdad.setText(obj.getString("edad"));
-                                compararContrasenia=obj.getString("contrasenia");
-                                Toast.makeText(getApplicationContext(), compararContrasenia.toString(), Toast.LENGTH_SHORT).show();
+                                String nameImage= String.valueOf(ivFotoP.getTag());
+                              //  imagenReturn(urlImage);
+                              if(imagenReturn(urlImage)==1) {
+                                    //&&nameImage.equals("bg2")
+                                    tvEmail.setText(obj.getString("email"));
+                                    txtName.setText(obj.getString("nombre_usuario"));
+                                    txtApe.setText(obj.getString("apellido_usuario"));
+                                    txtEdad.setText(obj.getString("edad"));
+
+                                    compararContrasenia = obj.getString("contrasenia");
+                                    loading2.dismiss();
+                                }
+
+                              //  ivFotoP.setDrawingCacheEnabled(false);
+
+                               // Toast.makeText(getApplicationContext(), compararContrasenia.toString(), Toast.LENGTH_SHORT).show();
+                                //ivFotoP.clearColorFilter();
+                                //ivFotoP.setImageBitmap(null);
+                                //ivFotoP.destroyDrawingCache();
+
+
                             }
 
                         } catch (JSONException e) {
@@ -190,7 +249,9 @@ MostrarResultado();
 
     }
 
-    private void imagenReturn(String url) {
+    private int imagenReturn(String url) {
+        final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
+        int band=0;
         if(url.contains(WebService.imagenRaiz)) {
             urlSinEspacios = url.replace(" ", "%20");
             String data = urlSinEspacios;
@@ -200,20 +261,101 @@ MostrarResultado();
                 ruta = split[1];
             }
             urlImagenLugar= WebService.urlRaiz+ruta;
-            //Toast.makeText(getApplicationContext(), "Item: " + ruta, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), ruta, Toast.LENGTH_LONG).show();
         }
         else{
             urlImagenLugar=urlSinEspacios;
         }
 
-        //Toast.makeText(actualizar_lugar_medico.this,urlImagenLugar, Toast.LENGTH_SHORT).show();
+       /* Picasso.get().load(urlImagenLugar).networkPolicy(NetworkPolicy.OFFLINE).into(ivFotoP, new Callback() {
+            @Override
+            public void onSuccess() {
+               // Log.i("Load image from caché! " + urlImagenLugar);
+               // textView.setText("From Caché:\n " + Uri.parse(urlImage).getLastPathSegment());
 
-        RequestQueue request4 = Volley.newRequestQueue(this);
+            }*/
+
+         /*   @Override
+            public void onError(Exception e) {
+                Log.e(String.valueOf(DatosPersonalesUsuario.this),"onError() " + e.getMessage());
+                Log.i(String.valueOf(DatosPersonalesUsuario.this), "Try to load image from internet! " + urlImagenLugar);
+                //Can´t find image in cache, load from internet.
+                */
+
+                Picasso.get().load(urlImagenLugar).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .into(ivFotoP);
+loading2.dismiss();
+               // Picasso.get().load(urlImagenLugar).into(ivFotoP);
+
+            //}
+       // });
+/*
+        Picasso.get().load(urlImagenLugar).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(ivFotoP);
+                */
+
+        //ivFotoP.setTag("bg2");
+        band=1;
+        return band;
+        //Toast.makeText(this,urlImagenLugar, Toast.LENGTH_LONG).show();
+
+      /*  RequestQueue request4 = Volley.newRequestQueue(this);
         ImageRequest imageRequest = new ImageRequest(urlImagenLugar, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                ivFotoP.setImageBitmap(response);
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                */
+                //ivFotoP=findViewById(R.id.ivPerfil2);
+               // bitmap.setConfig();
 
+                //bitmap.setHeight(response.getHeight());
+                //bitmap.setWidth(response.getWidth());
+               // ivFotoP.setTag("bg2");
+                //Configuración del mapa de bits en ImageView
+                /*int bwidth = response.getWidth();
+                int bheight = response.getHeight();
+                int swidth = ivFotoP2.getWidth();
+                int sheight = ivFotoP2.getHeight();
+                int new_width = swidth;
+                int new_height = (int) Math.floor((double) bheight * ((double) new_width / (double) bwidth));
+                newbitMap = Bitmap.createScaledBitmap(response, new_width, new_height, true);
+                */
+               // Picasso.get().load(urlImagenLugar).into(ivFotoP);
+
+                /*Picasso.get().load(urlImagenLugar).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .into(ivFotoP);*/
+
+                //ivFotoP2.setImageBitmap(newbitMap);
+               // bitmap=null;
+               // ivFotoP2.setImageBitmap(bitmap);
+                //ivFotoP2.getDrawingTime();
+
+                //ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
+               // ImageView iv=(ImageView)findViewById(R.id.imageView);
+                //ImageView ivFotoP2= (ImageView) findViewById(R.id.ivPerfil3);
+               // ivFotoP2.setImageBitmap(null);
+
+                //bitmap = null;
+                //bitmap=response;
+                //bitmap = Bitmap.createBitmap(response);
+               // ivFotoP2.setImageBitmap(bitmap);
+               // bitmap.recycle();
+               // bitmap = null;
+                //bitmap = Bitmap.createBitmap(ivFotoP2.getDrawingCache());
+                //ivFotoP2.setImage(ImageSource.bitmap(response));
+               // ivFotoP2.destroyDrawingCache();
+                //ivFotoP.setBackgroundResource(0);
+
+                //ivFotoP2.buildDrawingCache();
+              //  ivFotoP2.getDrawingCache();
+
+               //ivFotoP.setImageDrawable(null);
+               // ivFotoP2.invalidate();
+                //ivFotoP.setImageResource(0);
+/*
             }
         }, 0, 0,ImageView.ScaleType.CENTER, null,new Response.ErrorListener()
         {
@@ -222,13 +364,14 @@ MostrarResultado();
             public void onErrorResponse(VolleyError error)
             {
                 error.printStackTrace();
+                Log.e(String.valueOf(DatosPersonalesUsuario.this), "Image Load Error: ");
 
             }
 
         });
+*/
 
-
-        request4.add(imageRequest);
+        //request4.add(imageRequest);
 
     }
 
@@ -242,10 +385,14 @@ MostrarResultado();
                     public void onResponse(String response) {
 
                         //Descartar el diálogo de progreso
+                       // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
                         loading.dismiss();
 
                         //Mostrando el mensaje de la respuesta
                         Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), txtName.getText().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), txtApe.getText().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), txtEdad.getText().toString(), Toast.LENGTH_SHORT).show();
                         //startActivity(new Intent(getApplicationContext(), Login.class));
                         //finish();
                     }
@@ -262,6 +409,7 @@ MostrarResultado();
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         //Convertir bits a cadena
+
                         imagen_lugar = getStringImagen(bitmap); //Imagen
 
                         //Obtener el nombre de la imagen
@@ -269,12 +417,15 @@ MostrarResultado();
 
 
                         Map<String, String> parametros = new HashMap<String, String>();
-                        parametros.put("nombre_usuario", txtName.getText().toString().trim());
-                        parametros.put("apellido_usuario", txtApe.getText().toString().trim());
-                        parametros.put("edad", txtEdad.getText().toString().trim());
+                        parametros.put("email",tvEmail.getText().toString());
+                        parametros.put("nombre_usuario",txtName.getText().toString());
+                        parametros.put("apellido_usuario",txtApe.getText().toString());
+                        parametros.put("edad",txtEdad.getText().toString());
+                        String ban="1";
+                        parametros.put("sin_contrasenia", ban.toString() );
                        // parametros.put("contrasenia",getSHA256(txtContraseniaNueva.getText().toString()));
                         //Imagen
-                       parametros.put(claveImagen, imagen_lugar);
+                      parametros.put(claveImagen, imagen_lugar);
                        parametros.put(claveNombre, nombreImagen);
                         return parametros;
                     }
@@ -314,20 +465,20 @@ MostrarResultado();
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             //Convertir bits a cadena
-                            imagen_lugar = getStringImagen(bitmap); //Imagen
+                            //imagen_lugar = getStringImagen(bitmap); //Imagen
 
                             //Obtener el nombre de la imagen
-                            String nombreImagen = tvEmail.getText().toString().trim();
+                           // String nombreImagen = tvEmail.getText().toString().trim();
 
 
                             Map<String, String> parametros = new HashMap<String, String>();
-                            parametros.put("nombre_usuario", txtName.getText().toString().trim());
-                            parametros.put("apellido_usuario", txtApe.getText().toString().trim());
-                            parametros.put("edad", txtEdad.getText().toString().trim());
+                            parametros.put("nombre_usuario",txtName.getText().toString().trim());
+                            parametros.put("apellido_usuario",txtApe.getText().toString().trim());
+                            parametros.put("edad",txtEdad.getText().toString().trim());
                             parametros.put("contrasenia",getSHA256(txtContraseniaNueva.getText().toString()));
                             //Imagen
-                           parametros.put(claveImagen, imagen_lugar);
-                           parametros.put(claveNombre, nombreImagen);
+                          // parametros.put(claveImagen, imagen_lugar);
+                           //parametros.put(claveNombre, nombreImagen);
                             return parametros;
                         }
                     };
@@ -350,7 +501,7 @@ MostrarResultado();
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 5, baos);
         byte[] imageBytes = baos.toByteArray();
         String  encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
@@ -614,7 +765,8 @@ public void validarContraseniaBD(){
                 int new_height = (int) Math.floor((double) bheight * ((double) new_width / (double) bwidth));
                 newbitMap = Bitmap.createScaledBitmap(bitmap, new_width, new_height, true);
                 ivFotoP.setImageBitmap(newbitMap);
-
+               // newbitMap.recycle();
+                //bitmap.recycle();
 
             } catch (IOException e) {
                 e.printStackTrace();
