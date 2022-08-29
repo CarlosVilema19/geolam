@@ -1,9 +1,8 @@
 package com.riobamba.geolam.modelo;
 
 public class WebService {
-
-    public static final  String urlRaiz = "https://sqhrjblh.lucusvirtual.es/";
-    public static final  String imagenRaiz = "sqhrjblh.lucusvirtual.es/";
+    public static final  String imagenRaiz = "geolam.ga/";
+    public static final  String urlRaiz = "https://"+imagenRaiz;
     public static final  String servicioListarLugares = "listar_lugares.php";
     public static final  String servicioListarLugaresAdmin = "listar_lugares_admin.php";
     public static final  String servicioAgregarEspecialidad = "agregar_especialidad.php";
