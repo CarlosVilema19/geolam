@@ -172,7 +172,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Ha ocurrido un error con el servidor", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -210,7 +210,7 @@ public class ListarLugarUsuario extends AppCompatActivity
                                         obj.getString("nombre_usuario"),
                                         obj.getString("fecha_ingreso"),
                                         obj.getString("comentario"),
-                                        obj.getString("imagen"),
+                                        imagenReturn(obj.getString("imagen")),
                                         obj.getInt("id_opinion"),
                                         (float) obj.getDouble("calificacion"),
                                         obj.getString("email")
@@ -235,7 +235,7 @@ public class ListarLugarUsuario extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No se han podido cargar las opiniones", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

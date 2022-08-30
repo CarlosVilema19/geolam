@@ -141,7 +141,9 @@ public class EspecialidadBusquedaList extends AppCompatActivity implements Searc
     }
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-
+        Intent intent = new Intent(this,EspecialidadLugar.class);
+        intent.putExtra("ListadoLugarAdmin",item);
+        startActivity(intent);
     }
 
     //Metodos para la barra inferior

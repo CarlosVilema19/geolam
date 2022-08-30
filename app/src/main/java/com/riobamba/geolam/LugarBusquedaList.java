@@ -113,7 +113,7 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
                             lugarList.add(new ListadoLugar(
                                     obj.getString("nombre_lugar"),
                                     obj.getString("direccion"),
-                                    obj.getString("telefono"),
+                                    obj.getString("descripcion_tipo_lugar"),
                                     imagenReturn(obj.getString("imagen_lugar")),
                                     obj.getInt("id_lugar"),
                                     "",
