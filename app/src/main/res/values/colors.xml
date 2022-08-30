@@ -10,5 +10,6 @@
     <color name="backinfe">#FFEDEFF1</color>
     <color name="iconinfe">#48484D</color>
     <color name="titulo">#039678</color>
+    <color name="transparent">#0000ffff</color>
 
 </resources>

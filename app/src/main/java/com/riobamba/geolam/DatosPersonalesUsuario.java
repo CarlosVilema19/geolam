@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,12 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
     private Button btnCargarImagen;
 
+
+    //Botones Editar
+
+    Button btnEditNombre, btnEditApellido,btnEditEdad;
+
+    //-------
     private ImageView ivFotoP;
     private Bitmap bitmap;
     private Bitmap newbitMap;
@@ -101,6 +108,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         btnCargarImagen=findViewById(R.id.btn_cargarf3);
         tvEmail = findViewById(R.id.tvEmailUsu1);
         btnVerificarContraseniaAntigua=findViewById(R.id.btnVerificarContrasenia);
+        btnEditNombre=findViewById(R.id.btnEditNombre);
 
         //ivFotoP.setImageBitmap(null);
         //ivFotoP.setBackground(null);
@@ -135,6 +143,18 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
 
                 modificarDatos();
+            }
+        });
+
+        btnEditNombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtName.setClickable(false);
+                txtName.setFocusable(false);
+                txtName.setInputType((InputType.TYPE_CLASS_TEXT));
+                txtName.setTextIsSelectable(true);
+                txtName.requestFocus();
+
             }
         });
         btnVerificarContraseniaAntigua.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +305,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                 Picasso.get().load(urlImagenLugar).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
                         .memoryPolicy(MemoryPolicy.NO_CACHE)
                         .into(ivFotoP);
-loading2.dismiss();
+                loading2.dismiss();
                // Picasso.get().load(urlImagenLugar).into(ivFotoP);
 
             //}
@@ -501,7 +521,7 @@ loading2.dismiss();
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 5, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] imageBytes = baos.toByteArray();
         String  encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;

@@ -31,10 +31,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
         app:cardUseCompatPadding="true"
+        android:elevation="10dp"
         android:layout_below="@+id/btnAgregados"
         >
 
@@ -45,8 +47,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:orientation="vertical"
                 android:paddingBottom="50dp">
 
@@ -62,22 +64,29 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginBottom="10dp"
                         android:text="Ingresar datos"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
 
 
                         />
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="250dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center_horizontal"
+
+                    >
 
                 <RelativeLayout
-                    android:layout_below="@+id/cont2"
-                    android:layout_width="200dp"
-                    android:layout_height="145dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
 
                     >
@@ -89,40 +98,51 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="15dp"
-
+                        android:padding="5dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_baseline_image_24"
+                        android:src="@drawable/lugar_3"
                         android:tag="bg1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:strokeColor="@android:color/white"
+                        app:strokeColor="@null"
                         app:strokeWidth="1sp"
 
 
                         />
 
+                </RelativeLayout>
 
-                    <com.google.android.material.button.MaterialButton
+                    <RelativeLayout
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="176dp"
+                        android:layout_marginTop="105dp"
 
-                        android:id="@+id/btn_cargarfotoL"
-                        style="@style/Widget.Material3.Button.TextButton.Icon"
-                        android:layout_width="50dp"
-                        android:layout_height="55dp"
-                        android:layout_marginStart="145dp"
 
-                        android:layout_marginTop="88dp"
-                        android:backgroundTint="@android:color/holo_green_light"
-                        app:icon="@drawable/ic_baseline_photo_camera_24"
-                        app:iconTint="#FFFFFF" />
+                        >
+
+                        <com.google.android.material.button.MaterialButton
+
+                            android:id="@+id/btn_cargarfotoL"
+                            style="@style/Widget.Material3.Button.TextButton.Icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+
+                            android:backgroundTint="@android:color/holo_green_light"
+                            app:icon="@drawable/ic_baseline_photo_camera_24"
+
+                            app:iconGravity="textEnd"
+                            app:iconTint="#FFFFFF" />
+
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
 
-
-
-
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_below="@id/cont2"
+
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
