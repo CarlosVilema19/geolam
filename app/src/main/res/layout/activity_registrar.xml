@@ -67,14 +67,14 @@
                         android:layout_marginBottom="4dp"
                         android:padding="5dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_baseline_account_circle_24"
+                        android:src="@drawable/perfil2"
                         android:tag="bg1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:strokeColor="@android:color/darker_gray"
-                        app:strokeWidth="8dp"
+                        app:strokeWidth="2dp"
 
                         />
 
@@ -82,12 +82,15 @@
 
                         android:id="@+id/btn_cargarfoto"
                         style="@style/Widget.Material3.Button.TextButton.Icon"
-                        android:layout_width="50dp"
-                        android:layout_height="55dp"
-                        android:layout_marginStart="145dp"
+                        android:layout_width="45dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="143dp"
                         android:layout_marginTop="100dp"
                         android:backgroundTint="@android:color/holo_green_light"
                         app:icon="@drawable/ic_baseline_photo_camera_24"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="3dp"
+                        app:iconGravity="textEnd"
                         app:iconTint="#FFFFFF" />
 
 
@@ -207,10 +210,11 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnFechaIngreso"
                         android:layout_width="60dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:layout_above="@+id/tiEdad"
+                        android:background="@drawable/degradado2"
                         android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
-                        android:textColor="@android:color/white" />
+                        app:backgroundTint="@null" />
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tiFechaNac"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -244,6 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="9dp"
                         android:layout_below="@id/tiFechaNac"
                         android:layout_gravity="center">
 
@@ -253,6 +258,7 @@
                             android:layout_width="match_parent"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"
+
                             android:hint="@string/edad_regsitro"
                             android:clickable="false"
                             android:cursorVisible="false"
