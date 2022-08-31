@@ -125,20 +125,20 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center">
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnEnviarOpinion"
+                            android:id="@+id/btnCancelarOpinion"
                             android:layout_margin="10dp"
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Enviar" />
+                            android:text="Cancelar" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCancelarOpinion"
-                            android:layout_margin="10dp"
-                            android:layout_toEndOf="@+id/btnEnviarOpinion"
+                            android:id="@+id/btnEnviarOpinion"
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
-                            android:text="Cancelar" />
+                            android:layout_margin="10dp"
+                            android:layout_toEndOf="@+id/btnCancelarOpinion"
+                            android:text="Enviar" />
                     </RelativeLayout>
                 </LinearLayout>
             </ScrollView>

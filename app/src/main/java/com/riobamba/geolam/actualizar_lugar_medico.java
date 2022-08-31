@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
@@ -32,6 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.modelo.ConexionMapa;
 import com.riobamba.geolam.modelo.ListadoCategoria;
 import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugar;
@@ -56,37 +60,24 @@ import java.util.Map;
 
 public class actualizar_lugar_medico extends AppCompatActivity {
     EditText txtTipologia, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
-    TextView tvIdTipo;
-    TextView tvIdCategoria ;
-    TextView tvIdLugarMedico;
+    TextView tvIdTipo, tvIdCategoria,tvIdLugarMedico;
     int  posTipologia;
-    String pTip;
-    String pCat;
-    Button btnGuardarInfo;
-    String imagen_lugar;
+    String pTip, pCat,imagen_lugar,listIDCat,listIDTipo,ruta,urlImagenLugar,urlSinEspacios;
+    Button btnGuardarInfo, btnCancelarInfo;
+    Integer aux = 0;
+    String[] datosServidor;
 
-    String listIDCat;
-    String listIDTipo;
-    String ruta;
-    String urlImagenLugar;
-    String urlSinEspacios;
     //Imagen
     private Button btnCargarImagen;
     private ImageView ivFotoL;
     private Bitmap bitmap;
 
-    private Bitmap newbitMap;
-    private String claveImagen = "foto";
-    private String claveNombre = "nombre";
-    private int PICK_IMAGE_REQUEST = 1;
-   // int posTipologia =0;
-    int posCategoria =0;
+    private final String claveImagen = "foto";
+    private final String claveNombre = "nombre";
+    private final int PICK_IMAGE_REQUEST = 1;
 
     ArrayList<String> opcionesTipologia = new ArrayList<>();
     ArrayList<String> opcionesCategoria= new ArrayList<>();
-    //autocomplete
-   // private ListadoCategoriaAdaptador adaptadorCategoria;
-    //private ListadoTipologiaAdaptador adaptadorTipo;
     String listCatNombres;
     ArrayList<String> opcionesCategoriaNombres=new ArrayList<>();
 
@@ -103,7 +94,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_lugar_medico);
 
-        toolbar.show(this, "Actualizar Datos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Actualizar Datos", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         //adaptadorCategoria = new ListadoCategoriaAdaptador(this);
         autoCompleteOpcionesCategoria=findViewById(R.id.autoCat2);
@@ -140,7 +131,67 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 //General
                 if(validarCampos()==4)
                 {
-                    insertarLugar();
+                    if(aux == 1 &&
+                            datosServidor[0].equals(txtNombreLugar.getText().toString())&&
+                            datosServidor[1].equals(txtDireccion.getText().toString())&&
+                            datosServidor[2].equals(txtTelefono.getText().toString())&&
+                            datosServidor[3].equals(txtWhatsApp.getText().toString())&&
+                            datosServidor[4].equals(txtPaginaWeb.getText().toString())&&
+                            datosServidor[5].equals(txtLatitud.getText().toString())&&
+                            datosServidor[6].equals(txtLongitud.getText().toString())&&
+                            datosServidor[7].equals(txtDescripcion.getText().toString())&&
+                            datosServidor[8].equals(txtTipologia.getText().toString())&&
+                            datosServidor[9].equals(txtCategoria.getText().toString()))
+                    {
+                        Toast.makeText(actualizar_lugar_medico.this, "No se ha realizado cambios", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        insertarLugar();
+                    }
+                }
+            }
+        });
+
+        btnCancelarInfo = findViewById(R.id.btnCancelarAct);
+        btnCancelarInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(aux == 0 ||
+                        !datosServidor[0].equals(txtNombreLugar.getText().toString())||
+                        !datosServidor[1].equals(txtDireccion.getText().toString())||
+                        !datosServidor[2].equals(txtTelefono.getText().toString())||
+                        !datosServidor[3].equals(txtWhatsApp.getText().toString())||
+                        !datosServidor[4].equals(txtPaginaWeb.getText().toString())||
+                        !datosServidor[5].equals(txtLatitud.getText().toString())||
+                        !datosServidor[6].equals(txtLongitud.getText().toString())||
+                        !datosServidor[7].equals(txtDescripcion.getText().toString())||
+                        !datosServidor[8].equals(txtTipologia.getText().toString())||
+                        !datosServidor[9].equals(txtCategoria.getText().toString()))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(actualizar_lugar_medico.this);
+                    builder.setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    Intent intent = new Intent(actualizar_lugar_medico.this,ListadoCrud.class);
+                                    startActivity(intent);
+                                }
+                            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.show();
+                }
+                else
+                {
+                    finish();
+                    Intent intent = new Intent(actualizar_lugar_medico.this,ListadoCrud.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -151,9 +202,8 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
                 if (v.equals(btnCargarImagen) ) {
                     showFileChooser();
+                    aux = 0;
                 }
-
-
             }
         });
 
@@ -163,59 +213,80 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
 
     }
+    @Override public void onBackPressed() { }  //Anula la flecha de regreso del telefono
 
     private void actualizarDatos(ListadoLugarAdmin listadoLugar) {
-        categoria();
+        ProgressDialog loading; //Mensaje de carga en el mapa
+        loading = ProgressDialog.show(actualizar_lugar_medico.this, "Cargando...", "Espere por favor");
         tipologia();
-
-        String id_lugar = listadoLugar.getId().toString();
-
-        String url3=WebService.urlRaiz+WebService.servicioObtenerDatosLugarMedico;
-        StringRequest stringRequest3= new StringRequest(Request.Method.POST,url3,
-                response ->
-                {
-                    try{
-
-                        JSONArray array= new JSONArray(response);
-                        for(int i=0;i<array.length();i++) {
-
-                            JSONObject object = array.getJSONObject(i);
-
-                            tvIdLugarMedico.setText(object.getString("ID_LUGAR"));
-
-                            txtNombreLugar.setText(object.getString("NOMBRE_LUGAR").toUpperCase());
-                            txtDireccion.setText(object.getString("DIRECCION"));
-                            txtTelefono.setText(object.getString("TELEFONO"));
-                            String urlImage=object.getString("IMAGEN_LUGAR");
-                            imagenReturn(urlImage);
-                            tvIdTipo.setText(object.getString("ID_TIPOLOGIA_LUGAR").toString());
-                            tvIdCategoria.setText(object.getString("ID_CATEGORIA").toString());
-                            txtWhatsApp.setText(object.getString("WHATSAPP"));
-                            txtPaginaWeb.setText(object.getString("PAGINA_WEB"));
-                            txtLatitud.setText(object.getString("LATITUD"));
-                            txtLongitud.setText(object.getString("LONGITUD"));
-                            txtDescripcion.setText(object.getString("DESCRIPCION_LUGAR"));
-                            //ObtenerCategoria-Tipología
-                        }
-                        autoCompleteOpcionesTipologia.setText(autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString(),false);
-                        autoCompleteOpcionesCategoria.setText(autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString(),false);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
-
-        }){
+        new Handler().postDelayed(new Runnable() {  //tiempo para cargar la categoria
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar", id_lugar);
-                return parametros;
-            }
-        };
-        stringRequest3.setTag("REQUEST");
-        RequestQueue queue3= Volley.newRequestQueue(this);
-        queue3.add(stringRequest3);
+            public void run() {
+                categoria();
+                new Handler().postDelayed(new Runnable() {  //tiempo para cargar toda la información
+                    @Override
+                    public void run() {
+                        loading.dismiss();
+                        String id_lugar = listadoLugar.getId().toString();
+                        String url3=WebService.urlRaiz+WebService.servicioObtenerDatosLugarMedico;
+                        StringRequest stringRequest3= new StringRequest(Request.Method.POST,url3,
+                                response ->
+                                {
+                                    try{
+                                        JSONArray array= new JSONArray(response);
+                                        for(int i=0;i<array.length();i++) {
+                                            JSONObject object = array.getJSONObject(i);
+                                            tvIdLugarMedico.setText(object.getString("ID_LUGAR"));
+                                            txtNombreLugar.setText(object.getString("NOMBRE_LUGAR").toUpperCase());
+                                            txtDireccion.setText(object.getString("DIRECCION"));
+                                            txtTelefono.setText(object.getString("TELEFONO"));
+                                            String urlImage=object.getString("IMAGEN_LUGAR");
+                                            imagenReturn(urlImage);
+                                            tvIdTipo.setText(object.getString("ID_TIPOLOGIA_LUGAR").toString());
+                                            tvIdCategoria.setText(object.getString("ID_CATEGORIA").toString());
+                                            txtWhatsApp.setText(object.getString("WHATSAPP"));
+                                            txtPaginaWeb.setText(object.getString("PAGINA_WEB"));
+                                            txtLatitud.setText(object.getString("LATITUD"));
+                                            txtLongitud.setText(object.getString("LONGITUD"));
+                                            txtDescripcion.setText(object.getString("DESCRIPCION_LUGAR"));
 
+                                            datosServidor = new String[10];
+
+                                                datosServidor[0] = object.getString("NOMBRE_LUGAR");
+                                                datosServidor[1] = object.getString("DIRECCION");
+                                                datosServidor[2] = object.getString("TELEFONO");
+                                                datosServidor[3] = object.getString("WHATSAPP");
+                                                datosServidor[4] = object.getString("PAGINA_WEB");
+                                                datosServidor[5] = object.getString("LATITUD");
+                                                datosServidor[6] = object.getString("LONGITUD");
+                                                datosServidor[7] = object.getString("DESCRIPCION_LUGAR");
+                                                datosServidor[8] = autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString();
+                                                datosServidor[9] = autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString();
+
+
+                                        }
+                                        autoCompleteOpcionesTipologia.setText(autoCompleteOpcionesTipologia.getAdapter().getItem(seleccionTipologia()).toString(),false);
+                                        autoCompleteOpcionesCategoria.setText(autoCompleteOpcionesCategoria.getAdapter().getItem(seleccionCategoria()).toString(),false);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                },error -> {Toast.makeText(actualizar_lugar_medico.this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> parametros = new HashMap<String, String>();
+                                parametros.put("id_lugar", id_lugar);
+                                return parametros;
+                            }
+                        };
+                        stringRequest3.setTag("REQUEST");
+                        RequestQueue queue3= Volley.newRequestQueue(actualizar_lugar_medico.this);
+                        queue3.add(stringRequest3);
+                    }
+                },1000);
+            }
+        },1000);
     }
 
     private void categoria() {
@@ -396,7 +467,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 int sheight = ivFotoL.getHeight();
                 int new_width = swidth;
                 int new_height = (int) Math.floor((double) bheight * ((double) new_width / (double) bwidth));
-                newbitMap = Bitmap.createScaledBitmap(bitmap, new_width, new_height, true);
+                Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, new_width, new_height, true);
                 ivFotoL.setImageBitmap(newbitMap);
 
 
@@ -416,7 +487,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 ruta = split[1];
             }
             urlImagenLugar= WebService.urlRaiz+ruta;
-            //Toast.makeText(getApplicationContext(), "Item: " + ruta, Toast.LENGTH_SHORT).show();
         }
         else{
             urlImagenLugar=urlSinEspacios;
@@ -477,7 +547,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         int respuesta =0;
         String nameImage= String.valueOf(ivFotoL.getTag());
 
-        if(nameImage.equals("bg1")&&txtNombreLugar.getText().toString().equals("")
+        if(/*nameImage.equals("bg1")&&*/txtNombreLugar.getText().toString().equals("")
                 && txtDireccion.getText().toString().equals("") &&
                 /*txtTelefono.getText().toString().equals("") && */
 
@@ -492,8 +562,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             txtLongitud.setError("Ingrese la longitud");
             txtDescripcion.setError("Ingrese la descripción");
         }
-        else {if(nameImage.equals("bg1")){Toast.makeText(actualizar_lugar_medico.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
-        else{ if(txtNombreLugar.getText().toString().equals("")){Toast.makeText(actualizar_lugar_medico.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();
+        else {if(txtNombreLugar.getText().toString().equals("")){Toast.makeText(actualizar_lugar_medico.this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();
             txtNombreLugar.setError("Ingrese el nombre");
             txtNombreLugar.requestFocus();}
         else {if(txtDireccion.getText().toString().equals("")){Toast.makeText(actualizar_lugar_medico.this, "Ingrese la dirección", Toast.LENGTH_SHORT).show();
@@ -517,7 +586,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             txtDescripcion.requestFocus();
         }
         else{respuesta=2;}
-        }}}}}
+        }}}}//}
             //}
         }
         int opcionales=0;
@@ -583,6 +652,9 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             }
             if (respuesta == 3 || opcionales ==2 || opcionales == 3 || opcionales == 4 || opcionales == 5 || opcionales == 6|| opcionales == 7 || opcionales == 8) {
                 respuesta = 4;
+                if(nameImage.equals("bg1")){
+                    aux = 1; // para saber si no se ha cambiado la imagen
+                }
             }
 
         }
@@ -605,7 +677,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
-            txtNombreLugar.setError("Nombre demasiado largo. (Mínimo 40 caracteres)");
+            txtNombreLugar.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtNombreLugar.requestFocus();
         }
 
@@ -645,7 +717,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "¡Error! Página web", Toast.LENGTH_SHORT).show();
-            txtPaginaWeb.setError("Página web demasiada larga. (Mínimo 100 caracteres)");
+            txtPaginaWeb.setError("Página web demasiada larga. (Máximo 100 caracteres)");
             txtPaginaWeb.requestFocus();
         }
 
@@ -677,7 +749,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
-            txtDireccion.setError("Dirección demasiada larga. (Mínimo 40 caracteres)");
+            txtDireccion.setError("Dirección demasiada larga. (Máximo 40 caracteres)");
             txtDireccion.requestFocus();
         }
 
@@ -739,14 +811,13 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 //Descartar el diálogo de progreso
                 loading.dismiss();
-
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Se ha actualizado el lugar correctamente", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(getApplicationContext(), Login.class));
-                //finish();
+                finish();
+                Intent intent = new Intent(actualizar_lugar_medico.this,ListadoCrud.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -754,18 +825,12 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                //Convertir bits a cadena
-               imagen_lugar = getStringImagen(bitmap); //Imagen
-
-                //Obtener el nombre de la imagen
-                String nombreImagen = txtNombreLugar.getText().toString().trim();
-
 
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", tvIdLugarMedico.getText().toString());
@@ -779,12 +844,19 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 parametros.put("latitud", txtLatitud.getText().toString());
                 parametros.put("longitud", txtLongitud.getText().toString());
                 parametros.put("descripcion_lugar", txtDescripcion.getText().toString());
+                parametros.put("existencia_imagen", String.valueOf(aux));
 
-                //Imagen
-               parametros.put(claveImagen, imagen_lugar);
-               parametros.put(claveNombre, nombreImagen);
+                if(aux == 0)
+                {
+                    //Convertir bits a cadena
+                    imagen_lugar = getStringImagen(bitmap); //Imagen
 
-
+                    //Obtener el nombre de la imagen
+                    String nombreImagen = txtNombreLugar.getText().toString().trim();
+                    //Imagen
+                    parametros.put(claveImagen, imagen_lugar);
+                    parametros.put(claveNombre, nombreImagen);
+                }
                 return parametros;
             }
         };
