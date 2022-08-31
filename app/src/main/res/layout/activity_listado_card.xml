@@ -30,10 +30,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:layout_gravity="center">
+                    android:gravity="center">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
@@ -44,11 +44,11 @@
                         <ImageView
                             android:id="@+id/ivImagenLugarLista"
                             android:layout_width="wrap_content"
-                            android:layout_height="450dp"
+                            android:layout_height="300dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_baseline_add_home_work_24" />
                     </androidx.cardview.widget.CardView>
-                </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/llLugar"

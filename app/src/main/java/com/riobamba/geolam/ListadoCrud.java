@@ -127,6 +127,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
 
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
+        finish();
         Intent intent = new Intent(this,actualizar_lugar_medico.class);
         intent.putExtra("ListadoLugarAdmin",item);
         startActivity(intent);
