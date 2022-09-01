@@ -641,7 +641,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                     RequestQueue requestQueue = Volley.newRequestQueue(this);
                     //Agregar solicitud a la cola
                     requestQueue.add(stringRequest);
-                    ivFotoP.setTag("bg1");
+                   // ivFotoP.setTag("bg1");
                 }else
                 {
                     Toast.makeText(this,"No se ha realizado ningún cambio",Toast.LENGTH_SHORT).show();
@@ -817,7 +817,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
-            txtApe.setError("Apellido demasiado largo. (Mínimo 80 caracteres)");
+            txtApe.setError("Apellido demasiado largo. (Máximo 80 caracteres)");
             txtApe.requestFocus();
         }
         return datCorrecto;
