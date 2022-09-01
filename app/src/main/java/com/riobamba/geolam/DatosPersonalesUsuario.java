@@ -164,8 +164,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DatosPersonalesUsuario.this, CambiarContrasenia.class);
-                startActivity(intent);
+               finish();
             }
         });
 
@@ -253,6 +252,8 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
 
                 modificarDatos();
+
+
 
             }
         });
@@ -582,6 +583,10 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
                             //Mostrando el mensaje de la respuesta
                             Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
+                            ivFotoP.setTag("bg1");
+                            finish();
+                            Intent intent = new Intent(DatosPersonalesUsuario.this, DatosPersonalesUsuario.class);
+                            startActivity(intent);
 
                         }
                     }, new Response.ErrorListener() {
@@ -634,13 +639,17 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                             parametros.put("sin_contrasenia", ban.toString());
 
 
+
                             return parametros;
+
+
                         }
                     };
                     //Creación de una cola de solicitudes
                     RequestQueue requestQueue = Volley.newRequestQueue(this);
                     //Agregar solicitud a la cola
                     requestQueue.add(stringRequest);
+
                    // ivFotoP.setTag("bg1");
                 }else
                 {
@@ -651,6 +660,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
 
         }
+
     }
 
     private int verificaSimilitud() {
