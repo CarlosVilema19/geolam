@@ -69,7 +69,7 @@ public class CambiarContrasenia extends AppCompatActivity {
         contContraActual=findViewById(R.id.contContraActual);
         contConfirmarContra=findViewById(R.id.contConfirmarContra);
 
-        btnCancelar=findViewById(R.id.btnCancelar);
+        btnCancelar=findViewById(R.id.btnCancelar2);
         btnGuardarCambios=findViewById(R.id.btnGuardarCambiosUsu);
         btnVerificarContraseniaAntigua=findViewById(R.id.btnVerificarContrasenia);
 
