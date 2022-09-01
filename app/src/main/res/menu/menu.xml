@@ -17,6 +17,11 @@
                 android:icon="@drawable/ic_baseline_account_circle_24"
                 android:title="@string/mis_datos_menu" />
             <item
+                android:id="@+id/cambioContrasenia"
+                android:icon="@drawable/ic_baseline_https_24"
+                android:title="@string/cambioContrasenia" />
+
+            <item
                 android:id="@+id/iAcercaApp"
                 android:icon="@drawable/ic_baseline_info_24"
                 android:title="@string/acerca_menu" />

@@ -1,18 +1,25 @@
 package com.riobamba.geolam;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +29,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,8 +40,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 //import com.riobamba.geolam.modelo.DatosPersonalesAdaptador;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
 import com.itextpdf.text.pdf.fonts.cmaps.CMapCache;
+import com.riobamba.geolam.modelo.DatosPersonales;
+import com.riobamba.geolam.modelo.Proceso;
+import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
@@ -47,18 +59,36 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DatosPersonalesUsuario extends AppCompatActivity {
-    EditText txtName, txtApe, txtContraseniaAntigua,
-            txtEdad, txtContraseniaNueva, txtConfirmarContrasenia;
+    EditText txtName, txtApe, txtEdad;
+
     Button btnGuardarCambios, btnCancelar;
-    Button btnVerificarContraseniaAntigua;
-    String compararContrasenia=null;
+    Toolbar toolbar = new Toolbar();
+    String compararNombre="";
+    String compararApellido="";
+    String compararFecha="";
+
     String imagen_lugar;
     TextView tvEmail;
-    int contraseniaCorrecta = 0;
+
+
+    //Edad
+
+    String edadUsu = "";
+    private int dia,mes,anio;
+    Button btnFechaIngreso;
+    EditText txtFechaingreso;
+    String fechaNacBD;
+    String edadCalculada;
+    String fechaVerif="";
+    String fechaNac="";
+
 //Imagen
 
     private Button btnCargarImagen;
@@ -93,22 +123,102 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_personales);
+        //Calendario Edad
 
-
+        txtFechaingreso = findViewById(R.id.etFecha_);
+        txtEdad = findViewById(R.id.edEdad2);
+        btnFechaIngreso = findViewById(R.id.btnFechaNac);
+        Proceso proc = new Proceso();
+        toolbar.show(this, "Perfil", true);
         //Variables
         txtName =findViewById(R.id.etNombre3);
         txtApe =findViewById(R.id.etApellido3);
-        txtEdad=findViewById(R.id.etEdad);
-        txtContraseniaAntigua=findViewById(R.id.etContraAntes);
-        txtContraseniaNueva= findViewById(R.id.etNuevaContra);
-        txtConfirmarContrasenia=findViewById(R.id.etConfirContra);
+       // txtEdad=findViewById(R.id.etEdad);
+
         ivFotoP= (ImageView) findViewById(R.id.ivPerfil3);
         btnGuardarCambios=findViewById(R.id.btnGuardarCambiosUsu);
         btnCancelar=findViewById(R.id.btnCancelar);
         btnCargarImagen=findViewById(R.id.btn_cargarf3);
         tvEmail = findViewById(R.id.tvEmailUsu1);
-        btnVerificarContraseniaAntigua=findViewById(R.id.btnVerificarContrasenia);
+
         btnEditNombre=findViewById(R.id.btnEditNombre);
+        btnEditApellido=findViewById(R.id.btnEditApellido);
+
+       /* if(txtName.isFocusable())
+        {
+            txtApe.setFocusable(false);
+            txtEdad.setFocusable(false);
+            txtApe.requestFocus();
+        }else{
+            if(txtApe.isFocusable()){
+                txtName.setFocusable(false);
+                txtEdad.setFocusable(false);
+            }
+            else {
+                if(txtEdad.isFocusable()){}
+                txtName.setFocusable(false);
+                txtApe.setFocusable(false);
+            }
+        }*/
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DatosPersonalesUsuario.this, CambiarContrasenia.class);
+                startActivity(intent);
+            }
+        });
+
+        //EDAD
+
+        btnFechaIngreso.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                txtName.setFocusable(false);
+                txtApe.setFocusable(false);
+                if(v==btnFechaIngreso)
+                {
+                    final Calendar calen = Calendar.getInstance();
+                    dia = calen.get(Calendar.DAY_OF_MONTH);
+                    mes = calen.get(Calendar.MONTH);
+                    anio = calen.get(Calendar.YEAR);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(DatosPersonalesUsuario.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            String fecha = dayOfMonth+"/"+(month+1)+"/"+year;
+                            //fechaVerif =
+                                    //year+"/"+(month+1)+"/"+dayOfMonth;
+                            DecimalFormat formato2 = new DecimalFormat("#00");
+                            fechaVerif=year+"/"+formato2.format((month+1))+"/"+formato2.format(dayOfMonth);
+                            fechaNac = year+formato2.format((month+1))+formato2.format(dayOfMonth);
+                            txtFechaingreso.setText(fecha);
+                            //Edad en en anios y meses
+                            edadCalculada = proc.calcularEdad(year,month+1,dayOfMonth);
+                            //Edad en anios
+                            edadUsu = proc.calcularEdadAnios(year,month+1,dayOfMonth);
+                            txtEdad.setText(edadCalculada);
+
+
+                        }
+                    },dia,mes,anio);
+                    datePickerDialog.show();
+                    datePickerDialog.getDatePicker().setMaxDate(new Date().getTime()-(proc.calcularAniosMili(15)));
+                    datePickerDialog.getDatePicker().setMinDate(new Date().getTime()-(proc.calcularAniosMili(100)));
+                }
+
+            }
+        });
+
+
+        //Bloquea Ingreso de Texto
+        //txtName.setClickable(false);
+        //txtName.setFocusable(false);
+      //  txtName.setEnabled(false);
+
+
+        //txtApe.setClickable(false);
+        //txtApe.setFocusable(false);
+
 
         //ivFotoP.setImageBitmap(null);
         //ivFotoP.setBackground(null);
@@ -143,26 +253,77 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
 
                 modificarDatos();
+
             }
         });
 
         btnEditNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtName.setClickable(false);
-                txtName.setFocusable(false);
+/*
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                */
+                txtApe.setFocusable(false);
+                txtName.setClickable(true);
+                txtName.setSelection(txtName.getText().length());
+
+                txtName.setCursorVisible(true);
+                txtName.setFocusable(true);
+                txtName.setFocusableInTouchMode(true);
+                txtName.setInputType((InputType.TYPE_CLASS_TEXT));
+                txtName.requestFocus();
+
+                /*
+
+                txtName.setClickable(true);
+                txtName.setFocusable(true);
                 txtName.setInputType((InputType.TYPE_CLASS_TEXT));
                 txtName.setTextIsSelectable(true);
                 txtName.requestFocus();
+                */
+
 
             }
         });
-        btnVerificarContraseniaAntigua.setOnClickListener(new View.OnClickListener() {
+        /*
+        txtName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                cambioContrasenia();
+            public void onFocusChange(View v, boolean hasFocus) {
+                txtName.setFocusable(false);
             }
         });
+        txtApe.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                txtApe.setFocusable(false);
+            }
+        });
+*/
+        btnEditApellido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*txtName.setClickable(false);
+                txtName.setCursorVisible(false);
+                txtName.setFocusable(false);
+                txtName.setFocusableInTouchMode(false);
+*/
+
+                txtName.setFocusable(false);
+                txtApe.setClickable(true);
+                txtApe.setFocusable(true);
+                txtApe.setSelection(txtApe.getText().length());
+                txtApe.setCursorVisible(true);
+                txtApe.setFocusableInTouchMode(true);
+                txtApe.setInputType((InputType.TYPE_CLASS_TEXT));
+                //txtApe.setTextIsSelectable(true);
+                txtApe.requestFocus();
+
+            }
+        });
+
         btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,6 +358,13 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         ivFotoP.setImageDrawable(null);
         ivFotoP.invalidate();
         */
+      //  txtName.setClickable(false);
+       // txtName.setFocusable(false);
+        //  txtName.setEnabled(false);
+
+
+        //txtApe.setClickable(false);
+        //txtApe.setFocusable(false);
 
         final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
 
@@ -222,16 +390,20 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                                // ivFotoP.clearFocus();
 
                                 String urlImage=obj.getString("imagen");
+                                Toast.makeText(DatosPersonalesUsuario.this,urlImage.toString(),Toast.LENGTH_SHORT).show();
                                 String nameImage= String.valueOf(ivFotoP.getTag());
                               //  imagenReturn(urlImage);
                               if(imagenReturn(urlImage)==1) {
                                     //&&nameImage.equals("bg2")
                                     tvEmail.setText(obj.getString("email"));
                                     txtName.setText(obj.getString("nombre_usuario"));
+                                    compararNombre=obj.getString("nombre_usuario");
                                     txtApe.setText(obj.getString("apellido_usuario"));
+                                    compararApellido=obj.getString("apellido_usuario");
                                     txtEdad.setText(obj.getString("edad"));
-
-                                    compararContrasenia = obj.getString("contrasenia");
+                                    txtFechaingreso.setText(obj.getString("fecha_nacimiento"));
+                                    compararFecha=obj.getString("fecha_nacimiento").replace("-","/");
+                                   // compararContrasenia = obj.getString("contrasenia");
                                     loading2.dismiss();
                                 }
 
@@ -397,67 +569,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
     public void modificarDatos() {
         if (validarCampos() == 1) {
-            if(cambioContrasenia()==1){
-                String url = WebService.urlRaiz + WebService.servicioModificarDatosPersonales;
-                final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        //Descartar el diálogo de progreso
-                       // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
-                        loading.dismiss();
-
-                        //Mostrando el mensaje de la respuesta
-                        Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getApplicationContext(), txtName.getText().toString(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getApplicationContext(), txtApe.getText().toString(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getApplicationContext(), txtEdad.getText().toString(), Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), Login.class));
-                        //finish();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Descartar el diálogo de progreso
-                        loading.dismiss();
-                        //Showing toast
-                        Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        //Convertir bits a cadena
-
-                        imagen_lugar = getStringImagen(bitmap); //Imagen
-
-                        //Obtener el nombre de la imagen
-                        String nombreImagen = tvEmail.getText().toString().trim();
-
-
-                        Map<String, String> parametros = new HashMap<String, String>();
-                        parametros.put("email",tvEmail.getText().toString());
-                        parametros.put("nombre_usuario",txtName.getText().toString());
-                        parametros.put("apellido_usuario",txtApe.getText().toString());
-                        parametros.put("edad",txtEdad.getText().toString());
-                        String ban="1";
-                        parametros.put("sin_contrasenia", ban.toString() );
-                       // parametros.put("contrasenia",getSHA256(txtContraseniaNueva.getText().toString()));
-                        //Imagen
-                      parametros.put(claveImagen, imagen_lugar);
-                       parametros.put(claveNombre, nombreImagen);
-                        return parametros;
-                    }
-                };
-                //Creación de una cola de solicitudes
-                RequestQueue requestQueue = Volley.newRequestQueue(this);
-                //Agregar solicitud a la cola
-                requestQueue.add(stringRequest);
-
-            }else {
-                if(cambioContrasenia()==2)
-                {
+                if(verificaSimilitud()==1) {
                     String url = WebService.urlRaiz + WebService.servicioModificarDatosPersonales;
                     final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -465,12 +577,12 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                         public void onResponse(String response) {
 
                             //Descartar el diálogo de progreso
+                            // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
                             loading.dismiss();
 
                             //Mostrando el mensaje de la respuesta
-                            Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), Login.class));
-                            //finish();
+                            Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
+
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -485,20 +597,43 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             //Convertir bits a cadena
-                            //imagen_lugar = getStringImagen(bitmap); //Imagen
-
-                            //Obtener el nombre de la imagen
-                           // String nombreImagen = tvEmail.getText().toString().trim();
-
+                            String nameImage= String.valueOf(ivFotoP.getTag());
+                            String nombreImagen;
 
                             Map<String, String> parametros = new HashMap<String, String>();
-                            parametros.put("nombre_usuario",txtName.getText().toString().trim());
-                            parametros.put("apellido_usuario",txtApe.getText().toString().trim());
-                            parametros.put("edad",txtEdad.getText().toString().trim());
-                            parametros.put("contrasenia",getSHA256(txtContraseniaNueva.getText().toString()));
-                            //Imagen
-                          // parametros.put(claveImagen, imagen_lugar);
-                           //parametros.put(claveNombre, nombreImagen);
+
+                            if(nameImage.equals("bg2"))
+                            {
+                                imagen_lugar = getStringImagen(bitmap); //Imagen
+                                //Obtener el nombre de la imagen
+                                nombreImagen = tvEmail.getText().toString().trim();
+                                parametros.put(claveImagen, imagen_lugar);
+                                parametros.put(claveNombre, nombreImagen);
+
+                            }else
+                            {
+                               // parametros.put(claveImagen, " ");
+                               // parametros.put(claveNombre, " ");
+                                String sinImage="1";
+                                parametros.put("sin_imagen",sinImage.toString());
+
+                            }
+
+                            parametros.put("email", tvEmail.getText().toString());
+                            parametros.put("nombre_usuario", txtName.getText().toString());
+                            parametros.put("apellido_usuario", txtApe.getText().toString());
+                            parametros.put("edad", txtEdad.getText().toString());
+
+                            if (fechaNac.isEmpty()) {
+                                String date = "1";
+                                parametros.put("sinFecha", date.toString());//String.valueOf(fechaNacimiento));
+                            } else {
+                                parametros.put("fecha_nacimiento", fechaNac);//String.valueOf(fechaNacimiento));
+                            }
+                            String ban = "1";
+                            parametros.put("sin_contrasenia", ban.toString());
+
+
                             return parametros;
                         }
                     };
@@ -506,17 +641,66 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                     RequestQueue requestQueue = Volley.newRequestQueue(this);
                     //Agregar solicitud a la cola
                     requestQueue.add(stringRequest);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "No se ha realizado ningún cambio", Toast.LENGTH_SHORT).show();
+                    ivFotoP.setTag("bg1");
+                }else
+                {
+                    Toast.makeText(this,"No se ha realizado ningún cambio",Toast.LENGTH_SHORT).show();
                 }
 
-            }
 
 
 
         }
     }
+
+    private int verificaSimilitud() {
+        String nameImage= String.valueOf(ivFotoP.getTag());
+       // String nombreImagen="";
+
+        int band=0;
+
+
+
+        if(compararNombre.trim().equals(txtName.getText().toString().trim())&&
+                fechaVerif.toString().trim().equals("")&&
+                compararApellido.trim().equals(txtApe.getText().toString().trim()) && ivFotoP.getTag().toString().equals("bg1")) {
+           // Toast.makeText(DatosPersonalesUsuario.this,compararFecha.toString()+" " +fechaVerif.toString(),Toast.LENGTH_SHORT).show();
+            band=0;
+        }
+            else{
+
+                if(compararNombre.trim().equals(txtName.getText().toString().trim())&&
+                        compararFecha.trim().equals(fechaVerif.toString().trim())&&
+                        compararApellido.trim().equals(txtApe.getText().toString().trim()) && ivFotoP.getTag().toString().equals("bg1"))
+                {
+                    //Toast.makeText(DatosPersonalesUsuario.this,compararFecha.toString()+" " +fechaVerif.toString(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(DatosPersonalesUsuario.this,ivFotoP.getTag().toString(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(DatosPersonalesUsuario.this,compararNombre+" "+txtName.getText().toString(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(DatosPersonalesUsuario.this,compararApellido+" "+txtApe.getText().toString(),Toast.LENGTH_SHORT).show();
+                    band=0;
+                }
+                else
+                {
+                    if(
+                            !compararNombre.trim().equals(txtName.getText().toString())||
+                                    !compararApellido.trim().equals(txtApe.getText().toString())||
+                                    !compararFecha.trim().equals(fechaVerif.toString())||ivFotoP.getTag().toString().equals("bg2")
+                    )
+                    {
+                        // btnGuardarCambios.setEnabled(true);
+
+                        band=1;
+                    }
+
+                }
+
+
+        }
+
+
+        return band;
+    }
+
     public String getStringImagen(Bitmap bmp) {
 
 
@@ -571,7 +755,8 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
         if(respuesta==2)
         {
-            if(validarNombre()==1&&validarApellido()==1&&validarEdad()==1)
+            if(validarNombre()==1&&validarApellido()==1)
+                //&&validarEdad()==1
                     //&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
             {
                 //Toast.makeText(registrar.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
@@ -637,35 +822,29 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         }
         return datCorrecto;
     }
-public int cambioContrasenia(){
-        int respuesta=0;
-        if(txtContraseniaAntigua.getText().toString().equals("")){
-            respuesta=1;
-        }
-        else
-        {
-           if(validarContraseniaBD()==1){
 
-               respuesta =2;
-               txtContraseniaNueva.setEnabled(true);
-               txtConfirmarContrasenia.setEnabled(true);
-
-           }
-        }
-        return respuesta;
-}
-
+/*
 public int validarContraseniaBD(){
         if(compararContrasenia.toString().equals(getSHA256(txtContraseniaAntigua.getText().toString()))){
             contraseniaCorrecta= 1;
             //txtContraseniaAntigua.setError("Contraseña correcta");
+
+            //txtContraseniaNueva.setBackgroundColor(Color.TRANSPARENT);
+           // txtContraseniaNueva.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            //txtContraseniaNueva.setDrawingCacheBackgroundColor(Color.BLACK);
+            contNuevaContrasenia.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            contConfirmarContra.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+
         }
         else {
-            txtContraseniaAntigua.setError("Contraseña incorrecta");
+            contContraActual.setError("Contraseña incorrecta");
+            contContraActual.requestFocus();
+            contContraActual.setErrorIconDrawable(null);
+
         }
 
         return contraseniaCorrecta;
-}
+}*/
 
 /*
 public void validarContraseniaBD(){
@@ -738,11 +917,7 @@ public void validarContraseniaBD(){
     public String getSHA256(String data) {
         return Hashing.sha256().hashString(data, StandardCharsets.UTF_8).toString();
     }
-    public void verificaDatos()
-    {
-        if(cambioContrasenia()==1) {
-        }
-    }
+
     private int validarNombre(){
 
         int datCorrecto=0;
@@ -794,5 +969,18 @@ public void validarContraseniaBD(){
         }
     }
 
+    //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    //Funcion para ejecutar las instrucciones de los items -- proviene de la clase Toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        toolbar.getContexto(this);
+        toolbar.ejecutarItemSelected(item, this);
+        return super.onOptionsItemSelected(item);
+    }
 }

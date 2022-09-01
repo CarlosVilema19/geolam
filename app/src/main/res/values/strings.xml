@@ -97,5 +97,11 @@
     <string name="tituloReportes">Reportes</string>
 
     <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ-_.,0123456789</string>
+    <string name="cambioContrasenia">Contraseña</string>
+
+    <string name="text_with_paragraphs">
+        La contraseña debe tener mínimo 10 y máximo 16 caracteres,
+        evitar los espacios en blanco e incluir un caracter especial (?=\\S+$*).
+    </string>
 
 </resources>
