@@ -370,18 +370,6 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnGuardarCambiosUsu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Guardar"
-
-                        android:layout_margin="5dp"
-                        android:textColor="@android:color/white"
-                        android:layout_weight="1"
-                        android:textSize="14dp" />
-
-                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCancelar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -390,7 +378,18 @@
                         android:layout_margin="5dp"
                         android:textColor="@android:color/white"
                         android:layout_weight="1"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGuardarCambiosUsu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Guardar"
+                        android:layout_margin="5dp"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="1"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
 
