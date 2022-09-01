@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.riobamba.geolam" >
+    package="com.riobamba.geolam">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -24,7 +24,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Geolam"
-        tools:targetApi="s" >
+        tools:targetApi="s">
+        <activity
+            android:name=".CambiarContrasenia"
+            android:exported="false" />
         <activity
             android:name=".ReporteGraficoUsuarios"
             android:exported="false" />
@@ -207,7 +210,7 @@
             android:exported="true" />
         <activity
             android:name=".Bienvenida"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CambiarContrasenia">
+    <include layout="@layout/activity_menu_toolbar" />
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="19dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14dp"
+                    android:text="@string/text_with_paragraphs" />
+                <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="25dp"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Cambiar contraseña" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contContraActual"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_weight="1"
+
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="10dp"
+            app:passwordToggleEnabled = "true"
+
+            app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etContraAntes"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView5"
+                android:textSize="15dp"
+
+                android:hint="Contraseña Actual"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVerificarContrasenia"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:layout_width="20dp"
+
+            android:gravity="center_horizontal"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            app:backgroundTint="@color/white"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="1dp"
+
+            android:drawableLeft="@drawable/ic_baseline_verified_user_24"
+            />
+
+
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contNuevaContrasenia"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:enabled="true"
+        android:shadowColor="@color/black"
+
+        app:passwordToggleEnabled = "false"
+
+        android:layout_marginRight="10dp"
+        android:background="@color/material_dynamic_neutral_variant90"
+        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNuevaContra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnVerificarContrasenia"
+            android:layout_marginBottom="6dp"
+
+            android:enabled="false"
+            android:hint="Nueva contraseña"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/material_dynamic_neutral_variant90"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/contConfirmarContra"
+        app:passwordToggleEnabled="false"
+        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirContra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etNuevaContra"
+            android:enabled="false"
+            android:layout_marginBottom="6dp"
+            android:hint="@string/rec_confirme_la_contrasenia"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="#757575"
+            android:textSize="15dp"
+            tools:ignore="TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarCambiosUsu"
+            android:layout_width="0dp"
+            android:enabled="false"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Guardar"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:textSize="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Cancelar"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
+    </ScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
