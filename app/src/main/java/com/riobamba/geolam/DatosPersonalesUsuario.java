@@ -391,7 +391,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                                // ivFotoP.clearFocus();
 
                                 String urlImage=obj.getString("imagen");
-                                Toast.makeText(DatosPersonalesUsuario.this,urlImage.toString(),Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(DatosPersonalesUsuario.this,urlImage.toString(),Toast.LENGTH_SHORT).show();
                                 String nameImage= String.valueOf(ivFotoP.getTag());
                               //  imagenReturn(urlImage);
                               if(imagenReturn(urlImage)==1) {

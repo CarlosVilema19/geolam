@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,8 +130,12 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        Glide.with(mCtx)
+       /* Glide.with(mCtx)
                 .load(listadousuarios.getImagenUsuarios())
+                .into(viewHolder.imagenUsuarios);*/
+
+        Picasso.get().load(listadousuarios.getImagenUsuarios()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewHolder.imagenUsuarios);
 
         viewHolder.nombreUsuarios.setText(listadousuarios.getNombreUsuarios());

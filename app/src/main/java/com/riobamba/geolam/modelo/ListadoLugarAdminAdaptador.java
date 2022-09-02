@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.Tipologia;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,8 +139,11 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        Glide.with(mCtx)
+       /* Glide.with(mCtx)
                 .load(listadoLugar.getImagen())
+                .into(viewHolder.imagenLugar);*/
+        Picasso.get().load(listadoLugar.getImagen()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewHolder.imagenLugar);
 
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());

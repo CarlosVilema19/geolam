@@ -32,18 +32,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.riobamba.geolam.modelo.ConexionMapa;
-import com.riobamba.geolam.modelo.ListadoCategoria;
-import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
-import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
-import com.riobamba.geolam.modelo.ListadoTipologia;
-import com.riobamba.geolam.modelo.ListadoTipologiaAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,7 +49,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -477,7 +472,9 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         }
     }
 
-    private void imagenReturn(String url) {
+    private int imagenReturn(String url) {
+        final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
+        int band=0;
         if(url.contains(WebService.imagenRaiz)) {
             urlSinEspacios = url.replace(" ", "%20");
             String data = urlSinEspacios;
@@ -492,8 +489,13 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             urlImagenLugar=urlSinEspacios;
         }
 
-        //Toast.makeText(actualizar_lugar_medico.this,urlImagenLugar, Toast.LENGTH_SHORT).show();
+        Picasso.get().load(urlImagenLugar).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(ivFotoL);
+        loading2.dismiss();
 
+        //Toast.makeText(actualizar_lugar_medico.this,urlImagenLugar, Toast.LENGTH_SHORT).show();
+/*
         RequestQueue request4 = Volley.newRequestQueue(this);
         ImageRequest imageRequest = new ImageRequest(urlImagenLugar, new Response.Listener<Bitmap>() {
             @Override
@@ -512,10 +514,11 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             }
 
         });
+*/
 
-
-        request4.add(imageRequest);
-
+       // request4.add(imageRequest);
+        band=1;
+        return band;
 
     }
     public String getStringImagen(Bitmap bmp) {
