@@ -92,41 +92,43 @@
                             android:layout_below="@id/txTipologia"
                             android:maxLength="80"
                             android:layout_marginTop="15dp"
+                            android:inputType="textCapCharacters"
                             android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
                             android:gravity="left"
                             android:hint="@string/ingreso_tipologia"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAgregarTipologia"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginRight="75dp"
-                        android:text="@string/rec_guardar_informacion"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp" />
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCancelarTipo"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="Cancelar" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAgregarTipologia"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_toEndOf="@id/btnCancelarTipo"
+                            android:text="@string/rec_guardar_informacion" />
+                    </RelativeLayout>
+
+
                 </LinearLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>

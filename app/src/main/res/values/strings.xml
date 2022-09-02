@@ -36,12 +36,12 @@
     <string name="gestion_de_usuarios">Gestion de usuarios</string>
     //TIPOLOGIA
     <string name="titulo_tipologia">Tipología del lugar de ateción médica</string>
-    <string name="ingreso_tipologia">Ingrese la tipología</string>
+    <string name="ingreso_tipologia">Tipología</string>
     <string name="agregar_tipologia">Agregar</string>
     <string name="tipologia_agregada">tipologías agregadas</string>
     //ESPECIALIDAD
     <string name="especialidad">Especialidad</string>
-    <string name="ingrese_especilidad">Ingrese la especilidad</string>
+    <string name="ingrese_especilidad">Especilidad</string>
     <string name="agregar_especialidad">agregar</string>
     <string name="especialidades_agregadas">Especialidades agregadas</string>
     //MAPA
@@ -60,7 +60,7 @@
     <string name="rec_pagina_web">Página Web (opcional)</string>
     <string name="rec_latitud_lugar">Latitud</string>
     <string name="rec_longitud_lugar">Longitud</string>
-    <string name="rec_guardar_informacion">Añadir</string>
+    <string name="rec_guardar_informacion">Guardar</string>
     <string name="restabecer">Enviar</string>
     <string name="correo_electronico_restablecer">Correo electrónico</string>
     <string name="mensaje_restablecer">Enviaremos una nueva contraseña a tu correo</string>

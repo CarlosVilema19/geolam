@@ -590,13 +590,13 @@ private int validarWhatsapp(){
                 Map<String, String> parametros = new HashMap<String, String>();
                parametros.put("id_tipologia_lugar", tvIdTipo.getText().toString());
                parametros.put("id_categoria", tvIdCategoria.getText().toString());
-               parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
-                parametros.put("direccion", txtDireccion.getText().toString());
-                parametros.put("telefono", txtTelefono.getText().toString());
-                parametros.put("whatsapp", txtWhatsApp.getText().toString());
-                parametros.put("pagina_web", txtPaginaWeb.getText().toString());
-                parametros.put("latitud", txtLatitud.getText().toString());
-                parametros.put("longitud", txtLongitud.getText().toString());
+               parametros.put("nombre_lugar", txtNombreLugar.getText().toString().trim());
+                parametros.put("direccion", txtDireccion.getText().toString().trim());
+                parametros.put("telefono", txtTelefono.getText().toString().trim());
+                parametros.put("whatsapp", txtWhatsApp.getText().toString().trim());
+                parametros.put("pagina_web", txtPaginaWeb.getText().toString().trim());
+                parametros.put("latitud", txtLatitud.getText().toString().trim());
+                parametros.put("longitud", txtLongitud.getText().toString().trim());
                 parametros.put("descripcion_lugar", txtDescripcion.getText().toString());
 
                 //Imagen

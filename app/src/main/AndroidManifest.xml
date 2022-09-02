@@ -29,6 +29,9 @@
             android:name=".CambiarContrasenia"
             android:exported="false" />
         <activity
+            android:name=".ActualizarTipologia"
+            android:exported="false" />
+        <activity
             android:name=".ReporteGraficoUsuarios"
             android:exported="false" />
         <activity

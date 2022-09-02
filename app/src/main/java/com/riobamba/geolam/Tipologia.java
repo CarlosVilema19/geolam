@@ -43,7 +43,7 @@ public class Tipologia extends AppCompatActivity implements SearchView.OnQueryTe
     ListadoLugarAdminAdaptador adaptador;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     ListadoLugarAdminAdaptador myadapter;
-    Integer tipo = 1;
+    Integer tipo = 3;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,9 +118,10 @@ public class Tipologia extends AppCompatActivity implements SearchView.OnQueryTe
     }
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        /*Intent intent = new Intent(this,actualizar_lugar_medico.class);
-        intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);*/
+        finish();
+        Intent intent = new Intent(this,ActualizarTipologia.class);
+        intent.putExtra("ActualizarTipo",item);
+        startActivity(intent);
     }
 
     public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón

@@ -126,9 +126,9 @@ public class IngresoMedico extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("nombre_medico", txtNombreMedico.getText().toString());
-                    parametros.put("apellido_medico", txtApellidoMedico.getText().toString());
-                    parametros.put("descripcion_medico", txtDescripcionMedico.getText().toString());
+                    parametros.put("nombre_medico", txtNombreMedico.getText().toString().trim());
+                    parametros.put("apellido_medico", txtApellidoMedico.getText().toString().trim());
+                    parametros.put("descripcion_medico", txtDescripcionMedico.getText().toString().trim());
 
                     return parametros;
                 }
