@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,9 +127,12 @@ public class ListadoLugarAdaptador extends RecyclerView.Adapter<ListadoLugarAdap
     public void onBindViewHolder(ListadoLugarAdaptador.ViewHolder viewHolder, int position) {
         ListadoLugar listadoLugar = lugarList.get(position);
         //Cargar Imagen
-        Glide.with(mCtx)
+        /*Glide.with(mCtx)
                 .load(listadoLugar.getImagenLugar())
-                        .into(viewHolder.imagenLugar);
+                        .into(viewHolder.imagenLugar);*/
+        Picasso.get().load(listadoLugar.getImagenLugar()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(viewHolder.imagenLugar);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
