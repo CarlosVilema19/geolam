@@ -332,10 +332,12 @@ public class AsignarMedico extends AppCompatActivity {
     }
 
     private void insertarAsignacion() {
-        if(!tvIdMedico.getText().toString().equals("")
-                &&!tvIdLugarMedico.getText().toString().equals("")
-                && !tvIdEspecialidad.getText().toString().equals(""))
+        if(validarAsignacion() == 1)
         {
+
+        if (!tvIdMedico.getText().toString().equals("")
+                && !tvIdLugarMedico.getText().toString().equals("")
+                && !tvIdEspecialidad.getText().toString().equals("")) {
             String url = WebService.urlRaiz + WebService.servicioIngresarMedicoTrabaja;
             final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -347,21 +349,9 @@ public class AsignarMedico extends AppCompatActivity {
 
                     //Mostrando el mensaje de la respuesta
                     Toast.makeText(getApplicationContext(), "Se ha asignado el médico correctamente", Toast.LENGTH_SHORT).show();
-                    tvIdEspecialidad.setText("");
-                    tvIdMedico.setText("");
-                    tvIdLugarMedico.setText("");
-                    autoCompleteOpcionesMedico.clearListSelection();
-                    autoCompleteOpcionesEspecialidad.clearListSelection();
-                    autoCompleteOpcionesLugarMedico.clearListSelection();
-                    autoCompleteOpcionesLugarMedico.requestFocus();
-                    autoCompleteOpcionesEspecialidad.requestFocus();
-                    autoCompleteOpcionesMedico.requestFocus();
                     finish();
                     Intent intent = new Intent(AsignarMedico.this, AsignarMedico.class);
                     startActivity(intent);
-
-                    //startActivity(new Intent(getApplicationContext(), Login.class));
-                    //finish();
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -386,45 +376,41 @@ public class AsignarMedico extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             //Agregar solicitud a la cola
             requestQueue.add(stringRequest);
-        }
-        else {
+        } else {
 
             if (tvIdMedico.getText().toString().equals("")
-                    &&tvIdEspecialidad.getText().toString().equals("")
-                    &&tvIdLugarMedico.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(), "Seleccione la información correspondiente", Toast.LENGTH_SHORT).show();
+                    && tvIdEspecialidad.getText().toString().equals("")
+                    && tvIdLugarMedico.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Seleccione la información correspondiente", Toast.LENGTH_SHORT).show();
 
-                }else{
-                    if (tvIdMedico.getText().toString().equals("")
-                            &&tvIdEspecialidad.getText().toString().equals("")) {
-                        Toast.makeText(getApplicationContext(), "Seleccione un médico y una Especialidad", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        if (tvIdMedico.getText().toString().equals("")) {
-                            Toast.makeText(getApplicationContext(), "Seleccione un Médico", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+            } else {
+                if (tvIdMedico.getText().toString().equals("")
+                        && tvIdEspecialidad.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Seleccione un médico y una Especialidad", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (tvIdMedico.getText().toString().equals("")) {
+                        Toast.makeText(getApplicationContext(), "Seleccione un Médico", Toast.LENGTH_SHORT).show();
+                    } else {
 
-                                if (tvIdEspecialidad.getText().toString().equals("")&&tvIdLugarMedico.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "Seleccione una Especialidad & Lugar Médico", Toast.LENGTH_SHORT).show();
+                        if (tvIdEspecialidad.getText().toString().equals("") && tvIdLugarMedico.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Seleccione una Especialidad & Lugar Médico", Toast.LENGTH_SHORT).show();
 
-                            }else {
-                                if (tvIdEspecialidad.getText().toString().equals("")) {
-                                    Toast.makeText(getApplicationContext(), "Seleccione una Especialidad", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    if(tvIdLugarMedico.getText().toString().equals("")){
+                        } else {
+                            if (tvIdEspecialidad.getText().toString().equals("")) {
+                                Toast.makeText(getApplicationContext(), "Seleccione una Especialidad", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (tvIdLugarMedico.getText().toString().equals("")) {
 
-                                        Toast.makeText(getApplicationContext(), "Seleccione un Lugar Médico", Toast.LENGTH_SHORT).show();
-                                    }
+                                    Toast.makeText(getApplicationContext(), "Seleccione un Lugar Médico", Toast.LENGTH_SHORT).show();
                                 }
                             }
-
                         }
-                    }
 
+                    }
                 }
+
             }
+        }
 /*
         autoCompleteOpcionesLugarMedico.setAdapter(null);
         opcionesLugaresMedicosID.clear();
@@ -441,8 +427,61 @@ public class AsignarMedico extends AppCompatActivity {
 
 */
 
+    }
+}
 
+    private int validarMedico(){
+        int datCorrecto=0;
+        if(autoCompleteOpcionesMedico.getText().toString().equals("")){
+            autoCompleteOpcionesMedico.setError("¡Seleccione un médico!");
+            autoCompleteOpcionesMedico.requestFocus();
         }
+        else
+        {
+            datCorrecto = 1;
+        }
+
+        return datCorrecto;
+    }
+
+    private int validarNombre(){
+        int datCorrecto=0;
+        if(autoCompleteOpcionesLugarMedico.getText().toString().equals("")){
+            autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!");
+            autoCompleteOpcionesLugarMedico.requestFocus();
+        }
+        else
+        {
+            datCorrecto = 1;
+        }
+
+        return datCorrecto;
+    }
+    private int validarEspecialidad(){
+        int datCorrecto=0;
+        if(autoCompleteOpcionesEspecialidad.getText().toString().equals("")){
+            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!");
+            autoCompleteOpcionesEspecialidad.requestFocus();
+        }
+        else
+        {
+            datCorrecto = 1;
+        }
+
+        return datCorrecto;
+    }
+
+    private int validarAsignacion()
+    {
+        int valEsp = validarEspecialidad();
+        int valNom  = validarNombre();
+        int valMed  = validarMedico();
+        if(valNom == 1 && valEsp== 1&& valMed== 1)
+        {
+            return 1;
+        }
+        else  return 0;
+    }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override

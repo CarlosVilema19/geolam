@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -134,7 +135,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         ListadoLugarAdmin listadoLugar = lugarList.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -142,9 +143,19 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
        /* Glide.with(mCtx)
                 .load(listadoLugar.getImagen())
                 .into(viewHolder.imagenLugar);*/
-        Picasso.get().load(listadoLugar.getImagen()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .into(viewHolder.imagenLugar);
+        if(!listadoLugar.getImagen().equals(""))
+        {
+            Picasso.get().load(listadoLugar.getImagen()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .into(viewHolder.imagenLugar);
+        }
+        else
+        {
+            Glide.with(mCtx)
+                    .load(listadoLugar.getImagen())
+                    .into(viewHolder.imagenLugar);
+        }
+
 
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.idLugar.setVisibility(View.VISIBLE);

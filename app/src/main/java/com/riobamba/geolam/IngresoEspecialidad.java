@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class IngresoEspecialidad extends AppCompatActivity {
     EditText txtEspecialidad;
@@ -108,11 +109,25 @@ public class IngresoEspecialidad extends AppCompatActivity {
     private int validarCamposVacios() {
 
         int camposVacios=0;
-        if (!txtEspecialidad.getText().toString().equals("")) {
-            camposVacios=1;
+        if(txtEspecialidad.getText().toString().length()<=50) {
+            if (txtEspecialidad.getText().toString().equals("")) {
+                txtEspecialidad.setError("¡Ingrese una Especialidad!");
+                txtEspecialidad.requestFocus();
+            } else if (Pattern.compile(" {2,}").matcher(txtEspecialidad.getText().toString()).find()) {
+                txtEspecialidad.setError("¡Verifique que no haya más de un espacio en blanco!");
+                txtEspecialidad.requestFocus();
+            } else if(txtEspecialidad.getText().toString().length()<5 && txtEspecialidad.getText().toString().length()>0)
+            {
+                txtEspecialidad.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
+                txtEspecialidad.requestFocus();
+            }else {
+                camposVacios = 1;
+            }
         }
-        else {
-            txtEspecialidad.setError("¡Ingrese una Especialidad!");
+        else
+        {
+            Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
+            txtEspecialidad.setError("Nombre demasiado largo. (Máximo 50 caracteres)");
             txtEspecialidad.requestFocus();
         }
         return camposVacios;
@@ -125,7 +140,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(IngresoEspecialidad.this, EspecialidadListadoAdmin.class);
+                Intent intent = new Intent(IngresoEspecialidad.this, IngresoEspecialidad.class);
                 startActivity(intent);
             }
         }, new Response.ErrorListener() {

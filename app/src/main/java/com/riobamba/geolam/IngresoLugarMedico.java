@@ -428,7 +428,7 @@ private int validarNombre(){
      else
      {
          Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
-         txtNombreLugar.setError("Nombre demasiado largo. (Mínimo 40 caracteres)");
+         txtNombreLugar.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
          txtNombreLugar.requestFocus();
      }
 
