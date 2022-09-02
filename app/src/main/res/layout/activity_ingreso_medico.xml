@@ -111,6 +111,7 @@
                         android:layout_below="@id/txregistrate"
                         android:inputType="textCapCharacters"
                         android:layout_marginTop="15dp"
+                        android:maxLength="30"
                         android:digits="@string/digitos_aceptados"
                         android:hint="@string/nombre_medico"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
@@ -132,6 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/etemail"
                         android:layout_marginTop="3dp"
+                        android:maxLength="30"
                         android:digits="@string/digitos_aceptados"
                         android:inputType="textCapCharacters"
                         android:hint="@string/apellido_medico"
@@ -166,6 +168,7 @@
                         android:layout_height="85dp"
                         android:layout_below="@id/ednombre"
                         android:inputType="textCapCharacters"
+                        android:maxLength="150"
                         android:hint="@string/descripcion_medico"
                         android:digits="@string/digitos_aceptados"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />

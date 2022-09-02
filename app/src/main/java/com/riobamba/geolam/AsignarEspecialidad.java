@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AsignarEspecialidad extends AppCompatActivity {
 
@@ -238,63 +239,90 @@ public class AsignarEspecialidad extends AppCompatActivity {
         //Carga de datos
     }
     private void insertarLugar() {
+        if(validarAsignacion() == 1) {
+            if ((tvIdEspecialidad.getText().toString().equals("") && tvIdLugarMedico.getText().toString().equals("")) || (tvIdEspecialidad.getText().toString().equals("")) || (tvIdLugarMedico.getText().toString().equals(""))) {
+                Toast.makeText(AsignarEspecialidad.this, "Seleccione la informacion correspondiente", Toast.LENGTH_SHORT).show();
+            } else {
+                String url = WebService.urlRaiz + WebService.servicioIngresarEspecialidadLugar;
+                final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-        String url = WebService.urlRaiz +WebService.servicioIngresarEspecialidadLugar;
-        final ProgressDialog loading = ProgressDialog.show(this, "Guardando la información...", "Espere por favor");
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
+                        loading.dismiss();
+                        Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
+                        finish();
+                        Intent intent = new Intent(AsignarEspecialidad.this, AsignarEspecialidad.class);
+                        startActivity(intent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Descartar el diálogo de progreso
+                        loading.dismiss();
+                        Toast.makeText(getApplicationContext(), "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
 
-                //Descartar el diálogo de progreso
-                loading.dismiss();
 
-                //Mostrando el mensaje de la respuesta
-                //startActivity(new Intent(getApplicationContext(), Login.class));
-                //finish();
+                        Map<String, String> parametros = new HashMap<String, String>();
+                        parametros.put("id_lugar", tvIdLugarMedico.getText().toString());
+                        parametros.put("id_especialidad", tvIdEspecialidad.getText().toString());
 
 
-
-                if((tvIdEspecialidad.getText().toString().equals("")&&tvIdLugarMedico.getText().toString().equals(""))||(tvIdEspecialidad.getText().toString().equals(""))||(tvIdLugarMedico.getText().toString().equals("")))
-                {
-                    Toast.makeText(AsignarEspecialidad.this, "Llene todos los campos", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-
-                }
-
+                        return parametros;
+                    }
+                };
+                //Creación de una cola de solicitudes
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                //Agregar solicitud a la cola
+                requestQueue.add(stringRequest);
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Descartar el diálogo de progreso
-                loading.dismiss();
-                //Showing toast
-                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar",tvIdLugarMedico.getText().toString());
-                parametros.put("id_especialidad",tvIdEspecialidad.getText().toString());
-
-
-
-
-                return parametros;
-            }
-        };
-        //Creación de una cola de solicitudes
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //Agregar solicitud a la cola
-        requestQueue.add(stringRequest);
+        }
     }
+
+    private int validarNombre(){
+        int datCorrecto=0;
+        if(autoCompleteOpcionesLugarMedico.getText().toString().equals("")){
+                autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!");
+                autoCompleteOpcionesLugarMedico.requestFocus();
+            }
+        else
+        {
+            datCorrecto = 1;
+        }
+
+        return datCorrecto;
+    }
+    private int validarEspecialidad(){
+        int datCorrecto=0;
+        if(autoCompleteOpcionesEspecialidad.getText().toString().equals("")){
+            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!");
+            autoCompleteOpcionesEspecialidad.requestFocus();
+        }
+        else
+        {
+            datCorrecto = 1;
+        }
+
+        return datCorrecto;
+    }
+
+    private int validarAsignacion()
+    {
+        int valEsp = validarEspecialidad();
+        int valNom  = validarNombre();
+        if(valNom == 1 && valEsp== 1)
+        {
+            return 1;
+        }
+        else  return 0;
+    }
+
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override

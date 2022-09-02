@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class IngresoTipologia extends AppCompatActivity {
 
@@ -119,11 +120,25 @@ public class IngresoTipologia extends AppCompatActivity {
     private int validarCamposVacios() {
        // errorTipologia.setError(null);
         int camposVacios=0;
-        if (!txtTipologia.getText().toString().equals("")) {
-            camposVacios=1;
+        if(txtTipologia.getText().toString().length()<=80) {
+            if (txtTipologia.getText().toString().equals("")) {
+                txtTipologia.setError("¡Ingrese una Tipología!");
+                txtTipologia.requestFocus();
+            } else if (Pattern.compile(" {2,}").matcher(txtTipologia.getText().toString()).find()) {
+                txtTipologia.setError("¡Verifique que no haya más de un espacio en blanco!");
+                txtTipologia.requestFocus();
+            } else if(txtTipologia.getText().toString().length()<5 && txtTipologia.getText().toString().length()>0)
+            {
+                txtTipologia.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
+                txtTipologia.requestFocus();
+            }else {
+                camposVacios = 1;
+            }
         }
-        else {
-            txtTipologia.setError("¡Ingrese una Tipología!");
+        else
+        {
+            Toast.makeText(this, "¡Error! Tipología", Toast.LENGTH_SHORT).show();
+            txtTipologia.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtTipologia.requestFocus();
         }
         return camposVacios;
