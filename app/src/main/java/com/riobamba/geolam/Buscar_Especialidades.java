@@ -176,7 +176,7 @@ public class Buscar_Especialidades extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> enviarParametros4 = new HashMap<String, String>();
-                    enviarParametros4.put("caracteres", text);
+                    enviarParametros4.put("caracteres", text.trim());
                     return enviarParametros4;
                 }
 

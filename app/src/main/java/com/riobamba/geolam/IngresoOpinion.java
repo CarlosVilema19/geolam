@@ -108,7 +108,7 @@ public class IngresoOpinion extends AppCompatActivity {
                 parametros.put("id_lugar", idLugar);
                 parametros.put("email", email);
                 parametros.put("calificacion", String.valueOf(calficacionLugar.getRating()));
-                parametros.put("comentario", ingresarOpinion.getText().toString());
+                parametros.put("comentario", ingresarOpinion.getText().toString().trim());
                 return parametros;
             }
         };

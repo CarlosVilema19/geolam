@@ -75,7 +75,7 @@ public class InfoApp extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", email);
-                parametros.put("sugerencia", ingresarSugerencia.getText().toString());
+                parametros.put("sugerencia", ingresarSugerencia.getText().toString().trim());
                 return parametros;
             }
         };

@@ -36,7 +36,7 @@ public class IngresoTipologia extends AppCompatActivity {
 
     EditText txtTipologia;
     TextInputLayout errorTipologia;
-    Button btnAgregar, btnTipologiaAgregada;
+    Button btnAgregar, btnTipologiaAgregada,btnCancelar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
@@ -48,14 +48,20 @@ public class IngresoTipologia extends AppCompatActivity {
         btnAgregar = findViewById(R.id.btnAgregarTipologia);
         btnTipologiaAgregada = findViewById(R.id.btnTipologiaAgregada);
         errorTipologia=findViewById(R.id.txTipo);
+        btnCancelar=findViewById(R.id.btnCancelarTipo);
 
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*ConexionTipologia conexionTipologia = new ConexionTipologia();
-                conexionTipologia.insertarUsusario(txtTipologia);*/
                 validarTipologia();
+            }
+        });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -66,9 +72,6 @@ public class IngresoTipologia extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
     }
     private void validarTipologia(){
@@ -151,7 +154,9 @@ public class IngresoTipologia extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
-
+                finish();
+                Intent intent = new Intent(IngresoTipologia.this, IngresoTipologia.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override

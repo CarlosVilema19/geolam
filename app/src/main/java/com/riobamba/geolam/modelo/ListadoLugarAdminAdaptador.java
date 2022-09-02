@@ -143,7 +143,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
        /* Glide.with(mCtx)
                 .load(listadoLugar.getImagen())
                 .into(viewHolder.imagenLugar);*/
-        if(!listadoLugar.getImagen().equals(""))
+        if(!listadoLugar.getImagen().equals("") && !(tipo == 3))
         {
             Picasso.get().load(listadoLugar.getImagen()).fit().centerCrop().networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
@@ -179,6 +179,7 @@ public class ListadoLugarAdminAdaptador extends RecyclerView.Adapter<ListadoLuga
             viewHolder.idLugar.setVisibility(View.GONE);}
         if(tipo == 2){viewHolder.idLugar.setVisibility(View.GONE);
             viewHolder.cardLugar.setVisibility(View.VISIBLE);}
+        if(tipo == 3){viewHolder.idLugar.setVisibility(View.GONE);}
 
         viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
