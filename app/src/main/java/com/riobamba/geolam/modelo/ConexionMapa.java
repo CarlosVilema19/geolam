@@ -277,7 +277,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 int icon  = R.drawable.peligro;
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setIcon(icon)
-                        .setTitle("Cancelar").setMessage("El lugar de atención médica más cercano se encuentra a una distancia mayor a los 5 Km ¿Desea continuar?")
+                        .setTitle("Aviso")
+                        .setMessage("El lugar de atención médica más cercano se encuentra a una distancia mayor a los 5 Km ¿Desea continuar?")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
