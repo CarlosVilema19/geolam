@@ -3,7 +3,9 @@ package com.riobamba.geolam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -107,7 +109,26 @@ usuarios();
                     if (rowsUsuarios.size() > 0) {
                        // if(!pieChart.equals("")) {
 //
-                            pdf();
+                       /* new AlertDialog.Builder(ReporteGraficoUsuarios.this).setIcon(
+                                        getDrawable(R.drawable.peligro)
+                                )
+
+                                .setTitle("Reporte")
+                                .setMessage("El reporte se ha guardado con éxito en el almacenamiento interno del dispositivo")
+                                .setPositiveButton(
+                                        "Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {*/
+                                                //listener.removeSafezoneFromServer(center, radius, index);
+                                                // confirmacion=1;
+                                                pdf();
+                                               // dialog.cancel();
+                                           // }
+                                        //})
+                                //.show();
+
+
                         //}
                     }
                 }
@@ -328,8 +349,35 @@ private void crearGrafico() {
 
 
     public void pdf() {
+        new AlertDialog.Builder(ReporteGraficoUsuarios.this).setIcon(
+                        getDrawable(R.drawable.ic_baseline_verified_24)
+                )
+                // android.R.drawable.ic_dialog_alert)
+                .setTitle("Reporte")
+                .setMessage("El archivo se ha guardado con éxito en el almacenamiento interno del dispositivo.")
+                .setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //listener.removeSafezoneFromServer(center, radius, index);
+                                // confirmacion=1;
+                               // pdf();
+                                // dialog.cancel();
 
-        templatePDF = new TemplatePDF(getApplicationContext());
+                                templatePDF = new TemplatePDF(getApplicationContext());
+                                templatePDF.abrirDocumento();
+                                templatePDF.addMetada("Listado de Usuarios", "Administradores - Usuarios", "Geolam");
+                                templatePDF.addTitles("Reporte - GEOLAM", "Administradores & Usuarios", fecha());
+                                templatePDF.addParagraph(shorText);
+                                templatePDF.addImgName(grafi());
+                                templatePDF.crearTabla(header, retornar());
+                                templatePDF.cerrarDocumento();
+                                templatePDF.viewPDF();
+                            }
+                        })
+                .show();
+        /*templatePDF = new TemplatePDF(getApplicationContext());
         templatePDF.abrirDocumento();
         templatePDF.addMetada("Listado de Usuarios", "Administradores - Usuarios", "Geolam");
         templatePDF.addTitles("Reporte - GEOLAM", "Administradores & Usuarios", fecha());
@@ -337,14 +385,22 @@ private void crearGrafico() {
         templatePDF.addImgName(grafi());
         templatePDF.crearTabla(header, retornar());
         templatePDF.cerrarDocumento();
-        templatePDF.viewPDF();
+        templatePDF.viewPDF();*/
+
        // pieEntries.clear();
        // pieChart.clearValues();
         //pieDataSet.clear();
         //pieChart.setData(pi);
+        //-----
         pieChart.removeAllViews();
         cA=0;
         cU=0;
+
+        pieEntries.clear();
+        pieDataSet.setValues(pieEntries);
+        pieChart.removeAllViews();
+        //------
+
     //    pieChart.clearValues();
       //  pieChart.clear();
         //pieChart.refreshDrawableState();
@@ -361,10 +417,10 @@ private void crearGrafico() {
 
         //pieChart.setData(pieData);
        // pieEntries.clear();
-        pieEntries.clear();
+        /*pieEntries.clear();
         pieDataSet.setValues(pieEntries);
         pieChart.removeAllViews();
-
+*/
        // pieDataSet.
        // grafica.removeAllSeries();
     }

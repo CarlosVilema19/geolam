@@ -34,7 +34,7 @@ public class InfoApp extends AppCompatActivity {
         ingresarSugerencia= findViewById(R.id.etSugerencia);
         btnEnviarSugerencia = findViewById(R.id.btnEnviarSuge);
 
-        toolbar.show(this, "Calificación", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnEnviarSugerencia.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -3,7 +3,9 @@ package com.riobamba.geolam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -70,8 +72,27 @@ public class ReporteGraficoTop extends AppCompatActivity {
                 if (lugares() == 1) {
 
                     if (rowsLugares.size() > 0) {
+
+                        /*new AlertDialog.Builder(ReporteGraficoTop.this).setIcon(
+                                        getDrawable(R.drawable.peligro)
+                                )
+
+                                .setTitle("Reporte")
+                                .setMessage("El reporte se ha guardado con éxito en el almacenamiento interno del dispositivo")
+                                .setPositiveButton(
+                                        "Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {*/
+                                                //listener.removeSafezoneFromServer(center, radius, index);
+                                                // confirmacion=1;
+                                                pdf2();
+                                               // dialog.dismiss();
+                                           // }
+                                       // })
+                                //.show();
 //
-                        pdf2();
+                        //pdf2();
                     }
                 }
 
@@ -216,7 +237,33 @@ public class ReporteGraficoTop extends AppCompatActivity {
 
     public void pdf2(){
 
-        templatePDFLug = new TemplatePDFLugares(getApplicationContext());
+
+        new AlertDialog.Builder(ReporteGraficoTop.this).setIcon(
+                        getDrawable(R.drawable.ic_baseline_verified_24)
+                )
+                // android.R.drawable.ic_dialog_alert)
+                .setTitle("Reporte")
+                .setMessage("El archivo se ha guardado con éxito en el almacenamiento interno del dispositivo.")
+                .setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                templatePDFLug = new TemplatePDFLugares(getApplicationContext());
+                                templatePDFLug.abrirDocumento();
+                                templatePDFLug.addMetada("Lista de Lugares de atención médica", "Lugares con más vistas", "Geolam");
+                                templatePDFLug.addTitles("Reporte - GEOLAM", "Lugares con más vistas", fecha());
+                                templatePDFLug.addParagraph(shorText2);
+                                templatePDFLug.addImgName(grafi());
+                                templatePDFLug.crearTabla(header2, retornar2());
+                                templatePDFLug.cerrarDocumento();
+                                templatePDFLug.viewPDF();
+
+                            }
+                        })
+                .show();
+
+        /*templatePDFLug = new TemplatePDFLugares(getApplicationContext());
         templatePDFLug.abrirDocumento();
         templatePDFLug.addMetada("Lista de Lugares de atención médica", "Lugares con más vistas", "Geolam");
         templatePDFLug.addTitles("Reporte - GEOLAM", "Lugares con más vistas", fecha());
@@ -224,7 +271,7 @@ public class ReporteGraficoTop extends AppCompatActivity {
         templatePDFLug.addImgName(grafi());
         templatePDFLug.crearTabla(header2, retornar2());
         templatePDFLug.cerrarDocumento();
-        templatePDFLug.viewPDF();
+        templatePDFLug.viewPDF();*/
         grafica.removeAllSeries();
     }
     public Bitmap grafi () {

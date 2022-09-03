@@ -12,10 +12,15 @@
                 android:id="@+id/iInicioMenu"
                 android:icon="@drawable/ic_baseline_home_24"
                 android:title="@string/inicio_menu" />
+
             <item
                 android:id="@+id/iMisDatos"
                 android:icon="@drawable/ic_baseline_account_circle_24"
                 android:title="@string/mis_datos_menu" />
+            <item
+                android:id="@+id/iConfiguraciones"
+                android:icon="@drawable/ic_baseline_manage_accounts_24"
+                android:title="@string/configuracion_menu" />
             <item
                 android:id="@+id/iCambioContrasenia"
                 android:icon="@drawable/ic_baseline_https_24"

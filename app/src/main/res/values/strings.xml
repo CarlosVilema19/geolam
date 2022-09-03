@@ -99,9 +99,27 @@
     <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ-_.,0123456789</string>
     <string name="cambioContrasenia">Contraseña</string>
 
-    <string name="text_with_paragraphs">
+    <string name="reglasContrasenia">
         La contraseña debe tener mínimo 10 y máximo 16 caracteres,
         evitar los espacios en blanco e incluir un caracter especial (?=\\S+$*).
     </string>
+
+    <string name="textEliminarCuenta">
+        La eliminación de la cuenta es definitiva
+        \nSi eliminas tu cuenta de Geolam, no podrás recuperar la información que proporcionaste.
+    </string>
+    <string name="configuracion_menu">Configuración</string>
+    <string name="textTerminosCondiciones">
+        Término 1
+        \nTérmino2
+        \nTérmino3
+        \nTérmino4
+        \nTérmino5
+        \nTérmino6
+        \nTérmino7
+        \nTérmino8
+    </string>
+
+
 
 </resources>
