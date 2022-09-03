@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 
 public class IngresoEspecialidad extends AppCompatActivity {
     EditText txtEspecialidad;
-    Button btnAgregar, btnVerAgregados;
+    Button btnAgregar, btnVerAgregados,btnCancelar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
     @Override
@@ -43,6 +43,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         txtEspecialidad = findViewById(R.id.etEspecialidad);
         btnAgregar = findViewById(R.id.btnAgregarEspecialidad);
         btnVerAgregados = findViewById(R.id.btnEspecialidadAgregada);
+        btnCancelar=findViewById(R.id.btnCancelarEspe);
 
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -52,6 +53,12 @@ public class IngresoEspecialidad extends AppCompatActivity {
                 //ConexionTipologia conexionTipologia = new ConexionTipologia();
                 validarEspecialidad();
 
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         btnVerAgregados.setOnClickListener(new View.OnClickListener() {

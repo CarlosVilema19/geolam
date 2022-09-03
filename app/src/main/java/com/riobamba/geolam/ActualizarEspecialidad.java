@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class ActualizarTipologia extends AppCompatActivity {
+public class ActualizarEspecialidad extends AppCompatActivity {
 
     EditText txtName;
     Button btnGuardarCambios, btnCancelar, btnConsultar;
@@ -39,17 +39,17 @@ public class ActualizarTipologia extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingreso_tipologia);
+        setContentView(R.layout.activity_ingreso_especialidad);
 
         toolbar.show(this, "Actualizar", false);
 
         //Variables
-        txtName =findViewById(R.id.etTipologia);
-        btnGuardarCambios=findViewById(R.id.btnAgregarTipologia);
-        btnCancelar=findViewById(R.id.btnCancelarTipo);
-        btnConsultar=findViewById(R.id.btnTipologiaAgregada);
-        ListadoLugarAdmin actualizarTipo = (ListadoLugarAdmin) getIntent().getSerializableExtra("ActualizarTipo");
-        MostrarResultado(actualizarTipo);
+        txtName =findViewById(R.id.etEspecialidad);
+        btnGuardarCambios=findViewById(R.id.btnAgregarEspecialidad);
+        btnCancelar=findViewById(R.id.btnCancelarEspe);
+        btnConsultar=findViewById(R.id.btnEspecialidadAgregada);
+        ListadoLugarAdmin actualizarEspe = (ListadoLugarAdmin) getIntent().getSerializableExtra("ActualizarEspe");
+        MostrarResultado(actualizarEspe);
 
         btnConsultar.setVisibility(View.GONE);
 
@@ -59,13 +59,13 @@ public class ActualizarTipologia extends AppCompatActivity {
                 if(!(verificaSimilitud() == 1))
                 {
                     finish();
-                    Intent intent = new Intent(ActualizarTipologia.this, Tipologia.class);
+                    Intent intent = new Intent(ActualizarEspecialidad.this, EspecialidadListadoAdmin.class);
                     startActivity(intent);
                 }
                 else
                 {
                     int icon  = R.drawable.peligro;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ActualizarTipologia.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActualizarEspecialidad.this);
                     builder.setIcon(icon)
                             .setTitle("Cancelar")
                             .setMessage("Se perderán los cambios realizados. ¿Desea continuar?")
@@ -73,7 +73,7 @@ public class ActualizarTipologia extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     finish();
-                                    Intent intent = new Intent(ActualizarTipologia.this, Tipologia.class);
+                                    Intent intent = new Intent(ActualizarEspecialidad.this, EspecialidadListadoAdmin.class);
                                     startActivity(intent);
                                 }
                             }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -90,21 +90,21 @@ public class ActualizarTipologia extends AppCompatActivity {
         btnGuardarCambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modificarDatos(actualizarTipo);
+                modificarDatos(actualizarEspe);
 
             }
         });
 
     }
 
-    public void MostrarResultado(ListadoLugarAdmin actualizarTipo)
+    public void MostrarResultado(ListadoLugarAdmin actualizarEspe)
     {
         final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
 
-        String id_tipo = actualizarTipo.getId().toString();
+        String id_espe = actualizarEspe.getId().toString();
 
         //URL del web service
-        String url = WebService.urlRaiz + WebService.servicioListarTipoActual;
+        String url = WebService.urlRaiz + WebService.servicioListarEspeActual;
         //Metodo String Request
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -115,8 +115,8 @@ public class ActualizarTipologia extends AppCompatActivity {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
-                                txtName.setText(obj.getString("DESCRIPCION_TIPO_LUGAR"));
-                                compararNombre = obj.getString("DESCRIPCION_TIPO_LUGAR");
+                                txtName.setText(obj.getString("DESCRIPCION_ESPECIALIDAD"));
+                                compararNombre = obj.getString("DESCRIPCION_ESPECIALIDAD");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -132,7 +132,7 @@ public class ActualizarTipologia extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_tipo", id_tipo);
+                parametros.put("id_espe", id_espe);
                 return parametros;
             }
         };
@@ -141,11 +141,11 @@ public class ActualizarTipologia extends AppCompatActivity {
 
     }
 
-    public void modificarDatos(ListadoLugarAdmin actualizarTipo) {
-        String id_tipo = actualizarTipo.getId().toString();
+    public void modificarDatos(ListadoLugarAdmin actualizarEspe) {
+        String id_espe = actualizarEspe.getId().toString();
         if (validarCampos() == 1) {
             if(verificaSimilitud()==1) {
-                String url = WebService.urlRaiz + WebService.servicioActualizarTipologia;
+                String url = WebService.urlRaiz + WebService.servicioActualizarEspecialidad;
                 final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
@@ -154,7 +154,7 @@ public class ActualizarTipologia extends AppCompatActivity {
                         //Mostrando el mensaje de la respuesta
                         Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
                         finish();
-                        Intent intent = new Intent(ActualizarTipologia.this, Tipologia.class);
+                        Intent intent = new Intent(ActualizarEspecialidad.this, EspecialidadListadoAdmin.class);
                         startActivity(intent);
 
                     }
@@ -171,8 +171,8 @@ public class ActualizarTipologia extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> parametros = new HashMap<String, String>();
-                        parametros.put("tipolgia", txtName.getText().toString().trim());
-                        parametros.put("id_tipo", id_tipo);
+                        parametros.put("especialidad", txtName.getText().toString().trim());
+                        parametros.put("id_espe", id_espe);
                         return parametros;
                     }
                 };
@@ -199,10 +199,10 @@ public class ActualizarTipologia extends AppCompatActivity {
         {
             band=0;
         }
-            else if(!compararNombre.trim().equals(txtName.getText().toString()))
-            {
-                band=1;
-            }
+        else if(!compararNombre.trim().equals(txtName.getText().toString()))
+        {
+            band=1;
+        }
 
         return band;
     }
@@ -213,7 +213,7 @@ public class ActualizarTipologia extends AppCompatActivity {
 
         if(txtName.getText().toString().equals(""))
         {
-            Toast.makeText(ActualizarTipologia.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActualizarEspecialidad.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
             txtName.setError("Ingrese el nombre");
         }
 
@@ -222,7 +222,7 @@ public class ActualizarTipologia extends AppCompatActivity {
             txtName.requestFocus();
         }
         else if(!txtName.getText().toString().equals("")){
-                respuesta=2;
+            respuesta=2;
         }
         if(respuesta==2) {
             if(validarNombre()==1) {
@@ -235,9 +235,9 @@ public class ActualizarTipologia extends AppCompatActivity {
     private int validarNombre(){
 
         int camposVacios=0;
-        if(txtName.getText().toString().length()<=80) {
+        if(txtName.getText().toString().length()<=50) {
             if (txtName.getText().toString().equals("")) {
-                txtName.setError("¡Ingrese una Tipología!");
+                txtName.setError("¡Ingrese una Especialidad!");
                 txtName.requestFocus();
             } else if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
                 txtName.setError("¡Verifique que no haya más de un espacio en blanco!");
@@ -252,7 +252,7 @@ public class ActualizarTipologia extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "¡Error! Tipología", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
             txtName.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtName.requestFocus();
         }

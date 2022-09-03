@@ -71,4 +71,6 @@ public class WebService {
     public static final  String servicioIngresoSugerencia="ingreso_sugerencia.php";
     public static final  String servicioListarTipoActual="listar_tipo_actual.php";
     public static final  String servicioActualizarTipologia="actualizar_tipologia.php";
+    public static final  String servicioListarEspeActual="listar_espe_actual.php";
+    public static final  String servicioActualizarEspecialidad="actualizar_especialidad.php";
 }
