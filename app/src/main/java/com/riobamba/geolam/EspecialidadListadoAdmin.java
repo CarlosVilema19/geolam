@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.riobamba.geolam.modelo.EspecialidadAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
+import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -99,7 +100,13 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
                                public void onItemClick(ListadoLugarAdmin item) {
                                    mensajeConfirmacion(item);
                                }
-                           });
+                           },new EspecialidadAdminAdaptador.OnClickActListener() {
+
+                                @Override//llamada al método para borrar presionando sobre el botón
+                                public void onClick(ListadoLugarAdmin item) {
+                                    moveToActualizar(item);
+                                }
+                            });
                             recyclerView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -122,6 +129,14 @@ public class EspecialidadListadoAdmin extends AppCompatActivity implements Searc
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
         //Espacio para poner el actualizar
+    }
+
+    public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
+    {
+        finish();
+        Intent intent = new Intent(this,ActualizarEspecialidad.class);
+        intent.putExtra("ActualizarEspe",item);
+        startActivity(intent);
     }
 
 

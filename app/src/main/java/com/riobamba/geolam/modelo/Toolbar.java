@@ -125,8 +125,11 @@ public class Toolbar extends AppCompatActivity{
     }
 
     public void salir (AppCompatActivity activities) {
+        int icon  = R.drawable.peligro;
             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-            builder.setMessage("¿Desea salir de Geolam?")
+            builder.setIcon(icon)
+                    .setTitle("Salir")
+                    .setMessage("¿Desea salir de Geolam?")
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -145,12 +148,16 @@ public class Toolbar extends AppCompatActivity{
     }
 
     public void cerrarSesion (AppCompatActivity activities) {
+        int icon  = R.drawable.peligro;
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-        builder.setMessage("¿Desea cerrar sesión?")
+        builder.setIcon(icon)
+                .setTitle("Cancelar")
+                .setMessage("¿Desea cerrar sesión?")
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         guardarEstadoButton(activities);
+                        finish();
                         activities.startActivity(new Intent(ctx, login));
                     }
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
