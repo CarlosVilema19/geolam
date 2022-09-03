@@ -20,6 +20,7 @@ import com.riobamba.geolam.Bienvenida;
 //import com.riobamba.geolam.DatosPersonalesUsu;
 import com.riobamba.geolam.Busqueda;
 import com.riobamba.geolam.CambiarContrasenia;
+import com.riobamba.geolam.Configuraciones;
 import com.riobamba.geolam.DatosPersonalesUsuario;
 import com.riobamba.geolam.EspecialidadListadoUsuario;
 import com.riobamba.geolam.InfoApp;
@@ -42,6 +43,7 @@ public class Toolbar extends AppCompatActivity{
     public  Class <InfoApp> infoAppClass= InfoApp.class;
     public Class<Login> login = Login.class;
     public Class<CambiarContrasenia> cambioContraClass = CambiarContrasenia.class;
+    public Class<Configuraciones> configuracionesClass = Configuraciones.class;
     public Context ctx;
     public AppCompatActivity actividad;
 
@@ -98,6 +100,10 @@ public class Toolbar extends AppCompatActivity{
         if(item.getItemId()==R.id.iCambioContrasenia)
         {
             activities.startActivity(new Intent(ctx, cambioContraClass));
+        }
+        if(item.getItemId()==R.id.iConfiguraciones)
+        {
+            activities.startActivity(new Intent(ctx, configuracionesClass));
         }
     }
 

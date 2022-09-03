@@ -90,14 +90,16 @@ public class CambiarContrasenia extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                contContraActual.setErrorIconDrawable(null);
+                contContraActual.setError(null);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(txtContraseniaAntigua.getText().toString().isEmpty()){
+               /* if(txtContraseniaAntigua.getText().toString().isEmpty()){
                     contContraActual.setErrorIconDrawable(null);
                     contContraActual.setError(null);
-                }
+                }*/
             }
         });
 
@@ -109,14 +111,16 @@ public class CambiarContrasenia extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                contNuevaContrasenia.setErrorIconDrawable(null);
+                contNuevaContrasenia.setError(null);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(txtContraseniaNueva.getText().toString().isEmpty()){
+                /*if(txtContraseniaNueva.getText().toString().isEmpty()){
                     contNuevaContrasenia.setErrorIconDrawable(null);
                     contNuevaContrasenia.setError(null);
-                }
+                }*/
             }
         });
 
@@ -129,14 +133,15 @@ public class CambiarContrasenia extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                contConfirmarContra.setErrorIconDrawable(null);
+                contConfirmarContra.setError(null);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(txtConfirmarContrasenia.getText().toString().isEmpty()){
-                    contConfirmarContra.setErrorIconDrawable(null);
-                    contConfirmarContra.setError(null);
-                }
+                //if(txtConfirmarContrasenia.getText().toString().isEmpty()){
+
+                //}
             }
         });
 
@@ -144,7 +149,8 @@ public class CambiarContrasenia extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 //  if(txtContraseniaAntigua.requestFocus()){
-
+                contConfirmarContra.setErrorIconDrawable(null);
+                contConfirmarContra.setError(null);
                 //}
             }
         });
@@ -154,7 +160,14 @@ public class CambiarContrasenia extends AppCompatActivity {
             public void onClick(View v) {
                 contContraActual.setErrorIconDrawable(null);
                 contContraActual.setError(null);
-                cambioContrasenia();
+
+                if(txtContraseniaAntigua.getText().toString().equals("")){
+                    contContraActual.setErrorIconDrawable(null);
+                    contContraActual.setError("Campo vacío");
+                    contContraActual.requestFocus();
+                }else{
+                    cambioContrasenia();
+                }
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {

@@ -16,107 +16,103 @@
 
         >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/card"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        android:layout_centerVertical="true"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true">
-
-        <ScrollView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp">
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="25dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txReportes"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txReportes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="25dp"
+                            android:text="@string/tituloReportes"
+
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+
+
+                            />
+                    </RelativeLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerarPDFUsuarios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="25dp"
-                        android:text="@string/tituloReportes"
-
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="18sp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="20sp"
+                        android:background="@drawable/degradado2"
+                        android:drawableLeft="@drawable/ic_baseline_groups_24"
+                        android:text="Usuarios Registrados"
+                        android:textSize="11dp"
                         android:textStyle="bold"
+                        app:backgroundTint="@null" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerarPDFLugaresVisitados"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="1sp"
+                        android:background="@drawable/degradado2"
+                        android:drawableLeft="@drawable/hospital"
+                        android:text="Lugares más visitados"
+                        android:textSize="11dp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        app:backgroundTint="@null" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnprueba"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="20sp"
+                        android:background="@drawable/degradado2"
+                        android:drawableLeft="@drawable/hospital"
+                        android:text="Lugares mas vistos   "
+                        android:textSize="11dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null" />
 
 
-                        />
-                </RelativeLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGenerarPDFUsuarios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Usuarios Registrados"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/degradado2"
-                    android:drawableLeft="@drawable/ic_baseline_groups_24"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGenerarPDFLugaresVisitados"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="1sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="1dp"
-                    android:visibility="invisible"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Lugares más visitados"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/degradado2"
-                    android:drawableLeft="@drawable/hospital"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnprueba"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Lugares mas vistos   "
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/degradado2"
-                    android:drawableLeft="@drawable/hospital"
-                    />
-
-
-
-            </LinearLayout>
-        </ScrollView>
-    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
         <RelativeLayout
             android:id="@+id/Rlay"
             android:layout_below="@+id/card"

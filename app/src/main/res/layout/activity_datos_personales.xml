@@ -29,24 +29,10 @@
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tvMisDatos"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="Mis Datos"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
 
                 <RelativeLayout
-
+                    android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_gravity="center_horizontal"
