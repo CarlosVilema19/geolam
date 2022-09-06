@@ -126,17 +126,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 //General
                 if(validarCampos()==4)
                 {
-                    if(aux == 1 &&
-                            datosServidor[0].equals(txtNombreLugar.getText().toString())&&
-                            datosServidor[1].equals(txtDireccion.getText().toString())&&
-                            datosServidor[2].equals(txtTelefono.getText().toString())&&
-                            datosServidor[3].equals(txtWhatsApp.getText().toString())&&
-                            datosServidor[4].equals(txtPaginaWeb.getText().toString())&&
-                            datosServidor[5].equals(txtLatitud.getText().toString())&&
-                            datosServidor[6].equals(txtLongitud.getText().toString())&&
-                            datosServidor[7].equals(txtDescripcion.getText().toString())&&
-                            datosServidor[8].equals(txtTipologia.getText().toString())&&
-                            datosServidor[9].equals(txtCategoria.getText().toString()))
+                    if(verificarSimilitud() == 1)
                     {
                         Toast.makeText(actualizar_lugar_medico.this, "No se ha realizado cambios", Toast.LENGTH_SHORT).show();
                     }
@@ -152,42 +142,31 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         btnCancelarInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(aux == 0 ||
-                        !datosServidor[0].equals(txtNombreLugar.getText().toString())||
-                        !datosServidor[1].equals(txtDireccion.getText().toString())||
-                        !datosServidor[2].equals(txtTelefono.getText().toString())||
-                        !datosServidor[3].equals(txtWhatsApp.getText().toString())||
-                        !datosServidor[4].equals(txtPaginaWeb.getText().toString())||
-                        !datosServidor[5].equals(txtLatitud.getText().toString())||
-                        !datosServidor[6].equals(txtLongitud.getText().toString())||
-                        !datosServidor[7].equals(txtDescripcion.getText().toString())||
-                        !datosServidor[8].equals(txtTipologia.getText().toString())||
-                        !datosServidor[9].equals(txtCategoria.getText().toString()))
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(actualizar_lugar_medico.this);
-                    builder.setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
-                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                    Intent intent = new Intent(actualizar_lugar_medico.this,ListadoCrud.class);
-                                    startActivity(intent);
-                                }
-                            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    builder.show();
-                }
-                else
-                {
-                    finish();
-                    Intent intent = new Intent(actualizar_lugar_medico.this,ListadoCrud.class);
-                    startActivity(intent);
-                }
+                    if (verificarSimilitud() == 1) {
+                        finish();
+                        Intent intent = new Intent(actualizar_lugar_medico.this, ListadoCrud.class);
+                        startActivity(intent);
+                    } else {
+                        int icon  = R.drawable.peligro;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(actualizar_lugar_medico.this);
+                        builder.setIcon(icon)
+                                .setTitle("Cancelar")
+                                .setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                        Intent intent = new Intent(actualizar_lugar_medico.this, ListadoCrud.class);
+                                        startActivity(intent);
+                                    }
+                                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        builder.show();
+                    }
             }
         });
 
@@ -209,6 +188,26 @@ public class actualizar_lugar_medico extends AppCompatActivity {
 
     }
     @Override public void onBackPressed() { }  //Anula la flecha de regreso del telefono
+
+    private int verificarSimilitud()
+    {
+        if(aux == 1 &&
+                datosServidor[0].equals(txtNombreLugar.getText().toString()) &&
+                datosServidor[1].equals(txtDireccion.getText().toString()) &&
+                datosServidor[2].equals(txtTelefono.getText().toString()) &&
+                datosServidor[3].equals(txtWhatsApp.getText().toString()) &&
+                datosServidor[4].equals(txtPaginaWeb.getText().toString()) &&
+                datosServidor[5].equals(txtLatitud.getText().toString()) &&
+                datosServidor[6].equals(txtLongitud.getText().toString()) &&
+                datosServidor[7].equals(txtDescripcion.getText().toString()) &&
+                datosServidor[8].equals(txtTipologia.getText().toString()) &&
+                datosServidor[9].equals(txtCategoria.getText().toString()))
+        {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 
     private void actualizarDatos(ListadoLugarAdmin listadoLugar) {
         ProgressDialog loading; //Mensaje de carga en el mapa
@@ -669,7 +668,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         if(txtNombreLugar.getText().toString().length()<80){
             if(txtNombreLugar.getText().toString().length()<10)
             {
-                Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
                 txtNombreLugar.setError("Nombre demasiado corto. (Mínimo 10 caracteres)");
                 txtNombreLugar.requestFocus();
             }
@@ -679,7 +677,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "¡Error! Nombre del lugar", Toast.LENGTH_SHORT).show();
             txtNombreLugar.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtNombreLugar.requestFocus();
         }
@@ -694,12 +691,10 @@ public class actualizar_lugar_medico extends AppCompatActivity {
             //URL urlV = new URL(url);
             return URLUtil.isValidUrl(url) && Patterns.WEB_URL.matcher(url).matches(); }
         catch (MalformedURLException e) {
-            Toast.makeText(this, "¡Error! URL" + e.toString(), Toast.LENGTH_SHORT).show();
             txtPaginaWeb.setError("URL mal formada");
             txtPaginaWeb.requestFocus();
         }
         catch (URISyntaxException exception) {
-            Toast.makeText(this, "¡Error! URL" + exception.toString(), Toast.LENGTH_SHORT).show();
             txtPaginaWeb.setError("Error de sintaxis");
             txtPaginaWeb.requestFocus();
             return false;
@@ -709,9 +704,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
     private int validarUrl() {
         int datCorrecto = 0;
         String url = txtPaginaWeb.getText().toString().trim();
-
-
-
         if(url.length()<100) {
             if (urlValida(url)) {
                 datCorrecto = 1;
@@ -719,7 +711,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "¡Error! Página web", Toast.LENGTH_SHORT).show();
             txtPaginaWeb.setError("Página web demasiada larga. (Máximo 100 caracteres)");
             txtPaginaWeb.requestFocus();
         }
@@ -730,7 +721,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
     private int validarDescripcion(){
         int datCorrecto=0;
         if(txtDescripcion.getText().toString().length()<80) {
-
             datCorrecto=1;
         }
         return datCorrecto;
@@ -741,7 +731,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         if(txtDireccion.getText().toString().length()<80){
             if(txtDireccion.getText().toString().length()<10)
             {
-                Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
                 txtDireccion.setError("Dirección demasiada corta. (Mínimo 10 caracteres)");
                 txtDireccion.requestFocus();
             }
@@ -751,7 +740,6 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
             txtDireccion.setError("Dirección demasiada larga. (Máximo 40 caracteres)");
             txtDireccion.requestFocus();
         }
@@ -767,15 +755,12 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 datCorrecto=1;
             }
             else {
-
-                Toast.makeText(this, "¡Error! Teléfono del lugar", Toast.LENGTH_SHORT).show();
                 txtTelefono.setError("Teléfono inválido (Ingrese únicamente 7 dígitos)");
                 txtTelefono.requestFocus();
             }
         }
         else
         {
-            Toast.makeText(this, "¡Error! Número de Contacto del lugar", Toast.LENGTH_SHORT).show();
             txtTelefono.setError("Teléfono demasiado largo");
             txtTelefono.requestFocus();
         }
@@ -791,15 +776,12 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 datCorrecto=1;
             }
             else {
-
-                Toast.makeText(this, "¡Error! WhatsApp del lugar", Toast.LENGTH_SHORT).show();
                 txtWhatsApp.setError("Número de WhatsApp es inválido (Ingrese 10 dígitos)");
                 txtWhatsApp.requestFocus();
             }
         }
         else
         {
-            Toast.makeText(this, "¡Error! WhatsApp del lugar", Toast.LENGTH_SHORT).show();
             txtTelefono.setError("El número de WhatsApp es demasiado largo");
             txtTelefono.requestFocus();
         }
@@ -839,14 +821,14 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 parametros.put("id_lugar", tvIdLugarMedico.getText().toString());
                 parametros.put("id_tipologia_lugar", tvIdTipo.getText().toString());
                 parametros.put("id_categoria", tvIdCategoria.getText().toString());
-                parametros.put("nombre_lugar", txtNombreLugar.getText().toString());
-                parametros.put("direccion", txtDireccion.getText().toString());
-                parametros.put("telefono", txtTelefono.getText().toString());
-                parametros.put("whatsapp", txtWhatsApp.getText().toString());
-                parametros.put("pagina_web", txtPaginaWeb.getText().toString());
-                parametros.put("latitud", txtLatitud.getText().toString());
-                parametros.put("longitud", txtLongitud.getText().toString());
-                parametros.put("descripcion_lugar", txtDescripcion.getText().toString());
+                parametros.put("nombre_lugar", txtNombreLugar.getText().toString().trim().toUpperCase());
+                parametros.put("direccion", txtDireccion.getText().toString().trim());
+                parametros.put("telefono", txtTelefono.getText().toString().trim());
+                parametros.put("whatsapp", txtWhatsApp.getText().toString().trim());
+                parametros.put("pagina_web", txtPaginaWeb.getText().toString().trim());
+                parametros.put("latitud", txtLatitud.getText().toString().trim());
+                parametros.put("longitud", txtLongitud.getText().toString().trim());
+                parametros.put("descripcion_lugar", txtDescripcion.getText().toString().trim());
                 parametros.put("existencia_imagen", String.valueOf(aux));
 
                 if(aux == 0)

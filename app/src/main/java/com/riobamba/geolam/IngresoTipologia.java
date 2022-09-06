@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -61,7 +63,30 @@ public class IngresoTipologia extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(txtTipologia.getText().toString().equals(""))
+                {
+                    finish();
+                }
+                else{
+                    int icon  = R.drawable.peligro;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(IngresoTipologia.this);
+                    builder.setIcon(icon)
+                            .setTitle("Cancelar")
+                            .setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.show();
+                }
+
             }
         });
 

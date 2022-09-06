@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -49,6 +51,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class IngresoLugarMedico extends AppCompatActivity {
 
@@ -58,7 +61,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
 
     String pTip;
     String pCat;
-    Button btnGuardarInfo, btnAgregados;
+    Button btnGuardarInfo, btnAgregados, btnCancelar;
     String imagen_lugar;
     String idCategoria;
     String idTipologia;
@@ -112,8 +115,6 @@ public class IngresoLugarMedico extends AppCompatActivity {
                 response ->
                 {
                     try{
-
-
                         JSONArray array= new JSONArray(response);
                         for(int i=0;i<array.length();i++){
 
@@ -234,6 +235,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
         tvIdTipo = (TextView) findViewById(R.id.TextViewIDTipologia);
         tvIdCategoria = (TextView) findViewById(R.id.TextViewIDCategoria);
         btnGuardarInfo= findViewById(R.id.btn_guardarLugar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
 
         btnGuardarInfo.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +257,54 @@ public class IngresoLugarMedico extends AppCompatActivity {
             }
         });
 
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (verificarSimilitud() == 0) {
+                    finish();
+                } else {
+                    int icon  = R.drawable.peligro;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(IngresoLugarMedico.this);
+                    builder.setIcon(icon)
+                            .setTitle("Cancelar")
+                            .setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.show();
+                }
+            }
+        });
+
+
+    }
+
+    private int verificarSimilitud()
+    {
+        int exis = 0;
+        if(!txtNombreLugar.getText().toString().equals("")||
+                !tvIdTipo.getText().toString().equals("")||
+                !tvIdCategoria.getText().toString().equals("")||
+                !txtDireccion.getText().toString().equals("")||
+                !txtTelefono.getText().toString().equals("")||
+                !txtWhatsApp.getText().toString().equals("")||
+                !txtPaginaWeb.getText().toString().equals("")||
+                !txtLatitud.getText().toString().equals("")||
+                !txtLongitud.getText().toString().equals("")||
+                !txtDescripcion.getText().toString().equals("")||
+                !tvIdTipo.getText().toString().equals(""))
+        {
+            exis =1;
+        }
+        return exis;
     }
 
     private void retornaIdTipologia(String pTip) {
@@ -353,15 +403,12 @@ int opcionales=0;
 
                 if (validarTelefono() == 1 && validarWhatsapp() == 1 && validarUrl() == 1) {
                     opcionales = 2;
-
                 }
             } else {
                 if (validarNombre() == 1 && validarDireccion() == 1 && !txtTelefono.getText().toString().equals("")&& txtWhatsApp.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")) {
-
                     if (validarTelefono() == 1) {
                         opcionales = 3;
                     }
-
                 } else {if (validarNombre() == 1 && validarDireccion() == 1 && !txtWhatsApp.getText().toString().equals("") && txtTelefono.getText().toString().equals("") && txtPaginaWeb.getText().toString().equals("")) {
                     if (validarWhatsapp() == 1) {
                         opcionales = 4;
@@ -416,7 +463,10 @@ int opcionales=0;
 private int validarNombre(){
      int datCorrecto=0;
      if(txtNombreLugar.getText().toString().length()<80){
-         if(txtNombreLugar.getText().toString().length()<5)
+         if (Pattern.compile(" {2,}").matcher(txtNombreLugar.getText().toString()).find()) {
+             txtNombreLugar.setError("¡Verifique que no haya más de un espacio en blanco!");
+             txtNombreLugar.requestFocus();
+         }else if(txtNombreLugar.getText().toString().length()<5)
          {
              txtNombreLugar.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
              txtNombreLugar.requestFocus();
@@ -467,11 +517,16 @@ private int validarUrl() {
         if (urlValida(url)) {
             datCorrecto = 1;
         }
+        else if(Pattern.compile(" {2,}").matcher(txtPaginaWeb.getText().toString()).find())
+            {
+                txtPaginaWeb.setError("¡Verifique que no haya más de un espacio en blanco!");
+                txtPaginaWeb.requestFocus();
+            }
     }
     else
     {
         Toast.makeText(this, "¡Error! Página web", Toast.LENGTH_SHORT).show();
-        txtPaginaWeb.setError("Página web demasiada larga. (Mínimo 100 caracteres)");
+        txtPaginaWeb.setError("Página web demasiada larga. (Máximo 100 caracteres)");
         txtPaginaWeb.requestFocus();
     }
 
@@ -489,10 +544,14 @@ private int validarDescripcion(){
 private int validarDireccion(){
 
     int datCorrecto=0;
-    if(txtDireccion.getText().toString().length()<80){
-        if(txtDireccion.getText().toString().length()<10)
+    if(txtDireccion.getText().toString().length()<200){
+        if(Pattern.compile(" {2,}").matcher(txtDireccion.getText().toString()).find())
         {
-            txtDireccion.setError("Dirección demasiada corta. (Mínimo 10 caracteres)");
+            txtDireccion.setError("¡Verifique que no haya más de un espacio en blanco!");
+            txtDireccion.requestFocus();
+        } else if(txtDireccion.getText().toString().length()<5)
+        {
+            txtDireccion.setError("Dirección demasiada corta. (Mínimo 5 caracteres)");
             txtDireccion.requestFocus();
         }
         else {
@@ -502,7 +561,7 @@ private int validarDireccion(){
     else
     {
         Toast.makeText(this, "¡Error! Dirección del lugar", Toast.LENGTH_SHORT).show();
-        txtDireccion.setError("Dirección demasiada larga. (Mínimo 40 caracteres)");
+        txtDireccion.setError("Dirección demasiada larga. (Máximo 200 caracteres)");
         txtDireccion.requestFocus();
     }
 
@@ -565,7 +624,8 @@ private int validarWhatsapp(){
             public void onResponse(String response) {
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Se ha registrado el lugar correctamente", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(IngresoLugarMedico.this, ListadoCrud.class);
+                finish();
+                Intent intent = new Intent(IngresoLugarMedico.this, IngresoLugarMedico.class);
                 startActivity(intent);
             }
         }, new Response.ErrorListener() {
@@ -574,7 +634,7 @@ private int validarWhatsapp(){
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Se ha producido un error inesperado", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
@@ -590,14 +650,14 @@ private int validarWhatsapp(){
                 Map<String, String> parametros = new HashMap<String, String>();
                parametros.put("id_tipologia_lugar", tvIdTipo.getText().toString());
                parametros.put("id_categoria", tvIdCategoria.getText().toString());
-               parametros.put("nombre_lugar", txtNombreLugar.getText().toString().trim());
+               parametros.put("nombre_lugar", txtNombreLugar.getText().toString().trim().toUpperCase());
                 parametros.put("direccion", txtDireccion.getText().toString().trim());
                 parametros.put("telefono", txtTelefono.getText().toString().trim());
                 parametros.put("whatsapp", txtWhatsApp.getText().toString().trim());
                 parametros.put("pagina_web", txtPaginaWeb.getText().toString().trim());
                 parametros.put("latitud", txtLatitud.getText().toString().trim());
                 parametros.put("longitud", txtLongitud.getText().toString().trim());
-                parametros.put("descripcion_lugar", txtDescripcion.getText().toString());
+                parametros.put("descripcion_lugar", txtDescripcion.getText().toString().trim());
 
                 //Imagen
                 parametros.put(claveImagen, imagen_lugar);

@@ -124,9 +124,10 @@ public class MedicoAdmin extends AppCompatActivity implements SearchView.OnQuery
 
     public void moveToActualizar(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
-        /*Intent intent = new Intent(this,actualizar_lugar_medico.class);
-        intent.putExtra("ListadoLugarAdmin",item);
-        startActivity(intent);*/
+        finish();
+        Intent intent = new Intent(this,ActualizarMedico.class);
+        intent.putExtra("ActualizarMedi",item);
+        startActivity(intent);
     }
     public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
     {

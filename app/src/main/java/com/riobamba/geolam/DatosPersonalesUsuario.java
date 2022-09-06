@@ -625,8 +625,8 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                             }
 
                             parametros.put("email", tvEmail.getText().toString());
-                            parametros.put("nombre_usuario", txtName.getText().toString());
-                            parametros.put("apellido_usuario", txtApe.getText().toString());
+                            parametros.put("nombre_usuario", txtName.getText().toString().toUpperCase());
+                            parametros.put("apellido_usuario", txtApe.getText().toString().toUpperCase());
                             parametros.put("edad", txtEdad.getText().toString());
 
                             if (fechaNac.isEmpty()) {

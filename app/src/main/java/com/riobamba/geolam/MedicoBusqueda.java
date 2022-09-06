@@ -71,8 +71,8 @@ public class MedicoBusqueda extends AppCompatActivity {
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                lugar = txtLugar.getText().toString();
-                especialidad = txtEspe.getText().toString();
+                lugar = txtLugar.getText().toString().toUpperCase().trim();
+                especialidad = txtEspe.getText().toString().toUpperCase().trim();
 
                 if(lugar.equals("") && especialidad.equals(""))
                 {

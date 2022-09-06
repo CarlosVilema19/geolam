@@ -456,7 +456,7 @@ public class RegistroAdmin extends AppCompatActivity {
 
     private int validaExistenciaCorreo(ArrayList<String> opcionesCorreoUsuario) {
         int correcto=0;
-        if( opcionesCorreoUsuario.contains(txtEmail.getText().toString().trim()))
+        if( opcionesCorreoUsuario.contains(txtEmail.getText().toString().trim().toLowerCase()))
         {
 
             //Toast.makeText(this, "¡Error! Usuario ya registrado", Toast.LENGTH_SHORT).show();
@@ -549,11 +549,11 @@ public class RegistroAdmin extends AppCompatActivity {
 
                 Map<String, String> parametros = new HashMap<String, String>();
 
-                parametros.put("email", txtEmail.getText().toString().trim());
-                parametros.put("nombre_usuario", txtName.getText().toString().trim());
-                parametros.put("apellido_usuario", txtApe.getText().toString().trim());
+                parametros.put("email", txtEmail.getText().toString().trim().toLowerCase());
+                parametros.put("nombre_usuario", txtName.getText().toString().trim().toUpperCase());
+                parametros.put("apellido_usuario", txtApe.getText().toString().trim().toUpperCase());
                 parametros.put("edad", edadUsu /*txtEdad.getText().toString().trim()*/);
-                parametros.put("sexo", txtSexo.getText().toString());
+                parametros.put("sexo", txtSexo.getText().toString().toUpperCase());
                 parametros.put("contrasenia", getSHA256(pass.getText().toString().trim()));
                 parametros.put("fecha_nacimiento", fechaNac);//String.valueOf(fechaNacimiento));
 

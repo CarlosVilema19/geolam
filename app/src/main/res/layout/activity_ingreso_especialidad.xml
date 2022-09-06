@@ -88,7 +88,6 @@
                             android:gravity="left"
                             android:maxLength="50"
                             android:inputType="textCapCharacters"
-                            android:layout_below="@id/etEspecialidad"
                             android:hint="@string/ingrese_especilidad"
                             android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
                             tools:ignore="TextContrastCheck,TextContrastCheck"
