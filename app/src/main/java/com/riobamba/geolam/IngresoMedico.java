@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 
 public class IngresoMedico extends AppCompatActivity {
     EditText txtNombreMedico,txtApellidoMedico,txtDescripcionMedico;
-    Button btnAgregarMedico,btnMostrarAgregado;
+    Button btnAgregarMedico,btnMostrarAgregado,btnCancelar;
     TextView tvIdMedico;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -51,6 +51,7 @@ public class IngresoMedico extends AppCompatActivity {
         txtNombreMedico = findViewById(R.id.ednombreMedico);
         txtApellidoMedico = findViewById(R.id.edapellidoMedico);
         txtDescripcionMedico = findViewById(R.id.eddescripcionMedico);
+        btnCancelar=findViewById(R.id.btnCancelarMedi);
 
         btnAgregarMedico = findViewById(R.id.btnAgregarMedico);
         btnMostrarAgregado = findViewById(R.id.btnVerAgregados);
@@ -64,7 +65,12 @@ public class IngresoMedico extends AppCompatActivity {
 
             }
         });
-
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnMostrarAgregado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +132,8 @@ public class IngresoMedico extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("nombre_medico", txtNombreMedico.getText().toString().trim());
-                    parametros.put("apellido_medico", txtApellidoMedico.getText().toString().trim());
+                    parametros.put("nombre_medico", txtNombreMedico.getText().toString().trim().toUpperCase());
+                    parametros.put("apellido_medico", txtApellidoMedico.getText().toString().trim().toUpperCase());
                     parametros.put("descripcion_medico", txtDescripcionMedico.getText().toString().trim());
 
                     return parametros;

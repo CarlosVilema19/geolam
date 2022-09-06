@@ -94,9 +94,9 @@ public class LugarBusqueda extends AppCompatActivity {
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                categoria = txtCate.getText().toString();
-                tipologia = txtTipo.getText().toString();
-                especialidad = txtEspe.getText().toString();
+                categoria = txtCate.getText().toString().toUpperCase().trim();
+                tipologia = txtTipo.getText().toString().toUpperCase().trim();
+                especialidad = txtEspe.getText().toString().toUpperCase().trim();
                 
                 if(categoria.equals("") && tipologia.equals("") && especialidad.equals(""))
                 {

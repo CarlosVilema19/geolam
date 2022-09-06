@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -58,7 +60,29 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(txtEspecialidad.getText().toString().equals(""))
+                {
+                    finish();
+                }
+                else{
+                    int icon  = R.drawable.peligro;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(IngresoEspecialidad.this);
+                    builder.setIcon(icon)
+                            .setTitle("Cancelar")
+                            .setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.show();
+                }
             }
         });
         btnVerAgregados.setOnClickListener(new View.OnClickListener() {
@@ -75,30 +99,22 @@ public class IngresoEspecialidad extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     response ->
                     {
-
                         try {
-
                             JSONObject object = new JSONObject( URLDecoder.decode( response, "UTF-8" ));
                             String existencia = object.getString("valida");
 
                             if (existencia.equals("existe")) {
-
                                 txtEspecialidad.setError("¡Esta especialidad ya existe!");
                                 txtEspecialidad.requestFocus();
-
                             } else {
                                     insertarEspecialidad();
-
                             }
                         } catch (JSONException | UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                     },error ->{
                 Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
-
             })
-
-
             {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
@@ -111,7 +127,6 @@ public class IngresoEspecialidad extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         }
-
     }
     private int validarCamposVacios() {
 
@@ -146,7 +161,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Se ha agregado con éxito", Toast.LENGTH_SHORT).show();
-
+                finish();
                 Intent intent = new Intent(IngresoEspecialidad.this, IngresoEspecialidad.class);
                 startActivity(intent);
             }
@@ -156,7 +171,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
-            @Nullable
+            @NonNull
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
