@@ -41,13 +41,16 @@ import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -242,10 +245,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //General
-              if(validarCampos()==4)
-              {
-                  insertarLugar();
-              }
+              validarLugar();
             }
         });
 
@@ -286,7 +286,46 @@ public class IngresoLugarMedico extends AppCompatActivity {
 
 
     }
+    private void validarLugar(){
+        if(verificarSimilitud()==1) {
+            if (validarCampos() == 4) {
+                String url = WebService.urlRaiz + WebService.servicioExistenciaLugar;
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        response ->
+                        {
 
+                            try {
+
+                                JSONObject object = new JSONObject(URLDecoder.decode(response, "UTF-8"));
+                                String existencia = object.getString("valida");
+                                if (existencia.equals("existe")) {
+
+                                    txtNombreLugar.setError("¡Este lugar ya existe!");
+                                    txtNombreLugar.requestFocus();
+
+                                } else {
+                                    insertarLugar();
+                                }
+                            } catch (JSONException | UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }, error -> {
+                    Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
+
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parametros = new HashMap<String, String>();
+                        parametros.put("nombre_lugar", txtNombreLugar.getText().toString().toUpperCase().trim());
+
+                        return parametros;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                requestQueue.add(stringRequest);
+            }
+        }
+    }
     private int verificarSimilitud()
     {
         int exis = 0;
