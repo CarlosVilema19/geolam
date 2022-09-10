@@ -6,9 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Base64;
 import android.app.ProgressDialog;
 import android.provider.MediaStore;
@@ -77,7 +80,7 @@ public class RegistroAdmin extends AppCompatActivity {
     int emailCorrecto = 0;
     String edadUsu = "";
 
-    Button btnFechaIngreso;
+    Button btnFechaIngreso, btnCancelar;
     EditText txtFechaingreso;
     private int dia,mes,anio;
     String edadCalculada;
@@ -86,6 +89,9 @@ public class RegistroAdmin extends AppCompatActivity {
     //Items Sexo F y M
     AutoCompleteTextView autoCompleteTxtEdSexo;
     ArrayAdapter<String> adapterItems;
+    String textBoton;
+    ProgressDialog loading2;
+
 
     ArrayList<String> opcionesCorreoUsuario = new ArrayList<>();
 
@@ -95,9 +101,11 @@ public class RegistroAdmin extends AppCompatActivity {
         setContentView(R.layout.activity_registrar);
 
         login=findViewById(R.id.txsignup);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
-        toolbar.show(this,"Registro",true);
-        login.setText("Consultar");
+        toolbar.show(this,"Registro",false);
+        textBoton = "Consultar";
+        login.setText(textBoton);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +116,33 @@ public class RegistroAdmin extends AppCompatActivity {
             }
         });
 
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (verificarSimilitud() == 0) {
+                    finish();
+                } else {
+                    int icon  = R.drawable.peligro;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegistroAdmin.this);
+                    builder.setIcon(icon)
+                            .setTitle("Cancelar")
+                            .setMessage("Se perderán todos los cambios realizados ¿Desea continuar?")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.show();
+                }
+            }
+        });
         //Calendario Edad
 
         txtFechaingreso = findViewById(R.id.edFecha);
@@ -136,6 +171,7 @@ public class RegistroAdmin extends AppCompatActivity {
                             //Edad en anios
                             edadUsu = proc.calcularEdadAnios(year,month+1,dayOfMonth);
                             txtEdad.setText(edadCalculada);
+                            txtEdad.setError(null);
 
 
                         }
@@ -204,13 +240,14 @@ public class RegistroAdmin extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                loading2 = ProgressDialog.show(RegistroAdmin.this, "Validando...", "Espere por favor");
                 if(validarCampos()==1)
                 {
                     insertarUsusario();
                 }
                 else
                 {
+                    loading2.dismiss();
                     btnInsert=findViewById(R.id.btn_register);
 
                 }
@@ -218,7 +255,23 @@ public class RegistroAdmin extends AppCompatActivity {
             }
         });
 
+    }
 
+    private int verificarSimilitud()
+    {
+        int exis = 0;
+        if(ivFoto.getTag().toString().equals("bg2")||
+                !txtEmail.getText().toString().equals("")||
+                !txtFechaingreso.getText().toString().equals("")||
+                !txtApe.getText().toString().equals("")||
+                !txtSexo.getText().toString().equals("")||
+                !txtEdad.getText().toString().equals("")||
+                !pass.getText().toString().equals("")||
+                !confirmPass.getText().toString().equals(""))
+        {
+            exis =1;
+        }
+        return exis;
     }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
@@ -259,11 +312,20 @@ public class RegistroAdmin extends AppCompatActivity {
             txtName.setError("Ingrese el nombre");
             txtApe.setError("Ingrese el apellido");
             txtEdad.setError("Ingrese la edad");
-            //txtSexo.setError("Seleccione el sexo");
+            txtSexo.setError("Seleccione el sexo");
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    txtSexo.setError(null);
+                }
+            },2000);
             pass.setError("Ingrese la contraseña");
             confirmPass.setError("Ingrese nuevamente la contraseña");
         }
-        else{ if(nameImage.equals("bg1")){Toast.makeText(RegistroAdmin.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();}
+        else{ if(nameImage.equals("bg1")){
+            Toast.makeText(RegistroAdmin.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();
+        }
         else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(RegistroAdmin.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
             txtEmail.setError("Ingrese el correo eletrónico");
             txtEmail.requestFocus();
@@ -393,7 +455,10 @@ public class RegistroAdmin extends AppCompatActivity {
             if (validarCorreo == 1) {
                 String emailToText = txtEmail.getText().toString();
                 if (emailToText.length() < 40) {
-                    if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()&&validarCorreo==1) {
+                    if (Pattern.compile(" {1,}").matcher(txtEmail.getText().toString()).find()) {
+                        txtEmail.setError("¡Verifique que no haya espacios en blanco!");
+                        txtEmail.requestFocus();
+                    } else if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()&&validarCorreo==1) {
                         //Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
                         emailCorrecto = 1;
                     } else {
@@ -409,7 +474,7 @@ public class RegistroAdmin extends AppCompatActivity {
                     txtEmail.requestFocus();
                 }
             } else {
-                txtEmail.setError("Correo ya registrado 99999");
+                txtEmail.setError("Correo ya registrado");
 
             }
 
@@ -474,8 +539,10 @@ public class RegistroAdmin extends AppCompatActivity {
     private int validarApellido(){
         int datCorrecto=0;
         if(txtApe.getText().toString().length()<80){
-
-            if(txtApe.getText().toString().length()<3)
+            if (Pattern.compile(" {2,}").matcher(txtApe.getText().toString()).find()) {
+                txtApe.setError("¡Verifique que no haya más de un espacio en blanco!");
+                txtApe.requestFocus();
+            }else if(txtApe.getText().toString().length()<3)
             {
                 Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
                 txtApe.setError("Apellido demasiado corto. (Mínimo 3 caracteres)");
@@ -488,7 +555,7 @@ public class RegistroAdmin extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
-            txtApe.setError("Apellido demasiado largo. (Mínimo 80 caracteres)");
+            txtApe.setError("Apellido demasiado largo. (Máximo 80 caracteres)");
             txtApe.requestFocus();
         }
         return datCorrecto;
@@ -497,7 +564,10 @@ public class RegistroAdmin extends AppCompatActivity {
 
         int datCorrecto=0;
         if(txtName.getText().toString().length()<80){
-            if(txtName.getText().toString().length()<3)
+            if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
+                txtName.setError("¡Verifique que no haya más de un espacio en blanco!");
+                txtName.requestFocus();
+            }else if(txtName.getText().toString().length()<3)
             {
                 Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
                 txtName.setError("Nombre demasiado corto. (Mínimo 3 caracteres)");
@@ -506,17 +576,16 @@ public class RegistroAdmin extends AppCompatActivity {
             else {
                 datCorrecto=1;
             }
-
-
         }
         else{
             Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
-            txtName.setError("Nombre demasiado largo. (Mínimo 80 caracteres)");
+            txtName.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtName.requestFocus();
         }
         return datCorrecto;
     }
     private void insertarUsusario() {
+        loading2.dismiss();
 
         String url = WebService.urlRaiz+WebService.servicioInsertarAdmin;
         final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
@@ -528,6 +597,8 @@ public class RegistroAdmin extends AppCompatActivity {
                 //Mostrando el mensaje de la respuesta
                 Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_SHORT).show();
                 finish();
+                Intent intent = new Intent(RegistroAdmin.this, RegistroAdmin.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -621,13 +692,6 @@ public class RegistroAdmin extends AppCompatActivity {
         }
 
     }
-
-
-
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
+    public void onBackPressed() {}
 }

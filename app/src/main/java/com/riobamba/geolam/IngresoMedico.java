@@ -57,7 +57,7 @@ public class IngresoMedico extends AppCompatActivity {
         btnMostrarAgregado = findViewById(R.id.btnVerAgregados);
         tvIdMedico = (TextView) findViewById(R.id.TextViewIDMedico_);
 
-        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Gestión de lugares", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnAgregarMedico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -257,5 +257,7 @@ public class IngresoMedico extends AppCompatActivity {
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed() {}
 
 }

@@ -107,7 +107,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
 
         autoCompleteOpcionesTipologia.setAdapter(adaptadorTipo);
 
-        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Gestión de lugares", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
         //Conexión al Servidor- Consulta AutoComplete Tipología
@@ -749,12 +749,6 @@ private int validarWhatsapp(){
         }
     }
 
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -770,5 +764,7 @@ private int validarWhatsapp(){
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {}
 
 }
