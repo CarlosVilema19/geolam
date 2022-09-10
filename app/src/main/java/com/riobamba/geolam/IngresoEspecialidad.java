@@ -47,7 +47,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         btnVerAgregados = findViewById(R.id.btnEspecialidadAgregada);
         btnCancelar=findViewById(R.id.btnCancelarEspe);
 
-        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Gestión de lugares", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -196,5 +196,6 @@ public class IngresoEspecialidad extends AppCompatActivity {
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed() {}
 }

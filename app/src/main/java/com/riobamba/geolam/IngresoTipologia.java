@@ -52,7 +52,7 @@ public class IngresoTipologia extends AppCompatActivity {
         errorTipologia=findViewById(R.id.txTipo);
         btnCancelar=findViewById(R.id.btnCancelarTipo);
 
-        toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
+        toolbar.show(this, "Gestión de lugares", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -201,12 +201,6 @@ public class IngresoTipologia extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -222,5 +216,7 @@ public class IngresoTipologia extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {}
 
 }

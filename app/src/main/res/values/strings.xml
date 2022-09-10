@@ -18,7 +18,7 @@
     <string name="nombre_regsitro">Nombre</string>
     <string name="apellido_registro">Apellido</string>
     <string name="edad_regsitro">Edad</string>
-    <string name="ingreso_regsitro">Regístrate</string>
+    <string name="ingreso_regsitro">Guardar</string>
     //INFORMACION DEL LUGAR
     <string name="rec_nombre_del_lugar">Nombre del lugar</string>
     <string name="rec_descripcion_lugar">Descripción del lugar</string>
