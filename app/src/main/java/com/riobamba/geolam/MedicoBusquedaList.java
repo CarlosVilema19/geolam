@@ -127,8 +127,8 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("nombre_lugar",lugar.trim() );
-                parametros.put("especialidad",espe.trim());
+                parametros.put("nombre_lugar",lugar.trim().toUpperCase().trim());
+                parametros.put("especialidad",espe.trim().toUpperCase().trim());
                 return parametros;
             }
         };

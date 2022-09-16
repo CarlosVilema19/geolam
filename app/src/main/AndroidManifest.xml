@@ -41,6 +41,12 @@
             android:name=".ActualizarTipologia"
             android:exported="false" />
         <activity
+            android:name=".ActualizarEspecialidad"
+            android:exported="false" />
+        <activity
+            android:name=".ActualizarMedico"
+            android:exported="false" />
+        <activity
             android:name=".ReporteGraficoUsuarios"
             android:exported="false" />
         <activity

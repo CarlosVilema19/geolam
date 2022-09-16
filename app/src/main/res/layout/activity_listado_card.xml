@@ -10,8 +10,8 @@
     app:cardCornerRadius="10dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardUseCompatPadding="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="250dp"

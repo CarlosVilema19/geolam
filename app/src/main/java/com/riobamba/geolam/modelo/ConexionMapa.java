@@ -274,8 +274,11 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
             String text = proceso.verDistanciaCercano(distancias,count).toString();
             if(proceso.verDistanciaCercano(distancias,count)>5)
             {
+                int icon  = R.drawable.peligro;
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("El lugar de atención médica más cercano se encuentra a una distancia mayor a los 5 Km ¿Desea continuar?")
+                builder.setIcon(icon)
+                        .setTitle("Aviso")
+                        .setMessage("El lugar de atención médica más cercano se encuentra a una distancia mayor a los 5 Km ¿Desea continuar?")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -394,7 +397,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         fusedLocationClient.removeLocationUpdates(mlocationCallback);
     }
 
-    //Controla si acepta o no los peermisos de ubicacion para activar el gps
+    //Controla si acepta o no los permisos de ubicacion para activar el gps
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -405,7 +408,25 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 iniciarActualizacionesUbicacion();
                 //Toast.makeText(ConexionMapa.this, "Si llega", Toast.LENGTH_SHORT).show();
             } else {
-                checkLocationSetting(builder);
+                //checkLocationSetting(builder);
+                int icon  = R.drawable.peligro;
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setIcon(icon)
+                        .setTitle("Aviso").setMessage("Para hacer uso del mapa debe activar la ubicación")
+                        .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        }).setNegativeButton("Continuar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                checkLocationSetting(builder);
+                            }
+                        });
+                builder2.show();
             }
         }
     }

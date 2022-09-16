@@ -157,9 +157,10 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0987654321#°.-_"
-                        android:gravity="left"
+                        android:digits="@string/digitos_aceptados"
+                        android:inputType="textCapCharacters"
                         android:hint="@string/rec_nombre_del_lugar"
+                        android:maxLength="80"
                         tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -392,19 +393,32 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_guardarLugar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ingresoDescripcionLugar"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="80dp"
+                    android:layout_height="wrap_content">
 
-                    android:text="@string/rec_guardar_informacion"
-                    android:textColor="@android:color/white"
-                    android:textSize="15dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Cancelar" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_guardarLugar"
+                        android:layout_width="185dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@id/btnCancelar"
+                        android:text="@string/rec_guardar_informacion"
+                        android:textSize="15sp" />
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
 

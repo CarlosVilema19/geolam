@@ -18,7 +18,7 @@
     <string name="nombre_regsitro">Nombre</string>
     <string name="apellido_registro">Apellido</string>
     <string name="edad_regsitro">Edad</string>
-    <string name="ingreso_regsitro">Regístrate</string>
+    <string name="ingreso_regsitro">Guardar</string>
     //INFORMACION DEL LUGAR
     <string name="rec_nombre_del_lugar">Nombre del lugar</string>
     <string name="rec_descripcion_lugar">Descripción del lugar</string>
@@ -41,7 +41,7 @@
     <string name="tipologia_agregada">tipologías agregadas</string>
     //ESPECIALIDAD
     <string name="especialidad">Especialidad</string>
-    <string name="ingrese_especilidad">Especilidad</string>
+    <string name="ingrese_especilidad">Especialidad</string>
     <string name="agregar_especialidad">agregar</string>
     <string name="especialidades_agregadas">Especialidades agregadas</string>
     //MAPA
@@ -96,7 +96,7 @@
     <string name="mensaje">Se enviará un enlace de recuperación a tu correo</string>
     <string name="tituloReportes">Reportes</string>
 
-    <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ-_.,0123456789</string>
+    <string name="digitos_aceptados">abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ-_.,#°0123456789</string>
     <string name="cambioContrasenia">Contraseña</string>
 
     <string name="reglasContrasenia">

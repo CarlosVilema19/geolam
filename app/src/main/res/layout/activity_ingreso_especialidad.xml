@@ -88,7 +88,6 @@
                             android:gravity="left"
                             android:maxLength="50"
                             android:inputType="textCapCharacters"
-                            android:layout_below="@id/etEspecialidad"
                             android:hint="@string/ingrese_especilidad"
                             android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
                             tools:ignore="TextContrastCheck,TextContrastCheck"
@@ -113,17 +112,30 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAgregarEspecialidad"
-                        android:layout_width="185dp"
-                        android:layout_height="wrap_content"
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginRight="80dp"
-                        android:text="@string/rec_guardar_informacion"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp" />
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCancelarEspe"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:text="Cancelar" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAgregarEspecialidad"
+                            android:layout_width="185dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_toEndOf="@id/btnCancelarEspe"
+                            android:text="@string/rec_guardar_informacion"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
                 </LinearLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>

@@ -53,9 +53,7 @@
                     android:layout_below="@+id/cont"
                     android:layout_width="220dp"
                     android:layout_height="170dp"
-                    android:layout_gravity="center_horizontal"
-
-                    >
+                    android:layout_gravity="center_horizontal">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageViewPerfil"
@@ -75,12 +73,8 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:strokeColor="@android:color/darker_gray"
-                        app:strokeWidth="2dp"
-
-                        />
-
+                        app:strokeWidth="2dp" />
                     <com.google.android.material.button.MaterialButton
-
                         android:id="@+id/btn_cargarfoto"
                         style="@style/Widget.Material3.Button.TextButton.Icon"
                         android:layout_width="45dp"
@@ -93,11 +87,7 @@
                         app:strokeWidth="3dp"
                         app:iconGravity="textEnd"
                         app:iconTint="#FFFFFF" />
-
-
-
                 </RelativeLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -105,9 +95,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
-
                     >
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etemail"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -316,19 +304,35 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etcontrasenia"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="80dp"
-                    android:text="@string/ingreso_regsitro"
-                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content">
 
-                    android:textSize="15dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Cancelar" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_register"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/btnCancelar"
+                        android:text="@string/ingreso_regsitro"
+                        android:textSize="15sp" />
+                </RelativeLayout>
 
 
             </LinearLayout>

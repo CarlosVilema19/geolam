@@ -25,6 +25,7 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
     private final List<ListadoLugarAdmin> lugarList;
     final EspecialidadAdminAdaptador.OnItemClickListener listener;
     final EspecialidadAdminAdaptador.OnElimListener listener2;
+    final EspecialidadAdminAdaptador.OnClickActListener listener3;
     private final List<ListadoLugarAdmin> espeListOriginal;
     private final List<ListadoLugarAdmin> espeList;
 
@@ -37,15 +38,21 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
         void onItemClick(ListadoLugarAdmin item);
     }
 
+    public interface OnClickActListener{
+        void onClick(ListadoLugarAdmin button);
+    }
+
 
     public EspecialidadAdminAdaptador(Context mCtx, 
                                       List<ListadoLugarAdmin> lugarList, 
                                       EspecialidadAdminAdaptador.OnItemClickListener listener,
-                                      EspecialidadAdminAdaptador.OnElimListener listener2){
+                                      EspecialidadAdminAdaptador.OnElimListener listener2,
+                                      EspecialidadAdminAdaptador.OnClickActListener listener3){
         this.mCtx = mCtx;
         this.lugarList = lugarList;
         this.listener = listener;
         this.listener2 = listener2;
+        this.listener3 = listener3;
         espeListOriginal = new ArrayList<>();
         espeListOriginal.addAll(lugarList);
         espeList = new ArrayList<>();
@@ -140,7 +147,6 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
 
         viewHolder.nombreLugar.setText(listadoLugar.getNombreLugar());
         viewHolder.idLugar.setVisibility(View.GONE);
-        viewHolder.btnActualizar.setVisibility(View.GONE);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +157,12 @@ public class EspecialidadAdminAdaptador extends RecyclerView.Adapter<com.riobamb
             @Override
             public void onClick(View v) {
                 listener2.onItemClick(listadoLugar);
+            }
+        });
+        viewHolder.btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener3.onClick(listadoLugar);
             }
         });
 
