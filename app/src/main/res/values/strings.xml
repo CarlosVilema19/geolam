@@ -35,7 +35,7 @@
     <string name="gestion_de_lugares">Gestion de lugares</string>
     <string name="gestion_de_usuarios">Gestion de usuarios</string>
     //TIPOLOGIA
-    <string name="titulo_tipologia">Tipología del lugar de ateción médica</string>
+    <string name="titulo_tipologia">Tipología del lugar de atención médica</string>
     <string name="ingreso_tipologia">Tipología</string>
     <string name="agregar_tipologia">Agregar</string>
     <string name="tipologia_agregada">tipologías agregadas</string>
@@ -92,7 +92,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="consultar">Consultar</string>
+    <string name="consultar"> Consultar</string>
     <string name="mensaje">Se enviará un enlace de recuperación a tu correo</string>
     <string name="tituloReportes">Reportes</string>
 

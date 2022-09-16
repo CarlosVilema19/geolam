@@ -70,10 +70,10 @@ public class ReportesAdmin extends AppCompatActivity {
 
         setContentView(R.layout.activity_reportes_admin);
         btnGenerarPdfUsu = findViewById(R.id.btnGenerarPDFUsuarios);
-        btnGenerarPdfLugares = findViewById(R.id.btnGenerarPDFLugaresVisitados);
-        grafica=findViewById(R.id.grafica);
-        rl=findViewById(R.id.Rlay);
-
+       // btnGenerarPdfLugares = findViewById(R.id.btnGenerarPDFLugaresVisitados);
+       // grafica=findViewById(R.id.grafica);
+//        rl=findViewById(R.id.Rlay);
+//
 
       // grafi();
         prueba = findViewById(R.id.btnprueba);
@@ -95,21 +95,6 @@ public class ReportesAdmin extends AppCompatActivity {
             }
         });
 
-        btnGenerarPdfLugares.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (lugares() == 1) {
-                    if (rowsLugares.size() > 0) {
-
-                        pdf2();
-                    }
-                }
-
-
-
-            }
-        });
 
         prueba.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +104,7 @@ public class ReportesAdmin extends AppCompatActivity {
             }
         });
 
-        toolbar.show(this, "Reportes", true);
+        toolbar.show(this, "", true);
        // grafico();
     }
 

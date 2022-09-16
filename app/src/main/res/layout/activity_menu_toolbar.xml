@@ -11,8 +11,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:theme="@style/ToolbarTheme"
-      android:background="@drawable/degradado2"
-      app:titleTextColor="@color/white">
+      android:background="@color/white"
+      app:titleTextColor="@color/base">
 
   </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>

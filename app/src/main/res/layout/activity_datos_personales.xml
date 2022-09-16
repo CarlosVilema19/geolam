@@ -6,35 +6,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
+
     tools:context=".registrar">
 
     <include layout="@layout/activity_menu_toolbar" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@drawable/imagen2"
+    android:layout_below="@+id/iMenuSupe"
+    android:layout_alignParentTop="true"
+    android:layout_gravity="center_vertical"
+    android:layout_height="match_parent"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="19dp"
+        android:layout_gravity="center_vertical"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:alpha="0.5"
+        >
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/iMenuSupe"
+        android:gravity="center_vertical"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="19dp"
-        android:layout_below="@+id/iMenuSupe"
+        android:background="@color/transparent"
+        android:layout_gravity="center_vertical"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
         >
 
         <ScrollView
             android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingBottom="20dp">
-
-
+               >
 
                 <RelativeLayout
                     android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
+
                     android:layout_gravity="center_horizontal"
 
                     >
@@ -384,6 +415,6 @@
 
 
     </androidx.cardview.widget.CardView>
-
+    </RelativeLayout>
 
 </RelativeLayout>
