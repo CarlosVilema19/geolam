@@ -13,4 +13,9 @@
     <color name="transparent">#0000ffff</color>
     <color name="rojo">#9E1A1A</color>
 
+    <color name="morado">#5A65FF</color>
+    <color name="gris">#cbcbcb</color>
+    <color name="naranja">#FF8E60</color>
+    <color name="naranja_fuerte">#FF6869</color>
+
 </resources>

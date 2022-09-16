@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
 
     tools:context=".Configuraciones">
+
     <include layout="@layout/activity_menu_toolbar" />
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
+    android:background="@drawable/imagen"
     android:layout_below="@+id/iMenuSupe"
     >
     <androidx.cardview.widget.CardView
@@ -51,6 +53,7 @@
                             android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                             android:text="cuenta"
                             android:textAlignment="textStart"
+                            android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="14dp"
                             app:cornerRadius="6dp"

@@ -16,8 +16,10 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
     }
 
     buildTypes {
@@ -74,4 +76,5 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'com.github.salehyarahmadi:DataTable:v1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'jp.wasabeef:blurry:2.0.2'
 }

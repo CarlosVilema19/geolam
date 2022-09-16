@@ -10,13 +10,15 @@
     <LinearLayout
         android:layout_below="@+id/iMenuSupe"
         android:layout_width="match_parent"
+        android:background="@drawable/imagen"
         android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="45dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             app:cardUseCompatPadding="true"
@@ -41,7 +43,8 @@
                             android:id="@+id/txRecuperacion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
                             android:text="@string/restablecer_contrasenia"
                             android:textColor="@color/cardview_dark_background"
                             android:textSize="16sp"
@@ -54,6 +57,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="@string/mensaje"
                         android:textSize="12sp"
                         android:textStyle="bold"
