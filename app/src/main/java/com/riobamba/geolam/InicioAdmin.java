@@ -21,6 +21,8 @@ import android.widget.ViewFlipper;
 
 import com.riobamba.geolam.modelo.Toolbar;
 
+import java.util.ArrayList;
+
 public class InicioAdmin extends AppCompatActivity {
 Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnBuscarLugar;
     ViewFlipper carrusel,carrusel2,carrusel3;
@@ -30,6 +32,10 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
     Button previous, previous2;
     Boolean band1=false;
     Boolean band2=false;
+
+    ArrayList<String> idImages1= new ArrayList<>();
+    ArrayList<String> idImages2= new ArrayList<>();
+    ArrayList<String> idImages3= new ArrayList<>();
 
     Boolean band3=false;
     Boolean band4=false;
@@ -117,40 +123,41 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
 
         int images[]={R.drawable.carru_tip,R.drawable.carru_lug,R.drawable.carru_esp,
                 R.drawable.carru_med, R.drawable.carru_le, R.drawable.carru_mle};
-        /*for (int image:images){
-            flipperImages(image);
 
-        }*/
-        //if(images.length==6) {
+
+        String listIDImage1;
             for (int i = 0; i < images.length; i++) {
                 flipperImages(images[i]);
-            //}
-            //Toast.makeText(InicioAdmin.this, (Integer) carrusel.getCurrentView().getId(), Toast.LENGTH_SHORT).show();
-           // String a="2131165286";
+                listIDImage1= String.valueOf(images[i]);
+                idImages1.add(listIDImage1);
+
+            //Toast.makeText(InicioAdmin.this, idImages1.get(i).toString(), Toast.LENGTH_SHORT).show();
 
 
         }
 
+
         int images2[]={R.drawable.gesusers, R.drawable.reporte_lugares};
+        String listIDImage2;
         for (int i = 0; i < images2.length; i++) {
             flipperImages2(images2[i]);
+            listIDImage2= String.valueOf(images2[i]);
+            idImages2.add(listIDImage2);
+
+            //Toast.makeText(InicioAdmin.this, idImages2.get(i).toString(), Toast.LENGTH_SHORT).show();
+
+
         }
 
         int images3[]={R.drawable.gu};
+        String listIDImage3;
         for (int i = 0; i < images3.length; i++) {
             flipperImages3(images3[i]);
+            listIDImage3= String.valueOf(images3[i]);
+            idImages3.add(listIDImage3);
+
+           // Toast.makeText(InicioAdmin.this, idImages3.get(i).toString(), Toast.LENGTH_SHORT).show();
         }
-        /*for (int image:images){
-            flipperImages(image);
-
-        }*/
-       // if(images2.length==6) {
-
-            //Toast.makeText(InicioAdmin.this, (Integer) carrusel.getCurrentView().getId(), Toast.LENGTH_SHORT).show();
-            // String a="2131165286";
-
-
-      //  }
 
 
         carrusel.setOnClickListener(new View.OnClickListener() {
@@ -162,29 +169,24 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
                // Toast.makeText(InicioAdmin.this,carrusel.getCurrentView().getBackground().toString(), Toast.LENGTH_SHORT).show();
                 //btnGestionL.setVisibility(View.VISIBLE);
                 // if(carrusel.getCurrentView().getBackground().toString()==2131165428)
-               String tipo="2131165302";
-               String lug="2131165299";
-               String espe="2131165297";
-               String medic="2131165300";
-               String asigle="2131165298";
-               String asigmle="2131165301";
-                if(carrusel.getCurrentView().getTag().toString().equals(tipo)){
+               String idTag=carrusel.getCurrentView().getTag().toString();
+                if(idTag.equals(idImages1.get(0))){
                    // finishAndRemoveTask();
                     Intent intent = new Intent(InicioAdmin.this, IngresoTipologia.class);
                     startActivity(intent);}
-                else{if(carrusel.getCurrentView().getTag().toString().equals(lug)){
+                else{if(idTag.equals(idImages1.get(1))){
                     Intent intent = new Intent(InicioAdmin.this, IngresoLugarMedico.class);
                         startActivity(intent);}
-                    else { if(carrusel.getCurrentView().getTag().toString().equals(espe)){
+                    else { if(idTag.equals(idImages1.get(2))){
                         Intent intent = new Intent(InicioAdmin.this, IngresoEspecialidad.class);
                             startActivity(intent);}
-                        else{ if(carrusel.getCurrentView().getTag().toString().equals(medic)){
+                        else{ if(idTag.equals(idImages1.get(3))){
                             Intent intent = new Intent(InicioAdmin.this, IngresoMedico.class);
                                 startActivity(intent); }
-                            else{ if(carrusel.getCurrentView().getTag().toString().equals(asigle)){
+                            else{ if(idTag.equals(idImages1.get(4))){
                                 Intent intent = new Intent(InicioAdmin.this, AsignarEspecialidad.class);
                                     startActivity(intent); }
-                                else{ if(carrusel.getCurrentView().getTag().toString().equals(asigmle)){
+                                else{ if(idTag.equals(idImages1.get(5))){
                                     Intent intent = new Intent(InicioAdmin.this, AsignarMedico.class);
                                         startActivity(intent);
                                         //animacionCarrusel(false);
@@ -203,14 +205,13 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
                 //Toast.makeText(InicioAdmin.this,carrusel2.getCurrentView().getTag().toString(), Toast.LENGTH_SHORT).show();
                 //btnGestionL.setVisibility(View.VISIBLE);
                 // if(carrusel.getCurrentView().getBackground().toString()==2131165428)
-                String usuario="2131165357";
-                String lug="2131165498";
+                String idTag2=carrusel2.getCurrentView().getTag().toString();
 
-                if(carrusel2.getCurrentView().getTag().toString().equals(usuario)){
+                if(idTag2.equals(idImages2.get(0))){
                     // finishAndRemoveTask();
                     Intent intent = new Intent(InicioAdmin.this, ReporteGraficoUsuarios.class);
                     startActivity(intent);}
-                else{if(carrusel2.getCurrentView().getTag().toString().equals(lug)){
+                else{if(idTag2.equals(idImages2.get(1))){
                     Intent intent = new Intent(InicioAdmin.this, ReporteGraficoTop.class);
                     startActivity(intent);}
                }
@@ -226,9 +227,9 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
                // Toast.makeText(InicioAdmin.this,carrusel3.getCurrentView().getTag().toString(), Toast.LENGTH_SHORT).show();
                 //btnGestionL.setVisibility(View.VISIBLE);
                 // if(carrusel.getCurrentView().getBackground().toString()==2131165428)
-                String usuario="2131165361";
+                String idTag3=carrusel3.getCurrentView().getTag().toString();
 
-                if(carrusel3.getCurrentView().getTag().toString().equals(usuario)){
+                if(idTag3.equals(idImages3.get(0))){
                     // finishAndRemoveTask();
                     Intent intent = new Intent(InicioAdmin.this, RegistroAdmin.class);
                     startActivity(intent);}
@@ -313,7 +314,7 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
 
         //if (image==1) {
         // imageView.setTag("bg1");
-        Toast.makeText(InicioAdmin.this, imageView2.getTag().toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(InicioAdmin.this, imageView2.getTag().toString(), Toast.LENGTH_SHORT).show();
         //Toast.makeText(InicioAdmin.this, carrusel.getDisplay().toString(), Toast.LENGTH_SHORT).show();
         imageView2.setBackgroundResource(image);
         carrusel2.addView(imageView2);

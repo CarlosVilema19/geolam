@@ -17,5 +17,10 @@
     <color name="gris">#cbcbcb</color>
     <color name="naranja">#FF8E60</color>
     <color name="naranja_fuerte">#FF6869</color>
+    <color name="verde2">#FF92C400</color>
+    <color name="celeste">#46add5</color>
+    <color name="celesteb">#ffd7e7f4</color>
+    <color name="celestec">#fff1fbff</color>
+    <color name="morado_busqueda">#737efd</color>
 
 </resources>

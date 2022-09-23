@@ -19,13 +19,13 @@
         android:background="@drawable/circular"
         app:backgroundTint="@null"
         android:clickable="true"
-        android:textAlignment="center"
         android:focusable="true"
+        android:textAlignment="viewEnd"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="@string/consultar"
+        android:text= "@string/consultar"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="16dp"
 
         android:textStyle="bold" />
 
@@ -164,5 +164,5 @@
 
 
         </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

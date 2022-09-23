@@ -2,14 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid
-    android:color="@color/base" />
+        android:color="@color/base" />
     <gradient
-        android:startColor="#A9F99E"
+        android:startColor="@color/morado_busqueda"
         android:endColor="#46ADD5"
-        android:angle="100" />
+        android:angle="45" />
 
     <size
-        android:width="120dp"
+        android:width="160dp"
         android:height="60dp"/>
 
     <corners
@@ -18,6 +18,5 @@
 
 
 
-
+    />
 </shape>
-

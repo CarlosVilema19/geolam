@@ -88,20 +88,7 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMisDatosMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:drawableLeft="@drawable/ic_baseline_account_circle_24"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="Mis datos"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfiguraciones"
@@ -117,34 +104,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="16sp" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCambiarContrasenia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:drawableLeft="@drawable/ic_baseline_https_24"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="Contraseña"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAcercaAppMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:drawableLeft="@drawable/ic_baseline_info_24"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="Acerca de la app"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesionMenu"

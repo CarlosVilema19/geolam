@@ -84,23 +84,13 @@ public class Toolbar extends AppCompatActivity{
         {
             cerrarSesion(activities);
         }
-        if(item.getItemId()==R.id.iMisDatos)
-        {
-            activities.startActivity(new Intent(ctx, datosUsuClass));
-        }
+
         if(item.getItemId()==android.R.id.home)
         {
             activities.finish();
             activities.overridePendingTransition(0,0);
         }
-        if(item.getItemId()==R.id.iAcercaApp)
-        {
-            activities.startActivity(new Intent(ctx, infoAppClass));
-        }
-        if(item.getItemId()==R.id.iCambioContrasenia)
-        {
-            activities.startActivity(new Intent(ctx, cambioContraClass));
-        }
+
         if(item.getItemId()==R.id.iConfiguraciones)
         {
             activities.startActivity(new Intent(ctx, configuracionesClass));
