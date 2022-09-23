@@ -13,43 +13,84 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAsignaciones"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/iMenuSupe"
         android:layout_alignParentEnd="true"
-        android:background="#00FFFFFF"
+        android:background="@drawable/circular"
+        app:backgroundTint="@null"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/consultar"
         android:textAllCaps="false"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@color/white"
         android:textSize="16dp"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/iMenuSupe"
+        android:background="@drawable/imagen_gestion"
+        android:paddingTop="@dimen/activity_vertical_margin"
 
-    <androidx.cardview.widget.CardView
-        android:layout_below="@+id/btnAsignaciones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="30dp"
-        app:cardUseCompatPadding="true"
-        android:elevation="10dp"
         >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:alpha="0.7"
+            android:background="@color/transparent"
+            android:backgroundTint="@null"
+            android:gravity="center_vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="400dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@color/transparent"
+                        android:backgroundTint="@null"
+                        android:orientation="vertical"
+                        android:paddingLeft="14dp">
+
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="35dp"
+        android:background="@color/transparent"
+        android:backgroundTint="@null"
         android:orientation="vertical"
-        android:paddingBottom="50dp">
+        android:paddingLeft="35dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
         <TextView
@@ -61,11 +102,12 @@
             android:text="Asignar Médico | Especialidad | Lugar"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
 
 
             />
+        </RelativeLayout>
     <com.google.android.material.textfield.TextInputLayout
 
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -73,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAsignarMedico"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:hint="Médico"
 
@@ -114,7 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/autoMedico"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="10dp"
         android:hint="Especialidad"
 
@@ -151,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/autoEspecialidad"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_marginRight="10dp"
             android:hint="Lugar de atención Médica"
 
@@ -189,15 +231,12 @@
             android:layout_below="@id/TextViewIDLugar"
             android:layout_gravity="center"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="60dp"
-            android:layout_marginBottom="40dp"
             android:text="@string/rec_guardar_informacion"
             android:textColor="@android:color/white"
             android:textSize="15dp" />
 
     </LinearLayout>
-    </ScrollView>
-
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </RelativeLayout>

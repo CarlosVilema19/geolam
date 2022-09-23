@@ -7,15 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ReporteGraficoTop">
     <include layout="@layout/activity_menu_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/imagen_gestion"
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_height="wrap_content">
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card2"
-        android:layout_below="@+id/Rlay2"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="75dp"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:foregroundGravity="center"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
@@ -79,7 +86,7 @@
                         android:layout_below="@+id/text2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
+                        android:layout_margin="10dp"
                         app:header_gravity="center"
                         app:row_gravity="center"
 
@@ -120,4 +127,5 @@
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </RelativeLayout>

@@ -8,43 +8,73 @@
     tools:context=".EliminarCuenta">
 
     <include layout="@layout/activity_menu_toolbar" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/iMenuSupe"
-        android:layout_centerVertical="true"
+        android:background="@drawable/imagen_gestion"
+        android:paddingTop="@dimen/activity_vertical_margin"
+
         >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true"
-        >
-
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:alpha="0.7"
+            android:background="@color/transparent"
+            android:backgroundTint="@null"
+            android:gravity="center_vertical">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
 
-                android:orientation="vertical"
-                android:paddingBottom="50dp">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="280dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@color/transparent"
+                        android:backgroundTint="@null"
+                        android:orientation="vertical"
+                        android:paddingLeft="14dp">
+
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="35dp"
+            android:background="@color/transparent"
+            android:backgroundTint="@null"
+            android:orientation="vertical"
+            android:paddingLeft="35dp">
+
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="25dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:text="@string/textEliminarCuenta"
@@ -104,10 +134,7 @@
                     android:textStyle="bold"
                     app:backgroundTint="@null" />
 
-            </LinearLayout>
-        </ScrollView>
 
-
-    </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
+    </RelativeLayout>

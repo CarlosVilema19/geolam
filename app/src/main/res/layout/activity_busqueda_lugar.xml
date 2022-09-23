@@ -6,26 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    android:background="@color/background"
+    android:background="@color/white"
     tools:context=".registrar">
     <include layout="@layout/activity_menu_toolbar" />
+
     <include layout="@layout/activity_toolbar_infe" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/iMenuInfe"
+
         android:layout_below="@+id/iMenuSupe"
-        android:layout_above="@+id/iMenuInfe">
+        android:background="@drawable/imagen3">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="10dp"
-            >
+            android:layout_marginRight="20dp"
+
+            app:cardCornerRadius="10dp">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -34,29 +37,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
                     android:orientation="vertical">
 
 
                     <TextView
                         android:id="@+id/txBusquedaLu"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="75dp"
+
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/titulo_busqueda"
+                        android:gravity="center"
                         android:text="Lugares de atención médica"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:text="Escoja una categoría"
+
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -65,9 +71,9 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:hint="Categoría">
 
                         <AutoCompleteTextView
@@ -82,9 +88,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:text="Ingrese una tipología"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -94,9 +100,9 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginRight="20dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edBusTipo"
@@ -114,11 +120,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="20dp"
                         android:text="Ingrese una especialidad"
                         android:textSize="14sp"
+
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -126,9 +133,9 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginRight="20dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edBusEspe"
@@ -149,14 +156,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="75dp"
+                        android:layout_marginLeft="100dp"
                         android:layout_marginTop="25dp"
-                        android:layout_marginRight="75dp"
+                        android:layout_marginRight="100dp"
                         android:layout_marginBottom="25dp"
+                        android:background="@drawable/boton_bus_lug"
                         android:drawableEnd="@drawable/ic_baseline_search_24"
                         android:text="Buscar"
                         android:textColor="@android:color/white"
-                        android:textSize="15sp" />
+                        android:textSize="13sp"
+                        app:backgroundTint="@null" />
 
                 </LinearLayout>
             </ScrollView>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -173,7 +174,9 @@ public class CambiarContrasenia extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
+                Intent intent = new Intent(CambiarContrasenia.this, Configuraciones.class);
+                startActivity(intent);
             }
         });
         MostrarResultado();

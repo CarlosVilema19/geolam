@@ -9,21 +9,27 @@
     android:layout_gravity="center_horizontal"
     tools:context=".registrar">
     <include layout="@layout/activity_menu_toolbar" />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@+id/iMenuSupe"
+    android:background="@drawable/imagen_gestion2"
+    android:layout_height="wrap_content">
     <TextView
-        android:layout_below="@+id/iMenuSupe"
+
         android:id="@+id/txsignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+
         android:clickable="true"
         android:focusable="true"
+        android:background="@drawable/circular"
+        app:backgroundTint="@null"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Iniciar Sesión"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@color/white"
         android:textSize="16sp"
+        android:gravity="center"
         android:textStyle="bold"
         />
 
@@ -341,5 +347,5 @@
 
     </androidx.cardview.widget.CardView>
 
-
+</RelativeLayout>
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background"
+
     android:layout_gravity="center_horizontal">
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
@@ -13,129 +13,138 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iMenuSupe"
         android:layout_above="@+id/iMenuInfe"
-        >
+        android:layout_below="@+id/iMenuSupe"
+        android:background="@drawable/imagen3">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:elevation="10dp"
-        >
-
-        <ScrollView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-
-                <TextView
-                    android:id="@+id/txBusquedaMed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Médicos"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Ingrese un lugar de atención médica"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_height="wrap_content"
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edBusLugar"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/txBusquedaMed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:digits="@string/digitos_aceptados"
-                        android:hint="Lugar de trabajo"
-                        android:inputType="textCapCharacters"
-                        tools:ignore="TextContrastCheck,TextContrastCheck" />
+                        android:layout_marginLeft="75dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/titulo_busqueda_medicos"
+                        android:gravity="center"
+                        android:text="Médicos"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Ingrese un lugar de atención médica"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Ingrese una especialidad"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edBusEspe"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                      >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edBusLugar"
+
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:digits="@string/digitos_aceptados"
+                            android:hint="Lugar de trabajo"
+                            android:inputType="textCapCharacters"
+                            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:hint="Especialidad"
-                        android:digits="@string/digitos_aceptados"
-                        android:inputType="textCapCharacters"
-                        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="20dp"
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnBuscarMed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="75dp"
-                    android:layout_marginBottom="25dp"
-                    android:drawableEnd="@drawable/ic_baseline_search_24"
-                    android:text="Buscar"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Ingrese una especialidad"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-            </LinearLayout>
-        </ScrollView>
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edBusEspe"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:digits="@string/digitos_aceptados"
+                            android:hint="Especialidad"
+                            android:inputType="textCapCharacters"
+                            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-    </androidx.cardview.widget.CardView>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBuscarMed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="100dp"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/boton_busq_medic"
+                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                        android:text="Buscar"
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp"
+                        app:backgroundTint="@null" />
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </RelativeLayout>
