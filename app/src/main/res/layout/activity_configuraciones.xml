@@ -4,149 +4,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".Configuraciones">
 
     <include layout="@layout/activity_menu_toolbar" />
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:background="@drawable/imagen3"
-    android:layout_below="@+id/iMenuSupe"
-    >
-    <androidx.cardview.widget.CardView
-
-
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="10dp"
+        android:layout_below="@+id/iMenuSupe"
+        android:background="@drawable/imagen3"
+        android:gravity="center_vertical">
 
-        app:cardUseCompatPadding="true"
-        >
+        <androidx.cardview.widget.CardView
 
-        <ScrollView
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="10dp"
 
+            app:cardUseCompatPadding="true">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCuenta_"
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="25dp"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="@drawable/bordes_redondos"
-                            app:backgroundTint="@null"
-                            android:drawableLeft="@drawable/ic_baseline_person_24"
-                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:text="cuenta"
-                            android:textAlignment="textStart"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:textSize="14dp"
-                            app:cornerRadius="6dp"
-                            app:iconGravity="textEnd" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff1fbff"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCuenta_"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableLeft="@drawable/ic_baseline_person_24"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="cuenta"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null"
+                        app:cornerRadius="6dp"
+                        app:iconGravity="textEnd" />
 
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnContrasenia"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableLeft="@drawable/ic_baseline_lock_24"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="Contraseña"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null"
+
+                        app:iconGravity="textEnd" />
 
 
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnContrasenia"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/bordes_redondos"
-                            app:backgroundTint="@null"
-                            android:drawableLeft="@drawable/ic_baseline_lock_24"
-                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:text="Contraseña"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="13dp"
-                            android:textStyle="bold"
-
-                            app:iconGravity="textEnd" />
-
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEliminarCuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="Eliminar cuenta"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null"
+                        app:cornerRadius="6dp"
+                        app:iconGravity="textEnd" />
 
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnEliminarCuenta"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="@drawable/bordes_redondos"
-                            app:backgroundTint="@null"
-                            android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
-                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:text="Eliminar cuenta"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="13dp"
-                            android:textStyle="bold"
-                            app:cornerRadius="6dp"
-                            app:iconGravity="textEnd" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAcercaApp"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableLeft="@drawable/ic_baseline_info_24"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="Acerca de la app"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null"
+                        app:cornerRadius="6dp"
+                        app:iconGravity="textEnd" />
 
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnAcercaApp"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="@drawable/bordes_redondos"
-                            app:backgroundTint="@null"
-                            android:drawableLeft="@drawable/ic_baseline_info_24"
-                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:text="Acerca de la app"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="13dp"
-                            android:textStyle="bold"
-                            app:cornerRadius="6dp"
-                            app:iconGravity="textEnd" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTerminosCondiciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableLeft="@drawable/ic_baseline_article_24"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="Términos y Condiciones"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null"
+                        app:cornerRadius="6dp"
+                        app:iconGravity="textEnd" />
+                </LinearLayout>
+
+            </ScrollView>
 
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnTerminosCondiciones"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="25dp"
-                            android:background="@drawable/bordes_redondos"
-                            app:backgroundTint="@null"
-                            android:drawableLeft="@drawable/ic_baseline_article_24"
-                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:text="Términos y Condiciones"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="13dp"
-                            android:textStyle="bold"
-                            app:cornerRadius="6dp"
-                            app:iconGravity="textEnd" />
-                    </LinearLayout>
-
-        </ScrollView>
-
-
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </RelativeLayout>

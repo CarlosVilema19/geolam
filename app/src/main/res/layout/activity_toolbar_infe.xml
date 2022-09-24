@@ -98,7 +98,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:clickable="true"
-                android:drawableTop="@drawable/ic_baseline_search_242"
+                android:drawableTop="@drawable/ic_baseline_search_24222"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:onClick="moverEspe"

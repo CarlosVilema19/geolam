@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="match_parent"
 
-    android:src="@drawable/gradient"
+    android:src="@drawable/fondo4"
 
-    android:alpha="0.5"/>
+    android:alpha="0.25"/>
 

@@ -135,6 +135,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
     public void moveToEliminar(ListadoLugarAdmin button) //Método para eliminar presionando sobre un botón
     {
         String idLugar = button.getId().toString();
+        String nombre_lugar = button.getNombreLugar();
         String url2 = WebService.urlRaiz+WebService.servicioEliminarLugar; //URL del web service
 
         final ProgressDialog loading = ProgressDialog.show(ListadoCrud.this, "Eliminando...", "Espere por favor");
@@ -158,6 +159,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_lugar", idLugar);
+                parametros.put("nombre_lugar", nombre_lugar);
                 loading.dismiss();
                 return parametros;
             }
