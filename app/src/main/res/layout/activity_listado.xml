@@ -25,14 +25,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
+                android:background="@drawable/imagen"
                 android:orientation="horizontal"
                 android:padding="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
@@ -62,10 +63,10 @@
                         android:id="@+id/llLugar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
                         android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp">
 
@@ -73,24 +74,24 @@
                             android:id="@+id/tvNombreLugarLista"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:textColor="@color/black"
                             android:paddingLeft="2dp"
-                            android:layout_marginTop="5dp"
                             android:paddingRight="2dp"
                             android:text="@string/nombre_lugar_listado"
                             android:textAllCaps="true"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvTelefonoLista"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
                             android:text="Tipologia"
                             android:textAllCaps="true"
-                            android:layout_marginStart="2dp"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
@@ -112,11 +113,11 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="2dp"
                                 android:ellipsize="end"
-                                android:textColor="@color/black"
                                 android:maxLines="1"
                                 android:text="Categoria"
                                 android:textAllCaps="true"
-                                android:textSize="13sp"/>
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -129,7 +130,7 @@
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_baseline_directions_24"                                />
+                                app:srcCompat="@drawable/ic_baseline_directions_24" />
 
                             <TextView
                                 android:id="@+id/tvDireccionLista"
@@ -137,8 +138,8 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:textColor="@color/black"
                                 android:text="@string/direccion_listado"
+                                android:textColor="@color/black"
                                 android:textSize="13sp" />
                         </LinearLayout>
 
@@ -146,8 +147,8 @@
                             android:id="@+id/llDistancia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/ivDistancia"
@@ -161,9 +162,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Distancia"
-                                android:textStyle="bold"
+                                android:textColor="@color/black"
                                 android:textSize="13sp"
-                                android:textColor="@color/black" />
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -171,8 +172,8 @@
                             android:id="@+id/tvId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
