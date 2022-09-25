@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     android:padding="10dp"
+    android:background="@drawable/imagen3"
     tools:context=".Login">
 
     <LinearLayout

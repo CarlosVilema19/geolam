@@ -7,7 +7,7 @@
     android:animateLayoutChanges="true"
     tools:context=".ListadoUsuariosAdminControl"
     android:orientation="vertical"
-    app:cardElevation="4dp"
+    app:cardElevation="1dp"
     app:cardCornerRadius="10dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -24,13 +24,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:background="@drawable/imagen"
             android:orientation="horizontal"
             android:padding="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
 
@@ -48,10 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:paddingStart="2dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginEnd="70dp"
-                    android:layout_marginStart="4dp">
+                    android:orientation="vertical"
+                    android:paddingStart="2dp">
 
                     <TextView
                         android:id="@+id/tvNombreUsuariosLista"
@@ -98,7 +100,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="25dp"
-
+                android:layout_centerVertical="true"
                 android:orientation="vertical">
 
 
