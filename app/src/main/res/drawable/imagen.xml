@@ -5,5 +5,5 @@
 
     android:src="@drawable/fondo4"
 
-    android:alpha="0.25"/>
+    android:alpha="0.15"/>
 

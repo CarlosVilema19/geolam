@@ -133,8 +133,8 @@ public class AsignacionMedicoAdaptador extends RecyclerView.Adapter<AsignacionMe
         String lug, med, esp;
 
         med = "<b>Médico: </b>";
-        esp = "<br/><br/><b>Especalidad: </b>";
-        lug = "<br/><br/><b>Lugar: </b>";
+        esp = "<br/><b>Especalidad: </b>";
+        lug = "<br/><b>Lugar: </b>";
 
 
         String texto = med  + "(Id: " + listadoLugar.getIdMedico()+") " +listadoLugar.getMedico() +

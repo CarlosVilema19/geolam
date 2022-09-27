@@ -21,6 +21,7 @@ import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class InfoApp extends AppCompatActivity {
     EditText ingresarSugerencia;
@@ -51,36 +52,62 @@ public class InfoApp extends AppCompatActivity {
 
     }
 
+    private int validarComentario(){
+        int camposVacios=0;
+        if(ingresarSugerencia.getText().toString().length()<=200) {
+            if (Pattern.compile(" {3,}").matcher(ingresarSugerencia.getText().toString()).find()) {
+                ingresarSugerencia.setError("¡Verifique que no haya más de dos espacios en blanco!");
+                ingresarSugerencia.requestFocus();
+            } else if(ingresarSugerencia.getText().toString().length()<3 && ingresarSugerencia.getText().toString().length()>0)
+            {
+                ingresarSugerencia.setError("El texto ingresado es demasiado corto");
+                ingresarSugerencia.requestFocus();
+            }else {
+                camposVacios = 1;
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "¡Error!", Toast.LENGTH_SHORT).show();
+            ingresarSugerencia.setError("Supera los caracteres permitidos (máximo 200)");
+            ingresarSugerencia.requestFocus();
+        }
+        return camposVacios;
+    }
+
     private void insertarOpinion() {
 
-        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
-        String email = preferences.getString("estado_correo","");
+        if(validarComentario() == 1) {
 
-        String url = WebService.urlRaiz + WebService.servicioIngresoSugerencia;
+            SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+            String email = preferences.getString("estado_correo", "");
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Gracias por su sugerencia", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("email", email);
-                parametros.put("sugerencia", ingresarSugerencia.getText().toString().trim());
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            String url = WebService.urlRaiz + WebService.servicioIngresoSugerencia;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(getApplicationContext(), "Gracias por su sugerencia", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @NonNull
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("email", email);
+                    parametros.put("sugerencia", ingresarSugerencia.getText().toString().trim());
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
     }
 
 

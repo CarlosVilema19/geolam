@@ -122,7 +122,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 obj.getString("pagina_web"),
                                 (float)obj.getDouble("CALIFICACION"),
                                 obj.getInt("favorito"),
-                                obj.getInt("estado_opi")
+                                obj.getInt("estado_opi"),
+                                obj.getInt("num_opi")
                         ));
 
                     }

@@ -76,6 +76,7 @@ public class Login extends AppCompatActivity {
         });
 
         btnAdmin.setOnClickListener(v -> {
+            finish();
             Intent intent = new Intent(Login.this, login_admin.class);
             startActivity(intent);
         });
