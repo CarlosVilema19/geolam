@@ -1,8 +1,21 @@
 package com.riobamba.geolam.modelo;
 
+import android.content.Context;
+import android.view.contentcapture.ContentCaptureCondition;
+import android.widget.Toast;
+
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Formatter;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class Proceso {
     double temp = 100000;
@@ -77,6 +90,37 @@ public class Proceso {
             else{meses = " meses";}
             return String.valueOf(period.getYears());
         } else return "";
+    }
+
+    public String calcularEdadFecha(String fecha, Context ctx)
+    {
+        String fechaActu;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                Locale.getDefault());
+        Date dob = null;
+        try {
+            dob = dateFormat.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        GregorianCalendar cal = (GregorianCalendar) Calendar.getInstance();
+        cal.setGregorianChange(new Date(Long.MIN_VALUE));
+        cal.clear();
+        cal.set(Calendar.YEAR, 0);
+        cal.setTimeInMillis( cal.getTimeInMillis() + new Date().getTime() - dob.getTime());
+
+        Formatter fmtr = new Formatter();
+        if (cal.get(Calendar.YEAR) > 0) {
+            fmtr.format(String.valueOf(cal.get(Calendar.YEAR)));
+        }
+        /*if (cal.get(Calendar.MONTH) > 0) {
+            fmtr.format("%d meses ", cal.get(Calendar.MONTH));
+        }
+        if (cal.get(Calendar.DAY_OF_MONTH) > 0) {
+            fmtr.format("%d días ", cal.get(Calendar.DAY_OF_MONTH));
+        }*/
+        fechaActu = fmtr.toString();
+        return fechaActu;
     }
 
     public  long calcularAniosMili(int anios)

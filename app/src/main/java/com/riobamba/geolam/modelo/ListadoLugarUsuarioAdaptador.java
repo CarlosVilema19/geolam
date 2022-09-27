@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,7 +115,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final Button btnFavDes;
         private final Button btnFavAct;
         private final LinearLayout llBtnCalif;
-
+        private final RelativeLayout rlOpinion;
+        private final TextView tvNumOpi;
 
         public ViewHolder(View view) {
             super(view);
@@ -143,6 +145,8 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             btnFavDes = view.findViewById(R.id.btnFavoritoDes);
             btnFavAct  = view.findViewById(R.id.btnFavoritoAct);
             llBtnCalif = view.findViewById(R.id.llBtnCalificar);
+            rlOpinion = view.findViewById(R.id.rlOpinion);
+            tvNumOpi = view.findViewById(R.id.textView5);
 
         }
     }
@@ -174,6 +178,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         if(listadoLugar.getDireccionLugar().equals("")){viewHolder.descripcionLL.setVisibility(View.GONE);}
         if(listadoLugar.getCalificacion().equals(0F)){viewHolder.calificacionLL.setVisibility(View.GONE);}
         if(listadoLugar.getEstadoOpi().equals(1)) {viewHolder.llBtnCalif.setVisibility(View.GONE);}
+        //if(listadoLugar.getEstadoOpi().equals(0)) {viewHolder.rlOpinion.setVisibility(View.GONE);}
         if (listadoLugar.getFavorito().equals(1))
         {
             viewHolder.btnFavAct.setVisibility(View.VISIBLE);
@@ -185,6 +190,9 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         }
 
 
+        Integer numOpi = listadoLugar.getNumOpi();
+        String numeOpi = "("+numOpi+")";
+        viewHolder.tvNumOpi.setText(numeOpi);
 
 
         viewHolder.paginaWebLL.setOnClickListener(new View.OnClickListener() {
