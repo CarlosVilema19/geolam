@@ -218,6 +218,17 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Cancelar"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarCambiosUsu"
             android:layout_width="0dp"
             android:enabled="false"
@@ -229,16 +240,6 @@
             android:layout_weight="1"
             android:textSize="14dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelar2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Cancelar"
-            android:layout_margin="5dp"
-            android:textColor="@android:color/white"
-            android:layout_weight="1"
-            android:textSize="14sp" />
     </LinearLayout>
 
 

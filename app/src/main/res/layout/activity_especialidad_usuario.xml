@@ -17,8 +17,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:animateLayoutChanges="true"
+        android:background="@drawable/imagen"
         android:orientation="vertical">
 
 
@@ -38,18 +39,19 @@
                     android:id="@+id/cvImagenEspe"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="center">
-
-
-                <ImageView
-                    android:id="@+id/ivImagenEspecialidad"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_baseline_medical_services_24" />
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/ivImagenEspecialidad"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_baseline_medical_services_24" />
                 </androidx.cardview.widget.CardView>
+
                 <LinearLayout
                     android:id="@+id/llLugar"
                     android:layout_width="match_parent"
@@ -65,8 +67,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nombre"
-                        android:textColor="@color/black"
                         android:textAllCaps="true"
+                        android:textColor="@color/black"
                         android:textSize="17sp" />
 
                     <TextView

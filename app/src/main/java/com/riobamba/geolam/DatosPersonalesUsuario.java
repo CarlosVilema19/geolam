@@ -47,6 +47,7 @@ import com.google.common.hash.Hashing;
 import com.itextpdf.text.pdf.fonts.cmaps.CMapCache;
 import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.DatosPersonales;
+import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.Proceso;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -247,19 +248,15 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
        ivFotoP.setDrawingCacheEnabled(true);
 */
-        MostrarResultado();
+        String configuraciones = (String) getIntent().getSerializableExtra("Configuraciones");
+        MostrarResultado(configuraciones);
 
 
 
         btnGuardarCambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 modificarDatos();
-
-
-
             }
         });
 
@@ -354,23 +351,11 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Selecciona la imagen"), PICK_IMAGE_REQUEST);
 
     }
-    public void MostrarResultado()
+    public void MostrarResultado(String edadActual)
     {
-        /*
-        ivFotoP.destroyDrawingCache();
-        ivFotoP.buildDrawingCache();
-        ivFotoP.setBackgroundResource(0);
-       ivFotoP.getDrawingCache();
-        ivFotoP.setImageDrawable(null);
-        ivFotoP.invalidate();
-        */
-      //  txtName.setClickable(false);
-       // txtName.setFocusable(false);
-        //  txtName.setEnabled(false);
+        Proceso proceso = new Proceso();
 
-
-        //txtApe.setClickable(false);
-        //txtApe.setFocusable(false);
+        String edadAct = proceso.calcularEdadFecha(edadActual,this);
 
         final ProgressDialog loading2 = ProgressDialog.show(this, "Obteniendo información...", "Espere por favor");
 
@@ -425,7 +410,8 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-
+                            loading2.dismiss();
+                            finish();
                         }
 
                     }
@@ -433,12 +419,15 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                loading2.dismiss();
+                finish();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", email);
+                parametros.put("edad", edadAct);
                 return parametros;
             }
         };

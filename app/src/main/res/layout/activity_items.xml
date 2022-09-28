@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D0D5D8"
+    android:background="@drawable/imagen3"
     android:orientation="vertical">
 
     <include layout="@layout/activity_menu_toolbar" />
@@ -34,7 +34,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvOpinion"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rvUsuario"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="6dp"

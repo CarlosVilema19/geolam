@@ -134,7 +134,7 @@ public class AsignacionEspecialidadAdaptador extends RecyclerView.Adapter<Asigna
 
         med = "<b>Médico: </b>";
         esp = "<b>Especalidad: </b>";
-        lug = "<br/><br/><b>Lugar: </b>";
+        lug = "<br/><b>Lugar: </b>";
 
 
         String texto = esp + listadoLugar.getEspecialidad()  +

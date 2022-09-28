@@ -11,10 +11,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/iMenuSupe"
         android:background="@drawable/imagen3"
-        android:layout_below="@+id/iMenuSupe">
+        android:gravity="center_vertical">
 
         <TextView
 
@@ -76,18 +76,18 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/idCont"
-            android:gravity="center_horizontal"
-            android:drawableLeft="@drawable/menos"
-            android:textColor="@color/morado"
             android:layout_marginLeft="150dp"
             android:layout_marginRight="150dp"
-            android:textSize="9dp"
-            />
+            android:drawableLeft="@drawable/menos"
+            android:gravity="center_horizontal"
+            android:textColor="@color/morado"
+            android:textSize="9dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_below="@id/txLine"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="140dp"
             android:layout_marginBottom="40dp"
             android:orientation="horizontal">
@@ -131,9 +131,9 @@
             android:id="@+id/idCont2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_below="@+id/txLine"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
             android:clickable="true"
             android:focusable="true"
@@ -182,15 +182,13 @@
             android:textSize="9dp" />
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="3dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/txLine2"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
             android:clickable="true"
             android:focusable="true"
@@ -240,9 +238,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/circular2"
                 android:clickable="true"
-                android:layout_marginBottom="20dp"
                 android:drawableRight="@drawable/ic_baseline_keyboard_arrow_left_24"
                 android:focusable="true"
                 app:backgroundTint="@null"
@@ -255,8 +253,8 @@
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="280dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/circular2"
 
                 android:drawableLeft="@drawable/ic_baseline_keyboard_arrow_right_24"

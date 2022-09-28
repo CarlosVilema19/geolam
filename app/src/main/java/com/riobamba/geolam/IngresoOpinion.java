@@ -32,6 +32,7 @@ import com.riobamba.geolam.modelo.WebService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class IngresoOpinion extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
@@ -82,43 +83,69 @@ public class IngresoOpinion extends AppCompatActivity {
         finish();
     }
 
+    private int validarComentario(){
+        int camposVacios=0;
+        if(ingresarOpinion.getText().toString().length()<=200) {
+             if (Pattern.compile(" {3,}").matcher(ingresarOpinion.getText().toString()).find()) {
+                ingresarOpinion.setError("¡Verifique que no haya más de dos espacios en blanco!");
+                ingresarOpinion.requestFocus();
+            } else if(ingresarOpinion.getText().toString().length()<3 && ingresarOpinion.getText().toString().length()>0)
+            {
+                ingresarOpinion.setError("El texto ingresado es demasiado corto");
+                ingresarOpinion.requestFocus();
+            }else {
+                camposVacios = 1;
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "¡Error!", Toast.LENGTH_SHORT).show();
+            ingresarOpinion.setError("Su comentario supera los caracteres permitidos");
+            ingresarOpinion.requestFocus();
+        }
+        return camposVacios;
+    }
+
     private void insertarOpinion(ListadoLugar listadoLugarUsuario) {
 
-        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
-        String email = preferences.getString("estado_correo","");
+        if(validarComentario() == 1) {
 
-        String idLugar = listadoLugarUsuario.getId().toString();
+            SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+            String email = preferences.getString("estado_correo", "");
 
-        String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
+            String idLugar = listadoLugarUsuario.getId().toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
+            String url = WebService.urlRaiz + WebService.servicioInsertarOpinion;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     Toast.makeText(getApplicationContext(), "Gracias por calificar", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(IngresoOpinion.this, ListarLugarUsuario.class);
                     intent.putExtra("ListadoLugar", listadoLugarUsuario);
                     startActivity(intent);
                     finish();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id_lugar", idLugar);
-                parametros.put("email", email);
-                parametros.put("calificacion", String.valueOf(calficacionLugar.getRating()));
-                parametros.put("comentario", ingresarOpinion.getText().toString().trim());
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @NonNull
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("id_lugar", idLugar);
+                    parametros.put("email", email);
+                    parametros.put("calificacion", String.valueOf(calficacionLugar.getRating()));
+                    parametros.put("comentario", ingresarOpinion.getText().toString().trim());
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
     }
 
     //Metodos para la barra inferior
