@@ -4,10 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,6 +45,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
 import com.itextpdf.text.pdf.fonts.cmaps.CMapCache;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.DatosPersonales;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.Proceso;
@@ -67,6 +70,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatosPersonalesUsuario extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     EditText txtName, txtApe, txtEdad;
 
     Button btnGuardarCambios, btnCancelar;
@@ -981,5 +986,18 @@ public void validarContraseniaBD(){
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/colorOnPrimaryLightDemo"
     tools:context=".conexion_internet">
 
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewConexion"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_centerVertical="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:tint="@color/colorAccentDemo"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
@@ -25,24 +28,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:layout_gravity="center"
         app:strokeColor="@android:color/white"
-        app:strokeWidth="8dp"
+
 
         />
 
     <TextView
         android:id="@+id/tvConexionInternet"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewConexion"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="No hay conexión a internet"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
+
+        android:text="OOPS!"
+        android:textColor="@color/colorAccentDemo"
+        android:textSize="48sp"
+        android:gravity="center"
         android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/txtNoConection"
+        android:layout_below="@id/tvConexionInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccentDemo"
+        android:textSize="25sp"
+        android:text="No hay conexión a internet"
+        android:gravity="center"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRetry"
+        android:layout_below="@+id/txtNoConection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:textAllCaps="true"
+        android:background="@drawable/buton_reintentar"
+        android:text="Volver a intentar"
+        android:textColor="@color/colorOnPrimaryDemo"
+
         />
 
 </RelativeLayout>

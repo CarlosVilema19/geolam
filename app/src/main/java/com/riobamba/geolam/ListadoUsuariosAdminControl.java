@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PostProcessor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -23,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoUsuariosAdmin;
 import com.riobamba.geolam.modelo.ListadoUsuariosAdminAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -38,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ListadoUsuariosAdminControl extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     //Declarar la lista y el recycler view
     List<ListadoUsuariosAdmin> usuariosList;
     RecyclerView recyclerView;
@@ -217,5 +222,19 @@ public class ListadoUsuariosAdminControl extends AppCompatActivity implements Se
             urlImagenLugar=urlSinEspacios;
         }
         return  urlImagenLugar;
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
@@ -44,6 +47,7 @@ import java.util.Map;
 import java.util.jar.JarException;
 
 public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryTextListener {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
@@ -200,6 +204,21 @@ public class LugarMapa extends AppCompatActivity implements  SearchView.OnQueryT
         }
         return  urlImagenLugar;
     }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
+
 }
 
 

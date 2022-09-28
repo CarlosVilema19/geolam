@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.TemplatePDF;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -43,6 +46,7 @@ import ir.androidexception.datatable.model.DataTableHeader;
 import ir.androidexception.datatable.model.DataTableRow;
 
 public class ReporteGraficoUsuarios extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     //VARIABLES PARA PDF DE LISTADO DE USUARIOS
     private String[] header = {"Tipo de usuario", "Nombre"};
@@ -461,5 +465,19 @@ private void crearGrafico() {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

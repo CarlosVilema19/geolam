@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ConexionMapa;
 import com.riobamba.geolam.modelo.ListadoMapa;
 import com.riobamba.geolam.modelo.WebService;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     //Declarar la lista y el recycler view
     List<ListadoMapa> mapaList;
     ConexionMapa adaptador;
@@ -76,5 +81,19 @@ public class Mapa extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

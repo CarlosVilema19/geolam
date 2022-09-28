@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.BuscarEspecialidadesLMAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -33,7 +36,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Buscar_Especialidades extends AppCompatActivity {
-          BuscarEspecialidadesLMAdaptador adaptador;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    BuscarEspecialidadesLMAdaptador adaptador;
           AutoCompleteTextView actv;
           Button btnBuscarEsp;
           String lugar;
@@ -227,6 +232,20 @@ public class Buscar_Especialidades extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("lugarEspe", lugarEspe);
         editor.apply();
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
 }

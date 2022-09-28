@@ -1,8 +1,13 @@
 package com.riobamba.geolam;
 
+import com.riobamba.geolam.Utility.NetworkChangeListener;
+
 import org.json.JSONObject;
 
 public class BuscarEspecialidades_LM {
+
+
+
     String nombreLugar, direccionLugar, telefonoLugar;
     String imagenLugar, tipoLugar, categoriaLugar;
     String id;
@@ -43,4 +48,6 @@ public BuscarEspecialidades_LM(JSONObject object)
     public String toString(){
     return  nombreLugar.toUpperCase();
     }
+
+
 }

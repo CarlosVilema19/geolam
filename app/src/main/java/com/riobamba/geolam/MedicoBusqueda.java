@@ -12,7 +12,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -35,6 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdaptador;
 import com.riobamba.geolam.modelo.ListadoTipologia;
@@ -53,6 +56,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MedicoBusqueda extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     EditText txtLugar, txtEspe;
     Button btnBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
@@ -140,6 +145,19 @@ public class MedicoBusqueda extends AppCompatActivity {
     {
         toolbar.getActividad(this,this);
         toolbar.retornarEspecialidad();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
 }

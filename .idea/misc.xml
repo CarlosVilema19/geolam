@@ -14,6 +14,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/boton_morado.xml" value="0.125" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/boton_redondo.xml" value="0.157" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/boton_verde.xml" value="0.105" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/buton_reintentar.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular2.xml" value="0.1745" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular3.xml" value="0.2" />
@@ -57,7 +58,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_medico.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_calificacion.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.2" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_conexion_internet.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_conexion_internet.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_configuraciones.xml" value="0.16" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_datos_item.xml" value="0.1828125" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_datos_personales.xml" value="0.16" />

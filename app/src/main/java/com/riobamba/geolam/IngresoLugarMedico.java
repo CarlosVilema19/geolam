@@ -8,7 +8,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoCategoria;
 import com.riobamba.geolam.modelo.ListadoCategoriaAdaptador;
 import com.riobamba.geolam.modelo.ListadoTipologia;
@@ -57,6 +60,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class IngresoLugarMedico extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     EditText txtTipologia, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
     TextView tvIdTipo;
@@ -766,5 +770,19 @@ private int validarWhatsapp(){
 
     @Override
     public void onBackPressed() {}
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 
 }

@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.graphics.Bitmap.CompressFormat;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Base64;
@@ -40,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.hash.Hashing;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.Proceso;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -62,6 +65,7 @@ public class registrar extends AppCompatActivity {
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
     Button btnInsert;
     TextView login;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     String listCorreoUsuario;
     String[] items = {"Hombre", "Mujer"};
     ProgressDialog loading, loading2;
@@ -681,4 +685,18 @@ public class registrar extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {}
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

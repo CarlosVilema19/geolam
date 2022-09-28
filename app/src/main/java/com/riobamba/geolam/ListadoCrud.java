@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -21,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -37,6 +40,7 @@ import java.util.Map;
 
 public class ListadoCrud extends AppCompatActivity implements SearchView.OnQueryTextListener{
 //Declarar la lista y el recycler view
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     List<ListadoLugarAdmin> lugarList;
     RecyclerView recyclerView;
 
@@ -113,7 +117,7 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error con el servidor", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -229,5 +233,18 @@ public class ListadoCrud extends AppCompatActivity implements SearchView.OnQuery
             urlImagenLugar=urlSinEspacios;
         }
         return  urlImagenLugar;
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

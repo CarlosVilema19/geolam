@@ -12,7 +12,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.ListadoLugarUsuarioAdaptador;
@@ -49,6 +52,7 @@ import java.util.jar.JarException;
 
 public class ListarLugarUsuario extends AppCompatActivity
 {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     List<ListadoLugarUsuario> lugarList;
     RecyclerView recyclerView;
@@ -442,6 +446,20 @@ public class ListarLugarUsuario extends AppCompatActivity
             urlImagenLugar=urlSinEspacios;
         }
         return  urlImagenLugar;
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
 

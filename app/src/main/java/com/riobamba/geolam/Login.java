@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONArray;
@@ -42,8 +44,7 @@ public class Login extends AppCompatActivity {
     TextInputLayout errorPass, errorEmail;
     Button btnLogin, btnRecuperar, btnRegistro, btnAdmin;
 
-
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class Login extends AppCompatActivity {
         btnRegistro = findViewById(R.id.btnRegistroUsu);
         btnAdmin = findViewById(R.id.btnAdmin);
 
-        conexionInternet();
+        //conexionInternet();
 
         btnLogin.setOnClickListener(view -> {
             validarUsuario();
@@ -128,7 +129,7 @@ public class Login extends AppCompatActivity {
                 }
             },EXECUTION_TIME);
         }*/
-    private void conexionInternet() {
+    /*private void conexionInternet() {
         //Internet
         Log.e("netHabilitada",Boolean.toString(isNetDisponible() ));
         String Habilitada, acceso;
@@ -165,8 +166,10 @@ public class Login extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), "scc"+Boolean.toString(isOnlineNet()).toString(), Toast.LENGTH_SHORT).show();
 
     }
+    */
 
-    private boolean isNetDisponible() {
+
+   /* private boolean isNetDisponible() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -174,7 +177,8 @@ public class Login extends AppCompatActivity {
 
         return (actNetInfo != null && actNetInfo.isConnected());
     }
-
+*/
+    /*
     public boolean isOnlineNet() {
 
         try {
@@ -190,6 +194,7 @@ public class Login extends AppCompatActivity {
         }
         return false;
     }
+    */
 
     private void validarUsuario(){
         if(validarCamposVacios()==1) {
@@ -322,7 +327,18 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
 
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }
 

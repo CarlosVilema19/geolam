@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
@@ -42,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MedicoBusquedaList extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     List<ListadoMedico> lugarList;
     RecyclerView recyclerView;
@@ -179,6 +183,20 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
     public boolean onQueryTextChange(String newText) {
         myadapter.filtrado(newText);
         return false;
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }
 

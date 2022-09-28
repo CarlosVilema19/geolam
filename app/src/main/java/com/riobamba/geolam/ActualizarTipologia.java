@@ -3,6 +3,8 @@ package com.riobamba.geolam;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -34,6 +37,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class ActualizarTipologia extends AppCompatActivity {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     EditText txtName;
     Button btnGuardarCambios, btnCancelar, btnConsultar;
@@ -299,4 +304,18 @@ public class ActualizarTipologia extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     @Override public void onBackPressed() { }  //Anula la flecha de regreso del telefono
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

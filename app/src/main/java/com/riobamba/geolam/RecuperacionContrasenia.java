@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
 
@@ -36,6 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecuperacionContrasenia extends AppCompatActivity  {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     EditText txtEmailUsuario;
     String email;
     Button btnEnviarEmail;
@@ -359,4 +363,17 @@ public class RecuperacionContrasenia extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

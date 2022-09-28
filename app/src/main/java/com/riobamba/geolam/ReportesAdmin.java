@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.TemplatePDF;
 import com.riobamba.geolam.modelo.TemplatePDFLugares;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -36,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ReportesAdmin extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     //VARIABLES PARA PDF DE LISTADO DE USUARIOS
     private String[] header = {"Tipo de usuario", "Nombre"};
     private String shorText = "Lista de usuarios registrados en la aplicación Geolam";
@@ -323,5 +328,19 @@ public class ReportesAdmin extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }
