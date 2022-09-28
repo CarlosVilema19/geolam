@@ -23,4 +23,8 @@
     <color name="celestec">#fff1fbff</color>
     <color name="morado_busqueda">#737efd</color>
 
+    <color name="colorOnPrimaryDemo">#fff</color>
+    <color name="colorPrimaryDemo">#FF027FCC</color>
+    <color name="colorOnPrimaryLightDemo">#fff1fbff</color>
+    <color name="colorAccentDemo">#46add5</color>
 </resources>

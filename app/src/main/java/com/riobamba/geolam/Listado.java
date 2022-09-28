@@ -12,9 +12,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -35,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ConexionMapa;
 import com.riobamba.geolam.modelo.EspecialidadInicioAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugar;
@@ -57,6 +60,7 @@ import java.util.Map;
 import java.util.jar.JarException;
 
 public class Listado extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     List<ListadoLugar> lugarList;
     List<ListadoLugar> lugarList2;
@@ -384,7 +388,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                }, error -> Toast.makeText(getApplicationContext(), "Error con el servidor", Toast.LENGTH_SHORT).show()){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -545,6 +549,20 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
             urlImagenLugar=urlSinEspacios;
         }
         return  urlImagenLugar;
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
 }

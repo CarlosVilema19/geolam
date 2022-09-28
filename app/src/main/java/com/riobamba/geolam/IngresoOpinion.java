@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugar;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -31,6 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IngresoOpinion extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     EditText ingresarOpinion;
     Button btnEnviarOpinion, btnCancelarOpinion;
     RatingBar calficacionLugar;
@@ -163,4 +168,18 @@ public class IngresoOpinion extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {}
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.WebService;
 
 import org.json.JSONException;
@@ -32,10 +35,14 @@ public class login_admin extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     TextInputLayout errorPass, errorEmail;
     Button btnLogin, btnRecuperarAdmin, btnUsuario;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_admin);
+
 
         errorPass = findViewById(R.id.txcontraseniaAdmin);
         errorEmail=findViewById(R.id.txusuarioAdmin);
@@ -197,5 +204,17 @@ public class login_admin extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
 
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

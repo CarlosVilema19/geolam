@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoAsignarEspecialidadAdaptador;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedico;
 import com.riobamba.geolam.modelo.ListadoAsignarLugarMedicoAdaptador;
@@ -38,6 +41,9 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class AsignarEspecialidad extends AppCompatActivity {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
 
     TextView tvIdEspecialidad ;
     TextView tvIdLugarMedico ;
@@ -337,5 +343,19 @@ public class AsignarEspecialidad extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

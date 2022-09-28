@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,12 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.Toolbar;
 
 import java.util.ArrayList;
 
 public class InicioAdmin extends AppCompatActivity {
 Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnBuscarLugar;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     ViewFlipper carrusel,carrusel2,carrusel3;
     ImageView imageView, imageView2, imageView3;
     Button btnGestionL;
@@ -470,6 +476,17 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
 
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

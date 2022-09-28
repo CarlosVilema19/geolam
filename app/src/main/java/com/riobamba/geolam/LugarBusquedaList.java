@@ -8,7 +8,9 @@ package com.riobamba.geolam;
         import android.app.ProgressDialog;
         import android.content.Context;
         import android.content.Intent;
+        import android.content.IntentFilter;
         import android.content.SharedPreferences;
+        import android.net.ConnectivityManager;
         import android.os.Bundle;
         import android.os.Handler;
         import android.view.MenuItem;
@@ -23,6 +25,7 @@ package com.riobamba.geolam;
         import com.android.volley.RequestQueue;
         import com.android.volley.toolbox.StringRequest;
         import com.android.volley.toolbox.Volley;
+        import com.riobamba.geolam.Utility.NetworkChangeListener;
         import com.riobamba.geolam.modelo.ListadoLugar;
         import com.riobamba.geolam.modelo.LugarMapaAdaptador;
         import com.riobamba.geolam.modelo.Toolbar;
@@ -38,6 +41,7 @@ package com.riobamba.geolam;
         import java.util.Map;
 
 public class LugarBusquedaList extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     List<ListadoLugar> lugarList;
     RecyclerView recyclerView;
@@ -217,6 +221,20 @@ public class LugarBusquedaList extends AppCompatActivity implements SearchView.O
             urlImagenLugar=urlSinEspacios;
         }
         return  urlImagenLugar;
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }
 

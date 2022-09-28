@@ -2,7 +2,9 @@ package com.riobamba.geolam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -19,12 +21,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.navigation.NavigationView;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ConexionMapa;
 import com.riobamba.geolam.modelo.Toolbar;
 
 public class Inicio extends AppCompatActivity {
     Button btnlugarmedico, btnListadoLugar, btnEspecialidades, btnCerrar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     public static final Integer btnListadoMapa = R.layout.activity_listado_card;
     @Override
@@ -33,6 +37,8 @@ public class Inicio extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         btnlugarmedico = findViewById(R.id.btnlugarescercanos);
         btnListadoLugar = findViewById(R.id.btnlugaresmedicos);
+
+
         btnEspecialidades = findViewById(R.id.btnespecialidades);
         btnCerrar = findViewById(R.id.btnCerrarSesion);
 
@@ -119,6 +125,17 @@ public class Inicio extends AppCompatActivity {
         toolbar.getActividad(this,this);
         toolbar.retornarEspecialidad();
     }
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
 
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

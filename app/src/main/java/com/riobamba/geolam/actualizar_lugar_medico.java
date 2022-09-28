@@ -8,7 +8,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -58,6 +61,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class actualizar_lugar_medico extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     EditText txtTipologia, txtCategoria, txtNombreLugar, txtDireccion, txtTelefono, txtWhatsApp, txtPaginaWeb, txtLatitud, txtLongitud, txtDescripcion;
     TextView tvIdTipo, tvIdCategoria,tvIdLugarMedico;
     int  posTipologia;
@@ -910,5 +915,19 @@ public class actualizar_lugar_medico extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

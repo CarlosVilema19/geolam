@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoTipologia;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -38,6 +41,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class IngresoMedico extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     EditText txtNombreMedico,txtApellidoMedico,txtDescripcionMedico;
     Button btnAgregarMedico,btnMostrarAgregado,btnCancelar;
     TextView tvIdMedico;
@@ -260,4 +265,17 @@ public class IngresoMedico extends AppCompatActivity {
     @Override
     public void onBackPressed() {}
 
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

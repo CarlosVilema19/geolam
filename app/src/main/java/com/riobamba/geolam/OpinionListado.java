@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PostProcessor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.ListadoLugarAdminAdaptador;
 import com.riobamba.geolam.modelo.ListadoLugarAdmin;
 import com.riobamba.geolam.modelo.ListadoLugarUsuario;
@@ -39,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OpinionListado extends AppCompatActivity {
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     //Declarar la lista y el recycler view
     List<ListadoOpinion> opinionList;
     RecyclerView recyclerView;
@@ -167,5 +172,19 @@ public class OpinionListado extends AppCompatActivity {
             }
         });
         dialogo1.show();
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

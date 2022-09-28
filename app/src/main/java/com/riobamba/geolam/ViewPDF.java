@@ -5,15 +5,21 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 
 import java.io.File;
 
 public class ViewPDF extends AppCompatActivity {
-private PDFView pdfView;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+
+    private PDFView pdfView;
 private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,20 @@ private File file;
         }}
 
 
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 
 
 

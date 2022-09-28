@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.TemplatePDFLugares;
 import com.riobamba.geolam.modelo.Toolbar;
 import com.riobamba.geolam.modelo.WebService;
@@ -40,10 +43,14 @@ import ir.androidexception.datatable.model.DataTableHeader;
 import ir.androidexception.datatable.model.DataTableRow;
 
 public class ReporteGraficoTop extends AppCompatActivity {
+
+
     public GraphView grafica;
     String id, nombre,vistas;
     Bitmap mBitmap;
     RelativeLayout rl;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     private ArrayList<String[]> rowsLugares = new ArrayList<>();
     private ArrayList<String[]> rowsL = null;
     private TemplatePDFLugares templatePDFLug;
@@ -304,6 +311,21 @@ public class ReporteGraficoTop extends AppCompatActivity {
         toolbar.getContexto(this);
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
 }

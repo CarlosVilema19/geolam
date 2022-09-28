@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.riobamba.geolam.Utility.NetworkChangeListener;
 import com.riobamba.geolam.modelo.AsignacionMedico;
 import com.riobamba.geolam.modelo.AsignacionMedicoAdaptador;
 import com.riobamba.geolam.modelo.Toolbar;
@@ -37,6 +40,9 @@ import java.util.List;
 import java.util.Map;
 
 public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.OnQueryTextListener*/{
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+
     //Declarar la lista y el recycler view
     List<AsignacionMedico> lugarList;
     RecyclerView recyclerView;
@@ -213,4 +219,18 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
         myadapter.filtrado(newText);
         return true;
     }*/
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }
