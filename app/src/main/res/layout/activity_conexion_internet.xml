@@ -14,21 +14,21 @@
         android:id="@+id/imageViewConexion"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:tint="@color/colorAccentDemo"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:paddingBottom="200dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="1dp"
         android:padding="5dp"
+        android:paddingBottom="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_baseline_wifi_off_24"
         android:tag="bg1"
+        android:tint="@color/colorAccentDemo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center"
         app:strokeColor="@android:color/white"
 
 
@@ -40,12 +40,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewConexion"
 
+        android:gravity="center"
         android:text="OOPS!"
         android:textColor="@color/colorAccentDemo"
         android:textSize="48sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtNoConection"
@@ -60,15 +59,32 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRetry"
-        android:layout_below="@+id/txtNoConection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:textAllCaps="true"
+        android:layout_below="@+id/txtNoConection"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/buton_reintentar"
         android:text="Volver a intentar"
-        android:textColor="@color/colorOnPrimaryDemo"
 
-        />
+        android:textAllCaps="true"
+        android:textColor="@color/colorOnPrimaryDemo" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSalir2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnRetry"
+        android:layout_marginStart="50dp"
+
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/buton_reintentar"
+        android:text="Salir"
+        android:textAllCaps="true"
+        android:textColor="@color/colorOnPrimaryDemo" />
 
 </RelativeLayout>
