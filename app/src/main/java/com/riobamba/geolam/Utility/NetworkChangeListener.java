@@ -23,6 +23,7 @@ public class NetworkChangeListener extends BroadcastReceiver {
             builder.setView(layout_dialog);
 
             AppCompatButton btnRetry = layout_dialog.findViewById(R.id.btnRetry);
+            AppCompatButton btnSalir = layout_dialog.findViewById(R.id.btnSalir2);
             //Show dialog
 
             AlertDialog dialog = builder.create();
@@ -35,6 +36,20 @@ public class NetworkChangeListener extends BroadcastReceiver {
                                             public void onClick(View v) {
                                                 dialog.dismiss();
                                                 onReceive(context, intent);
+                                            }
+                                        }
+
+            );
+
+            btnSalir.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.dismiss();
+                                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                                intent.addCategory(Intent.CATEGORY_HOME);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                context.startActivity(intent);
+                                                //onReceive(context, intent);
                                             }
                                         }
 
