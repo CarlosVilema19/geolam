@@ -8,6 +8,7 @@ package com.riobamba.geolam;
         import android.app.ProgressDialog;
         import android.content.Context;
         import android.content.Intent;
+        import  androidx.appcompat.widget.SearchView;
         import android.content.IntentFilter;
         import android.content.SharedPreferences;
         import android.net.ConnectivityManager;
@@ -16,7 +17,7 @@ package com.riobamba.geolam;
         import android.view.MenuItem;
         import android.view.View;
         import android.widget.LinearLayout;
-        import android.widget.SearchView;
+
         import android.widget.TextView;
         import android.widget.Toast;
 
