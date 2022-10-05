@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/imagen3"
+    android:background="@drawable/imagen"
     android:orientation="vertical">
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
@@ -27,7 +27,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:cardCornerRadius="20dp">
-                <SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/svBuscar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                     android:layout_marginBottom="2dp"
                     android:background="@color/white">
 
-                </SearchView>
+                </androidx.appcompat.widget.SearchView>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
         <LinearLayout

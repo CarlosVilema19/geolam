@@ -77,4 +77,5 @@ public class WebService {
     public static final  String servicioActualizarMedico="actualizar_medico.php";
     public static final  String servicioExistenciaLugar="existencia_lugar.php";
     public static final  String servicioObtenerFechaNac="obtener_fecha_nac.php";
+    public static final  String servicioConsultaEspecialidades="consulta_especialidades.php";
 }
