@@ -3,8 +3,8 @@
     <solid
         android:color="@color/base" />
     <gradient
-        android:startColor="@color/morado_busqueda"
-        android:endColor="@color/morado_busqueda"
+        android:startColor="#22aafe"
+        android:endColor="#ff27cfda"
         android:angle="45" />
 
     <size

@@ -17,6 +17,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,7 +66,20 @@ public class LugarBusqueda extends AppCompatActivity {
     //Items Sexo F y M
     AutoCompleteTextView autoCompleteTxtEdSexo;
     ArrayAdapter<String> adapterItems;
+
     String[] items = {"NINGUNO","PRIVADO", "PUBLICO"};
+
+    //Tipología
+    String listTipologiasNombres;
+    ArrayList<String> opcionesTipologiaNombres= new ArrayList<>();
+
+    AutoCompleteTextView autoCompleteOpcionesTipologia;
+
+    //Especialidad
+    String listEspeNombres;
+    AutoCompleteTextView autoCompleteEspecialidad;
+    ArrayList<String> especialidades= new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +89,12 @@ public class LugarBusqueda extends AppCompatActivity {
         txtTipo = findViewById(R.id.edBusTipo);
         txtEspe = findViewById(R.id.edBusEspe);
         btnBuscar = findViewById(R.id.btnBuscar);
+        autoCompleteOpcionesTipologia=findViewById(R.id.autoTipologia4);
+        autoCompleteEspecialidad=findViewById(R.id.autoBusqEspe);
 
         toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-
+        tipologia();
+        especialidades();
         //Items Sexo F y M Autocomplete
         autoCompleteTxtEdSexo = findViewById(R.id.edBusCate);
         adapterItems = new ArrayAdapter<String>(this, R.layout.lista_items, items);
@@ -95,6 +113,27 @@ public class LugarBusqueda extends AppCompatActivity {
             }
 
         });
+        autoCompleteEspecialidad.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (autoCompleteEspecialidad.getOnItemSelectedListener()==null){
+                    txtEspe.setText("");
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -115,6 +154,164 @@ public class LugarBusqueda extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void tipologia() {
+        //Conexión al Servidor- Consulta AutoComplete Tipología
+
+        String url=WebService.urlRaiz+WebService.servicioListarTipologia;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try {
+
+
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+
+                            JSONObject object = array.getJSONObject(i);
+                            //JSONObject object2 = array.getJSONObject(i);
+                            //Carga de datos
+                            //adaptadorTipo.add(tipo);
+                            listTipologiasNombres = (object.getString("DESCRIPCION_TIPO_LUGAR"));
+                            //listTipologiasNombres[listTipologiasNombres.length()+1]="NINGUNO";
+                            opcionesTipologiaNombres.add(listTipologiasNombres);
+
+                            //Toast.makeText(this,opcionesTipologiaNombres.size(),Toast.LENGTH_SHORT).show();
+                            //listIDTipo = ( object.getString("ID_TIPOLOGIA_LUGAR"));
+                            //opcionesTipologia.add(listIDTipo);
+
+
+                        }
+                        opcionesTipologiaNombres.add(opcionesTipologiaNombres.size(), "NINGUNO");
+                        ArrayAdapter adapter;
+                        adapter=new ArrayAdapter<String> (this, R.layout.lista_items, opcionesTipologiaNombres);
+                        autoCompleteOpcionesTipologia.setAdapter(adapter);
+                        autoCompleteOpcionesTipologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                               // String itemTipo = parent.getItemAtPosition(position).toString();
+
+
+                                //String p= String.valueOf(position).trim();
+
+                                //String c= opcionesTipologia.get(position);
+
+                                //pTip=c;
+
+                                //retornaIdTipologia(pTip);
+                                String item = parent.getItemAtPosition(position).toString();
+                                if(item.equals("NINGUNO"))
+                                {
+                                    autoCompleteOpcionesTipologia.setText("");
+                                    txtTipo.setText("");
+
+                                }
+                                else {
+
+                                    String selected = (String) parent.getItemAtPosition(position);
+                                    int pos = opcionesTipologiaNombres.indexOf(selected);
+                                    txtTipo.setText(selected);
+                                }
+
+                            }
+
+                        });
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest.setTag("REQUEST");
+        RequestQueue queue= Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+
+    }
+
+
+    private void especialidades() {
+        //Conexión al Servidor- Consulta AutoComplete Tipología
+
+        String url=WebService.urlRaiz+WebService.servicioConsultaEspecialidades;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try {
+
+
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+
+                            JSONObject object = array.getJSONObject(i);
+                            //JSONObject object2 = array.getJSONObject(i);
+                            //Carga de datos
+                            //adaptadorTipo.add(tipo);
+                            listEspeNombres = (object.getString("DESCRIPCION_ESPECIALIDAD"));
+                            //listTipologiasNombres[listTipologiasNombres.length()+1]="NINGUNO";
+                            especialidades.add(listEspeNombres);
+
+                            //Toast.makeText(this,opcionesTipologiaNombres.size(),Toast.LENGTH_SHORT).show();
+                            //listIDTipo = ( object.getString("ID_TIPOLOGIA_LUGAR"));
+                            //opcionesTipologia.add(listIDTipo);
+
+
+                        }
+                        ArrayAdapter adapter;
+                        adapter=new ArrayAdapter<String> (this,R.layout.lista_items, especialidades);
+                        autoCompleteEspecialidad.setAdapter(adapter);
+                        autoCompleteEspecialidad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                // String itemTipo = parent.getItemAtPosition(position).toString();
+
+
+                                //String p= String.valueOf(position).trim();
+
+                                //String c= opcionesTipologia.get(position);
+
+                                //pTip=c;
+
+                                //retornaIdTipologia(pTip);
+                               String item = parent.getItemAtPosition(position).toString();
+                                if(item.equals(""))
+                                {
+                                    autoCompleteEspecialidad.setText("");
+                                    txtEspe.setText("");
+
+                                }
+                                else {
+
+                                    String selected = (String) parent.getItemAtPosition(position);
+                                int pos = especialidades.indexOf(selected);
+                                txtEspe.setText(selected);
+                                }
+
+
+
+                            }
+
+                        });
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+
+        });
+        stringRequest.setTag("REQUEST");
+        RequestQueue queue= Volley.newRequestQueue(this);
+        queue.add(stringRequest);
 
     }
 

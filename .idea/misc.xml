@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_dropdown_item_1line.xml" value="0.2078125" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable-v24/degradado2.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/borde.xml" value="0.162" />
@@ -15,12 +16,14 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/boton_redondo.xml" value="0.157" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/boton_verde.xml" value="0.105" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/buton_reintentar.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/calificacion.xml" value="0.191" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular2.xml" value="0.1745" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/circular3.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/degradado.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/degradado3.xml" value="0.15" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/degradado4.xml" value="0.132" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/degradado6.xml" value="0.18" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/fondo_espe.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.12" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/ic_baseline_burst_mode_24.xml" value="0.2115" />
@@ -45,20 +48,23 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/t_privados.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/t_publicos.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/textview_redondo.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_boton.xml" value="0.1665" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_busqueda.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_busqueda2.xml" value="0.152" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_busqueda_espe.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_busqueda_medicos.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_lugaratencionm.xml" value="0.1135" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_opinion.xml" value="0.1185" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_actualizar_lugar_medico.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_asignar_especialidad.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_asignar_medico.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_buscar_especialidades.xml" value="0.21" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda.xml" value="0.22" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_lugar.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_lugar.xml" value="0.11059907834101383" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_medico.xml" value="0.25" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_calificacion.xml" value="0.1" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_calificacion.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.2" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_conexion_internet.xml" value="0.33" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_conexion_internet.xml" value="0.22" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_configuraciones.xml" value="0.16" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_datos_item.xml" value="0.1828125" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_datos_personales.xml" value="0.16" />
@@ -73,7 +79,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_medico.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_tipologia.xml" value="0.18" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_inicio.xml" value="0.11574074074074074" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_inicio_admin.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_inicio_admin.xml" value="0.34085778781038373" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_inicio_items.xml" value="0.33" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_item_admin.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_items.xml" value="0.11574074074074074" />
@@ -83,7 +89,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_listado_lugar_crud.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_listado_opinion.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_listado_usuarios_admin.xml" value="0.25" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_listar_lugar_medico.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_listar_lugar_medico.xml" value="0.5" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_login.xml" value="0.3026315789473684" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_login_admin.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_lugar_medico.xml" value="0.25" />

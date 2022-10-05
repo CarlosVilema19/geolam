@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D0D5D8"
+    android:background="@color/celesteb"
     android:orientation="vertical">
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
     <LinearLayout
         android:layout_below="@+id/iMenuSupe"
         android:layout_above="@+id/iMenuInfe"
-        android:background="@color/celesteb"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/backinfe"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="2dp">
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -63,7 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/b2">
+                    android:background="@drawable/b2"
+                    android:backgroundTint="#25c3e6">
 
 
                 </LinearLayout>
@@ -102,7 +103,7 @@
                     android:text="  Ver más"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -120,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:backgroundTint="@color/backinfe"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="2dp">
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
                     android:layout_height="250dp"
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/b3"
-                    >
+                    android:backgroundTint="#25c3e6">
 
 
                 </LinearLayout>
@@ -140,11 +141,11 @@
                     android:id="@+id/tvListado"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/t_publicos"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="180dp"
                     android:layout_marginBottom="5dp"
+                    android:background="@drawable/t_publicos"
 
                     android:gravity="center_vertical"
                     android:text="   Lugares más vistos"
@@ -170,16 +171,17 @@
                     android:text="  Ver más"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_below="@+id/tvListado"
                     android:id="@+id/rvListado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_below="@+id/tvListado"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="10dp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -189,18 +191,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:backgroundTint="@color/backinfe"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="2dp">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/b1"
-                    >
+                    android:backgroundTint="#25c3e6"
+                    android:background="@drawable/b1">
 
                 </LinearLayout>
 
@@ -212,7 +215,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="180dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/t_favoritos"
+                    android:background="@drawable/t_publicos"
                     android:gravity="center_vertical"
                     android:text="   Mis lugares favoritos"
                     android:textColor="@color/white"
@@ -233,7 +236,7 @@
                     android:text="  Ver más"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -251,7 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:backgroundTint="@color/backinfe"
+                    android:backgroundTint="@color/white"
                     app:cardCornerRadius="2dp">
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -261,6 +264,7 @@
                             android:layout_height="250dp"
                             android:layout_alignParentBottom="true"
                             android:background="@drawable/b4"
+                            android:backgroundTint="#25c3e6"
                             >
                         </LinearLayout>
 
@@ -275,8 +279,9 @@
                             android:textColor="@color/white"
                             android:layout_marginBottom="5dp"
 
-                            android:background="@drawable/t_lugares"
+
                             android:text="   Lugares públicos"
+                            android:background="@drawable/t_publicos"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -294,7 +299,7 @@
                             android:text="  Ver más"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="16sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -312,7 +317,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:backgroundTint="@color/backinfe"
+                    android:backgroundTint="@color/white"
                     app:cardCornerRadius="2dp">
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -324,6 +329,7 @@
                             android:layout_height="250dp"
                             android:layout_alignParentBottom="true"
                             android:background="@drawable/b5"
+                            android:backgroundTint="#25c3e6"
                             >
                         </LinearLayout>
 
@@ -335,7 +341,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="180dp"
                             android:layout_marginBottom="5dp"
-                            android:background="@drawable/t_privados"
+                            android:background="@drawable/t_publicos"
                             android:text="   Lugares privados"
                             android:gravity="center_vertical"
                             android:textColor="@color/white"
@@ -356,7 +362,7 @@
                             android:text="  Ver más"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="16sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
