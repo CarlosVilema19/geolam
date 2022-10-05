@@ -171,7 +171,6 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="2dp"
                         android:visibility="invisible"
-
                         android:layout_marginRight="20dp">
 
                         <com.google.android.material.textfield.TextInputEditText
