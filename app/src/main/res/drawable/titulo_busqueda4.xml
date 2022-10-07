@@ -3,20 +3,19 @@
     <solid
         android:color="@color/base" />
     <gradient
-        android:startColor="@color/teal_700"
-        android:endColor="#4D9E50"
+        android:startColor="@color/celeste"
+        android:endColor="#2196F3"
         android:angle="45" />
 
     <size
-        android:width="80dp"
-        android:height="75dp"/>
+        android:width="120dp"
+        android:height="60dp"/>
 
     <corners
-        android:topRightRadius="50dp"
+        android:bottomLeftRadius="50dp"
         android:bottomRightRadius="50dp"/>
 
 
 
 
 </shape>
-

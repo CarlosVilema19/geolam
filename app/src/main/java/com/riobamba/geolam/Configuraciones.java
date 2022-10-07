@@ -55,7 +55,6 @@ public class Configuraciones extends AppCompatActivity {
         txtFecha = findViewById(R.id.tvFecha);
 
 
-
         btnMisDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +151,15 @@ public class Configuraciones extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         toolbar.getContexto(this);
-        toolbar.ejecutarItemSelected(item, this);
+        if(item.getItemId()==R.id.iConfiguraciones)
+        {
+            finish();
+            startActivity(new Intent(this, Configuraciones.class));
+        }
+        else
+        {
+            toolbar.ejecutarItemSelected(item, this);
+        }
         return super.onOptionsItemSelected(item);
     }
 }

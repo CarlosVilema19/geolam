@@ -81,7 +81,7 @@
                         android:id="@+id/tvTelefonoLista"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tipologia"
+                        android:text="@string/tipologia"
                         android:layout_marginStart="4dp"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
@@ -107,7 +107,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textColor="@color/black"
-                            android:text="Categoria"
+                            android:text="@string/Categoria"
                             android:textAllCaps="true"
                             android:textSize="12sp" />
                     </LinearLayout>

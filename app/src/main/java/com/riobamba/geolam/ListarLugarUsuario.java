@@ -177,7 +177,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Ha ocurrido un error con el servidor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

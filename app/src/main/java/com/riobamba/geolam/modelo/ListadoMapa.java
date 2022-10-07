@@ -6,12 +6,14 @@ public class ListadoMapa implements Serializable {
 
     Float latitud, longitud;
     String nombreLugar, direccionLugar;
+    Integer idLugar;
 
-    public ListadoMapa(Float latitud, Float longitud, String nombreLugar, String direccionLugar) {
+    public ListadoMapa(Float latitud, Float longitud, String nombreLugar, String direccionLugar, Integer idLugar) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
+        this.idLugar = idLugar;
     }
 
     public Float getLatitud() {
@@ -28,5 +30,9 @@ public class ListadoMapa implements Serializable {
 
     public String getDireccionLugar() {
         return direccionLugar;
+    }
+
+    public Integer getIdLugar() {
+        return idLugar;
     }
 }

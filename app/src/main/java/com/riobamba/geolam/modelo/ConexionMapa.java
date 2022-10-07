@@ -5,7 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -22,11 +25,20 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -45,36 +57,38 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.riobamba.geolam.Busqueda;
+import com.riobamba.geolam.Listado;
+import com.riobamba.geolam.ListadoEspecialidad;
+import com.riobamba.geolam.ListarLugarUsuario;
 import com.riobamba.geolam.LugarMapa;
 import com.riobamba.geolam.MapaLugarCerca;
 import com.riobamba.geolam.R;
 import com.riobamba.geolam.databinding.ActivityMapaBinding;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallback {
-    Button btnListarLugarCercano;
-    List<ListadoMapa> mapaList;
-    String[] distanc;
-    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
-    Integer count =0, count2 = 0; // contadores para verificar si la conexion se establece correctamente
-    Double[] distancias;
-    String[] lugarCerca;
-    Button btnMapa, btnMapaPul;
-    private GoogleMap mMap;
-    TextView lugarDistancia;
-    ProgressDialog loading; //Mensaje de carga en el mapa
-
-
     // Estado del Settings de verificación de permisos del GPS
     private static final int REQUEST_CHECK_SETTINGS = 102;
 
@@ -93,6 +107,39 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     // de ubicación de FusedLocationProviderApi
     public LocationRequest mLocationRequest;
 
+    Button btnListarLugarCercano;
+    List<ListadoMapa> mapaList;
+    String[] distanc;
+    Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
+    Integer count =0, count2 = 0; // contadores para verificar si la conexion se establece correctamente
+    Double[] distancias;
+    String[] lugarCerca;
+    Integer[] idLugarList;
+    Button btnMapa, btnMapaPul;
+    private GoogleMap mMap;
+    TextView lugarDistancia;
+    ProgressDialog loading; //Mensaje de carga en el mapa
+
+    ImageView imgmarker, expanMas,expanMenos;
+    BottomSheetBehavior mBottomSheetBehavior1;
+    LinearLayout tapactionLayout;
+    View white_forground_view;
+    View bottomSheet;
+    TextView txtNombreLugar, txtDireccion, txtTipologia, txtCategoria, txtTelefono, txtTituloPulsar;
+    NestedScrollView nInfoMapa;
+    String textoBoton = "Pulse para ocultar";
+    String textoBotonOcul = "Pulse para ver información del lugar";
+    RelativeLayout btnIrLugar;
+    String ruta;
+    String urlImagenLugar;
+    String urlSinEspacios;
+    List<ListadoLugarUsuario> lugarList;
+    ListadoLugar listadoLugar;
+    CardView masCercano;
+    String idCercano;
+    Marker marker, marker2;
+    LatLng riobamba = new LatLng(-1.67435, -78.6483);
+
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +153,56 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.mapView);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+        lugarList = new ArrayList<>();
+
+        //View headerLayout1 = findViewById(R.id.bottomJsoft);
+        imgmarker = findViewById(R.id.ImgMarker);
+        txtNombreLugar = findViewById(R.id.tvNombreLugar);
+        txtDireccion = findViewById(R.id.tvDireccion);
+        txtTipologia = findViewById(R.id.tvTipologia);
+        txtCategoria = findViewById(R.id.tvCategoria);
+        txtTelefono = findViewById(R.id.tvTelefono);
+        tapactionLayout =findViewById(R.id.tap_action_layout);
+        nInfoMapa = findViewById(R.id.nsvInfoMapa);
+        txtTituloPulsar = findViewById(R.id.tvTituloPulsar);
+        expanMas = findViewById(R.id.ivExpanMas);
+        expanMenos = findViewById(R.id.ivExpanMenos);
+        btnIrLugar = findViewById(R.id.rlIrLugar);
+        masCercano = findViewById(R.id.cvMasCercano);
+        nInfoMapa.setVisibility(View.GONE);
+        expanMenos.setVisibility(View.GONE);
+        txtTituloPulsar.setText(textoBoton);
+        tapactionLayout.setVisibility(View.GONE);
+
+        tapactionLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(txtTituloPulsar.getText().toString().equals(textoBoton))) {
+                    nInfoMapa.setVisibility(View.VISIBLE);
+                    expanMenos.setVisibility(View.VISIBLE);
+                    expanMas.setVisibility(View.GONE);
+                    txtTituloPulsar.setText(textoBoton);
+                } else
+                {
+                    nInfoMapa.setVisibility(View.GONE);
+                    expanMenos.setVisibility(View.GONE);
+                    expanMas.setVisibility(View.VISIBLE);
+                    txtTituloPulsar.setText(textoBotonOcul);
+                }
+
+            }
+        });
+
+        masCercano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MostrarResultado(idCercano);
+                marker2.showInfoWindow();
+                marker.hideInfoWindow();
+                CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 15F);
+                mMap.animateCamera(miUbicacion);
+            }
+        });
 
         //Senalar el icono donde pulsa en el menu inferior
         btnMapa = findViewById(R.id.btnLugaresCercanos2);
@@ -121,6 +218,14 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 finish();
             }
         });
+        btnIrLugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConexionMapa.this, ListarLugarUsuario.class);
+                intent.putExtra("ListadoLugar", listadoLugar);
+                startActivity(intent);
+            }
+        });
         //llamada a la funcion para obtener las coordenadas
         btnListarLugarCercano = findViewById(R.id.btnLugaresCercanosMapa);
         btnListarLugarCercano.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +237,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
+
         lugarDistancia = findViewById(R.id.tvDistancia);
 
         toolbar.show(this, "Lugares cercanos", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
@@ -156,12 +262,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         public void run() {
 
                             if(count2 == 0){
-                                Toast.makeText(ConexionMapa.this, "Se produjo un error, intente nuevamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ConexionMapa.this, "Error del servidor, intente nuevamente", Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
                                 finish();
                             }else
                             {
                                 agregarMarcador(location.getLatitude(),location.getLongitude());
+                                loading.dismiss();
                             }
                         }
                     },1500);
@@ -194,6 +301,64 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {mMap = googleMap;}
 
+
+    public void MostrarResultado(String idLugar)
+    {
+        SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+        String email = preferences.getString("estado_correo","");
+
+        //String idLugar = "113";//listadoLugar.getId().toString();
+        String url2 = WebService.urlRaiz+WebService.servicioListarLugaresUsuario; //URL del web service
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        listadoLugar = new ListadoLugar(
+                                obj.getString("nombre_lugar"),
+                                obj.getString("direccion"),
+                                obj.getString("telefono"),
+                                imagenReturn(obj.getString("imagen_lugar")),
+                                obj.getInt("id_lugar"),
+                                "",
+                                obj.getString("categoria"));
+
+                        txtNombreLugar.setText(obj.getString("nombre_lugar"));
+                        txtTipologia.setText(obj.getString("tipologia"));
+                        txtCategoria.setText(obj.getString("categoria"));
+                        txtDireccion.setText(obj.getString("direccion"));
+                        txtTelefono.setText(obj.getString("telefono"));
+                        Glide.with(ConexionMapa.this)
+                                .load(imagenReturn(obj.getString("imagen_lugar")))
+                                .into(imgmarker);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id_lugar", idLugar);
+                parametros.put("email", email);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
     public void obtenerCoordenadas()
     {
         String url = WebService.urlRaiz + WebService.servicioListarLugaresMapa;
@@ -209,7 +374,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                     (float) obj.getDouble("latitud"),
                                     (float) obj.getDouble("longitud"),
                                     obj.getString("nombre_lugar"),
-                                    obj.getString("direccion")
+                                    obj.getString("direccion"),
+                                    obj.getInt("id_lugar")
                             ));
                         }
                         count2 =1;
@@ -223,34 +389,39 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
     private void agregarMarcador(double lat, double lng) {
         loading.dismiss();
-        Toast.makeText(this, "Carga exitosa", Toast.LENGTH_SHORT).show();
         btnListarLugarCercano.setVisibility(View.VISIBLE);
+        tapactionLayout.setVisibility(View.VISIBLE);
+        nInfoMapa.setVisibility(View.VISIBLE);
         Float latitud, longitud;
-        String nombreLugar, direccionLugar;
+        String nombreLugar;
+        Integer idLugarMapa;
         BitmapDescriptor puntero = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
         BitmapDescriptor iconoPuntero = BitmapDescriptorFactory.fromResource(R.drawable.punterogeo);
-        LatLng riobamba = new LatLng(-1.67435, -78.6483);
+        //LatLng riobamba = new LatLng(-1.67435, -78.6483);
         LatLng coordenadas = new LatLng(lat, lng);//coordenadas de mi posicion
         String distanciaString;
+        String [] idMarker = new String[count];
         lugarCerca = new String[count];
+        idLugarList = new Integer[count];
         distancias = new Double[count];
         distanc = new String[count];
         Proceso proceso = new Proceso();
+        double temp = 10000;
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            mMap.addMarker(new MarkerOptions()
+           /* mMap.addMarker(new MarkerOptions()
                     .position(riobamba)
                     .icon(puntero)
-                    .title("Riobamba"));
+                    .title("Riobamba"));*/
 
             for (int i = 0; i < count; i++)
             {
                 latitud = mapaList.get(i).getLatitud();
                 longitud = mapaList.get(i).getLongitud();
                 nombreLugar = mapaList.get(i).getNombreLugar();
-                direccionLugar = mapaList.get(i).getDireccionLugar();
+                idLugarMapa = mapaList.get(i).getIdLugar();
                 DecimalFormat formato1 = new DecimalFormat("#0.0");
                 String distancia = formato1.format(proceso.obtenerDistancia(lat, lng, latitud,longitud));
 
@@ -260,18 +431,65 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
                 distancias[i] = proceso.obtenerDistancia(lat, lng, latitud,longitud);
                 lugarCerca[i] = nombreLugar;
+                idLugarList[i] = idLugarMapa;
 
                 LatLng lugarMedico = new LatLng(latitud, longitud);
-                mMap.addMarker(new MarkerOptions()
+                marker = mMap.addMarker(new MarkerOptions()
                         .position(lugarMedico)
                         .title(nombreLugar)
                         .snippet(distanciaString)
                         .icon(puntero)
                         .icon(iconoPuntero));
-            }
-            lugarDistancia.setText(proceso.verCercano(distancias, lugarCerca,count));
 
-            String text = proceso.verDistanciaCercano(distancias,count).toString();
+                if(proceso.obtenerDistancia(lat, lng, latitud,longitud)< temp)
+                {
+                    temp = proceso.obtenerDistancia(lat, lng, latitud,longitud);
+                    marker2 = mMap.addMarker(new MarkerOptions()
+                            .position(lugarMedico)
+                            .title(nombreLugar)
+                            .snippet(distanciaString)
+                            .icon(puntero)
+                            .icon(iconoPuntero));
+                    marker2.showInfoWindow();
+                    riobamba = new LatLng(latitud, longitud);
+                    /*mMap.addMarker(new MarkerOptions()
+                            .position(riobamba));*/
+                }
+
+
+
+
+                idMarker[i] = marker.getId();
+            }
+
+            String lugarCercano = proceso.verCercano(distancias, lugarCerca, count);
+            idCercano = proceso.verIdCercano(distancias, idLugarList,count);
+
+            //marker.id
+            MostrarResultado(idCercano);
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    int idLugarReal = proceso.obtenerIdLugar(idLugarList,idMarker,marker.getId(),count,ConexionMapa.this);
+                    marker.showInfoWindow();
+                    //marker.notifyAll();
+                    CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15F);
+                    mMap.animateCamera(miUbicacion);
+                    //Objects.requireNonNull(marker).isInfoWindowShown() = true;
+                    if(idLugarReal == 0)
+                    {
+                        Toast.makeText(ConexionMapa.this, "Error del servidor", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ConexionMapa.this, ConexionMapa.class);
+                        startActivity(intent);
+                    }else
+                        MostrarResultado(String.valueOf(idLugarReal));
+                    return true;
+                }
+            });
+
+            lugarDistancia.setText(lugarCercano);//proceso.verCercano(distancias, lugarCerca, idLugarList,count,0));
+
+            //String text = proceso.verDistanciaCercano(distancias,count).toString();
             if(proceso.verDistanciaCercano(distancias,count)>5)
             {
                 int icon  = R.drawable.peligro;
@@ -294,7 +512,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                 builder.show();
             }
 
-            CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 13.5F);
+            CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(riobamba, 15F);
             mMap.animateCamera(miUbicacion);
         }
     }
@@ -476,5 +694,22 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("tituloRefe",titulo);
         editor.apply();
+    }
+    //Obtener la url real
+    private String imagenReturn(String url) {
+        if(url.contains(WebService.imagenRaiz)) {
+            urlSinEspacios = url.replace(" ", "%20");
+            String data = urlSinEspacios;
+            String[] split = data.split(WebService.imagenRaiz);
+            ruta = null;
+            for (int i = 0; i < split.length; i++) {
+                ruta = split[1];
+            }
+            urlImagenLugar= WebService.urlRaiz+ruta;
+        }
+        else{
+            urlImagenLugar=urlSinEspacios;
+        }
+        return  urlImagenLugar;
     }
 }
