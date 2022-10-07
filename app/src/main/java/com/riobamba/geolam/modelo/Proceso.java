@@ -16,9 +16,11 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Proceso {
     double temp = 100000;
+    double temp1 = 100000;
 
     public double obtenerDistancia(Double latitudUsu, Double longitudUsu, Float latitudLug, Float longitudLug)
     {
@@ -42,7 +44,7 @@ public class Proceso {
     }
 
 
-    public String verCercano(Double[] distancias, String[] lugarCerca, Integer count ) {
+    public String verCercano(Double[] distancias, String[] lugarCerca, Integer count) {
         String lugarDist = "null";
         String dist;
         DecimalFormat formato2 = new DecimalFormat("#0.0");
@@ -55,8 +57,38 @@ public class Proceso {
                 lugarDist = lugarCerca[i] + " a "+ dist + " Km";
             }
         }
+
         return  lugarDist;
     }
+
+    public String verIdCercano(Double[] distancias, Integer[] idLugar, Integer count) {
+        String idLugarDist = "null";
+        for(int i = 0; i<count;i++)
+        {
+            if(distancias[i]< temp1)
+            {
+                temp1 = distancias[i];
+                idLugarDist = "" + idLugar[i];
+            }
+        }
+            return  idLugarDist;
+    }
+
+    public Integer obtenerIdLugar(Integer[] idLugar, String[] idMarker, String marker, Integer count, Context ctx)
+    {
+        int valor = 0;
+        for(int i = 0; i<count ; i++)
+        {
+            if(Objects.equals(marker, idMarker[i]))
+            {
+                valor = idLugar[i];
+            }
+        }
+//        Toast.makeText(ctx, String.valueOf(valor), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ctx, marker, Toast.LENGTH_SHORT).show();
+        return valor;
+    }
+
 
     public String calcularEdad(int anio, int mes, int dia)
     {

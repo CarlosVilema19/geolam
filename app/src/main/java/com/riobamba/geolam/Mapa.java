@@ -65,7 +65,8 @@ public class Mapa extends AppCompatActivity {
                                         (float)obj.getDouble("latitud"),
                                         (float)obj.getDouble("longitud"),
                                         obj.getString("nombre_lugar"),
-                                        obj.getString("direccion")
+                                        obj.getString("direccion"),
+                                        0
                                 ));
                             }
                             //new ConexionMapa(Mapa.this,mapaList);
