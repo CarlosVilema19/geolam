@@ -120,6 +120,14 @@
         \nTérmino8
     </string>
     <string name="telefono">Teléfono</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="enviar">Enviar</string>
+    <string name="item">item</string>
+    <string name="lugaratencionmedica">Lugar de atención Médica</string>
+    <string name="asiganar_medico_espe">Asignar Médico | Especialidad | Lugar</string>
+    <string name="ingresar_datos">Ingresar datos</string>
+    <string name="asignar_lugar_especialidad">Asignar Lugar | Especialidad</string>
+    <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
 
 
 </resources>

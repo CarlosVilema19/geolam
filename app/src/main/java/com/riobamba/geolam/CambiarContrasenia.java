@@ -179,8 +179,6 @@ public class CambiarContrasenia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(CambiarContrasenia.this, Configuraciones.class);
-                startActivity(intent);
             }
         });
         MostrarResultado();

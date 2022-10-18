@@ -249,6 +249,9 @@ public class IngresoLugarMedico extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //General
+                if (verificarSimilitud() == 0) {
+                    Toast.makeText(IngresoLugarMedico.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
+                }
               validarLugar();
             }
         });

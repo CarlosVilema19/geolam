@@ -21,148 +21,138 @@
         android:clickable="true"
         android:focusable="true"
         android:textAlignment="viewEnd"
-        android:foreground="?android:attr/selectableItemBackground"
         android:text= "@string/consultar"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16dp"
-
+        android:textSize="16sp"
         android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelarTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/circular4"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cancelar"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/iMenuSupe"
         android:background="@drawable/imagen_gestion"
-        android:paddingTop="@dimen/activity_vertical_margin"
-
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:alpha="0.7"
+            android:alpha="0.6"
             android:background="@color/transparent"
             android:backgroundTint="@null"
             android:gravity="center_vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:elevation="10dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true">
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="200dp"
-                        android:layout_marginRight="14dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@color/transparent"
-                        android:backgroundTint="@null"
-                        android:orientation="vertical"
-                        android:paddingLeft="14dp">
-
-                    </LinearLayout>
-                </ScrollView>
             </androidx.cardview.widget.CardView>
-
-
         </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="35dp"
             android:background="@color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
             android:backgroundTint="@null"
-            android:orientation="vertical"
-            android:paddingLeft="35dp">
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/txTipologia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/titulo_tipologia"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-
-                android:id="@+id/txTipo"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTipologia"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
-                    android:gravity="left"
-                    android:hint="@string/ingreso_tipologia"
-                    android:inputType="textCapCharacters"
-                    android:maxLength="80"
-                    tools:ignore="TextContrastCheck,TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancelarTipo"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Cancelar" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAgregarTipologia"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@id/btnCancelarTipo"
-                    android:text="@string/rec_guardar_informacion" />
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/txTipologia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginTop="25dp"
+                            android:text="@string/titulo_tipologia"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
 
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        android:id="@+id/txTipo"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTipologia"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ123456789"
+                            android:gravity="left"
+                            android:hint="@string/ingreso_tipologia"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="80"
+                            tools:ignore="TextContrastCheck,TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_gravity="center">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAgregarTipologia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/rec_guardar_informacion"
+                            android:textStyle="bold"
+                            app:cornerRadius="15dp"
+                            android:padding="10dp"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

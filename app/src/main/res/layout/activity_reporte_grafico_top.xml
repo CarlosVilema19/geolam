@@ -11,121 +11,121 @@
         android:layout_width="match_parent"
         android:background="@drawable/imagen_gestion"
         android:layout_below="@+id/iMenuSupe"
+        android:alpha="0.8"
         android:layout_height="wrap_content">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/card2"
-
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        android:foregroundGravity="center"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true">
-
-        <ScrollView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp">
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:elevation="10dp"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="10dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
 
-                <TextView
-        android:id="@+id/text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Top 10"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-
-    <RelativeLayout
-        android:id="@+id/Rlay2"
-        android:layout_below="@id/text1"
-        android:layout_width="match_parent"
-        android:layout_marginTop="25dp"
-        android:layout_height="200dp">
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/grafica2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:gravity="center_horizontal"
+                            android:text="Top 10"
+                            android:textStyle="bold" />
 
 
-            />
-    </RelativeLayout>
-                    <TextView
-                        android:id="@+id/text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/Rlay2"
-                        android:layout_marginTop="25dp"
-                        android:layout_centerHorizontal="true"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="12sp"
-                        android:text="Lugares de atención médica más vistos">
+                        <RelativeLayout
+                            android:id="@+id/Rlay2"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_below="@id/text1"
+                            android:layout_marginTop="25dp">
 
-                    </TextView>
-                    <ir.androidexception.datatable.DataTable
-                        android:id="@+id/data_table2"
-                        android:layout_below="@+id/text2"
+                            <com.jjoe64.graphview.GraphView
+                                android:id="@+id/grafica2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+
+                                />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Rlay2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="25dp"
+                            android:text="Lugares de atención médica más vistos"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12sp">
+
+                        </TextView>
+
+                        <ir.androidexception.datatable.DataTable
+                            android:id="@+id/data_table2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/text2"
+                            android:layout_margin="10dp"
+                            app:corner_radius="8dp"
+                            app:direction="ltr"
+
+                            app:header_background_color="#FF017FCC"
+                            app:header_gravity="center"
+                            app:header_horizontal_padding="0dp"
+                            app:header_text_color="#FFFFFF"
+                            app:header_text_size="4sp"
+                            app:header_vertical_padding="16dp"
+                            app:persian_number="false"
+                            app:row_background_color="#fff"
+                            app:row_gravity="center"
+                            app:row_text_color="#000"
+                            app:row_text_size="3sp"
+                            app:row_vertical_padding="16dp"
+                            app:shadow="8dp" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerarPDFLugaresVisitados2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:header_gravity="center"
-                        app:row_gravity="center"
-
-                        app:header_vertical_padding="16dp"
-                        app:header_horizontal_padding="0dp"
-                        app:row_vertical_padding="16dp"
-                        app:header_text_size="4sp"
-                        app:row_text_size="3sp"
-                        app:row_text_color="#000"
-                        app:header_text_color="#FFFFFF"
-                        app:row_background_color="#fff"
-                        app:header_background_color="#FF017FCC"
-                        app:persian_number="false"
-                        app:corner_radius="8dp"
-                        app:direction="ltr"
-                        app:shadow="8dp"/>
-
-                </RelativeLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGenerarPDFLugaresVisitados2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Generar reporte"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/degradado2"
-                    android:drawableLeft="@drawable/barras_"
-                    />
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/degradado2"
+                        android:drawableEnd="@drawable/barras_"
+                        android:text="Generar reporte"
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null" />
 
 
-            </LinearLayout>
-        </ScrollView>
-    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </RelativeLayout>

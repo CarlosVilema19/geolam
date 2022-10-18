@@ -62,7 +62,7 @@ public class AsignarMedico extends AppCompatActivity {
     String listLugarMedicoNombres;
 
     Button btnGuardarAsignacion;
-    Button btnAsignaciones;
+    Button btnAsignaciones, btnCancel;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -96,6 +96,7 @@ public class AsignarMedico extends AppCompatActivity {
         tvIdLugarMedico=findViewById(R.id.TextViewIDLugar);
         btnGuardarAsignacion = findViewById(R.id.btn_guardarAsignarMedic);
         btnAsignaciones = findViewById(R.id.btnAsignaciones);
+        btnCancel = findViewById(R.id.btnCancelarAsigMed);
 
         //AutoComplete
         //adaptadorMedico=new ListadoAsignarMedicoAdaptador(this);
@@ -123,6 +124,12 @@ public class AsignarMedico extends AppCompatActivity {
             }
         });
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnGuardarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -440,7 +447,7 @@ public class AsignarMedico extends AppCompatActivity {
     private int validarMedico(){
         int datCorrecto=0;
         if(autoCompleteOpcionesMedico.getText().toString().equals("")){
-            autoCompleteOpcionesMedico.setError("¡Seleccione un médico!");
+            autoCompleteOpcionesMedico.setError("¡Seleccione un médico!",null);
             autoCompleteOpcionesMedico.requestFocus();
         }
         else
@@ -454,7 +461,7 @@ public class AsignarMedico extends AppCompatActivity {
     private int validarNombre(){
         int datCorrecto=0;
         if(autoCompleteOpcionesLugarMedico.getText().toString().equals("")){
-            autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!");
+            autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!",null);
             autoCompleteOpcionesLugarMedico.requestFocus();
         }
         else
@@ -467,7 +474,7 @@ public class AsignarMedico extends AppCompatActivity {
     private int validarEspecialidad(){
         int datCorrecto=0;
         if(autoCompleteOpcionesEspecialidad.getText().toString().equals("")){
-            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!");
+            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!",null);
             autoCompleteOpcionesEspecialidad.requestFocus();
         }
         else

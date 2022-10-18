@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/imagen_gestion"
     android:layout_gravity="center_horizontal"
     tools:context=".AsignarEspecialidad">
     <include
@@ -27,188 +28,164 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelarAsigEspe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/iMenuSupe"
-        android:background="@drawable/imagen_gestion"
-        android:paddingTop="@dimen/activity_vertical_margin"
-
-        >
+        android:layout_alignParentStart="true"
+        android:background="@drawable/circular4"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cancelar"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:alpha="0.7"
-            android:background="@color/transparent"
-            android:backgroundTint="@null"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/iMenuSupe"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            >
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardUseCompatPadding="true">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="300dp"
-                        android:layout_marginRight="14dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@color/transparent"
-                        android:backgroundTint="@null"
-                        android:orientation="vertical"
-                        android:paddingLeft="14dp">
-
-                    </LinearLayout>
-                </ScrollView>
-            </androidx.cardview.widget.CardView>
-
-
-        </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="35dp"
-            android:background="@color/transparent"
-            android:backgroundTint="@null"
-            android:orientation="vertical"
-            android:paddingLeft="35dp">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:alpha="0.6"
+                android:background="@color/transparent"
+                android:backgroundTint="@null"
+                android:gravity="center_vertical">
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/tvAsignarLugarEspecialidad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-
-                    android:layout_marginRight="15dp"
-                    android:text="Asignar Lugar | Especialidad"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-
-
-                    />
-
+                </androidx.cardview.widget.CardView>
             </RelativeLayout>
-            <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/tvAsignarLugarEspecialidad"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:hint="Lugar de atención médica"
-
-
-                >
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoLugarMedico2"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/transparent"
+                android:backgroundTint="@null"
+                android:orientation="vertical">
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
+                    android:layout_height="match_parent"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                    />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                            <TextView
+                                android:id="@+id/tvAsignarLugarEspecialidad"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:text="@string/asignar_lugar_especialidad"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                />
+                        </RelativeLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:hint="@string/lugaratencionmedica"
+                            >
+                            <AutoCompleteTextView
+                                android:id="@+id/autoLugarMedico2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                />
 
-            <TextView
-                android:id="@+id/TextViewIDLugarMedico2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="1sp"
-                android:layout_marginBottom="1sp"
-                android:hint="item"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="1sp"
-                android:textStyle="bold"
-                android:visibility="invisible"
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:id="@+id/TextViewIDLugarMedico2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginBottom="1sp"
+                            android:hint="@string/item"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            />
 
-                />
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:hint="@string/especialidad"
+                            >
+                            <AutoCompleteTextView
+                                android:id="@+id/autoEspecialidad2"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:scrollbarDefaultDelayBeforeFade="50"
+                                android:scrollbarFadeDuration="50"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+                        <TextView
+                            android:id="@+id/TextViewIDEspecialidad2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginBottom="1sp"
+                            android:hint="@string/item"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            />
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/autoLugarMedico2"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Especialidad"
-
-                >
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoEspecialidad2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:inputType="none"
-                    android:scrollbarDefaultDelayBeforeFade="50"
-                    android:scrollbarFadeDuration="50"
-
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/TextViewIDEspecialidad2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="1sp"
-                android:layout_marginBottom="1sp"
-                android:hint="item"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="1sp"
-                android:textStyle="bold"
-                android:visibility="invisible"
-
-                />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_guardarAsigEspecialidad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/TextViewIDLugar"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="80dp"
-
-                android:text="@string/rec_guardar_informacion"
-                android:textColor="@android:color/white"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-    </RelativeLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_guardarAsigEspecialidad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="80dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="80dp"
+                            android:padding="10dp"
+                            android:text="@string/rec_guardar_informacion"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"
+                            app:cornerRadius="15dp" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </RelativeLayout>
 </RelativeLayout>
