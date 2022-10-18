@@ -76,9 +76,8 @@
                             <ImageView
                                 android:id="@+id/ivImagenLu"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="280dp"
                                 android:layout_gravity="center"
-                                android:scaleType="centerCrop"
                                 app:srcCompat="@drawable/busq_lugares" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -105,7 +104,7 @@
                                         android:background="@drawable/boton_morado"
                                         android:drawableEnd="@drawable/ic_baseline_search_24"
                                         android:drawableTint="@color/white"
-                                        android:text="Búsqueda rápida"
+                                        android:text="@string/busqueda_rapida"
                                         android:textAllCaps="false"
                                         android:textColor="@android:color/white"
                                         android:textSize="12sp"
@@ -188,8 +187,7 @@
                             <ImageView
                                 android:id="@+id/ivImagenEspe"
                                 android:layout_width="wrap_content"
-                                android:scaleType="centerCrop"
-                                android:layout_height="wrap_content"
+                                android:layout_height="280dp"
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/busq_espe" />
                             <RelativeLayout
@@ -301,8 +299,7 @@
                             <ImageView
                                 android:id="@+id/ivImagenMed"
                                 android:layout_width="wrap_content"
-                                android:scaleType="centerCrop"
-                                android:layout_height="wrap_content"
+                                android:layout_height="280dp"
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/busq_medic" />
 

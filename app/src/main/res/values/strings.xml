@@ -128,6 +128,9 @@
     <string name="ingresar_datos">Ingresar datos</string>
     <string name="asignar_lugar_especialidad">Asignar Lugar | Especialidad</string>
     <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
+    <string name="busqueda_rapida">Búsqueda rápida</string>
+    <string name="opinion_opcional">Opinión (Opcional)</string>
+    <string name="calificacion">Calificación</string>
 
 
 </resources>
