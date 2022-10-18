@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:background="@drawable/imagen_gestion"
     android:layout_height="match_parent"
     tools:context=".EliminarCuenta">
 
@@ -13,16 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/iMenuSupe"
-        android:background="@drawable/imagen_gestion"
         android:paddingTop="@dimen/activity_vertical_margin"
-
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:alpha="0.7"
+            android:alpha="0.6"
             android:background="@color/transparent"
             android:backgroundTint="@null"
             android:gravity="center_vertical">
@@ -30,30 +28,27 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:elevation="10dp"
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true">
 
-                <ScrollView
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="280dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@color/transparent"
+                    android:backgroundTint="@null"
+                    android:orientation="vertical"
+                    android:paddingLeft="14dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="280dp"
-                        android:layout_marginRight="14dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@color/transparent"
-                        android:backgroundTint="@null"
-                        android:orientation="vertical"
-                        android:paddingLeft="14dp">
+                </LinearLayout>
 
-                    </LinearLayout>
-                </ScrollView>
             </androidx.cardview.widget.CardView>
 
 
@@ -62,79 +57,84 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="35dp"
             android:background="@color/transparent"
             android:backgroundTint="@null"
-            android:orientation="vertical"
-            android:paddingLeft="35dp">
+            android:layout_margin="15dp"
+            android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/textView6"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:text="@string/textEliminarCuenta"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/contContraActual2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginBottom="25dp"
-                    android:gravity="center_horizontal"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/base"
-                    app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
-                    app:startIconTint="@color/base">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etContraActual2"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView8"
-                        android:hint="Ingrese la contraseña"
+                        android:layout_marginLeft="20dp"
 
-                        android:inputType="textPassword"
-                        android:maxLines="1"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:text="@string/textEliminarCuenta"
                         android:textSize="15dp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/contContraActual2"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="25dp"
+                        android:gravity="center_horizontal"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/base"
+                        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
+                        app:startIconTint="@color/base">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etContraActual2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/textView8"
+                            android:hint="Ingrese la contraseña"
+
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:textSize="15dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEliminarCuenta_"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/bordes_redondos"
-                    android:drawableRight="@drawable/ic_baseline_delete_outline_242"
-                    android:text="Eliminar cuenta"
-                    android:textColor="@color/rojo"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null" />
-
-
-    </LinearLayout>
-</RelativeLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEliminarCuenta_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bordes_redondos"
+                        android:drawableEnd="@drawable/ic_baseline_delete_outline_242"
+                        android:text="Eliminar cuenta"
+                        android:textColor="@color/rojo"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@null" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
     </RelativeLayout>
+</RelativeLayout>

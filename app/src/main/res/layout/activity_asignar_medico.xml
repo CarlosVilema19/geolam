@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
+    android:background="@drawable/imagen_gestion"
     tools:context=".AsignarMedico">
     <include
         layout="@layout/activity_menu_toolbar"
@@ -21,222 +22,201 @@
         app:backgroundTint="@null"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/consultar"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelarAsigMed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/iMenuSupe"
-        android:background="@drawable/imagen_gestion"
-        android:paddingTop="@dimen/activity_vertical_margin"
-
-        >
+        android:layout_alignParentStart="true"
+        android:background="@drawable/circular4"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cancelar"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:alpha="0.7"
-            android:background="@color/transparent"
-            android:backgroundTint="@null"
-            android:gravity="center_vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardUseCompatPadding="true">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="400dp"
-                        android:layout_marginRight="14dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@color/transparent"
-                        android:backgroundTint="@null"
-                        android:orientation="vertical"
-                        android:paddingLeft="14dp">
-
-                    </LinearLayout>
-                </ScrollView>
-            </androidx.cardview.widget.CardView>
-
-
-        </RelativeLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="35dp"
-        android:background="@color/transparent"
-        android:backgroundTint="@null"
-        android:orientation="vertical"
-        android:paddingLeft="35dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        <TextView
-            android:id="@+id/tvAsignarMedico"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="Asignar Médico | Especialidad | Lugar"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="14sp"
-            android:textStyle="bold"
-
-
-            />
-        </RelativeLayout>
-    <com.google.android.material.textfield.TextInputLayout
-
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAsignarMedico"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="Médico"
-
-
-        >
-
-        <AutoCompleteTextView
-            android:id="@+id/autoMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/TextViewIDMedico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="1sp"
-        android:layout_marginBottom="1sp"
-        android:hint="item"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="1sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-
-
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/autoMedico"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="10dp"
-        android:hint="Especialidad"
-
-
-        >
-
-        <AutoCompleteTextView
-            android:id="@+id/autoEspecialidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:maxLines="1"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:id="@+id/TextViewIDEspecialidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="1sp"
-        android:layout_marginBottom="1sp"
-        android:hint="item"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="1sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-
-        />
-        <com.google.android.material.textfield.TextInputLayout
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/autoEspecialidad"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
-            android:hint="Lugar de atención Médica"
-
+            android:layout_height="match_parent"
+            android:layout_below="@+id/iMenuSupe"
+            android:paddingTop="@dimen/activity_vertical_margin"
 
             >
 
-            <AutoCompleteTextView
-                android:id="@+id/autoLugar"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                android:maxLines="1"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:id="@+id/TextViewIDLugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="1sp"
-            android:layout_marginBottom="1sp"
-            android:hint="item"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="1sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
+                android:layout_centerVertical="true"
+                android:alpha="0.6"
+                android:background="@color/transparent"
+                android:backgroundTint="@null"
+                android:gravity="center_vertical">
 
-            />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardUseCompatPadding="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_guardarAsignarMedic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/TextViewIDLugar"
-            android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="60dp"
-            android:text="@string/rec_guardar_informacion"
-            android:textColor="@android:color/white"
-            android:textSize="15dp" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
 
-    </LinearLayout>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/transparent"
+                android:backgroundTint="@null"
+                android:orientation="vertical">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvAsignarMedico"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="@string/asiganar_medico_espe"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:hint="@string/medico"
+                            >
+
+                            <AutoCompleteTextView
+                                android:id="@+id/autoMedico"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/TextViewIDMedico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginBottom="1sp"
+                            android:hint="@string/item"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:hint="@string/especialidad"
+                            >
+                            <AutoCompleteTextView
+                                android:id="@+id/autoEspecialidad"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/TextViewIDEspecialidad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginBottom="1sp"
+                            android:hint="@string/item"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:hint="@string/lugaratencionmedica"
+                            >
+                            <AutoCompleteTextView
+                                android:id="@+id/autoLugar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/TextViewIDLugar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginBottom="1sp"
+                            android:hint="@string/item"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+
+                            />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_guardarAsignarMedic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:layout_marginBottom="15dp"
+                            android:padding="10dp"
+                            android:text="@string/rec_guardar_informacion"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"
+                            app:cornerRadius="15dp" />
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </RelativeLayout>
 </RelativeLayout>

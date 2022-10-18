@@ -56,7 +56,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
     String listIDLugarMedicoID;
     String listIDLugarMedicoNombres;
     Button btnGuardarAsig;
-    Button btnAsig;
+    Button btnAsig, btnCancel;
 
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -81,6 +81,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
         tvIdLugarMedico = findViewById(R.id.TextViewIDLugarMedico2);
         btnGuardarAsig = findViewById(R.id.btn_guardarAsigEspecialidad);
         btnAsig = findViewById(R.id.btnAsignacionEspe);
+        btnCancel = findViewById(R.id.btnCancelarAsigEspe);
 
         toolbar.show(this, "Gestión de lugares", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
 
@@ -102,6 +103,12 @@ public class AsignarEspecialidad extends AppCompatActivity {
             }
         });
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //Conexión al Servidor- Consulta AutoComplete Especialidad
 
         String url2 = WebService.urlRaiz + WebService.servicioAsignarEspecialidad;
@@ -294,7 +301,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
     private int validarNombre(){
         int datCorrecto=0;
         if(autoCompleteOpcionesLugarMedico.getText().toString().equals("")){
-                autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!");
+                autoCompleteOpcionesLugarMedico.setError("¡Seleccione un lugar!",null);
                 autoCompleteOpcionesLugarMedico.requestFocus();
             }
         else
@@ -307,7 +314,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
     private int validarEspecialidad(){
         int datCorrecto=0;
         if(autoCompleteOpcionesEspecialidad.getText().toString().equals("")){
-            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!");
+            autoCompleteOpcionesEspecialidad.setError("¡Seleccione una especialidad!",null);
             autoCompleteOpcionesEspecialidad.requestFocus();
         }
         else
