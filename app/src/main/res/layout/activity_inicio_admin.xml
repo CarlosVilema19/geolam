@@ -3,41 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    android:background="@drawable/imagen3"
     tools:context=".InicioAdmin">
 
     <include layout="@layout/activity_menu_toolbar" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iMenuSupe"
-        android:background="@drawable/imagen3"
-        android:gravity="center_vertical">
+        android:layout_below="@+id/iMenuSupe">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
 
             android:id="@+id/txGestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="2dp"
-
+            android:visibility="gone"
             android:text=" "
             android:textAlignment="center"
             android:textColor="@color/morado"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/idCont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txGestion"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground">
@@ -46,95 +47,74 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="10dp">
 
                 <ViewFlipper
-
                     android:id="@+id/carrusel"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-
                     android:clickable="true"
-
                     android:focusable="true"
                     android:foreground="?android:selectableItemBackground">
 
                 </ViewFlipper>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPrevious"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/circular2"
+                            android:clickable="true"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_left_24"
+                            android:focusable="true"
+                            app:backgroundTint="@null"
+                            android:layout_alignParentStart="true"
+                            />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnNext"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/circular2"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                            app:backgroundTint="@null"
+                            android:layout_alignParentEnd="true"
+                            />
+                </RelativeLayout>
+
 
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
 
         <TextView
-
             android:id="@+id/txLine"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/idCont"
             android:layout_marginLeft="150dp"
             android:layout_marginRight="150dp"
-            android:drawableLeft="@drawable/menos"
             android:gravity="center_horizontal"
             android:textColor="@color/morado"
-            android:textSize="9dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txLine"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="140dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPrevious"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/circular2"
-                android:clickable="true"
-                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_left_24"
-                android:focusable="true"
-
-                app:backgroundTint="@null"
-
-                />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNext"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center_vertical"
-
-                android:layout_marginLeft="280dp"
-                android:background="@drawable/circular2"
-
-                android:drawableLeft="@drawable/ic_baseline_keyboard_arrow_right_24"
-
-                app:backgroundTint="@null"
-
-                />
-        </LinearLayout>
-
+            app:drawableLeftCompat="@drawable/menos" />
 
         <LinearLayout
             android:id="@+id/idCont2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txLine"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="10dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground">
@@ -155,17 +135,13 @@
                     android:id="@+id/carrusel3"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-
                     android:clickable="true"
-
                     android:focusable="true"
                     android:foreground="?android:selectableItemBackground">
 
                 </ViewFlipper>
 
-
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
 
         <TextView
@@ -176,20 +152,18 @@
             android:layout_below="@id/idCont2"
             android:layout_marginLeft="150dp"
             android:layout_marginRight="150dp"
-            android:drawableLeft="@drawable/menos"
+            android:drawableStart="@drawable/menos"
             android:gravity="center_horizontal"
             android:textColor="@color/morado"
-            android:textSize="9dp" />
+            />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txLine2"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground">
@@ -197,8 +171,6 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
@@ -206,63 +178,45 @@
                 app:cardCornerRadius="10dp">
 
                 <ViewFlipper
-
                     android:id="@+id/carrusel2"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-
                     android:clickable="true"
-
                     android:focusable="true"
                     android:foreground="?android:selectableItemBackground">
-
                 </ViewFlipper>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPrevious2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/circular2"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_left_24"
+                        android:focusable="true"
+                        app:backgroundTint="@null"
+                        android:layout_alignParentStart="true"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnNext2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/circular2"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        app:backgroundTint="@null"
+                        android:layout_alignParentEnd="true"
+                        />
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txLine2"
-            android:layout_alignParentBottom="true"
-
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPrevious2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/circular2"
-                android:clickable="true"
-                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_left_24"
-                android:focusable="true"
-                app:backgroundTint="@null"
-
-                />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNext2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="280dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/circular2"
-
-                android:drawableLeft="@drawable/ic_baseline_keyboard_arrow_right_24"
-
-                app:backgroundTint="@null"
-
-                />
-        </LinearLayout>
-
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

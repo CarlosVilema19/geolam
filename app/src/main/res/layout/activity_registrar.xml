@@ -310,10 +310,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCancelar"
@@ -324,6 +326,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
                         android:text="Cancelar" />
 
                     <com.google.android.material.button.MaterialButton
@@ -335,10 +339,10 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/btnCancelar"
                         android:text="@string/ingreso_regsitro"
-                        android:textSize="15sp" />
-                </RelativeLayout>
+                        android:layout_weight="1"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
 
             </LinearLayout>
