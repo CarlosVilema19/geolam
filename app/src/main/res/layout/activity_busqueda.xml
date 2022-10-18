@@ -80,6 +80,58 @@
                                 android:layout_gravity="center"
                                 android:scaleType="centerCrop"
                                 app:srcCompat="@drawable/busq_lugares" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp">
+                                <LinearLayout
+                                    android:id="@+id/llLugarMed"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:focusable="true"
+                                    android:clickable="true"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusRapLugar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/boton_morado"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:drawableTint="@color/white"
+                                        android:text="Búsqueda rápida"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp"
+                                        app:backgroundTint="@null" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusAvanLugar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:background="@drawable/boton_morado"
+                                        app:backgroundTint="@null"
+                                        android:layout_weight="1"
+                                        android:focusable="true"
+                                        android:drawableTint="@color/white"
+                                        android:clickable="true"
+                                        android:layout_gravity="center"
+                                        android:layout_below="@+id/iMenuSupe"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:text="Búsqueda avanzada"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp" />
+
+                                </LinearLayout>
+                            </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
@@ -140,6 +192,55 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/busq_espe" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp">
+                                <LinearLayout
+                                    android:id="@+id/llEspe"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:focusable="true"
+                                    android:clickable="true"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusRapEspe"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_marginEnd="5dp"
+                                        app:backgroundTint="@null"
+                                        android:drawableTint="@color/white"
+                                        android:background="@drawable/boton_celeste"
+                                        android:layout_gravity="center"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:text="Búsqueda rápida"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusAvanEspe"
+                                        android:layout_width="match_parent"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="5dp"
+                                        android:drawableTint="@color/white"
+                                        app:backgroundTint="@null"
+                                        android:background="@drawable/boton_celeste"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:text="Búsqueda avanzada"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+                            </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
@@ -204,174 +305,61 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/busq_medic" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp">
+                                <LinearLayout
+                                    android:id="@+id/llLugar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:focusable="true"
+                                    android:clickable="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusRapMed"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center"
+                                        android:layout_marginEnd="5dp"
+                                        app:backgroundTint="@null"
+                                        android:drawableTint="@color/white"
+                                        android:background="@drawable/boton_verde"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:text="Búsqueda rápida"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnBusAvanMed"
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        app:backgroundTint="@null"
+                                        android:background="@drawable/boton_verde"
+                                        android:layout_marginStart="5dp"
+                                        android:drawableTint="@color/white"
+                                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                                        android:text="Búsqueda avanzada"
+                                        android:textAllCaps="false"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+                            </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
-
-
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-
         </RelativeLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_below="@+id/iMenuSupe"
-        android:id="@+id/llLugarMed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="215dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:focusable="true"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:clickable="true"
-        android:defaultFocusHighlightEnabled="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusRapLugar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iMenuSupe"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/boton_morado"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:drawableTint="@color/white"
-            android:text="Búsqueda rápida"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:backgroundTint="@null" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusAvanLugar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/boton_morado"
-            app:backgroundTint="@null"
-            android:layout_weight="1"
-            android:focusable="true"
-            android:drawableTint="@color/white"
-            android:clickable="true"
-            android:layout_gravity="center"
-            android:layout_below="@+id/iMenuSupe"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:text="Búsqueda avanzada"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llEspe"
-        android:layout_below="@id/cvBusLugar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="447dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:focusable="true"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:clickable="true"
-        android:defaultFocusHighlightEnabled="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusRapEspe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="5dp"
-            app:backgroundTint="@null"
-            android:drawableTint="@color/white"
-            android:background="@drawable/boton_celeste"
-            android:layout_gravity="center"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:text="Búsqueda rápida"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusAvanEspe"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="25dp"
-            android:drawableTint="@color/white"
-            app:backgroundTint="@null"
-            android:background="@drawable/boton_celeste"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:text="Búsqueda avanzada"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llLugar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cvBusEspe"
-        android:layout_marginTop="680dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:focusable="true"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:clickable="true"
-        android:defaultFocusHighlightEnabled="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusRapMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="5dp"
-            app:backgroundTint="@null"
-            android:drawableTint="@color/white"
-            android:background="@drawable/boton_verde"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:text="Búsqueda rápida"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBusAvanMed"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:backgroundTint="@null"
-            android:background="@drawable/boton_verde"
-            android:layout_marginLeft="5dp"
-            android:drawableTint="@color/white"
-            android:layout_marginRight="25dp"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:text="Búsqueda avanzada"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
-
 </RelativeLayout>
 
