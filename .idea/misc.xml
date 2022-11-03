@@ -158,15 +158,19 @@
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_calificacion.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.33" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_configuraciones.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_datos_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_datos_personales.xml" value="0.18" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_eliminar_cuenta.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_especialidad_inicio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_especialidad_usuario.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_info_app.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_especialidad.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_lugar_medico.xml" value="0.25" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_medico.xml" value="0.22" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_tipologia.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_admin.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_item_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado.xml" value="0.20416666666666666" />
