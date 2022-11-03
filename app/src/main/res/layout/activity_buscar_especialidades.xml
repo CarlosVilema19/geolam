@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".Buscar_Especialidades">
-
     <include layout="@layout/activity_menu_toolbar" />
     <include layout="@layout/activity_toolbar_infe" />
 

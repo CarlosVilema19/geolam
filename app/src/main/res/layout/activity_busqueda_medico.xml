@@ -64,25 +64,22 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:layout_marginTop="2dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="20dp"
+                        android:hint="@string/lugar_de_trabajo"
                       >
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edBusLugar"
-
+                        <AutoCompleteTextView
+                            android:id="@+id/acBusLugar"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:digits="@string/digitos_aceptados"
-                            android:hint="Lugar de trabajo"
                             android:inputType="textCapCharacters"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -91,10 +88,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_marginTop="20dp"
-
-
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:text="Ingrese una especialidad"
@@ -102,22 +96,21 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
-
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="20dp">
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/especialidad">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edBusEspe"
+                        <AutoCompleteTextView
+                            android:id="@+id/acBusEspe"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:digits="@string/digitos_aceptados"
-                            android:hint="Especialidad"
                             android:inputType="textCapCharacters"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
 

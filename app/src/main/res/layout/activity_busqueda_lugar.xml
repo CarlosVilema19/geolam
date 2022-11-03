@@ -98,8 +98,7 @@
                     <com.google.android.material.textfield.TextInputLayout
 
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:visibility="invisible"
-
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginLeft="20dp"
@@ -127,14 +126,15 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="20dp"
-                        android:hint="Tipología"
+                        android:hint="@string/tipologia"
                         >
                         <AutoCompleteTextView
-                            android:id="@+id/autoTipologia4"
+                            android:id="@+id/autoBusTipo"
                             android:layout_width="match_parent"
                             android:textSize="14sp"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
+                            android:digits="@string/digitos_aceptados"
+                            android:inputType="textCapCharacters"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,19 +149,24 @@
                         android:textSize="14sp"
 
                         android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/especialidad">
                     <AutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/autoBusqEspe"
-                        android:hint="Especialidad"
                         android:textSize="14sp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:padding="13dp"
+                        android:digits="@string/digitos_aceptados"
+                        android:inputType="textCapCharacters"
                         >
-
-
                     </AutoCompleteTextView>
+                </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
 
@@ -170,7 +175,7 @@
                         android:layout_height="0dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="2dp"
-                        android:visibility="invisible"
+                        android:visibility="gone"
                         android:layout_marginRight="20dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -179,8 +184,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:digits="@string/digitos_aceptados"
-                            android:hint="Especialidad"
+                            android:hint="@string/especialidad"
                             android:inputType="textCapCharacters"
                             tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -199,10 +203,11 @@
                         android:layout_marginBottom="25dp"
                         android:background="@drawable/boton_bus_lug"
                         android:drawableEnd="@drawable/ic_baseline_search_24"
-                        android:text="Buscar"
+                        android:text="@string/buscar"
                         android:textColor="@android:color/white"
                         android:textSize="13sp"
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        tools:targetApi="m" />
 
                 </LinearLayout>
             </ScrollView>

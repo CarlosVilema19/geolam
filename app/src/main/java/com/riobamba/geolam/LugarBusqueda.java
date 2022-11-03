@@ -59,25 +59,20 @@ import java.util.Objects;
 
 public class LugarBusqueda extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
-    EditText txtCate,txtTipo,txtEspe;
     Button btnBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     String categoria, tipologia, especialidad;
-    //Items Sexo F y M
-    AutoCompleteTextView autoCompleteTxtEdSexo;
+    AutoCompleteTextView acCate, acTipo, acEspe;
+    //Categoría
     ArrayAdapter<String> adapterItems;
-
     String[] items = {"NINGUNO","PRIVADO", "PUBLICO"};
 
     //Tipología
     String listTipologiasNombres;
     ArrayList<String> opcionesTipologiaNombres= new ArrayList<>();
 
-    AutoCompleteTextView autoCompleteOpcionesTipologia;
-
     //Especialidad
     String listEspeNombres;
-    AutoCompleteTextView autoCompleteEspecialidad;
     ArrayList<String> especialidades= new ArrayList<>();
 
 
@@ -85,21 +80,20 @@ public class LugarBusqueda extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_lugar);
-        txtCate = findViewById(R.id.edBusCate);
-        txtTipo = findViewById(R.id.edBusTipo);
-        txtEspe = findViewById(R.id.edBusEspe);
         btnBuscar = findViewById(R.id.btnBuscar);
-        autoCompleteOpcionesTipologia=findViewById(R.id.autoTipologia4);
-        autoCompleteEspecialidad=findViewById(R.id.autoBusqEspe);
+        acCate = findViewById(R.id.edBusCate);
+        acTipo=findViewById(R.id.autoBusTipo);
+        acEspe=findViewById(R.id.autoBusqEspe);
+
 
         toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
         tipologia();
         especialidades();
-        //Items Sexo F y M Autocomplete
-        autoCompleteTxtEdSexo = findViewById(R.id.edBusCate);
+
+        //Items Autocomplete
         adapterItems = new ArrayAdapter<String>(this, R.layout.lista_items, items);
-        autoCompleteTxtEdSexo.setAdapter(adapterItems);
-        autoCompleteTxtEdSexo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        acCate.setAdapter(adapterItems);
+        acCate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -107,13 +101,13 @@ public class LugarBusqueda extends AppCompatActivity {
                 // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
                 if(item.equals("NINGUNO"))
                 {
-                    autoCompleteTxtEdSexo.setText("");
+                    acCate.setText("");
                 }
 
             }
 
         });
-        autoCompleteEspecialidad.addTextChangedListener(new TextWatcher() {
+        acEspe.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -122,8 +116,8 @@ public class LugarBusqueda extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (autoCompleteEspecialidad.getOnItemSelectedListener()==null){
-                    txtEspe.setText("");
+                if (acEspe.getOnItemSelectedListener()==null){
+                    acEspe.clearListSelection();
 
                 }
             }
@@ -137,9 +131,9 @@ public class LugarBusqueda extends AppCompatActivity {
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                categoria = txtCate.getText().toString().toUpperCase().trim();
-                tipologia = txtTipo.getText().toString().toUpperCase().trim();
-                especialidad = txtEspe.getText().toString().toUpperCase().trim();
+                categoria = acCate.getText().toString().toUpperCase().trim();
+                tipologia = acTipo.getText().toString().toUpperCase().trim();
+                especialidad = acEspe.getText().toString().toUpperCase().trim();
                 
                 if(categoria.equals("") && tipologia.equals("") && especialidad.equals(""))
                 {
@@ -162,7 +156,7 @@ public class LugarBusqueda extends AppCompatActivity {
 
         String url=WebService.urlRaiz+WebService.servicioListarTipologia;
         //adaptadorTipo.clear();
-        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+        StringRequest stringRequest= new StringRequest(Request.Method.POST,url,
                 response ->
                 {
                     try {
@@ -188,8 +182,8 @@ public class LugarBusqueda extends AppCompatActivity {
                         opcionesTipologiaNombres.add(opcionesTipologiaNombres.size(), "NINGUNO");
                         ArrayAdapter adapter;
                         adapter=new ArrayAdapter<String> (this, R.layout.lista_items, opcionesTipologiaNombres);
-                        autoCompleteOpcionesTipologia.setAdapter(adapter);
-                        autoCompleteOpcionesTipologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        acTipo.setAdapter(adapter);
+                        acTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -206,15 +200,14 @@ public class LugarBusqueda extends AppCompatActivity {
                                 String item = parent.getItemAtPosition(position).toString();
                                 if(item.equals("NINGUNO"))
                                 {
-                                    autoCompleteOpcionesTipologia.setText("");
-                                    txtTipo.setText("");
+                                    acTipo.setText("");
 
                                 }
                                 else {
 
                                     String selected = (String) parent.getItemAtPosition(position);
                                     int pos = opcionesTipologiaNombres.indexOf(selected);
-                                    txtTipo.setText(selected);
+                                    acTipo.setText(selected);
                                 }
 
                             }
@@ -226,7 +219,7 @@ public class LugarBusqueda extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error del servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest.setTag("REQUEST");
@@ -266,8 +259,8 @@ public class LugarBusqueda extends AppCompatActivity {
                         }
                         ArrayAdapter adapter;
                         adapter=new ArrayAdapter<String> (this,R.layout.lista_items, especialidades);
-                        autoCompleteEspecialidad.setAdapter(adapter);
-                        autoCompleteEspecialidad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        acEspe.setAdapter(adapter);
+                        acEspe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -284,15 +277,15 @@ public class LugarBusqueda extends AppCompatActivity {
                                String item = parent.getItemAtPosition(position).toString();
                                 if(item.equals(""))
                                 {
-                                    autoCompleteEspecialidad.setText("");
-                                    txtEspe.setText("");
+                                    acEspe.setText("");
+                                   // txtEspe.setText("");
 
                                 }
                                 else {
 
                                     String selected = (String) parent.getItemAtPosition(position);
                                 int pos = especialidades.indexOf(selected);
-                                txtEspe.setText(selected);
+                                    acEspe.setText(selected);
                                 }
 
 
@@ -306,7 +299,7 @@ public class LugarBusqueda extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error del servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest.setTag("REQUEST");

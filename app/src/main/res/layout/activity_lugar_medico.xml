@@ -231,7 +231,8 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="15dp"
                         android:layout_marginEnd="15dp"
-                        android:text="Nombre"
+                        android:text="@string/rec_nombre_del_lugar"
+                        android:textIsSelectable="true"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textAllCaps="true"
@@ -255,7 +256,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
-                        android:text="Tipologia"
+                        android:text="@string/tipologia"
+                        android:textIsSelectable="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -265,7 +267,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
-                        android:text="Categoria"
+                        android:text="@string/Categoria"
+                        android:textIsSelectable="true"
                         android:textColor="@color/black"
                         android:textAllCaps="true"
                         android:textSize="16sp" />
@@ -628,6 +631,7 @@
                         android:layout_marginEnd="10dp"
                         android:text="@string/rec_descripcion_lugar"
                         android:textColor="@color/black"
+                        android:textIsSelectable="true"
                         android:textSize="15sp" />
                 </LinearLayout>
 

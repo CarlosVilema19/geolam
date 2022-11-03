@@ -145,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
+                android:textIsSelectable="true"
                 android:text="@string/tipologia"
                 />
             <TextView
@@ -155,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Categoria"
                 android:textAllCaps="true"
+                android:textIsSelectable="true"
                 />
         </LinearLayout>
         <LinearLayout

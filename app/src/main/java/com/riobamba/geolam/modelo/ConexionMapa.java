@@ -177,6 +177,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         direcLL = findViewById(R.id.llDirecMap);
         teleLL = findViewById(R.id.llTeleMap);
 
+        masCercano.setVisibility(View.GONE);
+
         tapactionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -430,6 +432,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         btnListarLugarCercano.setVisibility(View.VISIBLE);
         tapactionLayout.setVisibility(View.VISIBLE);
         nInfoMapa.setVisibility(View.VISIBLE);
+        masCercano.setVisibility(View.VISIBLE);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         Float latitud, longitud;
         String nombreLugar;
