@@ -90,6 +90,10 @@ public class ListadoEspecialidad extends AppCompatActivity implements SearchView
                     public void onResponse(String response) {
                         try {
                             JSONArray array = new JSONArray(response);
+                            if (array.length() == 0 ){
+                                finish();
+                                Toast.makeText(ListadoEspecialidad.this, "Todavía no hay información para este campo", Toast.LENGTH_SHORT).show();
+                            }
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoLugarAdmin(

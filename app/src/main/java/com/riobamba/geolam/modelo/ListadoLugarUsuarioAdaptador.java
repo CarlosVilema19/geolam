@@ -181,6 +181,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         if(listadoLugar.getCalificacion().equals(0F)){viewHolder.calificacionLL.setVisibility(View.GONE);}
         if(listadoLugar.getEstadoOpi().equals(1)) {viewHolder.llBtnCalif.setVisibility(View.GONE);}
         //if(listadoLugar.getEstadoOpi().equals(0)) {viewHolder.rlOpinion.setVisibility(View.GONE);}
+        if(lugarList.size()==0){viewHolder.btnMedicoUsuario.setVisibility(View.GONE);}else{viewHolder.btnMedicoUsuario.setVisibility(View.VISIBLE);}
         if (listadoLugar.getFavorito().equals(1))
         {
             viewHolder.btnFavAct.setVisibility(View.VISIBLE);

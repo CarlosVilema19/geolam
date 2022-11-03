@@ -116,6 +116,10 @@ public class MedicoListado extends AppCompatActivity implements SearchView.OnQue
                     public void onResponse(String response) {
                         try {
                             JSONArray array = new JSONArray(response);
+                            if (array.length() == 0 ){
+                                finish();
+                                Toast.makeText(MedicoListado.this, "Todavía no hay información para este campo", Toast.LENGTH_SHORT).show();
+                            }
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
                                 lugarList.add(new ListadoMedico(
