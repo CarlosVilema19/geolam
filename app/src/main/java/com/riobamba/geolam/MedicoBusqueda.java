@@ -58,27 +58,32 @@ import java.util.Objects;
 public class MedicoBusqueda extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
-    EditText txtLugar, txtEspe;
+    AutoCompleteTextView acLugar, acEspe;
     Button btnBuscar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
     String lugar, especialidad;
-
+    //Lugar
+    String listLugar;
+    ArrayList<String> opListLugar= new ArrayList<>();
+    //Especialidad
+    String listEspeNombres;
+    ArrayList<String> especialidades= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_medico);
-        txtLugar = findViewById(R.id.edBusLugar);
-        txtEspe = findViewById(R.id.edBusEspe);
+        acLugar = findViewById(R.id.acBusLugar);
+        acEspe = findViewById(R.id.acBusEspe);
         btnBuscar = findViewById(R.id.btnBuscarMed);
 
         toolbar.show(this, "Búsqueda Avanzada", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
-
+        lugar();
+        especialidades();
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                lugar = txtLugar.getText().toString().toUpperCase().trim();
-                especialidad = txtEspe.getText().toString().toUpperCase().trim();
-
+                lugar = acLugar.getText().toString().toUpperCase().trim();
+                especialidad = acEspe.getText().toString().toUpperCase().trim();
                 if(lugar.equals("") && especialidad.equals(""))
                 {
                     Toast.makeText(MedicoBusqueda.this, "Ingrese al menos un campo", Toast.LENGTH_SHORT).show();
@@ -92,6 +97,92 @@ public class MedicoBusqueda extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void lugar() {
+        //Conexión al Servidor- Consulta AutoComplete Tipología
+        String url=WebService.urlRaiz+WebService.servicioAsignarLugarMedico;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST,url,
+                response ->
+                {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            listLugar = (object.getString("NOMBRE_LUGAR"));
+                            opListLugar.add(listLugar);
+                        }
+                        opListLugar.add(opListLugar.size(), "NINGUNO");
+                        ArrayAdapter adapter;
+                        adapter=new ArrayAdapter<String> (this, R.layout.lista_items, opListLugar);
+                        acLugar.setAdapter(adapter);
+                        acLugar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String item = parent.getItemAtPosition(position).toString();
+                                if(item.equals("NINGUNO"))
+                                {
+                                    acLugar.setText("");
+                                }
+                                else {
+                                    String selected = (String) parent.getItemAtPosition(position);
+                                    int pos = opListLugar.indexOf(selected);
+                                    acLugar.setText(selected);
+                                }
+                            }
+                        });
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error del servidor",Toast.LENGTH_SHORT).show();
+        });
+        stringRequest.setTag("REQUEST");
+        RequestQueue queue= Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    private void especialidades() {
+        //Conexión al Servidor- Consulta AutoComplete Tipología
+        String url=WebService.urlRaiz+WebService.servicioConsultaEspecialidades;
+        //adaptadorTipo.clear();
+        StringRequest stringRequest= new StringRequest(Request.Method.GET,url,
+                response ->
+                {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            listEspeNombres = (object.getString("DESCRIPCION_ESPECIALIDAD"));
+                            especialidades.add(listEspeNombres);
+                        }
+                        ArrayAdapter adapter;
+                        adapter=new ArrayAdapter<String> (this,R.layout.lista_items, especialidades);
+                        acEspe.setAdapter(adapter);
+                        acEspe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String item = parent.getItemAtPosition(position).toString();
+                                if(item.equals(""))
+                                {
+                                    acEspe.setText("");
+                                }
+                                else {
+
+                                    String selected = (String) parent.getItemAtPosition(position);
+                                    int pos = especialidades.indexOf(selected);
+                                    acEspe.setText(selected);
+                                }
+                            }
+                        });
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                },error -> {Toast.makeText(this,"Error del servidor",Toast.LENGTH_SHORT).show();
+        });
+        stringRequest.setTag("REQUEST");
+        RequestQueue queue= Volley.newRequestQueue(this);
+        queue.add(stringRequest);
     }
 
     public void guardarLugar(String lugar)
