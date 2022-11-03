@@ -26,7 +26,9 @@ public class AsignacionEspecialidadAdaptador extends RecyclerView.Adapter<Asigna
     final AsignacionEspecialidadAdaptador.OnClickActListener listener3;
     private final List<AsignacionMedico> TipoListOriginal;
     Integer tipo;
-/*
+
+
+
     public void filtrado(String txtBuscar) {
         if(txtBuscar.length() == 0)
         {
@@ -37,15 +39,17 @@ public class AsignacionEspecialidadAdaptador extends RecyclerView.Adapter<Asigna
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
-                    List<ListadoLugarAdmin> collection = lugarList.stream()
-                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()))
+                    List<AsignacionMedico> collection = lugarList.stream()
+                            .filter(i -> i.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase()) ||
+                                    i.getEspecialidad().toLowerCase().contains(txtBuscar.toLowerCase()))
                             .collect(Collectors.toList());
                     lugarList.clear();
                     lugarList.addAll(collection);
                 } //else {
                 lugarList.clear();
-                for (ListadoLugarAdmin l :TipoListOriginal) {
-                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())) {
+                for (AsignacionMedico l :TipoListOriginal) {
+                    if (l.getNombreLugar().toLowerCase().contains(txtBuscar.toLowerCase())||
+                            l.getEspecialidad().toLowerCase().contains(txtBuscar.toLowerCase())) {
 
                         lugarList.add(l);
                     }
@@ -56,7 +60,7 @@ public class AsignacionEspecialidadAdaptador extends RecyclerView.Adapter<Asigna
         //medicListOriginal.clear();
         // lugarList.clear();
         notifyDataSetChanged();
-    }*/
+    }
 
 
     public interface OnItemClickListener{
