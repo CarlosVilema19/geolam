@@ -59,14 +59,16 @@
                         android:id="@+id/tvNombreUsuariosLista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nombre Usuario"
+                        android:textIsSelectable="true"
+                        android:text="@string/nombre_usuario"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Email"
+                        android:text="@string/email"
+                        android:textIsSelectable="true"
                         android:textSize="12sp" />
 
                     <LinearLayout
@@ -78,7 +80,7 @@
                             android:id="@+id/tvDescripcionTipo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tipo"
+                            android:text="@string/tipo"
                             android:textSize="12sp" />
 
                         <TextView
