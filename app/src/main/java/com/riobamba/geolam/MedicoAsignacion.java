@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.OnQueryTextListener*/{
+public class MedicoAsignacion extends AppCompatActivity implements SearchView.OnQueryTextListener{
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
 
@@ -62,8 +62,8 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         lugarList = new ArrayList<>();
         txtBuscar = findViewById(R.id.svBuscar);
-        //txtBuscar.setOnQueryTextListener(this);
-        txtBuscar.setVisibility(View.GONE);
+        txtBuscar.setOnQueryTextListener(this);
+        //txtBuscar.setVisibility(View.GONE);
 
         //llamar al mostrar resultado
         toolbar.show(this, "Asignaciones", true); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
@@ -207,18 +207,7 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
         toolbar.ejecutarItemSelected(item, this);
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        myadapter.filtrado(query);
-        return true;
-    }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        myadapter.filtrado(newText);
-        return true;
-    }*/
 
     @Override
     protected void onStart() {
@@ -232,5 +221,17 @@ public class MedicoAsignacion extends AppCompatActivity /*implements SearchView.
     protected void onStop() {
         unregisterReceiver(networkChangeListener);
         super.onStop();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        myadapter.filtrado(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        myadapter.filtrado(newText);
+        return false;
     }
 }

@@ -144,6 +144,13 @@ public class ListadoUsuariosAdminAdaptador extends RecyclerView.Adapter<ListadoU
         viewHolder.idTipoUsuarios.setText(String.valueOf(listadousuarios.getIdTipoUsuarios()));
         viewHolder.btnActualizar.setVisibility(View.GONE);
 
+        if(listadousuarios.getIdTipoUsuarios() == 1)
+        {
+            viewHolder.btnBorrar.setVisibility(View.GONE);
+        }else{
+            viewHolder.btnBorrar.setVisibility(View.VISIBLE);
+        }
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
