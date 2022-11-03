@@ -139,6 +139,10 @@
     <string name="direccion">Dirección</string>
     <string name="cargando">Cargando…</string>
     <string name="buscar">Buscar</string>
+    <string name="tipo">Tipo</string>
+    <string name="nombre">Nombre</string>
+    <string name="id">Id</string>
+    <string name="id_">Id:</string>
 
 
 </resources>
