@@ -6,28 +6,33 @@
     android:orientation="vertical">
 
     <include layout="@layout/activity_menu_toolbar" />
-
     <include layout="@layout/activity_toolbar_infe" />
-
+    <TextView
+        android:id="@+id/tvCarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/cargando"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/iMenuInfe"
         android:layout_below="@+id/iMenuSupe">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUsuario"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp">
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -35,14 +40,11 @@
                 android:id="@+id/rvOpinion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rvUsuario"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="6dp"
+                android:layout_below="@+id/rvUsuario"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="6dp" />
         </RelativeLayout>
-
-
     </ScrollView>
-
 </RelativeLayout>

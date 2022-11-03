@@ -19,6 +19,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -119,7 +120,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     TextView lugarDistancia;
     ProgressDialog loading; //Mensaje de carga en el mapa
-
+    LinearLayout teleLL, direcLL;
     ImageView imgmarker, expanMas,expanMenos;
     BottomSheetBehavior mBottomSheetBehavior1;
     LinearLayout tapactionLayout;
@@ -173,6 +174,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         expanMenos.setVisibility(View.GONE);
         txtTituloPulsar.setText(textoBoton);
         tapactionLayout.setVisibility(View.GONE);
+        direcLL = findViewById(R.id.llDirecMap);
+        teleLL = findViewById(R.id.llTeleMap);
 
         tapactionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,7 +328,9 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                 imagenReturn(obj.getString("imagen_lugar")),
                                 obj.getInt("id_lugar"),
                                 "",
-                                obj.getString("categoria"));
+                                obj.getString("categoria"),
+                                (float)obj.getDouble("latitud"),
+                                (float)obj.getDouble("longitud"));
 
                         txtNombreLugar.setText(obj.getString("nombre_lugar"));
                         txtTipologia.setText(obj.getString("tipologia"));
@@ -335,6 +340,39 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         Glide.with(ConexionMapa.this)
                                 .load(imagenReturn(obj.getString("imagen_lugar")))
                                 .into(imgmarker);
+
+                        Float finalLatitud = (float)obj.getDouble("latitud");
+                        Float finalLongitud = (float)obj.getDouble("longitud");
+                        String finalNombreLugar = obj.getString("nombre_lugar");
+                        String finalTelefono = obj.getString("telefono");
+
+                        if(finalTelefono.equals(""))
+                        {
+                            teleLL.setVisibility(View.GONE);
+                        }
+                        else{
+                            teleLL.setVisibility(View.VISIBLE);
+                        }
+
+                        direcLL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String uri = "geo:<" + finalLatitud + ">,<" + finalLongitud + ">?q=<" + finalLatitud+ ">,<" + finalLongitud+ ">(" + finalNombreLugar + ")";
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                startActivity(intent);
+                            }
+                        });
+
+                        teleLL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String phone = "tel:03"+finalTelefono;
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse(phone));
+                                startActivity(intent);
+                            }
+                        });
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -392,6 +430,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         btnListarLugarCercano.setVisibility(View.VISIBLE);
         tapactionLayout.setVisibility(View.VISIBLE);
         nInfoMapa.setVisibility(View.VISIBLE);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         Float latitud, longitud;
         String nombreLugar;
         Integer idLugarMapa;
@@ -450,15 +489,12 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                             .snippet(distanciaString)
                             .icon(puntero)
                             .icon(iconoPuntero));
+                    assert marker2 != null;
                     marker2.showInfoWindow();
                     riobamba = new LatLng(latitud, longitud);
                     /*mMap.addMarker(new MarkerOptions()
                             .position(riobamba));*/
                 }
-
-
-
-
                 idMarker[i] = marker.getId();
             }
 
@@ -470,9 +506,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(@NonNull Marker marker) {
-                    int idLugarReal = proceso.obtenerIdLugar(idLugarList,idMarker,marker.getId(),count,ConexionMapa.this);
+                    int idLugarReal = proceso.obtenerIdLugar(idLugarList, idMarker, marker.getId(), count, ConexionMapa.this);
                     marker.showInfoWindow();
-                    //marker.notifyAll();
                     CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15F);
                     mMap.animateCamera(miUbicacion);
                     //Objects.requireNonNull(marker).isInfoWindowShown() = true;

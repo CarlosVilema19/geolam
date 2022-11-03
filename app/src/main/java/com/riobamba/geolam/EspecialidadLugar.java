@@ -110,7 +110,9 @@ public class EspecialidadLugar extends AppCompatActivity implements SearchView.O
                                     imagenReturn(obj.getString("imagen_lugar")),
                                     obj.getInt("id_lugar"),
                                     "",
-                                    obj.getString("descripcion_categoria")
+                                    obj.getString("descripcion_categoria"),
+                                    0F,
+                                    0F
                             ));
 
                         }

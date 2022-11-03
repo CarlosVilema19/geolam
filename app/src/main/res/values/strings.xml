@@ -131,6 +131,13 @@
     <string name="busqueda_rapida">Búsqueda rápida</string>
     <string name="opinion_opcional">Opinión (Opcional)</string>
     <string name="calificacion">Calificación</string>
+    <string name="opiniones">Opiniones</string>
+    <string name="ver_otros_comentarios">Ver otros comentarios</string>
+    <string name="informacion_extra">Información extra</string>
+    <string name="pagina_web">Página Web</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="direccion">Dirección</string>
+    <string name="cargando">Cargando...</string>
 
 
 </resources>

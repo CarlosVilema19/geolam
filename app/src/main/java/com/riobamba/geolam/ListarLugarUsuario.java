@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -65,12 +66,14 @@ public class ListarLugarUsuario extends AppCompatActivity
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
+    TextView carga;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
 
+        carga = findViewById(R.id.tvCarga);
         recyclerView = findViewById(R.id.rvUsuario);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,6 +81,7 @@ public class ListarLugarUsuario extends AppCompatActivity
         recyclerView2 = findViewById(R.id.rvOpinion);
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2.setVisibility(View.GONE);
 
         lugarList = new ArrayList<>();
         ListadoLugar listadoLugar = (ListadoLugar) getIntent().getSerializableExtra("ListadoLugar");
@@ -106,7 +110,8 @@ public class ListarLugarUsuario extends AppCompatActivity
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                recyclerView2.setVisibility(View.VISIBLE);
+                carga.setVisibility(View.GONE);
                 guardarId(idLugar);//llamado a la funcion para guaradar el id del lugar pulsado
                 try {
                     JSONArray array = new JSONArray(response);
@@ -127,7 +132,9 @@ public class ListarLugarUsuario extends AppCompatActivity
                                 (float)obj.getDouble("CALIFICACION"),
                                 obj.getInt("favorito"),
                                 obj.getInt("estado_opi"),
-                                obj.getInt("num_opi")
+                                obj.getInt("num_opi"),
+                                (float)obj.getDouble("latitud"),
+                                (float)obj.getDouble("longitud")
                         ));
 
                     }
@@ -170,7 +177,7 @@ public class ListarLugarUsuario extends AppCompatActivity
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-
+                    finish();
                 }
 
             }
@@ -178,6 +185,7 @@ public class ListarLugarUsuario extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }){
             @Override
@@ -240,7 +248,8 @@ public class ListarLugarUsuario extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "No se han podido cargar las opiniones", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }){
             @Override

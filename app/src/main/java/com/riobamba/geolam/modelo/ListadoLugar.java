@@ -12,8 +12,11 @@ public class ListadoLugar implements Serializable {
     String imagenLugar;
     Integer id;
     String distancia, categoria;
+    Float latitud, longitud;
 
-    public ListadoLugar(String nombreLugar, String direccionLugar, String telefonoLugar, String imagenLugar, int id_lugar, String distancia,String categoria) {
+    public ListadoLugar(String nombreLugar, String direccionLugar, String telefonoLugar,
+                        String imagenLugar, int id_lugar, String distancia,String categoria,
+                        Float latitud, Float longitud) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
@@ -21,6 +24,8 @@ public class ListadoLugar implements Serializable {
         this.id = id_lugar;
         this.distancia = distancia;
         this.categoria = categoria;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
     public String getNombreLugar() {
@@ -47,5 +52,13 @@ public class ListadoLugar implements Serializable {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public Float getLatitud() {
+        return latitud;
+    }
+
+    public Float getLongitud() {
+        return longitud;
     }
 }
