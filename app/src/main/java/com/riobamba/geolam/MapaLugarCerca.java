@@ -108,7 +108,9 @@ public class MapaLugarCerca extends AppCompatActivity implements  SearchView.OnQ
                                     imagenReturn(obj.getString("imagen_lugar")),
                                     obj.getInt("id_lugar"),
                                     listadoLugar[i] + " Km",
-                                    obj.getString("descripcion_categoria")
+                                    obj.getString("descripcion_categoria"),
+                                    0F,
+                                    0F
                             ));
                         }
 

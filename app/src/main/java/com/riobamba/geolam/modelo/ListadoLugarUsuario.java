@@ -12,14 +12,15 @@ public class ListadoLugarUsuario implements Serializable {
     String imagenLugar, informacionLugar, categoriaLugar, tipologiaLugar;
     Integer idLugar;
     String whastapp, paginaWeb;
-    Float calificacion;
+    Float calificacion, latitud, longitud;
     Integer favorito;
     Integer estadoOpi, numOpi;
 
     public ListadoLugarUsuario(String nombreLugar, String direccionLugar, String telefonoLugar,
                                String imagenLugar, String informacionLugar, String categoriaLugar,
                                String tipologiaLugar, Integer idLugar, String whastapp,String paginaWeb,
-                               Float calificacion, Integer favorito, Integer estadoOpi, Integer numOpi) {
+                               Float calificacion, Integer favorito, Integer estadoOpi, Integer numOpi,
+                               Float latitud, Float longitud) {
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.telefonoLugar = telefonoLugar;
@@ -34,6 +35,8 @@ public class ListadoLugarUsuario implements Serializable {
         this.favorito = favorito;
         this.estadoOpi = estadoOpi;
         this.numOpi = numOpi;
+        this.latitud = latitud;
+        this.longitud = longitud;
 
     }
 
@@ -91,5 +94,13 @@ public class ListadoLugarUsuario implements Serializable {
 
     public Integer getNumOpi() {
         return numOpi;
+    }
+
+    public Float getLatitud() {
+        return latitud;
+    }
+
+    public Float getLongitud() {
+        return longitud;
     }
 }

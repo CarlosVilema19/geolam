@@ -112,6 +112,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         private final LinearLayout paginaWebLL;
         private final LinearLayout descripcionLL;
         private final LinearLayout calificacionLL;
+        private final LinearLayout direccionLL;
         private final Button btnFavDes;
         private final Button btnFavAct;
         private final LinearLayout llBtnCalif;
@@ -142,6 +143,7 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
             paginaWebLL = view.findViewById(R.id.llPaginaWeb);
             descripcionLL = view.findViewById(R.id.llDescripcion);
             calificacionLL = view.findViewById(R.id.llCalificacion);
+            direccionLL = view.findViewById(R.id.llDireccion);
             btnFavDes = view.findViewById(R.id.btnFavoritoDes);
             btnFavAct  = view.findViewById(R.id.btnFavoritoAct);
             llBtnCalif = view.findViewById(R.id.llBtnCalificar);
@@ -207,20 +209,30 @@ public class ListadoLugarUsuarioAdaptador extends RecyclerView.Adapter<ListadoLu
         viewHolder.telefonoLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(mCtx, "Pagina web", Toast.LENGTH_SHORT).show();
-                /*Uri telefono = Uri.parse(listadoLugar.getTelefonoLugar());
-                Intent intent = new Intent(Intent.ACTION_CALL, telefono);
-                mCtx.startActivity(intent);*/
+                String phone = "tel:03"+listadoLugar.getTelefonoLugar();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(phone));
+                mCtx.startActivity(intent);
             }
         });
 
         viewHolder.whatsappLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(mCtx, "Pagina web", Toast.LENGTH_SHORT).show();
-                /*Uri whatsapp = Uri.parse(listadoLugar.getWhastapp());
-                Intent intent = new Intent(Intent.ACTION_SENDTO, whatsapp);
-                mCtx.startActivity(intent);*/
+                String phone = "https://wa.me/593"+listadoLugar.getWhastapp();
+                Uri link = Uri.parse(phone);
+                Intent intent = new Intent(Intent.ACTION_VIEW,link);
+                mCtx.startActivity(intent);
+            }
+        });
+
+        viewHolder.direccionLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String labelLocation = listadoLugar.getNombreLugar();
+                String uri = "geo:<" + listadoLugar.getLatitud()+ ">,<" + listadoLugar.getLongitud()+ ">?q=<" + listadoLugar.getLatitud()+ ">,<" + listadoLugar.getLongitud()+ ">(" + labelLocation + ")";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                mCtx.startActivity(intent);
             }
         });
 

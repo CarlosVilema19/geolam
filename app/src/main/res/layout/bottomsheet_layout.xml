@@ -75,7 +75,6 @@
                     android:textAlignment="center"
                     android:foregroundGravity="center"
                     />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -147,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
                 android:text="@string/tipologia"
-                android:textStyle="bold"/>
+                />
             <TextView
                 android:id="@+id/tvCategoria"
                 android:textColor="@android:color/black"
@@ -156,20 +155,37 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Categoria"
                 android:textAllCaps="true"
-                android:textStyle="bold"/>
+                />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/llDirecMap"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@android:color/black"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/direccion_listado"
-                android:textStyle="bold"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp">
+                <TextView
+                    android:id="@+id/tvDirec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/direccion_listado"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/tvDirec"
+                        android:layout_marginStart="30dp"
+                        app:srcCompat="@drawable/ic_baseline_touch_app_242" />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/tvDireccion"
                 android:textColor="@android:color/black"
@@ -184,17 +200,35 @@
                 />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/llTeleMap"
             android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@android:color/black"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/telefono"
-                android:textStyle="bold"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/tvTele"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/telefono"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/tvTele"
+                    android:layout_marginStart="30dp"
+                    app:srcCompat="@drawable/ic_baseline_touch_app_242" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tvTelefono"
                 android:textColor="@android:color/black"

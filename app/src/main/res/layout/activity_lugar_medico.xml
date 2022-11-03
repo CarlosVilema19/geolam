@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/celestec"
     android:layout_height="wrap_content"
-    tools:context=".ListarLugarUsuario"
-    android:fillViewport="true">
-
+    tools:context=".ListarLugarUsuario">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/celestec"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:id="@+id/car1"
             android:layout_width="match_parent"
@@ -38,12 +38,12 @@
                         style="@style/Widget.Material3.Button.TextButton.Icon"
                         android:layout_width="55dp"
                         android:layout_height="62dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
                         android:layout_marginTop="3dp"
                         android:layout_marginEnd="5dp"
-                        android:backgroundTint="@color/verde2"
                         android:layout_marginBottom="3dp"
+                        android:backgroundTint="@color/verde2"
                         app:icon="@drawable/ic_baseline_favorite_border_24"
                         app:iconGravity="end"
                         app:iconTint="@color/white"
@@ -85,9 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-
-
 
                 <LinearLayout
 
@@ -289,7 +286,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_weight="1"
-                        android:layout_marginRight="30dp"
+                        android:layout_marginEnd="30dp"
                         android:layout_below="@id/idCont2"
                         android:layout_gravity="center_vertical"
                         android:drawableRight="@drawable/menos"
@@ -318,7 +315,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Calificación"
+                            android:text="@string/calificacion"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -329,21 +326,24 @@
                     android:id="@+id/llDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginEnd="160dp"
+                        android:layout_marginEnd="130dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/titulo_lugaratencionm"
+                        android:background="@drawable/t_espe"
                         android:backgroundTint="#ff7fc3c4"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/ivDireccion"
                             android:layout_width="wrap_content"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginStart="15dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_baseline_directions_2422" />
@@ -354,10 +354,24 @@
                             android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
                             android:layout_marginEnd="15dp"
                             android:textColor="@color/white"
-                            android:text="  Dirección"
+                            android:text="@string/direccion"
                             android:textSize="15sp"/>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                app:srcCompat="@drawable/ic_baseline_touch_app_24" />
+                        </RelativeLayout>
+
                     </LinearLayout>
 
                     <TextView
@@ -369,7 +383,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="@string/rec_direccion_lugar"
                         android:textColor="@color/black"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -378,6 +392,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -385,7 +402,7 @@
                         android:layout_height="40dp"
 
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="160dp"
+                        android:layout_marginEnd="130dp"
                         android:background="@drawable/t_espe"
                         android:backgroundTint="#ff7fc3c4"
                         android:orientation="horizontal">
@@ -394,20 +411,32 @@
                             android:id="@+id/ivTelefono"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_baseline_phone_24" />
 
                         <TextView
                             android:id="@+id/txtelefono"
                             android:textStyle="bold"
+                            android:layout_marginStart="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
                             android:layout_gravity="center"
                             android:textColor="@color/white"
-                            android:text="  Teléfono"
+                            android:text="@string/telefono"
                             android:textSize="15sp" />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                app:srcCompat="@drawable/ic_baseline_touch_app_24" />
+                        </RelativeLayout>
                     </LinearLayout>
 
 
@@ -439,16 +468,15 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="#ff7fc3c4"
-                        android:layout_marginEnd="160dp"
+                        android:layout_marginEnd="130dp"
                         android:background="@drawable/t_espe"
-
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/ivWhatsapp"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_baseline_whatsapp_24" />
 
@@ -460,8 +488,20 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:textColor="@color/white"
-                            android:text="  Whatsapp"
+                            android:text="@string/whatsapp"
+                            android:layout_marginStart="15dp"
                             android:textSize="15sp"/>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                app:srcCompat="@drawable/ic_baseline_touch_app_24" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
@@ -471,7 +511,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        android:text="Whatsapp"
+                        android:text="@string/whatsapp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -479,7 +519,6 @@
                 <LinearLayout
                     android:id="@+id/llPaginaWeb"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:clickable="true"
@@ -492,7 +531,7 @@
                         android:layout_height="40dp"
                         android:backgroundTint="#ff7fc3c4"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="160dp"
+                        android:layout_marginEnd="130dp"
                         android:background="@drawable/t_espe"
                         android:orientation="horizontal">
 
@@ -512,8 +551,20 @@
                             android:layout_marginEnd="15dp"
                             android:textColor="@color/white"
                             android:textStyle="bold"
-                            android:text="  Página Web"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/pagina_web"
                             android:textSize="15sp" />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                app:srcCompat="@drawable/ic_baseline_touch_app_24" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
@@ -523,7 +574,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        android:text="Página Web"
+                        android:text="@string/pagina_web"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -543,13 +594,13 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="#ff7fc3c4"
-                        android:layout_marginEnd="160dp"
+                        android:layout_marginEnd="130dp"
                         android:background="@drawable/t_espe"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/ivInfoExtra"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
@@ -562,7 +613,8 @@
                             android:layout_gravity="center"
                             android:textStyle="bold"
                             android:layout_marginEnd="15dp"
-                            android:text="  Información extra"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/informacion_extra"
                             android:textColor="@color/white"
                             android:textSize="15sp"/>
                     </LinearLayout>
@@ -680,9 +732,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Ver otros comentarios"
+                        android:text="@string/ver_otros_comentarios"
                         android:textColor="@color/black"
-                        android:textSize="5sp"
                         android:textStyle="italic" />
 
 
@@ -692,7 +743,7 @@
                     android:id="@+id/rlOpinion"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginRight="160dp"
+                    android:layout_marginEnd="160dp"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="#ff7fc3c4"
                     android:background="@drawable/t_espe"
@@ -701,7 +752,7 @@
 
                     <ImageView
                         android:id="@+id/ivComentario"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_centerVertical="true"
@@ -713,22 +764,23 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/ivComentario"
-                        android:text="  Opiniones "
-                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/opiniones"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textView4"
-                        android:text="N"
+                        android:text="@string/opiniones"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>

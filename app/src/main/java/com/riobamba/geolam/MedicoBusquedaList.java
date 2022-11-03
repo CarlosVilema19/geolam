@@ -72,7 +72,7 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
         myadapter = new ListadoMedicoAdaptador(MedicoBusquedaList.this, lugarList);
         txtBuscar.setOnQueryTextListener(this);
 
-        toolbar.show(this, "Lugares", true);
+        toolbar.show(this, "Médicos", true);
 
         //LugarBusqueda lugarBusqueda = (LugarBusqueda) getIntent().getSerializableExtra("LugarBusqueda");
 
