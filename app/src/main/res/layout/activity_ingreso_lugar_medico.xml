@@ -49,16 +49,15 @@
         android:background="@color/transparent"
         android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="10dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:elevation="10dp"
-        >
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="2dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp">
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <ScrollView
         android:layout_below="@+id/iMenuSupe"
@@ -411,11 +410,11 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/rec_guardar_informacion"
-                    app:cornerRadius="15dp"
-                    android:textStyle="bold"
                     android:padding="10dp"
-                    android:textSize="13sp" />
+                    android:text="@string/rec_guardar_informacion"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="15dp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
