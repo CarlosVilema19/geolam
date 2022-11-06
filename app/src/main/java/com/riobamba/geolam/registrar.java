@@ -495,6 +495,7 @@ public class registrar extends AppCompatActivity {
                                 }
                                 if (validaExistenciaCorreo(opcionesCorreoUsuario) == 1) {
                                     insertarUsusario();
+                                    loading2.dismiss();
                                 }
                                 else{
                                     loading2.dismiss();
@@ -502,10 +503,11 @@ public class registrar extends AppCompatActivity {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                loading2.dismiss();
                             }
 
                         }, error -> {
-                    Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error del servidor", Toast.LENGTH_SHORT).show();
                     loading2.dismiss();
                 });
                 stringRequest2.setTag("REQUEST");
