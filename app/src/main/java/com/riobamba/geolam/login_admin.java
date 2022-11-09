@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,6 +36,7 @@ public class login_admin extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     TextInputLayout errorPass, errorEmail;
     Button btnLogin, btnRecuperarAdmin, btnUsuario;
+    ProgressDialog loading;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -54,6 +56,7 @@ public class login_admin extends AppCompatActivity {
 
 
         btnLogin.setOnClickListener(view -> {
+            loading = ProgressDialog.show(login_admin.this, "Cargando...", "Espere por favor");
             validarUsuario();
         });
 
@@ -80,7 +83,6 @@ public class login_admin extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     response ->
                     {
-
                         try {
                             //JSONArray array = new JSONArray(response);
                             //JSONObject object = array.toJSONObject(array);
@@ -88,7 +90,7 @@ public class login_admin extends AppCompatActivity {
                             String existencia = object.getString("valida");
                             //Toast.makeText(getApplicationContext(), existencia, Toast.LENGTH_SHORT).show();
                             if (existencia.equals("existe")) {
-
+                                loading.dismiss();
                                 Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
                                 guardarEstadoButton();
                                 guardarEmail(edtUsuario.getText().toString());
@@ -96,6 +98,7 @@ public class login_admin extends AppCompatActivity {
                                 Intent intent = new Intent(login_admin.this, InicioAdmin.class);
                                 startActivity(intent);
                             } else {
+                                loading.dismiss();
                                 if (existencia.equals("usuario"))
                                 {
                                     Toast.makeText(getApplicationContext(), "Ingrese las credenciales de administrador", Toast.LENGTH_SHORT).show();
@@ -117,10 +120,11 @@ public class login_admin extends AppCompatActivity {
                             }
                         } catch (JSONException | UnsupportedEncodingException e) {
                             e.printStackTrace();
+                            loading.dismiss();
                         }
                     },error ->{
-
-
+                loading.dismiss();
+                Toast.makeText(login_admin.this, "Error del servidor", Toast.LENGTH_SHORT).show();
             })
 
 
@@ -147,6 +151,7 @@ public class login_admin extends AppCompatActivity {
             camposVacios=1;
         }
         else {
+            loading.dismiss();
             if (edtUsuario.getText().toString().equals("") && edtPassword.getText().toString().equals("")) {
 
                 //edtUsuario.setError("Ingrese un correo electrónico");

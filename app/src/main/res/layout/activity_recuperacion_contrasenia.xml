@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/imagen3"
     tools:context=".RecuperacionContrasenia">
     <include layout="@layout/activity_menu_toolbar" />
 
     <LinearLayout
         android:layout_below="@+id/iMenuSupe"
         android:layout_width="match_parent"
-        android:background="@drawable/imagen"
         android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="45dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             app:cardUseCompatPadding="true"
@@ -95,9 +95,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="80dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="25dp"
-                        android:layout_marginRight="80dp"
+                        android:layout_marginRight="10dp"
+                        app:cornerRadius="15sp"
+                        android:padding="10dp"
                         android:text="@string/restabecer"
                         android:textColor="@android:color/white"
                         android:textSize="15sp" />

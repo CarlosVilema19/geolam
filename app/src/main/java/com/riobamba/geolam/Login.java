@@ -1,5 +1,6 @@
 package com.riobamba.geolam;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -43,6 +44,7 @@ public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     TextInputLayout errorPass, errorEmail;
     Button btnLogin, btnRecuperar, btnRegistro, btnAdmin;
+    ProgressDialog loading;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
@@ -61,6 +63,7 @@ public class Login extends AppCompatActivity {
         //conexionInternet();
 
         btnLogin.setOnClickListener(view -> {
+            loading = ProgressDialog.show(Login.this, "Cargando...", "Espere por favor");
             validarUsuario();
         });
 
@@ -210,7 +213,7 @@ public class Login extends AppCompatActivity {
                             String existencia = object.getString("valida");
                             //Toast.makeText(getApplicationContext(), existencia, Toast.LENGTH_SHORT).show();
                             if (existencia.equals("existe")) {
-
+                                loading.dismiss();
                                 Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
                                 guardarEstadoButton();
                                 guardarEmail(edtUsuario.getText().toString());
@@ -218,6 +221,7 @@ public class Login extends AppCompatActivity {
                                 Intent intent = new Intent(Login.this, Listado.class);
                                 startActivity(intent);
                             } else {
+                                loading.dismiss();
                                 if (existencia.equals("administrador"))
                                 {
                                     Toast.makeText(getApplicationContext(), "Inicie sesión como administrador", Toast.LENGTH_SHORT).show();
@@ -239,10 +243,11 @@ public class Login extends AppCompatActivity {
                             }
                         } catch (JSONException | UnsupportedEncodingException e) {
                             e.printStackTrace();
+                            loading.dismiss();
                         }
                     },error ->{
-
-
+                Toast.makeText(Login.this, "Error del servidor", Toast.LENGTH_SHORT).show();
+                loading.dismiss();
                     })
 
 
@@ -270,6 +275,7 @@ public class Login extends AppCompatActivity {
             camposVacios=1;
         }
         else {
+            loading.dismiss();
             if (edtUsuario.getText().toString().equals("") && edtPassword.getText().toString().equals("")) {
 
                 //edtUsuario.setError("Ingrese un correo electrónico");

@@ -64,14 +64,12 @@ import java.util.regex.Pattern;
 public class registrar extends AppCompatActivity {
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
     Button btnInsert;
-    TextView login;
+    Button login;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     String listCorreoUsuario;
     String[] items = {"Hombre", "Mujer"};
     ProgressDialog loading, loading2;
-
     Toolbar toolbar = new Toolbar();
-
     //Imagen
     private Button btnCargarImagen;
     private ImageView ivFoto;
@@ -80,19 +78,15 @@ public class registrar extends AppCompatActivity {
     private String claveImagen = "foto";
     private String claveNombre = "nombre";
     private int PICK_IMAGE_REQUEST = 1;
-
     String edadUsu = "";
     private int dia,mes,anio;
     Button btnFechaIngreso,btnCancelar;
     EditText txtFechaingreso;
-
     String edadCalculada;
     String fechaNac;
-
     //Items Sexo F y M
     AutoCompleteTextView autoCompleteTxtEdSexo;
     ArrayAdapter<String> adapterItems;
-
     ArrayList<String> opcionesCorreoUsuario = new ArrayList<>();
 
     @Override
@@ -160,21 +154,11 @@ public class registrar extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
         //Imagen
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfoto);
         btnInsert = findViewById(R.id.btn_register);
 
         ivFoto = findViewById(R.id.imageViewPerfil);
-
-
-
-
 
         btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +167,6 @@ public class registrar extends AppCompatActivity {
                 if (v == btnCargarImagen) {
                     showFileChooser();
                 }
-
             }
         });
 
@@ -215,17 +198,8 @@ public class registrar extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //if(validarCampos()==1)
-               // {
-                    validarCorreoBD();
-              //  }
-             //else
-               // {
-                    //btnInsert=findViewById(R.id.btn_register);
-
-               // }
-
+                loading2 = ProgressDialog.show(registrar.this, "Validando...", "Espere por favor");
+                validarCorreoBD();
             }
         });
 
@@ -294,10 +268,8 @@ public class registrar extends AppCompatActivity {
     }
 
     public int validarCampos(){
-
         int respuesta =0;
         String nameImage= String.valueOf(ivFoto.getTag());
-
             if(nameImage.equals("bg1") &&
                     txtEmail.getText().toString().equals("")&&
                     txtName.getText().toString().equals("") &&
@@ -406,12 +378,12 @@ public class registrar extends AppCompatActivity {
         int datCorrecto=0;
         String passwordInput = pass.getText().toString().trim();
         if (pass.getText().toString().equals("")) {
-            pass.setError("Ingrese la contraseña");
+            pass.setError("Ingrese la contraseña",null);
             pass.requestFocus();
         }
         else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
             Toast.makeText(registrar.this, "La contraseña es demasiado débil o fuera de rango", Toast.LENGTH_SHORT).show();
-            pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)");
+            pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)",null);
             pass.requestFocus();
         }
         else{
@@ -428,7 +400,7 @@ public class registrar extends AppCompatActivity {
         String contrasenia = pass.getText().toString();
         String confirmContrasenia = confirmPass.getText().toString();
         if (confirmPass.getText().toString().equals("")) {
-            confirmPass.setError("Confirme la contraseña");
+            confirmPass.setError("Confirme la contraseña",null);
             confirmPass.requestFocus();
 
         }else if (contrasenia.equals(confirmContrasenia)) {
@@ -436,7 +408,7 @@ public class registrar extends AppCompatActivity {
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
-            confirmPass.setError("Las contraseñas no coinciden, ingrese nuevamente");
+            confirmPass.setError("Las contraseñas no coinciden, ingrese nuevamente",null);
             confirmPass.requestFocus();
         }
         return datCorrecto;
@@ -444,7 +416,6 @@ public class registrar extends AppCompatActivity {
 
     public int validarEmail() {
         int emailCorrecto = 0;
-
                 String emailToText = txtEmail.getText().toString();
                 if (emailToText.length() < 40) {
                     if(txtEmail.getText().toString().equals("")){
@@ -473,7 +444,7 @@ public class registrar extends AppCompatActivity {
     }
 
     private void validarCorreoBD() {
-        loading2 = ProgressDialog.show(this, "Validando...", "Espere por favor");
+       // loading2 = ProgressDialog.show(this, "Validando...", "Espere por favor");
 
         if(validarCampos() == 1)
         {
@@ -512,12 +483,8 @@ public class registrar extends AppCompatActivity {
                 });
                 stringRequest2.setTag("REQUEST");
                 queue2.add(stringRequest2);
-            }
-            else
-                loading2.dismiss();
+            } else loading2.dismiss();
         }else loading2.dismiss();
-
-
     }
 
     private int validaExistenciaCorreo(ArrayList<String> opcionesCorreoUsuario) {
@@ -553,7 +520,6 @@ public class registrar extends AppCompatActivity {
             else {
                 datCorrecto=1;
             }
-
         }
         else {
             txtApe.setError("Apellido demasiado largo. (Máximo 80 caracteres)");
@@ -562,7 +528,6 @@ public class registrar extends AppCompatActivity {
         return datCorrecto;
     }
     private int validarNombre(){
-
         int datCorrecto=0;
         if(txtName.getText().toString().length()<80){
             if(txtName.getText().toString().equals("")){
@@ -580,8 +545,6 @@ public class registrar extends AppCompatActivity {
             else {
                 datCorrecto=1;
             }
-
-
         }
         else{
             txtName.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
@@ -590,14 +553,12 @@ public class registrar extends AppCompatActivity {
         return datCorrecto;
     }
     private void insertarUsusario() {
-        loading2.dismiss();
          String url = WebService.urlRaiz + WebService.servicioInsertar;
-           loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //Descartar el diálogo de progreso
-                    loading.dismiss();
+                    loading2.dismiss();
                     //Mostrando el mensaje de la respuesta
                     finish();
                     startActivity(new Intent(getApplicationContext(), Login.class));
@@ -608,7 +569,7 @@ public class registrar extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Descartar el diálogo de progreso
-                    loading.dismiss();
+                    loading2.dismiss();
                     //Showing toast
                     Toast.makeText(getApplicationContext(), "Complete todos los campos" + error.toString(), Toast.LENGTH_SHORT).show();
                 }
@@ -626,11 +587,9 @@ public class registrar extends AppCompatActivity {
                     parametros.put("fecha_nacimiento", fechaNac);//String.valueOf(fechaNacimiento));
 
                     //Imagen
-
                     //Convertir bits a cadena
                     //bitmap = ivFoto.getDrawingCache();
                     String imagen = getStringImagen(bitmap); //Imagen
-                    ;
                     //Obtener el nombre de la imagen
                     String nombreImagen = txtEmail.getText().toString().trim();
 

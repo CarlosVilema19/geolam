@@ -10,145 +10,150 @@
     android:background="@drawable/imagen3"
     tools:context=".Login">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnAdmin"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="vertical">
+        android:layout_above="@+id/btnAdmin">
 
-        <TextView
-            android:id="@+id/tviniciosesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:text="@string/iniciar_sesion"
-            android:textColor="#616161"
-            android:textSize="20sp"
-
-            android:textStyle="bold" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/viewlogo1"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/tviniciosesion"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal"
-            android:foregroundTint="#00FFFFFF"
-            android:src="@mipmap/ic_launcher_foreground">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txusuario"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/viewlogo1"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center_horizontal"
-            app:startIconDrawable="@drawable/ic_baseline_email_24">
+            android:layout_above="@+id/btnAdmin"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edusuario"
+            <TextView
+                android:id="@+id/tviniciosesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:text="@string/iniciar_sesion"
+                android:textColor="#616161"
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/viewlogo1"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_below="@+id/tviniciosesion"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:foregroundTint="#00FFFFFF"
+                android:src="@mipmap/ic_launcher_foreground">
+
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txusuario"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="left"
-                android:hint="@string/email_usuario"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                 />
+                android:layout_below="@+id/viewlogo1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_horizontal"
+                app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edusuario"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="left"
+                    android:hint="@string/email_usuario"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txcontrasenia"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txusuario"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center_horizontal"
-            app:passwordToggleEnabled="true"
-            app:startIconDrawable="@drawable/ic_baseline_lock_24">
-            >
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edcontrasenia"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txcontrasenia"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/txusuario"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_horizontal"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edcontrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:hint="@string/contrasenia"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    tools:ignore="TextContrastCheck" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnolvidarcontrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txcontrasenia"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:gravity="left"
-                android:hint="@string/contrasenia"
-                android:inputType="textPassword"
-                android:singleLine="true"
+                android:text="@string/olvidaste_contr_login"
                 android:textColor="@color/black"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                tools:ignore="TextContrastCheck" />
+                android:textSize="10sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btniniciosesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnolvidarcontrasenia"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/entrar_log"
+                app:cornerRadius="15dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegistroUsu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btniniciosesion"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="25dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_horizontal"
+                android:text="@string/registro_log"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
 
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnolvidarcontrasenia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txcontrasenia"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="25dp"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:gravity="left"
-            android:text="@string/olvidaste_contr_login"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btniniciosesion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txcontrasenia"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center_horizontal"
-            android:text="@string/entrar_log" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRegistroUsu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btniniciosesion"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="25dp"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:gravity="center_horizontal"
-            android:text="@string/registro_log"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-
-    </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAdmin"
@@ -163,6 +168,5 @@
         android:text="Iniciar como administrador"
         android:textColor="@color/black"
         android:textSize="10sp" />
-
 
 </RelativeLayout>
