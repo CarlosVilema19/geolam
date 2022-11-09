@@ -66,13 +66,11 @@ public class RegistroAdmin extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     EditText txtName, txtEmail, pass,txtApe, txtEdad, txtSexo, confirmPass;
     Button btnInsert;
-    TextView login;
+    Button login;
     String listCorreoUsuario;
     String[] items = {"Hombre", "Mujer"};
     int validarCorreo=0;
-
     Toolbar toolbar = new Toolbar();
-
     //Imagen
     private Button btnCargarImagen;
     private ImageView ivFoto;
@@ -83,20 +81,16 @@ public class RegistroAdmin extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST = 1;
     int emailCorrecto = 0;
     String edadUsu = "";
-
     Button btnFechaIngreso, btnCancelar;
     EditText txtFechaingreso;
     private int dia,mes,anio;
     String edadCalculada;
     String fechaNac;
-
     //Items Sexo F y M
     AutoCompleteTextView autoCompleteTxtEdSexo;
     ArrayAdapter<String> adapterItems;
     String textBoton;
     ProgressDialog loading2;
-
-
     ArrayList<String> opcionesCorreoUsuario = new ArrayList<>();
 
     @Override
@@ -181,16 +175,18 @@ public class RegistroAdmin extends AppCompatActivity {
                         }
                     },dia,mes,anio);
                     datePickerDialog.show();
-                    datePickerDialog.getDatePicker().setMaxDate(new Date().getTime()-(proc.calcularAniosMili(15)));
+                    datePickerDialog.getDatePicker().init(anio, mes, dia, new DatePicker.OnDateChangedListener() {
+                        @Override
+                        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            //Toast.makeText(RegistroAdmin.this, "Fecha", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     datePickerDialog.getDatePicker().setMinDate(new Date().getTime()-(proc.calcularAniosMili(100)));
+                    datePickerDialog.getDatePicker().setMaxDate(new Date().getTime()-(proc.calcularAniosMili(15)));
                 }
 
             }
         });
-
-
-
-
         //Imagen
         btnCargarImagen = (Button) findViewById(R.id.btn_cargarfoto);
         btnInsert = findViewById(R.id.btn_register);
@@ -207,29 +203,18 @@ public class RegistroAdmin extends AppCompatActivity {
                 if (v == btnCargarImagen) {
                     showFileChooser();
                 }
-                else {
-
-                    // PICK_IMAGE_REQUEST=1;
-                    //insertarUsusario();
-                }
-
             }
         });
-
-
         //Items Sexo F y M Autocomplete
         autoCompleteTxtEdSexo = findViewById(R.id.edsexo);
         adapterItems = new ArrayAdapter<String>(this, R.layout.lista_items, items);
         autoCompleteTxtEdSexo.setAdapter(adapterItems);
         autoCompleteTxtEdSexo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 // Toast.makeText(getApplicationContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
-
             }
-
         });
 
         //otros campos
@@ -245,16 +230,7 @@ public class RegistroAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loading2 = ProgressDialog.show(RegistroAdmin.this, "Validando...", "Espere por favor");
-                if(validarCampos()==1)
-                {
-                    insertarUsusario();
-                }
-                else
-                {
-                    loading2.dismiss();
-                    btnInsert=findViewById(R.id.btn_register);
-
-                }
+                validarCorreoBD();
 
             }
         });
@@ -304,12 +280,17 @@ public class RegistroAdmin extends AppCompatActivity {
     }
 
     public int validarCampos(){
-
         int respuesta =0;
         String nameImage= String.valueOf(ivFoto.getTag());
+        if(nameImage.equals("bg1") &&
+                txtEmail.getText().toString().equals("")&&
+                txtName.getText().toString().equals("") &&
+                txtApe.getText().toString().equals("") &&
+                txtEdad.getText().toString().equals("") &&
+                txtSexo.getText().toString().equals("") &&
+                pass.getText().toString().equals("") &&
+                confirmPass.getText().toString().equals("")){
 
-        if(nameImage.equals("bg1") && txtEmail.getText().toString().equals("") && txtName.getText().toString().equals("") && txtApe.getText().toString().equals("") && txtEdad.getText().toString().equals("")
-                && txtSexo.getText().toString().equals("") && pass.getText().toString().equals("") && confirmPass.getText().toString().equals("")){
             Toast.makeText(RegistroAdmin.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
             txtEmail.setError("Ingrese el correo eletrónico");
             txtEmail.requestFocus();
@@ -324,92 +305,14 @@ public class RegistroAdmin extends AppCompatActivity {
                     txtSexo.setError(null);
                 }
             },2000);
-            pass.setError("Ingrese la contraseña");
-            confirmPass.setError("Ingrese nuevamente la contraseña");
-        }
-        else{ if(nameImage.equals("bg1")){
-            Toast.makeText(RegistroAdmin.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();
-        }
-        else{ if(txtEmail.getText().toString().equals("")){Toast.makeText(RegistroAdmin.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
-            txtEmail.setError("Ingrese el correo eletrónico");
-            txtEmail.requestFocus();
-        }
-        else {if(txtName.getText().toString().equals("")){
-            txtName.setError("Ingrese el nombre");
-            txtName.requestFocus();
-        }
-        else {if(txtApe.getText().toString().equals("")){
-            txtApe.setError("Ingrese el apellido");
-            txtApe.requestFocus();
-        }
-        else {if(txtEdad.getText().toString().equals("")){
 
+            pass.setError("Ingrese la contraseña",null);
+            confirmPass.setError("Ingrese nuevamente la contraseña",null);
         }
-        else {if (txtSexo.getText().toString().equals("")) {
-            Toast.makeText(this, "Por favor seleccione el sexo", Toast.LENGTH_SHORT).show();
-        }
-        else {if (pass.getText().toString().equals("")) {
-            pass.setError("Ingrese la contraseña");
-            pass.requestFocus();
-        }
-        else {if(confirmPass.getText().toString().equals("")){
-            confirmPass.setError("Confirme la contraseña");
-            confirmPass.requestFocus();
-
-        }
-            respuesta=2;
-        }
-
-        }}}}}}}
-
-        if(respuesta==2)
-        {
-            if(validarEmail()==1&&validarNombre()==1&&validarApellido()==1&& validarCaracteresContrasenia()==1&&validarContrasenia()==1)
-            {
-                //Toast.makeText(RegistroAdmin.this, "Dtos verif correctos", Toast.LENGTH_SHORT).show();
-                respuesta=1;
-
-            }
-            else {
-                //Toast.makeText(RegistroAdmin.this, "Alguno da 0", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-        else{
-
-            //Toast.makeText(RegistroAdmin.this, "No coinside alguna función", Toast.LENGTH_SHORT).show();
-        }
-
-
-        //}
-
+        else  {respuesta = 1;}
         return respuesta;
     }
 
-
-
-    /*private int validarEdad(){
-        int datCorrecto=0;
-        String Edad = txtEdad.getText().toString();
-
-        // Comparar si está en el rango
-
-        int numero = Integer.parseInt(Edad);
-        if (numero >= 15 && numero <= 100) {
-            //Toast.makeText(RegistroAdmin.this, "Edad correcta", Toast.LENGTH_SHORT).show();
-
-            datCorrecto=1;
-        } else {
-            // Si no, entonces indicamos el error y damos focus
-            txtEdad.setError("Número fuera de rango(15-100 años)");
-            txtEdad.requestFocus();
-            datCorrecto=0;
-        }
-
-
-
-        return datCorrecto;
-    }*/
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[@#$%^&+=*])"+     // al menos un caracter especial
@@ -420,9 +323,13 @@ public class RegistroAdmin extends AppCompatActivity {
     private int validarCaracteresContrasenia(){
         int datCorrecto=0;
         String passwordInput = pass.getText().toString().trim();
-        if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+        if (pass.getText().toString().equals("")) {
+            pass.setError("Ingrese la contraseña",null);
+            pass.requestFocus();
+        }
+        else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
             Toast.makeText(RegistroAdmin.this, "La contraseña es demasiado débil o fuera de rango", Toast.LENGTH_SHORT).show();
-            pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)");
+            pass.setError("Ingrese de 10-16 caracteres (Agregar un caracter especial y sin espacios)",null);
             pass.requestFocus();
         }
         else{
@@ -438,96 +345,115 @@ public class RegistroAdmin extends AppCompatActivity {
         int datCorrecto=0;
         String contrasenia = pass.getText().toString();
         String confirmContrasenia = confirmPass.getText().toString();
+        if (confirmPass.getText().toString().equals("")) {
+            confirmPass.setError("Confirme la contraseña",null);
+            confirmPass.requestFocus();
 
-        // Comparar si son iguales
-        if (contrasenia.equals(confirmContrasenia)) {
-            //Toast.makeText(RegistroAdmin.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
+        }else if (contrasenia.equals(confirmContrasenia)) {
+            //Toast.makeText(registrar.this, "La contraseñas coinciden", Toast.LENGTH_SHORT).show();
             datCorrecto=1;
         } else {
             // Si no, entonces indicamos el error y damos focus
-            confirmPass.setError("Las contraseñas no coinciden, ingrese nuevamente");
+            confirmPass.setError("Las contraseñas no coinciden, ingrese nuevamente",null);
             confirmPass.requestFocus();
-            datCorrecto=0;
         }
         return datCorrecto;
     }
 
     public int validarEmail() {
-
-        if(emailCorrecto==0&&validarCorreoBD()==1) {
-
-            if (validarCorreo == 1) {
-                String emailToText = txtEmail.getText().toString();
-                if (emailToText.length() < 40) {
-                    if (Pattern.compile(" {1,}").matcher(txtEmail.getText().toString()).find()) {
-                        txtEmail.setError("¡Verifique que no haya espacios en blanco!");
-                        txtEmail.requestFocus();
-                    } else if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()&&validarCorreo==1) {
-                        //Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
-                        emailCorrecto = 1;
-                    } else {
-                        txtEmail.setError("Ingrese un correo válido");
-                        txtEmail.requestFocus();
-
-                        //Toast.makeText(this, "Ingrese un correo válido", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "¡Error! Correo electrónico", Toast.LENGTH_SHORT).show();
-
-                    txtEmail.setError("Correo demasiado largo. (Máximo 40 caracteres)");
-                    txtEmail.requestFocus();
-                }
-            } else {
-                txtEmail.setError("Correo ya registrado");
-
+        int emailCorrecto = 0;
+        String emailToText = txtEmail.getText().toString();
+        if (emailToText.length() < 40) {
+            if(txtEmail.getText().toString().equals("")){
+                Toast.makeText(RegistroAdmin.this, "Ingrese el correo", Toast.LENGTH_SHORT).show();
+                txtEmail.setError("Ingrese el correo eletrónico");
+                txtEmail.requestFocus();
             }
+            else if (Pattern.compile(" {1,}").matcher(txtEmail.getText().toString()).find()) {
+                txtEmail.setError("¡Verifique que no haya espacios en blanco!");
+                txtEmail.requestFocus();
+            }else if (Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+                //Toast.makeText(this, "Correo verificado", Toast.LENGTH_SHORT).show();
+                emailCorrecto = 1;
+            } else {
+                txtEmail.setError("Ingrese un correo válido");
+                txtEmail.requestFocus();
 
+                //Toast.makeText(this, "Ingrese un correo válido", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            txtEmail.setError("Correo demasiado largo. (Máximo 40 caracteres)");
+            txtEmail.requestFocus();
         }
         return emailCorrecto;
 
     }
 
-    private int validarCorreoBD() {
+    private void validarCorreoBD() {
+        if(validarCampos() == 1)
+        {
+            if(validarRegistro() == 1)
+            {
+                RequestQueue queue2 = Volley.newRequestQueue(this);
+                String url2 = WebService.urlRaiz + WebService.servicioExistenciaCorreo;
+                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url2,
 
-        RequestQueue queue2 = Volley.newRequestQueue(this);
-        String url2 = WebService.urlRaiz + WebService.servicioExistenciaCorreo;
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url2,
+                        response ->
+                        {
+                            try {
+                                JSONArray array = new JSONArray(response);
+                                for (int i = 0; i < array.length(); i++) {
 
-                response ->
-                {
-                    try {
-                        JSONArray array = new JSONArray(response);
-                        for (int i = 0; i < array.length(); i++) {
+                                    JSONObject object = array.getJSONObject(i);
+                                    listCorreoUsuario = (object.getString("EMAIL"));
+                                    opcionesCorreoUsuario.add(listCorreoUsuario);
+                                }
+                                if (validaExistenciaCorreo(opcionesCorreoUsuario) == 1) {
+                                    insertarUsusario();
+                                    loading2.dismiss();
+                                }
+                                else{
+                                    loading2.dismiss();
+                                }
 
-                            JSONObject object = array.getJSONObject(i);
-                            listCorreoUsuario = (object.getString("EMAIL"));
-                            opcionesCorreoUsuario.add(listCorreoUsuario);
-                            if (validaExistenciaCorreo(opcionesCorreoUsuario) == 1) {
-                                validarCorreo = 1;
-                            } else {
-
-                                validarCorreo = 0;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                loading2.dismiss();
                             }
-                        }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                        }, error -> {
+                    Toast.makeText(this, "Error del servidor", Toast.LENGTH_SHORT).show();
+                    loading2.dismiss();
+                });
+                stringRequest2.setTag("REQUEST");
+                queue2.add(stringRequest2);
+            } else loading2.dismiss();
+        }else loading2.dismiss();
+    }
 
-                }, error -> {
-            Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
+    private int validarRegistro() {
+        int respuesta = 0;
+        int valNom = validarNombre();
+        int valApe = validarApellido();
+        int valSex = validarSexo();
+        int valEdad = validarEdad();
+        int valCon = validarCaracteresContrasenia();
+        int valConfCon = validarContrasenia();
+        int valIma = validarImagen();
+        int valEmail = validarEmail();
 
-        });
-        stringRequest2.setTag("REQUEST");
-        queue2.add(stringRequest2);
-        return validarCorreo;
+        if(valIma == 1 && valNom == 1 && valApe == 1 && valEmail == 1 && valSex == 1 && valEdad == 1 && valCon == 1 && valConfCon == 1)
+        {
+            respuesta = 1;
+        }
+        return respuesta;
     }
 
     private int validaExistenciaCorreo(ArrayList<String> opcionesCorreoUsuario) {
-        int correcto=0;
-        if( opcionesCorreoUsuario.contains(txtEmail.getText().toString().trim().toLowerCase()))
+        int correcto;
+        if( opcionesCorreoUsuario.contains(txtEmail.getText().toString()))
         {
-
+            correcto =0;
             //Toast.makeText(this, "¡Error! Usuario ya registrado", Toast.LENGTH_SHORT).show();
             txtEmail.setError("Usuario ya registrado");
             txtEmail.requestFocus();
@@ -539,41 +465,90 @@ public class RegistroAdmin extends AppCompatActivity {
         return correcto;
 
     }
+    private int validarImagen()
+    {
+        int datCorrecto=0;
+        String nameImage= String.valueOf(ivFoto.getTag());
+        if(nameImage.equals("bg1")){
+            Toast.makeText(RegistroAdmin.this, "Ingrese una imagen", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            datCorrecto=1;
+        }
+        return datCorrecto;
+    }
+
+    private int validarEdad()
+    {
+        int datCorrecto=0;
+        if (txtEdad.getText().toString().equals("")) {
+            Toast.makeText(this, "Por favor seleccione la edad", Toast.LENGTH_SHORT).show();
+            txtEdad.setError("Ingrese la edad");
+            txtEdad.requestFocus();
+        }
+        else {
+            datCorrecto=1;
+        }
+        return datCorrecto;
+    }
+
+    private int validarSexo()
+    {
+        int datCorrecto=0;
+        if (txtSexo.getText().toString().equals("")) {
+            Toast.makeText(this, "Por favor seleccione el sexo", Toast.LENGTH_SHORT).show();
+            txtSexo.setError("Seleccione el sexo");
+            txtSexo.requestFocus();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    txtSexo.setError(null);
+                }
+            },2000);
+        }
+        else {
+            datCorrecto=1;
+        }
+        return datCorrecto;
+    }
 
     private int validarApellido(){
         int datCorrecto=0;
         if(txtApe.getText().toString().length()<80){
-            if (Pattern.compile(" {2,}").matcher(txtApe.getText().toString()).find()) {
+            if(txtApe.getText().toString().equals("")){
+                txtApe.setError("Ingrese el apellido");
+                txtApe.requestFocus();
+            }
+            else if (Pattern.compile(" {2,}").matcher(txtApe.getText().toString()).find()) {
                 txtApe.setError("¡Verifique que no haya más de un espacio en blanco!");
                 txtApe.requestFocus();
             }else if(txtApe.getText().toString().length()<3)
             {
-                Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
                 txtApe.setError("Apellido demasiado corto. (Mínimo 3 caracteres)");
                 txtApe.requestFocus();
             }
             else {
                 datCorrecto=1;
             }
-
         }
         else {
-            Toast.makeText(this, "¡Error! Apellido", Toast.LENGTH_SHORT).show();
             txtApe.setError("Apellido demasiado largo. (Máximo 80 caracteres)");
             txtApe.requestFocus();
         }
         return datCorrecto;
     }
     private int validarNombre(){
-
         int datCorrecto=0;
         if(txtName.getText().toString().length()<80){
-            if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
+            if(txtName.getText().toString().equals("")){
+                txtName.setError("Ingrese el nombre");
+                txtName.requestFocus();
+            }
+            else if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
                 txtName.setError("¡Verifique que no haya más de un espacio en blanco!");
                 txtName.requestFocus();
             }else if(txtName.getText().toString().length()<3)
             {
-                Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
                 txtName.setError("Nombre demasiado corto. (Mínimo 3 caracteres)");
                 txtName.requestFocus();
             }
@@ -582,64 +557,53 @@ public class RegistroAdmin extends AppCompatActivity {
             }
         }
         else{
-            Toast.makeText(this, "¡Error! Nombre", Toast.LENGTH_SHORT).show();
             txtName.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
             txtName.requestFocus();
         }
         return datCorrecto;
     }
     private void insertarUsusario() {
-        loading2.dismiss();
-
         String url = WebService.urlRaiz+WebService.servicioInsertarAdmin;
-        final ProgressDialog loading = ProgressDialog.show(this, "Creando perfil...", "Espere por favor");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Descartar el diálogo de progreso
-                loading.dismiss();
+                loading2.dismiss();
                 //Mostrando el mensaje de la respuesta
-                Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_SHORT).show();
                 finish();
                 Intent intent = new Intent(RegistroAdmin.this, RegistroAdmin.class);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Descartar el diálogo de progreso
-                loading.dismiss();
+                loading2.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), "Complete todos los campos"+error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Complete todos los campos", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                //Convertir bits a cadena
-                String imagen = getStringImagen(bitmap); //Imagen
-                ;
-                //Obtener el nombre de la imagen
-                String nombreImagen = txtEmail.getText().toString().trim();
-
                 Map<String, String> parametros = new HashMap<String, String>();
-
                 parametros.put("email", txtEmail.getText().toString().trim().toLowerCase());
                 parametros.put("nombre_usuario", txtName.getText().toString().trim().toUpperCase());
                 parametros.put("apellido_usuario", txtApe.getText().toString().trim().toUpperCase());
-                parametros.put("edad", edadUsu /*txtEdad.getText().toString().trim()*/);
+                parametros.put("edad", edadUsu);
                 parametros.put("sexo", txtSexo.getText().toString().toUpperCase());
                 parametros.put("contrasenia", getSHA256(pass.getText().toString().trim()));
                 parametros.put("fecha_nacimiento", fechaNac);//String.valueOf(fechaNacimiento));
 
-
                 //Imagen
+                //Convertir bits a cadena
+                String imagen = getStringImagen(bitmap); //Imagen
+                //Obtener el nombre de la imagen
+                String nombreImagen = txtEmail.getText().toString().trim();
 
                 parametros.put(claveNombre, nombreImagen);
                 parametros.put(claveImagen, imagen);
-
-
-
 
                 return parametros;
             }
