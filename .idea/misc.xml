@@ -74,7 +74,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_gestion_lugares.xml" value="0.18" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_gestion_usuarios.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_info_app.xml" value="0.18072916666666666" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_especialidad.xml" value="0.25" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_especialidad.xml" value="0.5" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_lugar_medico.xml" value="0.18" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_medico.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_ingreso_tipologia.xml" value="0.18" />
@@ -135,58 +135,6 @@
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam-GITHUB/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam-GITHUB/app/src/main/res/layout/activity_lugar_medico.xml" value="0.1" />
         <entry key="..\:/Users/carlo/Desktop/Tesis/geolam-GITHUB/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/circular.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/circular2.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/circular3.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/circular4.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/ic_baseline_touch_app_24.xml" value="0.1455" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/ic_baseline_touch_app_242.xml" value="0.1365" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/imagen3.xml" value="0.134" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/imagen_gestion.xml" value="0.1455" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/imagen_gestion2.xml" value="0.1455" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/t_lugares.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/t_opinion.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/t_privados.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/t_publicos.xml" value="0.125" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/drawable/titulo_lugaratencionm.xml" value="0.1455" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_asignar_especialidad.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_asignar_medico.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_buscar_especialidades.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_busqueda.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_busqueda_lugar.xml" value="0.25" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_busqueda_medico.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_calificacion.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.33" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_configuraciones.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_datos_item.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_datos_personales.xml" value="0.18" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_eliminar_cuenta.xml" value="0.25" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_especialidad_inicio.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_especialidad_usuario.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_info_app.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_especialidad.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_lugar_medico.xml" value="0.25" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_medico.xml" value="0.22" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_ingreso_tipologia.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_admin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_inicio_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_item_admin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado_card.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado_lugar_crud.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listado_usuarios_admin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_listar_lugar_medico.xml" value="0.20102564102564102" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_lugar_medico.xml" value="0.22" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_mapa.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_medico_usu.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_menu_toolbar.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_registrar.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_reporte_grafico_top.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/activity_reporte_grafico_usuarios.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/carlo/Desktop/Tesis/geolam/app/src/main/res/layout/bottomsheet_layout.xml" value="0.22" />
       </map>
     </option>
   </component>
