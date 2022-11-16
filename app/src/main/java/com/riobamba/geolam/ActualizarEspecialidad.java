@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,8 +41,10 @@ public class ActualizarEspecialidad extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     EditText txtName;
+    EditText txtUrlEspecialidad2;
     Button btnGuardarCambios, btnCancelar, btnConsultar;
     Toolbar toolbar = new Toolbar();
+    String compararURL="";
     String compararNombre="", mensajeExiste = "¡Esta especialidad ya existe!";
 
     @Override
@@ -53,9 +56,11 @@ public class ActualizarEspecialidad extends AppCompatActivity {
 
         //Variables
         txtName =findViewById(R.id.etEspecialidad);
+
         btnGuardarCambios=findViewById(R.id.btnAgregarEspecialidad);
         btnCancelar=findViewById(R.id.btnCancelarEspe);
         btnConsultar=findViewById(R.id.btnEspecialidadAgregada);
+        txtUrlEspecialidad2= findViewById(R.id.urlEspecialidad);
         ListadoLugarAdmin actualizarEspe = (ListadoLugarAdmin) getIntent().getSerializableExtra("ActualizarEspe");
         MostrarResultado(actualizarEspe);
 
@@ -106,8 +111,9 @@ public class ActualizarEspecialidad extends AppCompatActivity {
     }
 
     private void validarEspecialidad(ListadoLugarAdmin actualizarEspe ){
-        if (verificaSimilitud() == 1) {
-            if (validarCampos() == 1) {
+        if (validarCampos() == 1) {
+            if (verificaSimilitud() == 1) {
+
                 String url = WebService.urlRaiz + WebService.servicioValidarExistenciaEspecialidad;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         response ->
@@ -115,7 +121,8 @@ public class ActualizarEspecialidad extends AppCompatActivity {
                             try {
                                 JSONObject object = new JSONObject(URLDecoder.decode(response, "UTF-8"));
                                 String existencia = object.getString("valida");
-                                if (existencia.equals("existe")) {
+                                if (existencia.equals("existe") &&
+                                        (!compararNombre.trim().equals(txtName.getText().toString().trim()))) {
                                     txtName.setError(mensajeExiste);
                                     txtName.requestFocus();
                                 } else {
@@ -132,15 +139,15 @@ public class ActualizarEspecialidad extends AppCompatActivity {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> parametros = new HashMap<String, String>();
                         parametros.put("descripcion_especialidad", txtName.getText().toString().toUpperCase().trim());
+                        parametros.put("imagen", txtUrlEspecialidad2.getText().toString().trim());
                         return parametros;
                     }
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(this);
                 requestQueue.add(stringRequest);
+            } else {
+                Toast.makeText(this, "No se ha realizado ningún cambio", Toast.LENGTH_SHORT).show();
             }
-        }else
-        {
-            Toast.makeText(this,"No se ha realizado ningún cambio",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -164,6 +171,9 @@ public class ActualizarEspecialidad extends AppCompatActivity {
                                 JSONObject obj = array.getJSONObject(i);
                                 txtName.setText(obj.getString("DESCRIPCION_ESPECIALIDAD"));
                                 compararNombre = obj.getString("DESCRIPCION_ESPECIALIDAD");
+                                compararURL=obj.getString("imagen");
+                                txtUrlEspecialidad2.setText(obj.getString("imagen"));
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -190,6 +200,8 @@ public class ActualizarEspecialidad extends AppCompatActivity {
 
     public void modificarDatos(ListadoLugarAdmin actualizarEspe) {
         String id_espe = actualizarEspe.getId().toString();
+
+
         String url = WebService.urlRaiz + WebService.servicioActualizarEspecialidad;
         final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -217,6 +229,7 @@ public class ActualizarEspecialidad extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("especialidad", txtName.getText().toString().trim().toUpperCase());
                 parametros.put("id_espe", id_espe);
+                parametros.put("imagen", txtUrlEspecialidad2.getText().toString().trim());
                 return parametros;
             }
         };
@@ -229,18 +242,11 @@ public class ActualizarEspecialidad extends AppCompatActivity {
     private int verificaSimilitud() {
 
         int band=0;
-        if(compararNombre.trim().equals(txtName.getText().toString().trim())) {
-            band=0;
-        }
-        else if(compararNombre.trim().equals(txtName.getText().toString().trim()))
-        {
-            band=0;
-        }
-        else if(!compararNombre.trim().equals(txtName.getText().toString()))
+        if(!compararNombre.trim().equals(txtName.getText().toString().trim())
+                ||!compararURL.trim().equals(txtUrlEspecialidad2.getText().toString().trim()))
         {
             band=1;
         }
-
         return band;
     }
 
@@ -248,17 +254,19 @@ public class ActualizarEspecialidad extends AppCompatActivity {
 
         int respuesta =0;
 
-        if(txtName.getText().toString().equals(""))
+        if(txtName.getText().toString().equals("")&& txtUrlEspecialidad2.getText().toString().equals(""))
         {
             Toast.makeText(ActualizarEspecialidad.this, "Campos vacíos. Por favor ingrese datos", Toast.LENGTH_SHORT).show();
             txtName.setError("Ingrese el nombre");
+            txtName.requestFocus();
+            txtUrlEspecialidad2.setError("Ingrese la URL de la imagen");
         }
 
-        else if(!txtName.getText().toString().equals("")){
+        else if(!txtName.getText().toString().equals("")&& !txtUrlEspecialidad2.getText().toString().equals("")){
             respuesta=2;
         }
         if(respuesta==2) {
-            if(validarNombre()==1) {
+            if(validarNombre()==2) {
                 respuesta=1;
             }
         }
@@ -268,28 +276,76 @@ public class ActualizarEspecialidad extends AppCompatActivity {
     private int validarNombre(){
 
         int camposVacios=0;
-        if(txtName.getText().toString().length()<=50) {
-            if (txtName.getText().toString().equals("")) {
-                txtName.setError("¡Ingrese una Especialidad!");
-                txtName.requestFocus();
-            } else if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
-                txtName.setError("¡Verifique que no haya más de un espacio en blanco!");
-                txtName.requestFocus();
-            } else if(txtName.getText().toString().length()<5 && txtName.getText().toString().length()>0)
-            {
-                txtName.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
-                txtName.requestFocus();
-            }else {
-                camposVacios = 1;
-            }
-        }
-        else
+
+        if(txtName.getText().toString().equals("") && txtUrlEspecialidad2.getText().toString().equals("") )
         {
-            Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
-            txtName.setError("Nombre demasiado largo. (Máximo 80 caracteres)");
+            txtName.setError("¡Ingrese una Especialidad!");
             txtName.requestFocus();
+            txtUrlEspecialidad2.setError("¡Ingrese la URL de la imagen!");
         }
+        else {
+            if (txtName.getText().toString().length() <= 50) {
+                if (txtName.getText().toString().equals("")) {
+                    txtName.setError("¡Ingrese una Especialidad!");
+                    txtName.requestFocus();
+                } else if (Pattern.compile(" {2,}").matcher(txtName.getText().toString()).find()) {
+                    txtName.setError("¡Verifique que no haya más de un espacio en blanco!");
+                    txtName.requestFocus();
+                } else if (txtName.getText().toString().length() < 5 && txtName.getText().toString().length() > 0) {
+                    txtName.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
+                    txtName.requestFocus();
+                } else {
+                    camposVacios = 1;
+                }
+            } else {
+                Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
+                txtName.setError("Nombre demasiado largo. (Máximo 50 caracteres)");
+                txtName.requestFocus();
+            }
+            if (camposVacios == 1) {
+                if (txtUrlEspecialidad2.getText().toString().length() <= 449) {
+                    if (txtUrlEspecialidad2.getText().toString().equals("")) {
+                        txtUrlEspecialidad2.setError("¡Ingrese la URL de la imagen!");
+                        txtUrlEspecialidad2.requestFocus();
+                    } else if (Pattern.compile(" {2,}").matcher(txtUrlEspecialidad2.getText().toString()).find()) {
+                        txtUrlEspecialidad2.setError("¡Verifique que no haya más de un espacio en blanco!");
+                        txtUrlEspecialidad2.requestFocus();
+                    } else if (txtUrlEspecialidad2.getText().toString().length() < 5 && txtUrlEspecialidad2.getText().toString().length() > 0) {
+                        txtUrlEspecialidad2.setError("URL demasiada corta");
+                        txtUrlEspecialidad2.requestFocus();
+                    } else {
+                        if(verificarURL(txtUrlEspecialidad2.getText().toString().trim())==false){
+
+                            txtUrlEspecialidad2.setError("Ingrese una URL válida");
+                            txtUrlEspecialidad2.requestFocus();
+
+                        }
+                        else {
+                            camposVacios = 2;
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "¡Error! Imagen Especialidad", Toast.LENGTH_SHORT).show();
+                    txtUrlEspecialidad2.setError("URL demasiada larga. (Máximo 449 caracteres)");
+                    txtUrlEspecialidad2.requestFocus();
+                }
+            }
+
+
+        }
+
         return camposVacios;
+    }
+
+    private boolean verificarURL(String url){
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return  false;
+        }
     }
 
     //Funcion para rellenar el menu contextual en la parte superior -- proviene de la clase Toolbar
