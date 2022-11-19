@@ -1,7 +1,6 @@
 package com.riobamba.geolam;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -31,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +40,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     EditText txtEspecialidad;
+    EditText txtUrlEspecialidad;
     Button btnAgregar, btnVerAgregados,btnCancelar;
     Toolbar toolbar = new Toolbar(); //asignar el objeto de tipo toolbar
 
@@ -50,6 +51,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         txtEspecialidad = findViewById(R.id.etEspecialidad);
         btnAgregar = findViewById(R.id.btnAgregarEspecialidad);
         btnVerAgregados = findViewById(R.id.btnEspecialidadAgregada);
+        txtUrlEspecialidad= findViewById(R.id.urlEspecialidad);
         btnCancelar=findViewById(R.id.btnCancelarEspe);
 
         toolbar.show(this, "Gestión de lugares", false); //Llamar a la clase Toolbar y ejecutar la funcion show() para mostrar la barra superior -- Parametros (Contexto, Titulo, Estado de la flecha de regreso)
@@ -99,7 +101,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
         });
     }
     private void validarEspecialidad(){
-        if(validarCamposVacios()==1) {
+        if(validarCamposVacios()==2) {
             String url = WebService.urlRaiz + WebService.servicioValidarExistenciaEspecialidad;
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     response ->
@@ -136,30 +138,75 @@ public class IngresoEspecialidad extends AppCompatActivity {
     private int validarCamposVacios() {
 
         int camposVacios=0;
-        if(txtEspecialidad.getText().toString().length()<=50) {
-            if (txtEspecialidad.getText().toString().equals("")) {
-                txtEspecialidad.setError("¡Ingrese una Especialidad!");
-                txtEspecialidad.requestFocus();
-            } else if (Pattern.compile(" {2,}").matcher(txtEspecialidad.getText().toString()).find()) {
-                txtEspecialidad.setError("¡Verifique que no haya más de un espacio en blanco!");
-                txtEspecialidad.requestFocus();
-            } else if(txtEspecialidad.getText().toString().length()<5 && txtEspecialidad.getText().toString().length()>0)
-            {
-                txtEspecialidad.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
-                txtEspecialidad.requestFocus();
-            }else {
-                camposVacios = 1;
-            }
-        }
-        else
+        if(txtEspecialidad.getText().toString().equals("") && txtUrlEspecialidad.getText().toString().equals("") )
         {
-            Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
-            txtEspecialidad.setError("Nombre demasiado largo. (Máximo 50 caracteres)");
+            txtEspecialidad.setError("¡Ingrese una Especialidad!");
             txtEspecialidad.requestFocus();
+
+            txtUrlEspecialidad.setError("¡Ingrese la URL de la imagen!");
+        }
+        else {
+            if (txtEspecialidad.getText().toString().length() <= 50) {
+                if (txtEspecialidad.getText().toString().equals("")) {
+                    txtEspecialidad.setError("¡Ingrese una Especialidad!");
+                    txtEspecialidad.requestFocus();
+                } else if (Pattern.compile(" {2,}").matcher(txtEspecialidad.getText().toString()).find()) {
+                    txtEspecialidad.setError("¡Verifique que no haya más de un espacio en blanco!");
+                    txtEspecialidad.requestFocus();
+                } else if (txtEspecialidad.getText().toString().length() < 5 && txtEspecialidad.getText().toString().length() > 0) {
+                    txtEspecialidad.setError("Nombre demasiado corto. (Mínimo 5 caracteres)");
+                    txtEspecialidad.requestFocus();
+                } else {
+                    camposVacios = 1;
+                }
+            } else {
+                Toast.makeText(this, "¡Error! Especialidad", Toast.LENGTH_SHORT).show();
+                txtEspecialidad.setError("Nombre demasiado largo. (Máximo 50 caracteres)");
+                txtEspecialidad.requestFocus();
+            }
+
+            //url
+            if (camposVacios == 1) {
+                if (txtUrlEspecialidad.getText().toString().length() <= 449) {
+                    if (txtUrlEspecialidad.getText().toString().equals("")) {
+                        txtUrlEspecialidad.setError("¡Ingrese la URL de la imagen!");
+                        txtUrlEspecialidad.requestFocus();
+                    } else if (Pattern.compile(" {2,}").matcher(txtUrlEspecialidad.getText().toString()).find()) {
+                        txtUrlEspecialidad.setError("¡Verifique que no haya más de un espacio en blanco!");
+                        txtUrlEspecialidad.requestFocus();
+                    } else if (txtUrlEspecialidad.getText().toString().length() < 5 && txtUrlEspecialidad.getText().toString().length() > 0) {
+                        txtUrlEspecialidad.setError("URL demasiada corta");
+                        txtUrlEspecialidad.requestFocus();
+                    } else {
+                        if(verificarURL(txtUrlEspecialidad.getText().toString().trim())==false){
+
+                                txtUrlEspecialidad.setError("Ingrese una URL válida");
+                                txtUrlEspecialidad.requestFocus();
+
+                        }
+                        else {
+                            camposVacios = 2;
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "¡Error! Imagen Especialidad", Toast.LENGTH_SHORT).show();
+                    txtUrlEspecialidad.setError("URL demasiada larga. (Máximo 449 caracteres)");
+                    txtUrlEspecialidad.requestFocus();
+                }
+            }
         }
         return camposVacios;
     }
-
+private boolean verificarURL(String url){
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return  false;
+        }
+}
     private void insertarEspecialidad() {
         String url = WebService.urlRaiz + WebService.servicioAgregarEspecialidad;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -181,6 +228,7 @@ public class IngresoEspecialidad extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("descripcion_especialidad",txtEspecialidad.getText().toString().toUpperCase().trim());
+                parametros.put("imagen", txtUrlEspecialidad.getText().toString().trim());
                 return parametros;
             }
         };
