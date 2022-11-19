@@ -1,5 +1,7 @@
 package com.riobamba.geolam.modelo;
 
+import static android.service.notification.Condition.SCHEME;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -7,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +27,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -423,7 +428,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                         e.printStackTrace();
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                }, error -> Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show());
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -687,11 +692,52 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
     //Solicitar permisos de acceso cuando se usa por primera vez  la app
-    private void dialogoSolicitarPermisoGPS(){
+    private void dialogoSolicitarPermisoGPS() {
         if (ActivityCompat.checkSelfPermission(ConexionMapa.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(ConexionMapa.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ConexionMapa.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 123);
         }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 123) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION)||permissions[0].equals(Manifest.permission.ACCESS_COARSE_LOCATION))) {
+                iniciarActualizacionesUbicacion();
+            } else {
+                int icon  = R.drawable.peligro;
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setIcon(icon)
+                        .setTitle("Aviso").setMessage("Para hacer uso del mapa debe permitir el acceso a la ubicación")
+                        .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        }).setNegativeButton("Configuración", new DialogInterface.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                                String packageName = "com.riobamba.geolam";
+                                try {
+                                    //Open the specific App Info page:
+                                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    intent.setData(Uri.parse("package:" + packageName));
+                                    startActivity(intent);
+
+                                } catch ( ActivityNotFoundException e ) {
+                                    //Open the generic Apps page:
+                                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                builder2.show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
     //Metodos para la barra inferior
     public void moverInicio(View view) //dirige al Inicio

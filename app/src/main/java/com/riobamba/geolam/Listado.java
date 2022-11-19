@@ -77,13 +77,15 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
     String ruta;
     String urlImagenLugar;
     String urlSinEspacios;
-    Integer elementosInicio = 5;
+    Integer elementosInicio = 5, contador = 0;
     public Button btnInicio, btnInicioPul;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_items);
+
+        guardarEstadoButton(0);
 
         lugar = findViewById(R.id.cvListado);
         lugarEspe = findViewById(R.id.cvListadoEspe);
@@ -191,6 +193,17 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         MostrarResultadoPub();
         MostrarResultadoPri();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(carga() == 1)
+                {
+                    errorConta();
+                }
+            }
+        },3000);
+
+
 
     }
 
@@ -221,7 +234,6 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
         return super.onKeyDown(keyCode, event);
     }
-
 
     public void MostrarResultado()
     {
@@ -257,7 +269,11 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                errorServidor();            }
+        });
 
         Volley.newRequestQueue(this).add(stringRequest);
 
@@ -303,7 +319,11 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                errorServidor();            }
+        }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -350,7 +370,11 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                errorServidor();            }
+        }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -396,7 +420,11 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), "Error con el servidor", Toast.LENGTH_SHORT).show()){
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                errorServidor();            }
+        }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -464,7 +492,7 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                errorServidor();
             }
         });
 
@@ -472,6 +500,49 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         requestQueue.add(stringRequest);
 
     }
+    private void errorServidor()
+    {
+        guardarEstadoButton(1);
+    }
+    private void errorConta(){
+        int icon  = R.drawable.peligro;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(icon)
+                .setTitle("Error en el servidor")
+                .setMessage("No se ha cargado todo el contenido, ¿desea continuar?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNeutralButton("Recargar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Listado.this,Listado.class);
+                        startActivity(intent);
+                    }
+                });
+        builder.show();
+    }
+    private int carga(){
+        SharedPreferences preferences = getSharedPreferences("carga", Context.MODE_PRIVATE);
+        int text =  preferences.getInt("carga",0);
+        return text;
+    }
+
+    public void guardarEstadoButton(int estado)
+    {
+        SharedPreferences preferences = getSharedPreferences("carga",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("carga",estado);
+        editor.apply();
+    }
+
     public void moveToDescription(ListadoLugarAdmin item)// Método para llamar a una pantalla presionanado sobre el item
     {
         Intent intent = new Intent(this,EspecialidadLugar.class);
