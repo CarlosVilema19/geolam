@@ -444,13 +444,8 @@ public class Listado extends AppCompatActivity implements SearchView.OnQueryText
         final ProgressDialog loading = ProgressDialog.show(this, "Cargando...", "Espere por favor");
         Intent intent = new Intent(Listado.this,ListarLugarUsuario.class);
         intent.putExtra("ListadoLugar",item);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(intent);
-                loading.dismiss();
-            }
-        },1200);
+        startActivity(intent);
+        loading.dismiss();
 
     }
 
