@@ -107,7 +107,7 @@ public class IngresoMedico extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest.setTag("REQUEST");
@@ -130,7 +130,7 @@ public class IngresoMedico extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Nullable

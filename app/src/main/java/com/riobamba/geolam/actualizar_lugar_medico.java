@@ -304,7 +304,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                                     }catch (Exception e){
                                         e.printStackTrace();
                                     }
-                                },error -> {Toast.makeText(actualizar_lugar_medico.this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                                },error -> {Toast.makeText(actualizar_lugar_medico.this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
                         }){
                             @Override
@@ -375,7 +375,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         RequestQueue queue2= Volley.newRequestQueue(this);
@@ -439,7 +439,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest.setTag("REQUEST");
@@ -862,7 +862,7 @@ public class actualizar_lugar_medico extends AppCompatActivity {
                 //Descartar el diálogo de progreso
                 loading.dismiss();
                 //Showing toast
-                Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable

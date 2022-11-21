@@ -166,7 +166,7 @@ public class ReportesAdmin extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }, error -> {
-            Toast.makeText(this, "Error del servidor" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error del servidor", Toast.LENGTH_SHORT).show();
         }
         );
 
@@ -227,7 +227,7 @@ public class ReportesAdmin extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }, error -> {
-            Toast.makeText(this, "Error del servidor" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error del servidor", Toast.LENGTH_SHORT).show();
         }
         );
 

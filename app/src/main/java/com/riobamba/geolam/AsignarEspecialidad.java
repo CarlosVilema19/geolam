@@ -159,7 +159,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }, error -> {
-            Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error -->" + "Error en el servidor", Toast.LENGTH_SHORT).show();
 
         });
         RequestQueue queue2 = Volley.newRequestQueue(this);
@@ -220,7 +220,7 @@ public class AsignarEspecialidad extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }, error -> {
-            Toast.makeText(this, "Error -->" + error.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error -->" + "Error en el servidor", Toast.LENGTH_SHORT).show();
 
         });
         RequestQueue queue3 = Volley.newRequestQueue(this);

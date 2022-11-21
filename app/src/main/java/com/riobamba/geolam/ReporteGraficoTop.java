@@ -12,10 +12,12 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +38,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import ir.androidexception.datatable.DataTable;
@@ -59,6 +62,7 @@ public class ReporteGraficoTop extends AppCompatActivity {
     Button btnGenerarPdfLugares;
     DataTable dataTable;
     Toolbar toolbar = new Toolbar();
+    TextView txRango;
 
 
     @Override
@@ -71,6 +75,9 @@ public class ReporteGraficoTop extends AppCompatActivity {
         grafica=findViewById(R.id.grafica2);
         btnGenerarPdfLugares=findViewById(R.id.btnGenerarPDFLugaresVisitados2);
         rl=findViewById(R.id.Rlay2);
+
+        txRango = findViewById(R.id.tvRango);
+        txRango.setText(Html.fromHtml(asignarTexto()));
 
         btnGenerarPdfLugares.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +115,29 @@ public class ReporteGraficoTop extends AppCompatActivity {
 
         toolbar.show(this, "Reporte", true);
 
+    }
+
+    private String asignarTexto(){
+        int dia,mes,anio;
+        final Calendar calen = Calendar.getInstance();
+        dia = calen.get(Calendar.DAY_OF_MONTH);
+        mes = calen.get(Calendar.MONTH) +1;
+        anio = calen.get(Calendar.YEAR);
+        int mesAnt, anioAnt;
+        String texto, mesTexto;
+        if(mes == 1) {
+            mesAnt = 12;
+            anioAnt = anio -1;
+        } else {
+            mesAnt = mes-1;
+            anioAnt = anio;
+        }
+        if(mes<10){mesTexto="0";} else {mesTexto = "";}
+
+
+        texto = "Desde: 01/"+mesTexto+mesAnt+"/"+anioAnt+"<br>Hasta: 01/"+mes+"/"+anio+"</br>";
+
+        return texto;
     }
 
     public int lugares() {

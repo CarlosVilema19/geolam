@@ -571,7 +571,7 @@ public class registrar extends AppCompatActivity {
                     //Descartar el diálogo de progreso
                     loading2.dismiss();
                     //Showing toast
-                    Toast.makeText(getApplicationContext(), "Complete todos los campos" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Nullable

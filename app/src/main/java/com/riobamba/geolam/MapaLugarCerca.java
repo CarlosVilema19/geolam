@@ -123,7 +123,7 @@ public class MapaLugarCerca extends AppCompatActivity implements  SearchView.OnQ
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                }, error -> Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show());
 
         Volley.newRequestQueue(this).add(stringRequest);
 

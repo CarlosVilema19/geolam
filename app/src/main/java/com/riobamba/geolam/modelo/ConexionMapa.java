@@ -281,7 +281,7 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                 loading.dismiss();
                             }
                         }
-                    },1500);
+                    },2500);
                 }
                 super.onLocationResult(locationResult);
             }
