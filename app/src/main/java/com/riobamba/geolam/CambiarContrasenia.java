@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -50,7 +51,7 @@ public class CambiarContrasenia extends AppCompatActivity {
             txtContraseniaNueva, txtConfirmarContrasenia;
     TextInputLayout contNuevaContrasenia,contContraActual,contConfirmarContra;
     Button btnGuardarCambios, btnCancelar;
-    Button btnVerificarContraseniaAntigua;
+    ImageButton btnVerificarContraseniaAntigua;
     String compararContrasenia="";
     int contraseniaCorrecta = 0;
 
@@ -67,8 +68,8 @@ public class CambiarContrasenia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cambiar_contrasenia);
-        txtContraseniaAntigua=findViewById(R.id.etContraAntes);
-        txtContraseniaNueva= findViewById(R.id.etNuevaContra);
+        txtContraseniaAntigua = findViewById(R.id.etContraAntes);
+        txtContraseniaNueva = findViewById(R.id.etNuevaContra);
         txtConfirmarContrasenia=findViewById(R.id.etConfirContra);
         contNuevaContrasenia= findViewById(R.id.contNuevaContrasenia);
         contContraActual=findViewById(R.id.contContraActual);
@@ -186,55 +187,55 @@ public class CambiarContrasenia extends AppCompatActivity {
     }
 
     public void modificarDatos() {
-     if(cambioContrasenia()==2) {
-         if (validarCaracteresContrasenia() == 1) {
-             if(validarContrasenia()==1){
+        if(cambioContrasenia()==2) {
+            if (validarCaracteresContrasenia() == 1) {
+                if(validarContrasenia()==1){
 
-             String url = WebService.urlRaiz + WebService.servicioModificarContrasenia;
-             SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
-             String email = preferences.getString("estado_correo", "");
-             final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la contraseña...", "Espere por favor");
-             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                 @Override
-                 public void onResponse(String response) {
+                    String url = WebService.urlRaiz + WebService.servicioModificarContrasenia;
+                    SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
+                    String email = preferences.getString("estado_correo", "");
+                    final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la contraseña...", "Espere por favor");
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                     //Descartar el diálogo de progreso
-                     // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
-                     loading.dismiss();
+                            //Descartar el diálogo de progreso
+                            // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
+                            loading.dismiss();
 
-                     //Mostrando el mensaje de la respuesta
-                     Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
-
-
-                 }
-             }, new Response.ErrorListener() {
-                 @Override
-                 public void onErrorResponse(VolleyError error) {
-                     //Descartar el diálogo de progreso
-                     loading.dismiss();
-                     //Showing toast
-                     Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
-                 }
-             }) {
-                 @Nullable
-                 @Override
-                 protected Map<String, String> getParams() throws AuthFailureError {
-                     //Convertir bits a cadena
+                            //Mostrando el mensaje de la respuesta
+                            Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
 
 
-                     Map<String, String> parametros = new HashMap<String, String>();
-                     parametros.put("email", email);
-                     parametros.put("contrasenia", getSHA256(txtContraseniaNueva.getText().toString().trim()));
-                     return parametros;
-                 }
-             };
-             //Creación de una cola de solicitudes
-             RequestQueue requestQueue = Volley.newRequestQueue(this);
-             //Agregar solicitud a la cola
-             requestQueue.add(stringRequest);
-         }
-     }
-     }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //Descartar el diálogo de progreso
+                            loading.dismiss();
+                            //Showing toast
+                            Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        @Nullable
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            //Convertir bits a cadena
+
+
+                            Map<String, String> parametros = new HashMap<String, String>();
+                            parametros.put("email", email);
+                            parametros.put("contrasenia", getSHA256(txtContraseniaNueva.getText().toString().trim()));
+                            return parametros;
+                        }
+                    };
+                    //Creación de una cola de solicitudes
+                    RequestQueue requestQueue = Volley.newRequestQueue(this);
+                    //Agregar solicitud a la cola
+                    requestQueue.add(stringRequest);
+                }
+            }
+        }
 
     }
 
@@ -259,8 +260,8 @@ public class CambiarContrasenia extends AppCompatActivity {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
-                                    compararContrasenia = obj.getString("contrasenia");
-                                   // loading2.dismiss();
+                                compararContrasenia = obj.getString("contrasenia");
+                                // loading2.dismiss();
                             }
 
                         } catch (JSONException e) {
@@ -316,8 +317,10 @@ public class CambiarContrasenia extends AppCompatActivity {
         if(compararContrasenia.toString().equals(getSHA256(txtContraseniaAntigua.getText().toString()))){
             btnGuardarCambios.setEnabled(true);
             contraseniaCorrecta= 1;
-            contNuevaContrasenia.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-            contConfirmarContra.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+
+            txtContraseniaNueva.getBackground().setColorFilter(Color.argb(210,255,255,255), PorterDuff.Mode.SRC_ATOP);
+
+            txtConfirmarContrasenia.getBackground().setColorFilter(Color.argb(210,255,255,255), PorterDuff.Mode.SRC_ATOP);
         }
         else {
             contContraActual.setError("Contraseña incorrecta");
@@ -364,7 +367,7 @@ public class CambiarContrasenia extends AppCompatActivity {
             contConfirmarContra.setError("Las contraseñas no coinciden, ingrese nuevamente");
             contConfirmarContra.requestFocus();
             contConfirmarContra.setErrorIconDrawable(null);
-           // txtConfirmarContrasenia.requestFocus();
+            // txtConfirmarContrasenia.requestFocus();
             datCorrecto=0;
         }
         return datCorrecto;

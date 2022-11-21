@@ -55,6 +55,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_busqueda_medicos.xml" value="0.1" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_lugaratencionm.xml" value="0.1135" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/titulo_opinion.xml" value="0.1185" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/drawable/verificar.xml" value="0.2115" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_actualizar_lugar_medico.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_asignar_especialidad.xml" value="0.2" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_asignar_medico.xml" value="0.1" />
@@ -63,7 +64,7 @@
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_lugar.xml" value="0.17" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_busqueda_medico.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_calificacion.xml" value="0.25" />
-        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.2" />
+        <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.25" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_conexion_internet.xml" value="0.22" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_configuraciones.xml" value="0.16" />
         <entry key="..\:/Users/User/Documents/geolam_rio_tesis/app/src/main/res/layout/activity_datos_item.xml" value="0.1828125" />
