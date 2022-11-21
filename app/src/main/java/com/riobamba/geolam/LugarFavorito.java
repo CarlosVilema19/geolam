@@ -118,7 +118,7 @@ public class LugarFavorito extends AppCompatActivity implements  SearchView.OnQu
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                }, error -> Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show()){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

@@ -589,7 +589,7 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                             //Descartar el diálogo de progreso
                             loading.dismiss();
                             //Showing toast
-                            Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
                         }
                     }) {
                         @Nullable

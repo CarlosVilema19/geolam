@@ -184,7 +184,7 @@ public class AsignarMedico extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },error -> {
-            Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         RequestQueue queue= Volley.newRequestQueue(this);
@@ -237,7 +237,7 @@ public class AsignarMedico extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },error -> {
-            Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         RequestQueue queue2= Volley.newRequestQueue(this);
@@ -301,7 +301,7 @@ public class AsignarMedico extends AppCompatActivity {
                     }
                 },error -> {
 
-            Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
         }
         ) {
             @Nullable
@@ -373,7 +373,7 @@ public class AsignarMedico extends AppCompatActivity {
                     //Descartar el diálogo de progreso
                     loading.dismiss();
                     //Showing toast
-                    Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Nullable

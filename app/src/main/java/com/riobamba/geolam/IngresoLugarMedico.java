@@ -156,7 +156,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest.setTag("REQUEST");
@@ -202,7 +202,7 @@ public class IngresoLugarMedico extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                },error -> {Toast.makeText(this,"Error -->"+ error.toString(),Toast.LENGTH_SHORT).show();
+                },error -> {Toast.makeText(this,"Error en el servidor",Toast.LENGTH_SHORT).show();
 
         });
         stringRequest2.setTag("REQUEST");

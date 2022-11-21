@@ -127,7 +127,7 @@ public class MedicoBusquedaList extends AppCompatActivity implements SearchView.
 
                     }
 
-                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                }, error -> Toast.makeText(getApplicationContext(), "Error en el servidor", Toast.LENGTH_SHORT).show()){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
