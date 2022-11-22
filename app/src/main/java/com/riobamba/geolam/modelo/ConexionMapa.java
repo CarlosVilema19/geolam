@@ -161,6 +161,8 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         lugarList = new ArrayList<>();
 
+        guardarEstadoUbi(1);
+
         //View headerLayout1 = findViewById(R.id.bottomJsoft);
         imgmarker = findViewById(R.id.ImgMarker);
         txtNombreLugar = findViewById(R.id.tvNombreLugar);
@@ -532,9 +534,12 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
 
             lugarDistancia.setText(lugarCercano);//proceso.verCercano(distancias, lugarCerca, idLugarList,count,0));
 
+            SharedPreferences preferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+            int estado = preferences.getInt("estado",1);
             //String text = proceso.verDistanciaCercano(distancias,count).toString();
-            if(proceso.verDistanciaCercano(distancias,count)>5)
+            if(proceso.verDistanciaCercano(distancias,count)>5 && estado == 1)
             {
+                guardarEstadoUbi(0);
                 int icon  = R.drawable.peligro;
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setIcon(icon)
@@ -791,6 +796,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
         SharedPreferences preferences = getSharedPreferences("tituloRefe", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("tituloRefe",titulo);
+        editor.apply();
+    }
+    public void guardarEstadoUbi(int est)
+    {
+        SharedPreferences preferences = getSharedPreferences("estado", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("estado",est);
         editor.apply();
     }
     //Obtener la url real
