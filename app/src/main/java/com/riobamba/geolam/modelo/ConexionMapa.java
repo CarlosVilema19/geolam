@@ -686,6 +686,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                 dialog.dismiss();
                                 checkLocationSetting(builder);
                             }
+                        }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                finish();
+                                Intent intent = new Intent(ConexionMapa.this, ConexionMapa.class);
+                                startActivity(intent);
+                            }
                         });
                 builder2.show();
             }
@@ -732,6 +739,13 @@ public class ConexionMapa extends AppCompatActivity implements OnMapReadyCallbac
                                     Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
                                     startActivity(intent);
                                 }
+                            }
+                        }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                finish();
+                                Intent intent = new Intent(ConexionMapa.this, ConexionMapa.class);
+                                startActivity(intent);
                             }
                         });
                 builder2.show();
