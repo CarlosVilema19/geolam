@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Geolam"
         tools:targetApi="s">
         <activity
+            android:name=".Tutorial"
+            android:exported="false" />
+        <activity
             android:name=".TerminosCondiciones"
             android:exported="false" />
         <activity

@@ -30,6 +30,7 @@ import com.riobamba.geolam.Listado;
 import com.riobamba.geolam.ListadoEspecialidad;
 import com.riobamba.geolam.Login;
 import com.riobamba.geolam.R;
+import com.riobamba.geolam.Tutorial;
 
 import java.util.Objects;
 
@@ -44,6 +45,7 @@ public class Toolbar extends AppCompatActivity{
     public Class<Login> login = Login.class;
     public Class<CambiarContrasenia> cambioContraClass = CambiarContrasenia.class;
     public Class<Configuraciones> configuracionesClass = Configuraciones.class;
+    public Class<Tutorial> tutorialClass = Tutorial.class;
     public Context ctx;
     public AppCompatActivity actividad;
 
@@ -95,6 +97,12 @@ public class Toolbar extends AppCompatActivity{
         {
             activities.startActivity(new Intent(ctx, configuracionesClass));
         }
+        if(item.getItemId()==R.id.iTutorial)
+        {
+            activities.startActivity(new Intent(ctx, tutorialClass));
+        }
+
+
     }
 
     public void retornarInicio() {

@@ -8,7 +8,9 @@
     android:layout_gravity="center_horizontal"
     android:padding="10dp"
     android:background="@drawable/imagen3"
-    tools:context=".Login">
+    tools:context=".Login"
+
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,36 +26,40 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tviniciosesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
-                android:text="@string/iniciar_sesion"
-                android:textColor="#616161"
-                android:textSize="20sp"
-
-                android:textStyle="bold" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/viewlogo1"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:layout_below="@+id/tviniciosesion"
+                android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:foregroundTint="#00FFFFFF"
                 android:src="@mipmap/ic_launcher_foreground">
 
+
             </com.google.android.material.imageview.ShapeableImageView>
+
+            <TextView
+                android:id="@+id/tviniciosesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewlogo1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp"
+                android:alpha="0.8"
+                android:text="@string/iniciar_sesion"
+                android:textColor="#616161"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txusuario"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/viewlogo1"
+                android:layout_below="@id/tviniciosesion"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
@@ -145,6 +151,7 @@
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
+                android:layout_marginBottom="50dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:gravity="center_horizontal"
                 android:text="@string/registro_log"
