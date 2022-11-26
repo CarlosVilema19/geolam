@@ -4,4 +4,4 @@
     android:layout_height="wrap_content"
     android:src="@drawable/fondo3_"
 
-    android:alpha="0.3"/>
+    android:alpha="0.1"/>

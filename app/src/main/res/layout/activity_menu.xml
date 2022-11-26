@@ -105,6 +105,21 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTutorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_baseline_play_circle_24"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Tutorial"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesionMenu"

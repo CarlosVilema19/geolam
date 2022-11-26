@@ -7,7 +7,20 @@
     tools:context=".Bienvenida"
     android:background="@color/white"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
 
+        android:alpha="0.1"
+        android:layout_height="match_parent">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/gif"
+
+            />
+    </RelativeLayout>
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/viewlogo"
         android:layout_width="250dp"

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Tutorial">
+
+    <include layout="@layout/activity_menu_toolbar" />
+    <RelativeLayout
+        android:layout_below="@+id/iMenuSupe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/imagen_gestion"
+        android:alpha="0.37"
+        >
+
+        <ImageView
+            android:id="@+id/gift"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            ></ImageView>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/iMenuSupe"
+        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvtuto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relative"
+                    android:background="@drawable/circularadmin"
+                    android:backgroundTint="@null"
+                    android:layout_marginBottom="5dp"
+                    android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="Inicio"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    >
+                    <LinearLayout
+                        android:id="@+id/contVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <VideoView
+                            android:id="@+id/vv1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+
+                            ></VideoView>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvtuto2"
+                    android:layout_below="@id/relative2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/circularadmin"
+                    android:backgroundTint="@null"
+                    android:text="Búsquedas"
+                    android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/relative2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    >
+                    <LinearLayout
+                        android:id="@+id/contVideo2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <VideoView
+                            android:id="@+id/vv2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+
+                            ></VideoView>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvtuto3"
+                    android:layout_below="@id/relative3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/circularadmin"
+                    android:backgroundTint="@null"
+                    android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="Geolocalización"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/relative3"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                  >
+                    <LinearLayout
+                        android:id="@+id/contVideo3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <VideoView
+                            android:id="@+id/vv3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+
+                            ></VideoView>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

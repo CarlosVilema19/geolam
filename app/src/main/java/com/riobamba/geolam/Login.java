@@ -7,12 +7,14 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.hash.Hashing;
 import com.riobamba.geolam.Utility.NetworkChangeListener;
@@ -51,6 +54,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
         errorPass = findViewById(R.id.txcontrasenia);
         errorEmail=findViewById(R.id.txusuario);
         edtUsuario = findViewById(R.id.edusuario);
@@ -59,6 +64,9 @@ public class Login extends AppCompatActivity {
         btnRecuperar = findViewById(R.id.btnolvidarcontrasenia);
         btnRegistro = findViewById(R.id.btnRegistroUsu);
         btnAdmin = findViewById(R.id.btnAdmin);
+
+
+
 
         //conexionInternet();
 

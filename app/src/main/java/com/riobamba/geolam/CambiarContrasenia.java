@@ -53,6 +53,11 @@ public class CambiarContrasenia extends AppCompatActivity {
     Button btnGuardarCambios, btnCancelar;
     ImageButton btnVerificarContraseniaAntigua;
     String compararContrasenia="";
+
+    Button btnTutorial;
+
+
+
     int contraseniaCorrecta = 0;
 
     Toolbar toolbar = new Toolbar();
@@ -78,6 +83,7 @@ public class CambiarContrasenia extends AppCompatActivity {
         btnCancelar=findViewById(R.id.btnCancelar2);
         btnGuardarCambios=findViewById(R.id.btnGuardarCambiosUsu);
         btnVerificarContraseniaAntigua=findViewById(R.id.btnVerificarContrasenia);
+
 
 
         btnGuardarCambios.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,10 @@
                 android:title="@string/configuracion_menu" />
 
             <item
+                android:id="@+id/iTutorial"
+                android:icon="@drawable/ic_baseline_play_circle_24"
+                android:title="Tutorial" />
+            <item
                 android:id="@+id/iCerrarSesion"
                 android:icon="@drawable/ic_baseline_power_settings_new_24"
                 android:title="@string/cerrar_menu" />
