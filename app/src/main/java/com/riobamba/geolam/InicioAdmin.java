@@ -2,6 +2,7 @@ package com.riobamba.geolam;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -250,7 +251,7 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
                 //activarBoton(a);
             }
         });
-        toolbar.show(this, "Hola, administrador", false);
+        toolbar.show(this, "Bienvenido", false);
 
 
 
@@ -460,6 +461,12 @@ Button btnGestionLugar, btnGestionUsuario, btnBuscarEspeLugar, btnReportes, btnB
     }
 
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //getMenuInflater().inflate(R.menu.menugral, menu);
+        MenuItem item = menu.findViewById(R.id.iTutorial);
+        item.setVisible(true);   //oculta item3**
+        return true;
+    }
 
 
 

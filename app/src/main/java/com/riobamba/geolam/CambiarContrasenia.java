@@ -196,7 +196,9 @@ public class CambiarContrasenia extends AppCompatActivity {
         if(cambioContrasenia()==2) {
             if (validarCaracteresContrasenia() == 1) {
                 if(validarContrasenia()==1){
-
+                    if(txtContraseniaAntigua.getText().toString().equals(txtContraseniaNueva.getText().toString())){
+                        Toast.makeText(this, "Ingrese una contraseña distinta a la actual", Toast.LENGTH_SHORT).show();
+                    }else{
                     String url = WebService.urlRaiz + WebService.servicioModificarContrasenia;
                     SharedPreferences preferences = getSharedPreferences("correo_email", Context.MODE_PRIVATE);
                     String email = preferences.getString("estado_correo", "");
@@ -211,7 +213,9 @@ public class CambiarContrasenia extends AppCompatActivity {
 
                             //Mostrando el mensaje de la respuesta
                             Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
-
+                            finish();
+                            Intent intent = new Intent(CambiarContrasenia.this, Configuraciones.class);
+                            startActivity(intent);
 
                         }
                     }, new Response.ErrorListener() {
@@ -239,6 +243,7 @@ public class CambiarContrasenia extends AppCompatActivity {
                     RequestQueue requestQueue = Volley.newRequestQueue(this);
                     //Agregar solicitud a la cola
                     requestQueue.add(stringRequest);
+                    }
                 }
             }
         }

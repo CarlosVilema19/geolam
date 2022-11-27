@@ -574,12 +574,11 @@ public class DatosPersonalesUsuario extends AppCompatActivity {
                             //Descartar el diálogo de progreso
                             // final ProgressDialog loading = ProgressDialog.show(this, "Actualizando la información...", "Espere por favor");
                             loading.dismiss();
-
+                            ivFotoP.setTag("bg1");
                             //Mostrando el mensaje de la respuesta
                             Toast.makeText(getApplicationContext(), "Se ha actualizado correctamente", Toast.LENGTH_SHORT).show();
-                            ivFotoP.setTag("bg1");
                             finish();
-                            Intent intent = new Intent(DatosPersonalesUsuario.this, DatosPersonalesUsuario.class);
+                            Intent intent = new Intent(DatosPersonalesUsuario.this, Configuraciones.class);
                             startActivity(intent);
 
                         }
