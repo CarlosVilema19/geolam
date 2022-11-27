@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/encabezado"
         android:title="@string/lugares_menu"
@@ -13,16 +12,14 @@
                 android:id="@+id/iInicioMenu"
                 android:icon="@drawable/ic_baseline_home_24"
                 android:title="@string/inicio_menu" />
-
             <item
                 android:id="@+id/iConfiguraciones"
                 android:icon="@drawable/ic_baseline_manage_accounts_24"
                 android:title="@string/configuracion_menu" />
-
             <item
                 android:id="@+id/iTutorial"
                 android:icon="@drawable/ic_baseline_play_circle_24"
-                android:title="Tutorial" />
+                android:title="@string/tutorial" />
             <item
                 android:id="@+id/iCerrarSesion"
                 android:icon="@drawable/ic_baseline_power_settings_new_24"
@@ -31,9 +28,6 @@
                 android:id="@+id/iSalir"
                 android:icon="@drawable/ic_baseline_logout_24"
                 android:title="@string/salir_menu" />
-
         </menu>
-
     </item>
-
 </menu>

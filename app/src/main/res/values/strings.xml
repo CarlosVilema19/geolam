@@ -143,6 +143,7 @@
     <string name="nombre">Nombre</string>
     <string name="id">Id</string>
     <string name="id_">Id:</string>
+    <string name="tutorial">Tutorial</string>
 
 
 </resources>
